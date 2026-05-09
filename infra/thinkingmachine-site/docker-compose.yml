@@ -36,7 +36,7 @@ services:
       - "traefik.http.services.tm-site.loadbalancer.server.port=80"
 
       # www → apex permanent redirect
-      - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.eu/(.*)"
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.uk/(.*)"
       - "traefik.http.middlewares.tm-www-redirect.redirectregex.replacement=https://thinkingmachine.uk/$$1"
       - "traefik.http.middlewares.tm-www-redirect.redirectregex.permanent=true"
 
