@@ -28,7 +28,7 @@ services:
       - "traefik.docker.network=traefik"
 
       # Apex + www
-      - "traefik.http.routers.tm-site.rule=Host(`thinkingmachine.eu`) || Host(`www.thinkingmachine.eu`)"
+      - "traefik.http.routers.tm-site.rule=Host(`thinkingmachine.uk`) || Host(`www.thinkingmachine.uk`)"
       - "traefik.http.routers.tm-site.entrypoints=websecure"
       - "traefik.http.routers.tm-site.tls=true"
       - "traefik.http.routers.tm-site.tls.certresolver=letsencrypt"
@@ -37,7 +37,7 @@ services:
 
       # www → apex permanent redirect
       - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.eu/(.*)"
-      - "traefik.http.middlewares.tm-www-redirect.redirectregex.replacement=https://thinkingmachine.eu/$$1"
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.replacement=https://thinkingmachine.uk/$$1"
       - "traefik.http.middlewares.tm-www-redirect.redirectregex.permanent=true"
 
       # Optional: enable Watchtower auto-updates by adding the label below

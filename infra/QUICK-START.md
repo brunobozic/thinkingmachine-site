@@ -18,13 +18,13 @@ If the repo is private and the script is therefore not publicly downloadable, pa
 
 After bootstrap finishes, it prints your server's public IP. Copy it.
 
-## 2. DNS — point thinkingmachine.eu at the server
+## 2. DNS — point thinkingmachine.uk at the server
 
 In your DNS provider (Cloudflare Registrar's DNS panel, or wherever you registered):
 
 ```
-thinkingmachine.eu      A   <server-ip>   proxied: OFF
-www.thinkingmachine.eu  A   <server-ip>   proxied: OFF
+thinkingmachine.uk      A   <server-ip>   proxied: OFF
+www.thinkingmachine.uk  A   <server-ip>   proxied: OFF
 ```
 
 If using Cloudflare, set proxy status to **DNS only** (grey cloud) — this is required for the Let's Encrypt HTTP-01 challenge to succeed. You can flip to proxied (orange cloud) later if you want CDN edge in front.
@@ -32,7 +32,7 @@ If using Cloudflare, set proxy status to **DNS only** (grey cloud) — this is r
 Verify propagation:
 
 ```bash
-dig +short thinkingmachine.eu
+dig +short thinkingmachine.uk
 ```
 
 Wait until it returns the server IP before continuing.
@@ -102,7 +102,7 @@ docker compose logs --tail=50 thinkingmachine-site
 curl -I http://127.0.0.1/
 
 # From anywhere
-curl -I https://thinkingmachine.eu/
+curl -I https://thinkingmachine.uk/
 ```
 
 You should see `HTTP/2 200`. Open the site in a browser to sanity-check.
@@ -134,7 +134,7 @@ To restore `:latest`, edit back and `docker compose up -d` again.
 ## Health & monitoring
 
 - **Container health**: built into Docker — `docker ps` shows healthy/unhealthy.
-- **External uptime**: point UptimeRobot, Better Stack, or similar at `https://thinkingmachine.eu/`.
+- **External uptime**: point UptimeRobot, Better Stack, or similar at `https://thinkingmachine.uk/`.
 - **Cert renewal**: Traefik auto-renews 30 days before expiry — verify by watching the Traefik logs the day before any cert expires.
 
 ## File index

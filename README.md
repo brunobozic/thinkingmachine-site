@@ -2,7 +2,7 @@
 
 Public marketing site for **Thinking Machine d.o.o.** — built with Astro, Tailwind CSS, and content collections; deployed as a static container behind Traefik.
 
-> **Domain:** [thinkingmachine.eu](https://thinkingmachine.eu)
+> **Domain:** [thinkingmachine.uk](https://thinkingmachine.uk)
 > **Stack:** Astro 5 · Tailwind 3 · TypeScript · nginx (runtime)
 > **Deployment:** Docker image published to GHCR via GitHub Actions; pulled by VPS behind Traefik.
 

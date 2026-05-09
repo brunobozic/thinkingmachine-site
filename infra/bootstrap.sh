@@ -101,10 +101,10 @@ Server public IP: $SERVER_IP
 
 Next steps (in order):
 
-  1. Point DNS:  thinkingmachine.eu        A    $SERVER_IP
-                 www.thinkingmachine.eu    A    $SERVER_IP
+  1. Point DNS:  thinkingmachine.uk        A    $SERVER_IP
+                 www.thinkingmachine.uk    A    $SERVER_IP
      Wait for DNS to propagate (usually 1-5 min). Check with:
-        dig +short thinkingmachine.eu
+        dig +short thinkingmachine.uk
 
   2. Drop the Traefik compose into /srv/traefik/docker-compose.yml
      and the static config into /srv/traefik/traefik.yml.
@@ -120,6 +120,6 @@ Next steps (in order):
         cd /srv/thinkingmachine-site && docker compose up -d
 
   5. Verify:
-        curl -I https://thinkingmachine.eu/
+        curl -I https://thinkingmachine.uk/
 
 EOF

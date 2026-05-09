@@ -10,7 +10,7 @@
                                                                 ▼
                                           ┌──────────────────────────────┐
                                           │  VPS — Traefik + nginx (TLS) │
-                                          │  https://thinkingmachine.eu  │
+                                          │  https://thinkingmachine.uk  │
                                           └──────────────────────────────┘
 ```
 
@@ -32,11 +32,11 @@ echo "$GHCR_PAT" | docker login ghcr.io -u brunobozic --password-stdin
 
 ### 2. DNS
 
-Point `thinkingmachine.eu` (and optionally `www.thinkingmachine.eu`) to the VPS public IP. Verify with `dig +short thinkingmachine.eu`.
+Point `thinkingmachine.uk` (and optionally `www.thinkingmachine.uk`) to the VPS public IP. Verify with `dig +short thinkingmachine.uk`.
 
 ### 3. Traefik wildcard cert
 
-Confirm your existing Traefik configuration has a `certresolver` (e.g. `letsencrypt`) that can issue or already holds a wildcard cert for `*.thinkingmachine.eu`. The compose file references `certresolver=letsencrypt` — adjust if yours is named differently.
+Confirm your existing Traefik configuration has a `certresolver` (e.g. `letsencrypt`) that can issue or already holds a wildcard cert for `*.thinkingmachine.uk`. The compose file references `certresolver=letsencrypt` — adjust if yours is named differently.
 
 ### 4. Drop the service into the VPS compose stack
 
@@ -52,7 +52,7 @@ The container should come up healthy within ~30 seconds. Verify:
 ```bash
 docker compose ps thinkingmachine-site
 docker compose logs --tail=50 thinkingmachine-site
-curl -I https://thinkingmachine.eu/
+curl -I https://thinkingmachine.uk/
 ```
 
 ## Routine deployment (after every commit to `main`)
@@ -111,17 +111,17 @@ For a permanent rollback, revert the offending commit on `main` and let CI rebui
 - **HTTP**: nginx access/error logs go to stdout/stderr — scraped by your existing Docker log driver.
 - **TLS**: Traefik handles cert lifecycle.
 
-For external uptime monitoring, point UptimeRobot or similar at `https://thinkingmachine.eu/`.
+For external uptime monitoring, point UptimeRobot or similar at `https://thinkingmachine.uk/`.
 
 ## First-run checklist
 
 - [ ] Repo cloned locally, `npm install`, `npm run build` succeeds
 - [ ] First commit pushed to `main`; CI workflow goes green
 - [ ] `ghcr.io/brunobozic/thinkingmachine-site:latest` is visible under your GitHub Packages
-- [ ] DNS for `thinkingmachine.eu` resolves to the VPS
+- [ ] DNS for `thinkingmachine.uk` resolves to the VPS
 - [ ] `docker compose up -d thinkingmachine-site` succeeds on the VPS
 - [ ] Traefik routes the host to the container (check `docker logs traefik`)
-- [ ] `curl -I https://thinkingmachine.eu/` returns `HTTP/2 200`
+- [ ] `curl -I https://thinkingmachine.uk/` returns `HTTP/2 200`
 - [ ] Browser load shows the site with valid TLS
 
 ## Where things live
@@ -133,4 +133,4 @@ For external uptime monitoring, point UptimeRobot or similar at `https://thinkin
 | Image registry | `ghcr.io/brunobozic/thinkingmachine-site` |
 | VPS compose service | `docker-compose.example.yml` (template) |
 | TLS / routing | Traefik on the VPS |
-| DNS | wherever you registered `thinkingmachine.eu` |
+| DNS | wherever you registered `thinkingmachine.uk` |
