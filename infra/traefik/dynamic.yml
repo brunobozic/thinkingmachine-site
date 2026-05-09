@@ -1,29 +1,49 @@
-# Traefik dynamic configuration
+# Traefik dynamic configuration — hot-reloaded on change
 # Path on VPS: /srv/traefik/dynamic.yml
-# Reloaded on file change.
 
 http:
   middlewares:
-    # Strict security headers — applied at the edge
+    # ---- Strict security headers ----
     secure-headers:
       headers:
+        # Frame embedding
         frameDeny: true
+        # MIME sniffing protection
         contentTypeNosniff: true
+        # Legacy XSS filter (deprecated but harmless on old browsers)
         browserXssFilter: true
+        # Referrer
         referrerPolicy: "strict-origin-when-cross-origin"
-        permissionsPolicy: "geolocation=(), microphone=(), camera=()"
+        # Permissions
+        permissionsPolicy: "geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()"
+        # HSTS
         stsSeconds: 31536000
         stsIncludeSubdomains: true
         stsPreload: true
+        forceSTSHeader: true
+        # Cross-origin isolation (modern; safe for static site)
         customResponseHeaders:
-          X-Powered-By: ""   # strip
+          # Content Security Policy — static site with Google Fonts only
+          Content-Security-Policy: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+          Cross-Origin-Opener-Policy: "same-origin"
+          Cross-Origin-Resource-Policy: "same-origin"
+          # Legacy server fingerprint stripping (defense in depth)
           Server: ""
+          X-Powered-By: ""
 
-    # Compress responses (Traefik-level gzip; nginx already handles it but doesn't hurt)
+    # ---- Compression ----
     compress:
       compress: {}
 
-  # TLS options — modern profile only
+    # ---- Per-IP rate limit (anti-abuse, anti-scraping) ----
+    rate-limit-default:
+      rateLimit:
+        average: 100   # 100 req/sec per source IP
+        burst: 200
+        sourceCriterion:
+          ipStrategy:
+            depth: 0  # take direct client IP
+
 tls:
   options:
     default:
@@ -39,3 +59,6 @@ tls:
         - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
         - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
         - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+      curvePreferences:
+        - X25519
+        - CurveP384

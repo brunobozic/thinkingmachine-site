@@ -46,7 +46,7 @@ services:
       - "traefik.http.routers.tm-site.entrypoints=websecure"
       - "traefik.http.routers.tm-site.tls=true"
       - "traefik.http.routers.tm-site.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.tm-site.middlewares=secure-headers@file,tm-www-redirect"
+      - "traefik.http.routers.tm-site.middlewares=secure-headers@file,rate-limit-default@file,compress@file,tm-www-redirect"
       - "traefik.http.services.tm-site.loadbalancer.server.port=80"
       - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.uk/(.*)"
       - "traefik.http.middlewares.tm-www-redirect.redirectregex.replacement=https://thinkingmachine.uk/$$1"
