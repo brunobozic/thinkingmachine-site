@@ -60,6 +60,10 @@ ufw allow 22/tcp   comment "SSH"
 ufw allow 80/tcp   comment "HTTP (Traefik / ACME challenge)"
 ufw allow 443/tcp  comment "HTTPS (Traefik)"
 ufw --force enable
+
+# Docker requires FORWARD chain to allow bridge traffic; UFW defaults to DROP which kills container egress
+sed -i "s|DEFAULT_FORWARD_POLICY=.*|DEFAULT_FORWARD_POLICY=\\\\"ACCEPT\\\\"|" /etc/default/ufw
+ufw reload >/dev/null 2>&1 || true
 ok "Firewall: 22/80/443 inbound, all outbound"
 
 # ----------------------------------------------------------------------------

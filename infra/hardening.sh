@@ -172,6 +172,7 @@ ufw deny out 465/tcp     comment "SMTPS blocked"
 ufw deny out 587/tcp     comment "Submission blocked"
 
 ufw --force enable
+sed -i "s|DEFAULT_FORWARD_POLICY=.*|DEFAULT_FORWARD_POLICY=\\\\"ACCEPT\\\\"|" /etc/default/ufw
 ufw reload
 ok "UFW outbound restricted to essentials"
 
