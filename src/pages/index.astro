@@ -7,150 +7,187 @@ const allStudies = await getCollection('case-studies', ({ data }) => !data.draft
 const featured = allStudies
   .filter(s => s.data.featured)
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
+
+const sectors = ['Healthcare IT', 'Telecommunications', 'Government R&D', 'Industrial IoT', 'Energy', 'Aviation'];
 ---
 <BaseLayout
   title="Thinking Machine — Strategic engineering advisory"
   description="Cloud cost strategy, cyber resilience, AI integration. Fixed-scope engagements. Decision-grade deliverables. Zagreb-based, EU-wide."
 >
-  {/* Hero */}
-  <section class="container-page pt-20 pb-16 md:pt-32 md:pb-24">
-    <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight max-w-4xl">
-      Strategic engineering advisory for compliance-sensitive enterprises.
-    </h1>
-    <p class="mt-8 text-xl md:text-2xl text-ink-700 font-serif italic max-w-3xl leading-snug">
-      Fixed-scope engagements. Decision-grade deliverables. No six-month discovery phase.
-    </p>
-    <div class="mt-10 flex flex-wrap gap-4">
-      <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
-      <a href="/services" class="btn-secondary">What we do</a>
-    </div>
-  </section>
+  {/* HERO */}
+  <section class="container-page pt-20 pb-20 md:pt-32 md:pb-28 relative overflow-hidden">
+    {/* Decorative accent — quiet geometry */}
+    <svg aria-hidden="true" class="absolute -top-24 -right-24 w-[480px] h-[480px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="98" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="70" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="42" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
 
-  <hr class="container-page section-divider" />
-
-  {/* Three services */}
-  <section class="container-page">
-    <h2 class="font-serif text-3xl md:text-4xl mb-12">What we do</h2>
-    <div class="grid gap-12 md:grid-cols-3">
-      <div>
-        <h3 class="font-serif text-xl mb-3">Cloud cost & FinOps strategy</h3>
-        <p class="text-ink-700">
-          When a board needs a defensible answer on a cloud migration, a SaaS pricing decision, or
-          a year-on-year cost trajectory — and the existing options are an in-house guess or a
-          six-figure consulting engagement — we deliver a forty-hour fixed-scope assessment anchored
-          on published frameworks. Board-ready document, working cost model, clear recommendation.
-        </p>
-        <a href="/services#cloud-cost" class="inline-block mt-4 text-accent-700 text-sm no-underline">
-          More on cloud cost →
-        </a>
+    <div class="relative">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">
+        Thinking Machine d.o.o. · Boutique engineering advisory
       </div>
-
-      <div>
-        <h3 class="font-serif text-xl mb-3">Cyber resilience & NFR advisory</h3>
-        <p class="text-ink-700">
-          NIS2 readiness, Azure-native security architecture, and structured NFR responses for
-          procurement and pre-contract due diligence. Whether you are a vendor responding to an
-          enterprise customer's NFR catalog or an enterprise drafting one, we close the gap between
-          <em>we'll figure it out</em> and an auditable response.
-        </p>
-        <a href="/services#cyber" class="inline-block mt-4 text-accent-700 text-sm no-underline">
-          More on cyber resilience →
-        </a>
-      </div>
-
-      <div>
-        <h3 class="font-serif text-xl mb-3">AI integration for established systems</h3>
-        <p class="text-ink-700">
-          MCP control layers wrapping existing applications. RAG over enterprise knowledge bases.
-          On-premises LLM infrastructure for data-residency-sensitive sectors. We help organisations
-          connect modern frontier models to the systems they already have — without the all-in
-          transformation pitch and without retraining anything.
-        </p>
-        <a href="/services#ai" class="inline-block mt-4 text-accent-700 text-sm no-underline">
-          More on AI integration →
-        </a>
+      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-ink-900 leading-[1.05] tracking-tight max-w-4xl">
+        Strategic engineering advisory for compliance-sensitive enterprises.
+      </h1>
+      <p class="mt-8 text-xl md:text-2xl text-ink-700 font-serif italic max-w-3xl leading-snug">
+        Fixed-scope engagements. Decision-grade deliverables. No six-month discovery phase.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+        <a href="#what-we-do" class="btn-secondary">What we do →</a>
       </div>
     </div>
   </section>
 
-  <hr class="container-page section-divider" />
+  {/* SECTOR STRIP — credibility marker */}
+  <section class="border-y border-ink-200 bg-ink-100/40">
+    <div class="container-page py-6 flex flex-wrap items-center gap-x-8 gap-y-3">
+      <span class="text-xs uppercase tracking-wider text-ink-500 font-medium">Twenty-plus years across</span>
+      {sectors.map((s, i) => (
+        <span class="text-sm text-ink-700">{s}</span>
+      ))}
+    </div>
+  </section>
 
-  {/* How we work */}
-  <section class="container-page">
-    <h2 class="font-serif text-3xl md:text-4xl mb-12">How we work</h2>
-    <div class="grid gap-10 md:grid-cols-3">
-      <div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Discovery Sprint</div>
-        <p class="font-serif text-xl text-ink-900 mb-2">1–2 weeks</p>
-        <p class="text-ink-700">
-          Scoped problem, structured deliverable, decision-ready output. Best when the question is
-          concrete and the timeline is tight.
+  {/* WHAT WE DO */}
+  <section id="what-we-do" class="container-page py-20 md:py-24">
+    <div class="max-w-2xl mb-14">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">What we do</div>
+      <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">
+        Three lanes. One engagement model. No surprises on the invoice.
+      </h2>
+    </div>
+
+    <div class="grid gap-px bg-ink-200 border border-ink-200 md:grid-cols-3">
+      <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">01 · Cloud</div>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">Cloud cost & FinOps strategy</h3>
+        <p class="text-ink-700 leading-relaxed">
+          Board-grade cost assessments anchored on published frameworks. Triangulated baselines, multi-scenario reserved-instance modelling, vendor-side pricing playbooks. The document the decision-maker reads.
         </p>
-      </div>
-      <div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Rapid PoC</div>
-        <p class="font-serif text-xl text-ink-900 mb-2">2–4 weeks</p>
-        <p class="text-ink-700">
-          Working demonstration plus an evidence-based go/no-go recommendation. Best when
-          <em>should we even try this</em> is the actual question.
+        <a href="/services#cloud-cost" class="inline-block mt-5 text-sm text-accent-700 no-underline group-hover:text-accent-800">
+          Read more on cloud cost →
+        </a>
+      </article>
+
+      <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">02 · Cyber</div>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">Cyber resilience & NFR advisory</h3>
+        <p class="text-ink-700 leading-relaxed">
+          NIS2 readiness. Azure-native security architecture. Structured NFR responses for procurement and pre-contract due diligence. We close the gap between <em>we'll figure it out</em> and an auditable position.
         </p>
+        <a href="/services#cyber" class="inline-block mt-5 text-sm text-accent-700 no-underline group-hover:text-accent-800">
+          Read more on cyber resilience →
+        </a>
+      </article>
+
+      <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">03 · AI</div>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">AI integration for established systems</h3>
+        <p class="text-ink-700 leading-relaxed">
+          MCP control layers. RAG over enterprise knowledge. On-prem LLM infra for data-residency-sensitive sectors. We connect modern frontier models to the systems you already have — no all-in transformation pitch.
+        </p>
+        <a href="/services#ai" class="inline-block mt-5 text-sm text-accent-700 no-underline group-hover:text-accent-800">
+          Read more on AI integration →
+        </a>
+      </article>
+    </div>
+  </section>
+
+  {/* HOW WE WORK — engagement strip */}
+  <section class="bg-ink-100/50 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20">
+      <div class="max-w-2xl mb-12">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">How we work</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-[1.15]">
+          Time-boxed shapes you can actually approve.
+        </h2>
       </div>
-      <div>
-        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Fractional advisory</div>
-        <p class="font-serif text-xl text-ink-900 mb-2">Monthly retainer</p>
-        <p class="text-ink-700">
-          Architectural sounding-board, RFP due diligence, second-opinion reviews. Best when the
-          in-house team is strong but lacks one specific area of depth.
+
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="bg-white border-l-4 border-accent-700 p-7">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 1</div>
+          <p class="font-serif text-2xl text-ink-900 mb-2">Discovery Sprint</p>
+          <p class="text-sm text-ink-500 mb-4 font-medium">1–2 weeks · fixed fee</p>
+          <p class="text-ink-700">Scoped problem, structured deliverable, decision-ready output. Best when the question is concrete and the timeline is tight.</p>
+        </div>
+        <div class="bg-white border-l-4 border-accent-700 p-7">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 2</div>
+          <p class="font-serif text-2xl text-ink-900 mb-2">Rapid PoC</p>
+          <p class="text-sm text-ink-500 mb-4 font-medium">2–4 weeks · fixed fee</p>
+          <p class="text-ink-700">Working demonstration plus an evidence-based go/no-go. Best when <em>should we even try this</em> is the actual question.</p>
+        </div>
+        <div class="bg-white border-l-4 border-accent-700 p-7">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 3</div>
+          <p class="font-serif text-2xl text-ink-900 mb-2">Fractional advisory</p>
+          <p class="text-sm text-ink-500 mb-4 font-medium">Monthly retainer</p>
+          <p class="text-ink-700">Architectural sounding-board, RFP due diligence, second-opinion reviews. Best when the in-house team is strong but lacks one specific area of depth.</p>
+        </div>
+      </div>
+
+      <div class="mt-10 max-w-prose text-ink-700">
+        <p>
+          We take <strong class="text-ink-900">one to two new engagements per quarter</strong>. We decline work where the answer is not actually AI, cloud, or compliance. The first thirty minutes is always free.
         </p>
       </div>
     </div>
-
-    <p class="mt-12 text-ink-700 max-w-prose">
-      We take one to two new engagements per quarter. We decline work where the answer is not
-      actually AI, cloud, or compliance. The first thirty minutes is always free.
-    </p>
   </section>
 
-  <hr class="container-page section-divider" />
-
-  {/* Recent work */}
-  <section class="container-page">
-    <div class="flex items-baseline justify-between mb-12">
-      <h2 class="font-serif text-3xl md:text-4xl">Recent work</h2>
-      <a href="/work" class="text-sm text-accent-700 no-underline">See all engagements →</a>
+  {/* RECENT WORK */}
+  <section class="container-page py-20 md:py-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Recent work</div>
+        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Anonymised case studies.</h2>
+      </div>
+      <a href="/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">See all engagements →</a>
     </div>
     <div class="grid gap-6 md:grid-cols-2">
       {featured.map(study => <CaseStudyCard study={study} />)}
     </div>
   </section>
 
-  <hr class="container-page section-divider" />
-
-  {/* About teaser */}
-  <section class="container-page">
-    <h2 class="font-serif text-3xl md:text-4xl mb-8">About Bruno</h2>
-    <div class="max-w-prose text-lg text-ink-700 leading-relaxed">
-      <p>
-        Bruno Božić is the founder of Thinking Machine d.o.o. and Head of IoT at
-        Reos GmbH (Hamburg). Twenty-plus years of enterprise architecture across healthcare IT,
-        telecommunications, government R&D, and industrial IoT. C#/.NET architect by training;
-        integration architect by trade.
-      </p>
-      <p class="mt-6">
-        <a href="/about" class="text-accent-700 no-underline">Read more →</a>
-      </p>
+  {/* PULL QUOTE — confidence frame */}
+  <section class="bg-accent-700 text-white">
+    <div class="container-page py-20 md:py-28 max-w-prose">
+      <div class="font-serif text-2xl md:text-4xl leading-[1.25] tracking-tight">
+        "Most consulting engagements are designed to expand. Discovery becomes Phase 1; Phase 1 becomes Phase 2; the meter runs. We do not work that way."
+      </div>
+      <div class="mt-6 text-sm uppercase tracking-wider opacity-70">
+        Why fixed-scope · Read the full About →
+      </div>
+      <a href="/about" class="absolute inset-0" aria-label="About Thinking Machine"></a>
     </div>
   </section>
 
-  {/* Footer CTA */}
-  <section class="container-page mt-24 mb-24">
-    <div class="border-t border-ink-200 pt-12 max-w-prose">
-      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">
-        If a fixed-scope outside read on a cloud cost decision, an NFR response, or an AI integration
-        would be useful, the first thirty minutes is on us.
+  {/* ABOUT TEASER */}
+  <section class="container-page py-20 md:py-24">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div class="md:col-span-1">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">About</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Bruno Božić</h2>
+      </div>
+      <div class="md:col-span-2 max-w-prose text-lg text-ink-700 leading-relaxed">
+        <p>
+          Founder of Thinking Machine d.o.o. and Head of IoT at Reos GmbH (Hamburg). Twenty-plus years of enterprise architecture across healthcare IT, telecommunications, government R&D, and industrial IoT. C#/.NET architect by training; integration architect by trade.
+        </p>
+        <p class="mt-5">
+          <a href="/about" class="text-accent-700 no-underline">Read the full background →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* FINAL CTA */}
+  <section class="container-page pb-24">
+    <div class="border-t border-ink-200 pt-16 max-w-prose">
+      <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">
+        If a fixed-scope outside read on a cloud cost decision, an NFR response, or an AI integration would be useful — the first thirty minutes is on us.
       </p>
-      <div class="mt-8 flex gap-4">
+      <div class="mt-10 flex flex-wrap gap-4">
         <a href="/contact" class="btn-primary">Book intro</a>
+        <a href="/services" class="btn-secondary">See all services</a>
       </div>
     </div>
   </section>
