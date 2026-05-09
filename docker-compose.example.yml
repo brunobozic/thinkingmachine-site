@@ -1,0 +1,50 @@
+# Drop this into your existing docker-compose stack on the VPS.
+# Assumes Traefik is already running with a wildcard cert (cert resolver name: "letsencrypt"
+# or whatever you've named yours — adjust the certresolver label below).
+#
+# Usage on the VPS:
+#   1. Authenticate Docker against GHCR once:
+#        echo "$GITHUB_TOKEN" | docker login ghcr.io -u brunobozic --password-stdin
+#   2. Place this file (or merge it into your compose file).
+#   3. docker compose up -d thinkingmachine-site
+#   4. Optional: install Watchtower or run a periodic `docker compose pull && docker compose up -d`
+#      to auto-update on new images pushed by CI.
+
+services:
+  thinkingmachine-site:
+    image: ghcr.io/brunobozic/thinkingmachine-site:latest
+    container_name: thinkingmachine-site
+    restart: unless-stopped
+    networks:
+      - traefik
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+
+      # Primary EU domain
+      - "traefik.http.routers.tm-site.rule=Host(`thinkingmachine.eu`) || Host(`www.thinkingmachine.eu`)"
+      - "traefik.http.routers.tm-site.entrypoints=websecure"
+      - "traefik.http.routers.tm-site.tls=true"
+      - "traefik.http.routers.tm-site.tls.certresolver=letsencrypt"
+      - "traefik.http.services.tm-site.loadbalancer.server.port=80"
+
+      # www → apex redirect
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.eu/(.*)"
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.replacement=https://thinkingmachine.eu/$$1"
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.permanent=true"
+      - "traefik.http.routers.tm-site.middlewares=tm-www-redirect@docker"
+
+      # Optional: HR domain alias (when thinkingmachine.hr is configured to redirect or co-serve)
+      # - "traefik.http.routers.tm-site-hr.rule=Host(`thinkingmachine.hr`)"
+      # - "traefik.http.routers.tm-site-hr.entrypoints=websecure"
+      # - "traefik.http.routers.tm-site-hr.tls.certresolver=letsencrypt"
+
+networks:
+  traefik:
+    external: true

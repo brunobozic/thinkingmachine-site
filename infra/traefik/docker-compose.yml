@@ -1,0 +1,39 @@
+# Traefik standalone stack
+# Path on VPS: /srv/traefik/docker-compose.yml
+# Bring up:    cd /srv/traefik && docker compose up -d
+
+services:
+  traefik:
+    image: traefik:v3.2
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - --configFile=/etc/traefik/traefik.yml
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./dynamic.yml:/etc/traefik/dynamic.yml:ro
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - traefik
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80/ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    labels:
+      - "traefik.enable=true"
+      # Dashboard is OFF by default. To enable, define the router below
+      # AND add basic-auth middleware. Skip for production unless you really need it.
+      # - "traefik.http.routers.dashboard.rule=Host(`traefik.thinkingmachine.eu`)"
+      # - "traefik.http.routers.dashboard.service=api@internal"
+      # - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
+      # - "traefik.http.routers.dashboard.middlewares=auth-admin"
+      # - "traefik.http.middlewares.auth-admin.basicauth.users=admin:$$apr1$$..."
+
+networks:
+  traefik:
+    external: true

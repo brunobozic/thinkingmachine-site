@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import { getCollection } from 'astro:content';
+
+const allStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+const featured = allStudies
+  .filter(s => s.data.featured)
+  .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
+---
+<BaseLayout
+  title="Thinking Machine — Strategic engineering advisory"
+  description="Cloud cost strategy, cyber resilience, AI integration. Fixed-scope engagements. Decision-grade deliverables. Zagreb-based, EU-wide."
+>
+  {/* Hero */}
+  <section class="container-page pt-20 pb-16 md:pt-32 md:pb-24">
+    <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight max-w-4xl">
+      Strategic engineering advisory for compliance-sensitive enterprises.
+    </h1>
+    <p class="mt-8 text-xl md:text-2xl text-ink-700 font-serif italic max-w-3xl leading-snug">
+      Fixed-scope engagements. Decision-grade deliverables. No six-month discovery phase.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+      <a href="/services" class="btn-secondary">What we do</a>
+    </div>
+  </section>
+
+  <hr class="container-page section-divider" />
+
+  {/* Three services */}
+  <section class="container-page">
+    <h2 class="font-serif text-3xl md:text-4xl mb-12">What we do</h2>
+    <div class="grid gap-12 md:grid-cols-3">
+      <div>
+        <h3 class="font-serif text-xl mb-3">Cloud cost & FinOps strategy</h3>
+        <p class="text-ink-700">
+          When a board needs a defensible answer on a cloud migration, a SaaS pricing decision, or
+          a year-on-year cost trajectory — and the existing options are an in-house guess or a
+          six-figure consulting engagement — we deliver a forty-hour fixed-scope assessment anchored
+          on published frameworks. Board-ready document, working cost model, clear recommendation.
+        </p>
+        <a href="/services#cloud-cost" class="inline-block mt-4 text-accent-700 text-sm no-underline">
+          More on cloud cost →
+        </a>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-xl mb-3">Cyber resilience & NFR advisory</h3>
+        <p class="text-ink-700">
+          NIS2 readiness, Azure-native security architecture, and structured NFR responses for
+          procurement and pre-contract due diligence. Whether you are a vendor responding to an
+          enterprise customer's NFR catalog or an enterprise drafting one, we close the gap between
+          <em>we'll figure it out</em> and an auditable response.
+        </p>
+        <a href="/services#cyber" class="inline-block mt-4 text-accent-700 text-sm no-underline">
+          More on cyber resilience →
+        </a>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-xl mb-3">AI integration for established systems</h3>
+        <p class="text-ink-700">
+          MCP control layers wrapping existing applications. RAG over enterprise knowledge bases.
+          On-premises LLM infrastructure for data-residency-sensitive sectors. We help organisations
+          connect modern frontier models to the systems they already have — without the all-in
+          transformation pitch and without retraining anything.
+        </p>
+        <a href="/services#ai" class="inline-block mt-4 text-accent-700 text-sm no-underline">
+          More on AI integration →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="container-page section-divider" />
+
+  {/* How we work */}
+  <section class="container-page">
+    <h2 class="font-serif text-3xl md:text-4xl mb-12">How we work</h2>
+    <div class="grid gap-10 md:grid-cols-3">
+      <div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Discovery Sprint</div>
+        <p class="font-serif text-xl text-ink-900 mb-2">1–2 weeks</p>
+        <p class="text-ink-700">
+          Scoped problem, structured deliverable, decision-ready output. Best when the question is
+          concrete and the timeline is tight.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Rapid PoC</div>
+        <p class="font-serif text-xl text-ink-900 mb-2">2–4 weeks</p>
+        <p class="text-ink-700">
+          Working demonstration plus an evidence-based go/no-go recommendation. Best when
+          <em>should we even try this</em> is the actual question.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Fractional advisory</div>
+        <p class="font-serif text-xl text-ink-900 mb-2">Monthly retainer</p>
+        <p class="text-ink-700">
+          Architectural sounding-board, RFP due diligence, second-opinion reviews. Best when the
+          in-house team is strong but lacks one specific area of depth.
+        </p>
+      </div>
+    </div>
+
+    <p class="mt-12 text-ink-700 max-w-prose">
+      We take one to two new engagements per quarter. We decline work where the answer is not
+      actually AI, cloud, or compliance. The first thirty minutes is always free.
+    </p>
+  </section>
+
+  <hr class="container-page section-divider" />
+
+  {/* Recent work */}
+  <section class="container-page">
+    <div class="flex items-baseline justify-between mb-12">
+      <h2 class="font-serif text-3xl md:text-4xl">Recent work</h2>
+      <a href="/work" class="text-sm text-accent-700 no-underline">See all engagements →</a>
+    </div>
+    <div class="grid gap-6 md:grid-cols-2">
+      {featured.map(study => <CaseStudyCard study={study} />)}
+    </div>
+  </section>
+
+  <hr class="container-page section-divider" />
+
+  {/* About teaser */}
+  <section class="container-page">
+    <h2 class="font-serif text-3xl md:text-4xl mb-8">About Bruno</h2>
+    <div class="max-w-prose text-lg text-ink-700 leading-relaxed">
+      <p>
+        Bruno Božić is the founder of Thinking Machine d.o.o. and Head of IoT at
+        Reos GmbH (Hamburg). Twenty-plus years of enterprise architecture across healthcare IT,
+        telecommunications, government R&D, and industrial IoT. C#/.NET architect by training;
+        integration architect by trade.
+      </p>
+      <p class="mt-6">
+        <a href="/about" class="text-accent-700 no-underline">Read more →</a>
+      </p>
+    </div>
+  </section>
+
+  {/* Footer CTA */}
+  <section class="container-page mt-24 mb-24">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">
+        If a fixed-scope outside read on a cloud cost decision, an NFR response, or an AI integration
+        would be useful, the first thirty minutes is on us.
+      </p>
+      <div class="mt-8 flex gap-4">
+        <a href="/contact" class="btn-primary">Book intro</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Services — Thinking Machine"
+  description="Three lanes — cloud cost & FinOps, cyber resilience & NFR, AI integration. Fixed-scope advisory engagements for compliance-sensitive enterprises."
+>
+  <article class="container-page py-20 md:py-28">
+    <header class="max-w-prose mb-16">
+      <h1 class="font-serif text-4xl md:text-5xl text-ink-900 leading-tight">Services</h1>
+      <p class="mt-6 text-xl text-ink-700 leading-relaxed">
+        We work with compliance-sensitive enterprises and the vendors who sell to them.
+        Three lanes; one engagement model; no six-month discovery phase.
+      </p>
+    </header>
+
+    {/* Service: Cloud cost */}
+    <section id="cloud-cost" class="prose max-w-prose">
+      <h2>Cloud cost & FinOps strategy</h2>
+
+      <h3>When to call us</h3>
+      <p>
+        You are about to make a multi-year cloud commitment and the internal numbers do not agree.
+        Your incumbent hosting provider will not share invoices. A board paper is due in three weeks.
+        You are a SaaS vendor pricing a multi-installation deal and need to know what to charge before
+        you quote it. Your CSP renewal is up and the partner-margin question has nobody to defend it.
+      </p>
+
+      <h3>What we deliver</h3>
+      <p>
+        A board-grade cost assessment anchored on published cloud-economics frameworks — Hugo & Rey
+        on FinOps structure and chargeback, Kline et al. on managed-instance tier selection and
+        migration effort, Campbell & Majors on SLA and DR cost modelling, and three more depending
+        on the engagement.
+      </p>
+      <p>
+        Typical deliverables include a four-category cost taxonomy (fixed overhead, competence,
+        variable, per-server), multi-scenario reserved-instance and CSP-margin modelling, a
+        triangulated baseline against incumbent spend, sensitivity analysis on staffing posture, and
+        a working cost-model spreadsheet you keep.
+      </p>
+
+      <h3>What we do not deliver</h3>
+      <p>
+        We do not write Terraform. We do not migrate workloads. We do not sell you a product or a
+        partner relationship. We deliver the document the decision-maker reads.
+      </p>
+
+      <h3>Recent example</h3>
+      <p>
+        A multi-installation industrial software vendor needed to know what to charge an enterprise
+        customer for a cloud-managed deployment. The incumbent hosting baseline was unavailable.
+        We built a triangulated baseline from public cloud list pricing and typical partner-margin
+        bands, modelled three pricing scenarios across two staffing postures, and delivered a
+        per-installation pricing playbook plus an enterprise-side calculator the customer could
+        populate with their own numbers.
+        Forty-hour fixed-scope advisory. <a href="/work/cloud-cost-finops">Read full case study →</a>
+      </p>
+    </section>
+
+    <hr class="section-divider mx-auto max-w-prose" />
+
+    {/* Service: Cyber resilience */}
+    <section id="cyber" class="prose max-w-prose">
+      <h2>Cyber resilience & NFR advisory</h2>
+
+      <h3>When to call us</h3>
+      <p>
+        Your enterprise customer just sent you their NFR catalog and you have ninety days to respond.
+        NIS2 transposition has started touching your operating perimeter and the in-house team is
+        missing one specific area. You are drafting the NFR catalog itself for an upcoming
+        procurement and want it audit-defensible. Your pre-contract due diligence keeps stalling on
+        the same five questions.
+      </p>
+
+      <h3>What we deliver</h3>
+      <p>
+        Structured NFR compliance responses against enterprise procurement matrices. We work across
+        the standard domains — cyber security, data architecture, technical architecture, business
+        continuity. Each response carries a compliance status (compliant / partial / non-compliant /
+        desirable), justification, evidence trail, action required, and cost-impact estimate.
+      </p>
+      <p>
+        Around the register itself we add structural artifacts the original catalog often does not
+        ask for — a deep-dive for the items that do not fit a row, a source-verification log linking
+        each justification to the underlying meeting or document, and a consolidated cost-impact
+        summary that surfaces renegotiation triggers up front rather than mid-procurement.
+      </p>
+      <p>
+        We work with Azure-native security stacks (Entra ID, Key Vault, Defender, Purview, Sentinel)
+        but the methodology is platform-agnostic.
+      </p>
+
+      <h3>What we do not deliver</h3>
+      <p>
+        We do not conduct penetration tests or security audits. We do not sit on your CSIRT.
+        We do not write your ISO 27001 policies from scratch. We deliver structured advisory — the
+        kind of document that turns a vague <em>we'll be compliant</em> into a defensible position.
+      </p>
+
+      <h3>Recent example</h3>
+      <p>
+        A tier-1 European energy operator's procurement NFR matrix carried roughly fifty line items
+        across cyber security and data architecture domains. The vendor needed a structured response
+        that would survive procurement review, with evidence trails for partial-compliance items and
+        a separate cost-impact tab for non-compliant ones. We produced the response register, a
+        deep-dive sheet for the difficult items, and a source-verification log linking each
+        justification to the underlying meeting or email.
+        Pre-contract due diligence engagement. <a href="/work/nfr-compliance-energy">Read full case study →</a>
+      </p>
+    </section>
+
+    <hr class="section-divider mx-auto max-w-prose" />
+
+    {/* Service: AI integration */}
+    <section id="ai" class="prose max-w-prose">
+      <h2>AI integration for established systems</h2>
+
+      <h3>When to call us</h3>
+      <p>
+        You have working systems and you want to connect modern frontier models to them — not
+        replace them. Your data-residency requirements rule out hosted LLM APIs. Your knowledge base
+        is too large to paste into a prompt and too sensitive to upload to a third party. Your
+        engineering team has shipped a chatbot and now leadership wants to know
+        <em>is this actually working?</em>
+      </p>
+
+      <h3>What we deliver</h3>
+      <p>Five common engagement shapes:</p>
+      <ol>
+        <li><strong>MCP control layers</strong> wrapping existing internal applications, exposing them as tools to LLM agents.</li>
+        <li><strong>RAG over enterprise knowledge bases</strong> — including chunking strategy, retrieval tuning, evaluation harness, and an honest answer to <em>is RAG the right call here at all?</em></li>
+        <li><strong>On-premises LLM infrastructure</strong> — model selection (Llama family, Mistral, others), serving stack (Ollama / vLLM), GPU sizing, observability.</li>
+        <li><strong>LLM-assisted legacy modernization</strong> — using frontier models to accelerate code understanding, dependency mapping, and migration planning on systems your team has been told to <em>just rewrite</em>.</li>
+        <li><strong>AI training for engineers and managers</strong> — what these systems are, what they are not, and how to evaluate them empirically.</li>
+      </ol>
+
+      <h3>What we do not deliver</h3>
+      <p>
+        We do not train foundation models. We do not sell you <em>AI strategy</em> without a working
+        artifact at the end. We will not ship an AI feature where the right answer is a SQL query.
+      </p>
+
+      <h3>Recent example</h3>
+      <p>
+        We are holding the most recent AI integration cases until the relevant clients clear public
+        reference. The general shape is: PoC in two to four weeks, evidence-based go/no-go, and either
+        a production roadmap or a clean exit from a project that should never have been an AI project
+        to begin with.
+      </p>
+    </section>
+
+    <hr class="section-divider mx-auto max-w-prose" />
+
+    {/* How we work */}
+    <section class="prose max-w-prose">
+      <h2>How we work</h2>
+      <p>We run three engagement shapes:</p>
+      <p>
+        <strong>Discovery Sprint</strong> — one to two weeks. Scoped question, structured assessment,
+        decision-ready output. Typical for <em>should we go to cloud</em>, <em>is this NFR response
+        defensible</em>, or <em>is RAG the right shape for this problem</em>. Fixed fee.
+      </p>
+      <p>
+        <strong>Rapid PoC</strong> — two to four weeks. Working demonstration plus an evidence-based
+        go/no-go recommendation. Typical for AI integrations and modernization questions where the
+        team needs to see something running before it commits. Fixed fee.
+      </p>
+      <p>
+        <strong>Fractional advisory</strong> — ongoing retainer. Architectural sounding-board for the
+        in-house team, second-opinion reviews on RFPs, technical due diligence on vendor proposals.
+        Typical when the in-house team is strong but missing one specific area of depth.
+        Monthly minimum.
+      </p>
+      <p>
+        We take one to two new engagements per quarter. The first thirty minutes is always free,
+        with no pitch and no slide deck. If we do not think we can help, we will say so.
+      </p>
+      <p><a href="/contact" class="btn-primary not-prose">Book a 30-minute intro</a></p>
+    </section>
+  </article>
+</BaseLayout>

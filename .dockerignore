@@ -1,0 +1,14 @@
+node_modules
+dist
+.astro
+.git
+.github
+.vscode
+.idea
+*.md
+!README.md
+.env*
+.DS_Store
+Thumbs.db
+docker-compose.example.yml
+DEPLOY.md

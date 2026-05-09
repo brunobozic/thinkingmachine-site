@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { getCollection } from 'astro:content';
+
+const studies = (await getCollection('case-studies', ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
+---
+<BaseLayout
+  title="Work — Thinking Machine"
+  description="Anonymised case studies of recent advisory engagements. Cloud cost, cyber resilience, AI integration."
+>
+  <article class="container-page py-20 md:py-28">
+    <header class="max-w-prose mb-16">
+      <h1 class="font-serif text-4xl md:text-5xl text-ink-900 leading-tight">Work</h1>
+      <p class="mt-6 text-xl text-ink-700 leading-relaxed">
+        We publish case studies after the engagement closes and the client clears the anonymised
+        version for public reference. Others remain under reference embargo and are available on
+        request.
+      </p>
+    </header>
+
+    <section class="grid gap-6 md:grid-cols-2">
+      {studies.map(study => <CaseStudyCard study={study} />)}
+    </section>
+
+    <hr class="section-divider mx-auto max-w-prose" />
+
+    <section class="prose max-w-prose">
+      <p>
+        More engagements will be published as they clear public reference. To discuss a specific
+        past piece of work that is not on this page, please get in touch.
+      </p>
+      <p><a href="/contact" class="btn-primary not-prose">Book a 30-minute intro</a></p>
+    </section>
+  </article>
+</BaseLayout>

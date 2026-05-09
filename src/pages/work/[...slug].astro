@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const studies = await getCollection('case-studies', ({ data }) => !data.draft);
+  return studies.map(study => ({
+    params: { slug: study.slug },
+    props: { study }
+  }));
+}
+
+interface Props { study: CollectionEntry<'case-studies'>; }
+const { study } = Astro.props;
+const { Content } = await study.render();
+const { title, sector, engagementType, year, region, summary } = study.data;
+---
+<BaseLayout
+  title={`${title} — Thinking Machine`}
+  description={summary}
+>
+  <article class="container-page py-16 md:py-24">
+    <nav class="max-w-prose mx-auto mb-8 text-sm">
+      <a href="/work" class="text-ink-500 hover:text-ink-900 no-underline">← All case studies</a>
+    </nav>
+
+    <header class="max-w-prose mx-auto mb-12">
+      <div class="text-xs uppercase tracking-wider text-ink-500 mb-4">{engagementType}</div>
+      <h1 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.15]">
+        {title}
+      </h1>
+
+      <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-4 gap-x-8 text-sm border-t border-b border-ink-200 py-6">
+        <div>
+          <dt class="text-ink-500 text-xs uppercase tracking-wider">Engagement</dt>
+          <dd class="mt-1 text-ink-800">{engagementType}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-500 text-xs uppercase tracking-wider">Sector</dt>
+          <dd class="mt-1 text-ink-800">{sector}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-500 text-xs uppercase tracking-wider">Year</dt>
+          <dd class="mt-1 text-ink-800">{year}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-500 text-xs uppercase tracking-wider">Region</dt>
+          <dd class="mt-1 text-ink-800">{region}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <section class="prose mx-auto">
+      <Content />
+    </section>
+
+    <hr class="section-divider mx-auto max-w-prose" />
+
+    <section class="max-w-prose mx-auto">
+      <p class="font-serif text-2xl text-ink-900 leading-snug">
+        Working through something similar?
+      </p>
+      <p class="mt-4 text-ink-700">
+        The first thirty minutes is on us — no pitch, no slides. We will tell you on the call
+        whether we can help.
+      </p>
+      <div class="mt-6">
+        <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

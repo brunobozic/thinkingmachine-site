@@ -1,0 +1,48 @@
+# Traefik static configuration
+# Path on VPS: /srv/traefik/traefik.yml
+
+api:
+  dashboard: true
+  insecure: false   # dashboard exposed only via authenticated router (see compose labels)
+
+log:
+  level: INFO
+  format: json
+
+accessLog:
+  format: json
+  bufferingSize: 100
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: letsencrypt
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: traefik
+  file:
+    filename: /etc/traefik/dynamic.yml
+    watch: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: bruno.bozic@gmail.com   # CHANGE if you want a different ACME contact
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: web
+
+# Optional global middleware defined in dynamic.yml — sets stricter security headers

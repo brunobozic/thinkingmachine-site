@@ -1,0 +1,49 @@
+# thinkingmachine-site application stack
+# Path on VPS: /srv/thinkingmachine-site/docker-compose.yml
+#
+# Bring up:    cd /srv/thinkingmachine-site && docker compose pull && docker compose up -d
+# Update:      cd /srv/thinkingmachine-site && docker compose pull && docker compose up -d
+# Logs:        docker compose logs -f thinkingmachine-site
+#
+# Requires:
+#   - traefik network exists (created by bootstrap.sh)
+#   - Traefik stack is running with cert resolver "letsencrypt"
+#   - Docker is logged into ghcr.io with read:packages scope
+
+services:
+  thinkingmachine-site:
+    image: ghcr.io/brunobozic/thinkingmachine-site:latest
+    container_name: thinkingmachine-site
+    restart: unless-stopped
+    networks:
+      - traefik
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+
+      # Apex + www
+      - "traefik.http.routers.tm-site.rule=Host(`thinkingmachine.eu`) || Host(`www.thinkingmachine.eu`)"
+      - "traefik.http.routers.tm-site.entrypoints=websecure"
+      - "traefik.http.routers.tm-site.tls=true"
+      - "traefik.http.routers.tm-site.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.tm-site.middlewares=secure-headers@file,tm-www-redirect"
+      - "traefik.http.services.tm-site.loadbalancer.server.port=80"
+
+      # www → apex permanent redirect
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.eu/(.*)"
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.replacement=https://thinkingmachine.eu/$$1"
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.permanent=true"
+
+      # Optional: enable Watchtower auto-updates by adding the label below
+      # AND running Watchtower with --label-enable elsewhere in your stack.
+      # - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  traefik:
+    external: true
