@@ -75,7 +75,7 @@ ok "Unattended upgrades enabled"
 log "Creating /srv layout"
 mkdir -p /srv/traefik/letsencrypt
 mkdir -p /srv/thinkingmachine-site
-chmod 600 /srv/traefik/letsencrypt 2>/dev/null || true
+chmod 700 /srv/traefik/letsencrypt 2>/dev/null || true
 ok "Directories created under /srv"
 
 # ----------------------------------------------------------------------------

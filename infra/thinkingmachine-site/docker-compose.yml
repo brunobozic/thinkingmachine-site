@@ -1,15 +1,8 @@
-# thinkingmachine-site application stack
-# Path on VPS: /srv/thinkingmachine-site/docker-compose.yml
-# Bring up:    cd /srv/thinkingmachine-site && docker compose up -d
-# Requires:    Traefik running, traefik network exists, Docker logged into ghcr.io (only if image private)
-
 services:
   thinkingmachine-site:
     image: ghcr.io/brunobozic/thinkingmachine-site:latest
     container_name: thinkingmachine-site
     restart: unless-stopped
-
-    # ----- Container hardening -----
     read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=16m
@@ -38,27 +31,27 @@ services:
       nofile:
         soft: 8192
         hard: 8192
-
     networks:
       - traefik
-
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/"]
       interval: 30s
       timeout: 3s
       retries: 3
       start_period: 5s
-
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
-      # Apex + www — both routed to this service
       - "traefik.http.routers.tm-site.rule=Host(`thinkingmachine.uk`) || Host(`www.thinkingmachine.uk`)"
       - "traefik.http.routers.tm-site.entrypoints=websecure"
       - "traefik.http.routers.tm-site.tls=true"
       - "traefik.http.routers.tm-site.tls.certresolver=letsencrypt"
       - "traefik.http.routers.tm-site.middlewares=secure-headers@file,tm-www-redirect"
       - "traefik.http.services.tm-site.loadbalancer.server.port=80"
-      # www -> apex permanent redirect
       - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.uk/(.*)"
-      - "traefik.http.middlewares.tm-www-red
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.replacement=https://thinkingmachine.uk/$$1"
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.permanent=true"
+
+networks:
+  traefik:
+    external: true
