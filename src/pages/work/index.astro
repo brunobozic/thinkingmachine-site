@@ -5,33 +5,56 @@ import { getCollection } from 'astro:content';
 
 const studies = (await getCollection('case-studies', ({ data }) => !data.draft))
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
+
+const sectorsCovered = [...new Set(studies.map(s => s.data.sector))];
 ---
 <BaseLayout
   title="Work — Thinking Machine"
-  description="Anonymised case studies of recent advisory engagements. Cloud cost, cyber resilience, AI integration."
+  description="Anonymised case studies: cloud cost assessments, NFR compliance responses, AI integration. Two engagements published; others under reference embargo."
+  pageType="CollectionPage"
 >
-  <article class="container-page py-20 md:py-28">
-    <header class="max-w-prose mb-16">
-      <h1 class="font-serif text-4xl md:text-5xl text-ink-900 leading-tight">Work</h1>
-      <p class="mt-6 text-xl text-ink-700 leading-relaxed">
-        We publish case studies after the engagement closes and the client clears the anonymised
-        version for public reference. Others remain under reference embargo and are available on
-        request.
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="160" height="160" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <rect x="50" y="50" width="100" height="100" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <rect x="80" y="80" width="40" height="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Work</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Anonymised engagements. Real numbers, no client names.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        We publish case studies after the engagement closes and the client clears the anonymised version. Others remain under reference embargo and are available on request.
       </p>
-    </header>
+    </div>
+  </section>
 
-    <section class="grid gap-6 md:grid-cols-2">
+  {/* Sector filter strip — placeholder for future, also functions as credibility marker */}
+  <section class="border-y border-ink-200 bg-ink-100/40">
+    <div class="container-page py-5 flex flex-wrap items-center gap-x-6 gap-y-2">
+      <span class="text-xs uppercase tracking-wider text-ink-500 font-medium">Sectors covered</span>
+      {sectorsCovered.map(s => <span class="text-sm text-ink-700">{s}</span>)}
+    </div>
+  </section>
+
+  <section class="container-page py-16 md:py-20">
+    <div class="grid gap-6 md:grid-cols-2">
       {studies.map(study => <CaseStudyCard study={study} />)}
-    </section>
+    </div>
+  </section>
 
-    <hr class="section-divider mx-auto max-w-prose" />
-
-    <section class="prose max-w-prose">
-      <p>
-        More engagements will be published as they clear public reference. To discuss a specific
-        past piece of work that is not on this page, please get in touch.
+  <section class="container-page pb-24">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">
+        Want to discuss work that's not on this page?
       </p>
-      <p><a href="/contact" class="btn-primary not-prose">Book a 30-minute intro</a></p>
-    </section>
-  </article>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        Some of our engagements remain confidential. We are happy to discuss them under NDA on a first call.
+      </p>
+      <div class="mt-8">
+        <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

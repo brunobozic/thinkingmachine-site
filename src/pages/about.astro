@@ -3,90 +3,78 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="About — Thinking Machine"
-  description="Bruno Božić, founder. 20+ years of enterprise architecture across healthcare IT, telecom, government, and industrial IoT. Why fixed-scope. What we won't do."
+  description="Bruno Božić, founder. 20+ years across healthcare IT, telecommunications, government R&D, industrial IoT. Why fixed-scope advisory. What we won't do."
+  pageType="AboutPage"
 >
-  <article class="container-page py-20 md:py-28">
-    <header class="max-w-prose mb-12">
-      <h1 class="font-serif text-4xl md:text-5xl text-ink-900 leading-tight">About</h1>
-    </header>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="100,10 190,55 190,145 100,190 10,145 10,55" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <polygon points="100,40 165,72 165,128 100,160 35,128 35,72" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">About</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Boutique by design. Fixed-scope by principle.
+      </h1>
+    </div>
+  </section>
 
-    <section class="prose max-w-prose">
-      <h2>The company</h2>
-      <p>
-        Thinking Machine d.o.o. is a strategic engineering advisory firm based in Zagreb, Croatia,
-        founded in 2022. We work with compliance-sensitive enterprises and the vendors who sell to
-        them — across cloud cost strategy, cyber resilience, and AI integration into existing systems.
-      </p>
-      <p>
-        We are deliberately small. The work is delivered by senior practitioners, not staffed out
-        to a delivery team. Each engagement is fixed-scope, time-boxed, and decision-grade.
-        We take one to two new engagements per quarter.
-      </p>
-
-      <h2>Bruno Božić, founder</h2>
-      <p>
-        I started writing software in the late 1990s and have been doing it professionally since
-        2003. Since then I have built and shipped systems in healthcare (hospital information systems,
-        lab automation, e-Health certification), telecommunications, government R&D consortia,
-        aviation, and industrial IoT. C#/.NET is my home stack; integration architecture is the
-        thread that runs through all of it.
-      </p>
-      <p>
-        The organisations I have worked with — as employee, contractor, or fractional CTO — include
-        national telecommunications operators, government agencies, healthcare networks, and EU-funded
-        research consortia. I have managed teams of up to eleven across multiple European sites,
-        mentored more than fifty engineers, and authored hundreds of pages of technical specifications
-        and runbooks. I am currently Head of IoT at Reos GmbH (Hamburg), where I lead the engineering
-        for a multi-vendor smart-building platform across hundreds of European sites. Thinking Machine
-        is the channel through which I take selective external advisory engagements that do not
-        conflict with that role.
-      </p>
-      <p>
-        I am also engaged in applied research on production systems for IoT device onboarding and
-        runtime integration — multi-tenant certificate lifecycle management, secure mTLS at scale, and
-        bridging affordance-centric semantics with the resource-centric REST APIs that increasingly
-        dominate device-vendor clouds. The research informs the work, not the other way around.
-      </p>
-
-      <h2>Why fixed-scope</h2>
-      <p>
-        Most enterprise consulting engagements are designed to expand. Discovery becomes Phase 1;
-        Phase 1 becomes Phase 2; the meter runs.
-      </p>
-      <p>
-        That model works for some problems. It does not work for the kind of problem Thinking Machine
-        takes on, which is almost always: <em>we need to make a decision, soon, and we need someone
-        external to help us get there with rigor</em>. Cloud migration go/no-go. NFR pre-contract
-        due diligence. AI integration feasibility. These have a clear endpoint. The right deliverable
-        is a document a board can read in fifteen minutes, backed by a model that survives a hostile
-        read.
-      </p>
-      <p>
-        So we work in fixed-scope engagement shapes — Discovery Sprint, Rapid PoC, fractional
-        retainer — with explicit out-of-scope items declared up front. If the engagement uncovers a
-        bigger problem, we will tell you. We will not solve it through the same engagement.
-      </p>
-
-      <h2>What we will not do</h2>
-      <p>
-        We will not take work where AI, cloud, or compliance is not actually the right answer.
-        We will not build the thing we recommend in the same engagement that recommended it
-        (separation of advisory and implementation is structural, not stylistic). We will not sell
-        you a partner relationship, a license, or a managed service. We do not have a sales team
-        because we do not sell things — we sell time, capped.
-      </p>
-      <p>
-        If those constraints are a problem for your organisation, we are not the right fit, and
-        we will help you find someone who is.
-      </p>
-
-      <h2>Get in touch</h2>
-      <p>Thirty minutes, no slides, no pitch.</p>
-      <p><a href="/contact" class="btn-primary not-prose">Book a 30-minute intro</a></p>
-
-      <hr />
-
-      <p class="text-sm text-ink-500"><em>Zagreb, Croatia · Founded 2022 · Reachable EU-wide</em></p>
-    </section>
+  <article class="container-page pb-12 md:pb-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div class="md:col-span-1">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">The company</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Thinking Machine d.o.o. is a strategic engineering advisory firm based in Zagreb, Croatia, founded in 2022. We work with compliance-sensitive enterprises and the vendors who sell to them — across cloud cost strategy, cyber resilience, and AI integration into existing systems.</p>
+        <p>We are deliberately small. The work is delivered by senior practitioners, not staffed out to a delivery team. Each engagement is fixed-scope, time-boxed, and decision-grade. We take one to two new engagements per quarter.</p>
+      </div>
+    </div>
   </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Founder</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Bruno Božić</h2>
+        <p class="mt-3 text-sm text-ink-500 font-medium">Founder & Principal Advisor</p>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>I started writing software in the late 1990s and have been doing it professionally since 2003. Since then I have built and shipped systems in healthcare (hospital information systems, lab automation, e-Health certification), telecommunications, government R&D consortia, aviation, and industrial IoT. C#/.NET is my home stack; integration architecture is the thread that runs through all of it.</p>
+        <p>The organisations I have worked with — as employee, contractor, or fractional CTO — include national telecommunications operators, government agencies, healthcare networks, and EU-funded research consortia. I have managed teams of up to eleven across multiple European sites, mentored more than fifty engineers, and authored hundreds of pages of technical specifications and runbooks. I am currently Head of IoT at Reos GmbH (Hamburg), where I lead the engineering for a multi-vendor smart-building platform across hundreds of European sites. Thinking Machine is the channel through which I take selective external advisory engagements that do not conflict with that role.</p>
+        <p>I am also engaged in applied research on production systems for IoT device onboarding and runtime integration — multi-tenant certificate lifecycle management, secure mTLS at scale, and bridging affordance-centric semantics with the resource-centric REST APIs that increasingly dominate device-vendor clouds. The research informs the work, not the other way around.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+    <div>
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Why fixed-scope</div>
+    </div>
+    <div class="md:col-span-2 prose">
+      <p>Most enterprise consulting engagements are designed to expand. Discovery becomes Phase 1; Phase 1 becomes Phase 2; the meter runs.</p>
+      <p>That model works for some problems. It does not work for the kind of problem Thinking Machine takes on, which is almost always: <em>we need to make a decision, soon, and we need someone external to help us get there with rigor</em>. Cloud migration go/no-go. NFR pre-contract due diligence. AI integration feasibility. These have a clear endpoint. The right deliverable is a document a board can read in fifteen minutes, backed by a model that survives a hostile read.</p>
+      <p>So we work in fixed-scope engagement shapes — Discovery Sprint, Rapid PoC, fractional retainer — with explicit out-of-scope items declared up front. If the engagement uncovers a bigger problem, we will tell you. We will not solve it through the same engagement.</p>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">What we won't do</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>We will not take work where AI, cloud, or compliance is not actually the right answer. We will not build the thing we recommend in the same engagement that recommended it (separation of advisory and implementation is structural, not stylistic). We will not sell you a partner relationship, a license, or a managed service. We do not have a sales team because we do not sell things — we sell time, capped.</p>
+        <p>If those constraints are a problem for your organisation, we are not the right fit, and we will help you find someone who is.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="container-page py-16 md:py-20">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">Thirty minutes, no slides, no pitch.</p>
+      <div class="mt-8">
+        <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

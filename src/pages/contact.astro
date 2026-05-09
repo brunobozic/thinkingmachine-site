@@ -2,73 +2,76 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // Replace these placeholders before launch
-const calendarUrl = 'https://cal.com/your-handle/30min'; // Cal.com or Calendly URL
-const emailAddress = 'hello@thinkingmachine.uk';        // Or whatever you decide
+const calendarUrl = 'https://cal.com/your-handle/30min';
+const emailAddress = 'hello@thinkingmachine.uk';
 ---
 <BaseLayout
   title="Contact — Thinking Machine"
-  description="Thirty minutes, no slides, no pitch. Book a free intro to discuss a fixed-scope advisory engagement."
+  description="Book a free 30-minute introduction. No slides, no pitch. We discuss your problem and decide together whether we can help."
+  pageType="ContactPage"
 >
-  <article class="container-page py-20 md:py-28">
-    <header class="max-w-prose mb-12">
-      <h1 class="font-serif text-4xl md:text-5xl text-ink-900 leading-tight">Contact</h1>
-      <p class="mt-6 text-xl text-ink-700 leading-relaxed">
-        Thirty minutes, no slides, no pitch.
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="140" cy="140" r="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <line x1="60" y1="60" x2="140" y2="140" stroke="#1E3A8A" stroke-width="1"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Contact</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Thirty minutes. No slides. No pitch.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        The first call is always free. We use it to understand the problem and decide together whether we can help. If we don't think Thinking Machine is the right fit, we will say so on the call and, where possible, point you to someone better suited.
       </p>
-    </header>
+    </div>
+  </section>
 
-    <section class="prose max-w-prose">
-      <p>
-        The first call is always free. We use it to understand the problem and decide together
-        whether we can help. If we do not think Thinking Machine is the right fit, we will say
-        so on the call and, where possible, point you to someone better suited.
+  <section class="container-page py-12 md:py-16 grid md:grid-cols-2 gap-12 max-w-page">
+    <div class="bg-accent-700 text-white p-10 md:p-12">
+      <div class="text-xs uppercase tracking-[0.2em] opacity-70 mb-4 font-medium">Schedule</div>
+      <h2 class="font-serif text-3xl text-white leading-tight">Pick a slot that works.</h2>
+      <p class="mt-5 opacity-90 leading-relaxed">
+        Thirty minutes via video. Bring a few sentences on the problem; we'll read what you send before the call.
       </p>
+      <a href={calendarUrl} class="inline-block mt-8 bg-white text-accent-700 px-6 py-3 no-underline hover:bg-ink-50 transition-colors font-medium">
+        Open the calendar →
+      </a>
+    </div>
 
-      <h2>Book a call</h2>
-      <p>
-        <a href={calendarUrl} class="btn-primary not-prose">
-          Book a 30-minute intro →
-        </a>
+    <div class="bg-ink-100/40 border border-ink-200 p-10 md:p-12">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">Email</div>
+      <h2 class="font-serif text-3xl text-ink-900 leading-tight">Or write first.</h2>
+      <p class="mt-5 text-ink-700 leading-relaxed">
+        If the calendar isn't loading, or you want to send some context ahead, drop a line. We reply within one working day.
       </p>
+      <a href={`mailto:${emailAddress}`} class="inline-block mt-8 text-accent-700 no-underline text-lg">
+        {emailAddress} →
+      </a>
+    </div>
+  </section>
 
-      <p>
-        If the calendar is not loading or you would rather email first, write to
-        <strong><a href={`mailto:${emailAddress}`}>{emailAddress}</a></strong>
-        and we will get back to you within one working day.
-      </p>
-
+  <section class="container-page py-12">
+    <div class="prose max-w-prose">
       <h2>What to send ahead</h2>
-      <p>
-        A few sentences on the problem. The deadline if there is one. Any documents that frame
-        the question. We will read what you send before the call.
-      </p>
-      <p>
-        We treat all pre-engagement communications as confidential. We do not maintain a CRM.
-        We do not subscribe you to a newsletter. We do not share your inquiry with anyone outside
-        Thinking Machine.
-      </p>
+      <p>A few sentences on the problem. The deadline if there is one. Any documents that frame the question. We will read what you send before the call.</p>
+      <p>We treat all pre-engagement communications as confidential. We do not maintain a CRM. We do not subscribe you to a newsletter. We do not share your inquiry with anyone outside Thinking Machine.</p>
 
       <h2>Where we work</h2>
-      <p>
-        Zagreb, Croatia, with engagements across the European Union. Remote-first. We travel for
-        kickoff and final-readout meetings when the engagement warrants it.
-      </p>
+      <p>Zagreb, Croatia, with engagements across the European Union. Remote-first. We travel for kickoff and final-readout meetings when the engagement warrants it.</p>
 
       <h2>What we charge</h2>
-      <p>
-        Engagement fees depend on shape and scope; we will quote a fixed fee on the first call before
-        any commitment. We do not bill hourly. There are no expansion clauses. We do not charge for
-        the introductory thirty minutes regardless of outcome.
-      </p>
-    </section>
+      <p>Engagement fees depend on shape and scope; we will quote a fixed fee on the first call before any commitment. We do not bill hourly. There are no expansion clauses. We do not charge for the introductory thirty minutes regardless of outcome.</p>
+    </div>
+  </section>
 
+  <section class="container-page pb-16">
     <hr class="section-divider mx-auto max-w-prose" />
-
     <footer class="max-w-prose text-sm text-ink-500">
       <p><strong class="text-ink-800">Thinking Machine d.o.o.</strong></p>
       <p>Zagreb, Croatia · Founded 2022</p>
-      <p>OIB: <span class="text-ink-700">62472822484</span></p>
+      <p>OIB: <span class="text-ink-700">62472822484</span> · MB: <span class="text-ink-700">5637031</span></p>
       <p>Registered office: <span class="text-ink-700">Zagorska ulica 11, 10000 Zagreb, Croatia</span></p>
     </footer>
-  </article>
+  </section>
 </BaseLayout>
