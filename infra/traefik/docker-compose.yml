@@ -17,6 +17,31 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - ./dynamic.yml:/etc/traefik/dynamic.yml:ro
       - ./letsencrypt:/letsencrypt
+
+    # ----- Container hardening -----
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE   # bind 80/443
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+          pids: 200
+        reservations:
+          cpus: "0.05"
+          memory: 64M
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
+
     networks:
       - traefik
     healthcheck:
@@ -27,13 +52,4 @@ services:
     labels:
       - "traefik.enable=true"
       # Dashboard is OFF by default. To enable, define the router below
-      # AND add basic-auth middleware. Skip for production unless you really need it.
-      # - "traefik.http.routers.dashboard.rule=Host(`traefik.thinkingmachine.uk`)"
-      # - "traefik.http.routers.dashboard.service=api@internal"
-      # - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
-      # - "traefik.http.routers.dashboard.middlewares=auth-admin"
-      # - "traefik.http.middlewares.auth-admin.basicauth.users=admin:$$apr1$$..."
-
-networks:
-  traefik:
-    external: true
+      # AND
