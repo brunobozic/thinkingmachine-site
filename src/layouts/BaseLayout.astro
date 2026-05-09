@@ -8,17 +8,137 @@ export interface Props {
   description?: string;
   canonical?: string;
   ogImage?: string;
+  pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'Article';
 }
 
 const {
   title,
-  description = "Strategic engineering advisory for compliance-sensitive enterprises. Cloud cost, cyber resilience, and AI integration. Fixed-scope engagements, decision-grade deliverables.",
+  description = "Strategic engineering advisory for compliance-sensitive enterprises. Cloud cost strategy, cyber resilience, AI integration. Fixed-scope engagements, decision-grade deliverables.",
   canonical,
-  ogImage = '/og-image.png'
+  ogImage = '/og-image.png',
+  pageType = 'WebPage',
 } = Astro.props;
 
 const fullTitle = title.includes('Thinking Machine') ? title : `${title} — Thinking Machine`;
 const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toString();
+const siteUrl = Astro.site?.toString() ?? 'https://thinkingmachine.uk/';
+const ogImageURL = new URL(ogImage, Astro.site).toString();
+
+// JSON-LD structured data (graph). High SEO + AI-visibility value in 2026
+// (ChatGPT, Perplexity, Gemini all parse Organization + Service nodes).
+const ldJson = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}#organization`,
+      name: 'Thinking Machine d.o.o.',
+      legalName: 'Thinking Machine d.o.o.',
+      alternateName: 'Thinking Machine',
+      url: siteUrl,
+      logo: new URL('/favicon.svg', Astro.site).toString(),
+      foundingDate: '2022',
+      slogan: 'Strategic engineering advisory for compliance-sensitive enterprises.',
+      description: 'Boutique strategic engineering advisory: cloud cost & FinOps strategy, cyber resilience & NFR compliance, AI integration for established systems. Fixed-scope, decision-grade engagements.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Zagorska ulica 11',
+        addressLocality: 'Zagreb',
+        postalCode: '10000',
+        addressCountry: 'HR',
+      },
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'European Union' },
+        { '@type': 'Country', name: 'Croatia' },
+        { '@type': 'Country', name: 'Germany' },
+        { '@type': 'Country', name: 'Norway' },
+      ],
+      knowsAbout: [
+        'Cloud cost optimisation',
+        'FinOps',
+        'Microsoft Azure',
+        'Amazon Web Services',
+        'Google Cloud Platform',
+        'NIS2 Directive compliance',
+        'EU Cyber Resilience Act',
+        'Non-functional requirements',
+        'Procurement due diligence',
+        'AI integration',
+        'Retrieval-Augmented Generation',
+        'Model Context Protocol',
+        'On-premises Large Language Models',
+        'Domain-Driven Design',
+        'Microservices architecture',
+        'C# .NET architecture',
+        'Industrial IoT',
+        'W3C Web of Things',
+        'Healthcare information systems',
+        'Telecommunications',
+      ],
+      identifier: [
+        { '@type': 'PropertyValue', propertyID: 'OIB', value: '62472822484' },
+        { '@type': 'PropertyValue', propertyID: 'MB', value: '5637031' },
+      ],
+      sameAs: [
+        'https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/',
+        'https://github.com/brunobozic',
+      ],
+      founder: {
+        '@type': 'Person',
+        name: 'Bruno Božić',
+        jobTitle: 'Founder & Principal Advisor',
+        sameAs: [
+          'https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/',
+          'https://github.com/brunobozic',
+        ],
+      },
+      makesOffer: [
+        {
+          '@type': 'Offer',
+          name: 'Cloud cost & FinOps strategy',
+          description: 'Board-grade cost assessments anchored on published frameworks. Triangulated baselines, multi-scenario reserved-instance modelling, vendor-side pricing playbooks.',
+          category: 'Cloud cost advisory',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Cyber resilience & NFR advisory',
+          description: 'NIS2 readiness, Azure-native security architecture, and structured NFR responses for procurement and pre-contract due diligence.',
+          category: 'Cyber resilience advisory',
+        },
+        {
+          '@type': 'Offer',
+          name: 'AI integration for established systems',
+          description: 'MCP control layers, RAG over enterprise knowledge bases, on-premises LLM infrastructure, LLM-assisted legacy modernisation.',
+          category: 'AI integration advisory',
+        },
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Sales',
+        email: 'hello@thinkingmachine.uk',
+        availableLanguage: ['en', 'hr'],
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}#website`,
+      url: siteUrl,
+      name: 'Thinking Machine',
+      publisher: { '@id': `${siteUrl}#organization` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': pageType,
+      '@id': canonicalURL,
+      url: canonicalURL,
+      name: fullTitle,
+      description,
+      isPartOf: { '@id': `${siteUrl}#website` },
+      about: { '@id': `${siteUrl}#organization` },
+      inLanguage: 'en',
+    },
+  ],
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -31,7 +151,6 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    {/* Favicon */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     {/* Open Graph */}
@@ -39,13 +158,19 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content="Thinking Machine" />
+    <meta property="og:locale" content="en_GB" />
 
     {/* Twitter */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {/* Author / publisher */}
+    <meta name="author" content="Bruno Božić" />
+    <meta name="theme-color" content="#1E3A8A" />
 
     {/* Fonts — preconnect + display swap */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,7 +180,8 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
     />
 
-    {/* No tracking by default. Add analytics here only if explicitly needed. */}
+    {/* JSON-LD structured data — for SEO + AI visibility (ChatGPT/Perplexity/Gemini parse this) */}
+    <script type="application/ld+json" set:html={JSON.stringify(ldJson)} />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
