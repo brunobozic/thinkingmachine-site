@@ -10,50 +10,36 @@ const featured = allStudies
 
 const sectors = ['Healthcare IT', 'Telecommunications', 'Government R&D', 'Industrial IoT', 'Energy', 'Aviation'];
 
-const faqs = [
-  {
-    q: "How long is a typical engagement?",
-    a: "Discovery Sprints run 1–2 weeks. Rapid PoCs run 2–4 weeks. Fractional advisory is monthly retainer. We never sell engagements that expand themselves — every shape has a fixed scope and a fixed end date declared up front."
-  },
-  {
-    q: "How do you price?",
-    a: "Fixed fee, quoted on the first call before any commitment. We do not bill hourly. There are no expansion clauses. The introductory thirty-minute call is free regardless of outcome."
-  },
-  {
-    q: "Will you sign an NDA before the first call?",
-    a: "Yes. Send it ahead of time and we will sign before the call. Many of our existing engagements remain under reference embargo at the client's request."
-  },
-  {
-    q: "Do you also implement what you recommend?",
-    a: "No. Separation of advisory and implementation is structural, not stylistic. If your engagement uncovers work that needs an implementation team, we will help you scope it but not deliver it."
-  },
-  {
-    q: "Can you work with clients outside the European Union?",
-    a: "Yes. Our base is Zagreb, Croatia, and most engagements are EU-based, but we have worked with clients in Norway, the UK, and beyond. We are remote-first and travel for kickoff and final-readout meetings when the engagement warrants it."
-  },
-  {
-    q: "What sectors do you specialise in?",
-    a: "Healthcare IT, telecommunications, government R&D, industrial IoT, energy, and aviation — anywhere compliance, integration, or cost-discipline matters more than novelty. Twenty-plus years across these domains."
-  },
-  {
-    q: "How quickly can you start?",
-    a: "We take one to two new engagements per quarter. Lead time is usually two to six weeks depending on existing commitments. We will tell you on the first call what the realistic start date looks like."
-  },
-  {
-    q: "What if you decide we're not the right fit?",
-    a: "We will say so on the first call and, where possible, point you to someone better suited. We do not take work where AI, cloud, or compliance is not actually the right answer."
-  }
+const stats = [
+  { num: '20+', label: 'Years of enterprise architecture' },
+  { num: '6', label: 'Sectors of deep experience' },
+  { num: '1–2', label: 'New engagements per quarter' },
+  { num: '€0', label: 'For the first 30 minutes' },
 ];
 
-// FAQPage JSON-LD for rich-result snippets in Google search
+const frameworks = [
+  'Hugo & Rey · Efficient Cloud FinOps',
+  'Kline et al. · Pro Database Migration to Azure',
+  'Campbell & Majors · Database Reliability Engineering',
+  'Majors, Fong-Jones, Miranda · Observability Engineering',
+  'Nygard · Release It!',
+  'Forsgren, Humble, Kim · Accelerate',
+];
+
+const faqs = [
+  { q: "How long is a typical engagement?", a: "Discovery Sprints run 1–2 weeks. Rapid PoCs run 2–4 weeks. Fractional advisory is monthly retainer. We never sell engagements that expand themselves — every shape has a fixed scope and a fixed end date declared up front." },
+  { q: "How do you price?", a: "Fixed fee, quoted on the first call before any commitment. We do not bill hourly. There are no expansion clauses. The introductory thirty-minute call is free regardless of outcome." },
+  { q: "Will you sign an NDA before the first call?", a: "Yes. Send it ahead of time and we will sign before the call. Many of our existing engagements remain under reference embargo at the client's request." },
+  { q: "Do you also implement what you recommend?", a: "No. Separation of advisory and implementation is structural, not stylistic. If your engagement uncovers work that needs an implementation team, we will help you scope it but not deliver it." },
+  { q: "Can you work with clients outside the European Union?", a: "Yes. Our base is Zagreb, Croatia, and most engagements are EU-based, but we have worked with clients in Norway, the UK, and beyond. We are remote-first and travel for kickoff and final-readout meetings when the engagement warrants it." },
+  { q: "What sectors do you specialise in?", a: "Healthcare IT, telecommunications, government R&D, industrial IoT, energy, and aviation — anywhere compliance, integration, or cost-discipline matters more than novelty." },
+  { q: "How quickly can you start?", a: "We take one to two new engagements per quarter. Lead time is usually two to six weeks depending on existing commitments." },
+  { q: "What if you decide we're not the right fit?", a: "We will say so on the first call and, where possible, point you to someone better suited. We do not take work where AI, cloud, or compliance is not actually the right answer." }
+];
+
 const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map(({ q, a }) => ({
-    "@type": "Question",
-    name: q,
-    acceptedAnswer: { "@type": "Answer", text: a }
-  }))
+  "@context": "https://schema.org", "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } }))
 };
 ---
 <BaseLayout
@@ -67,18 +53,17 @@ const faqJsonLd = {
       <circle cx="100" cy="100" r="70" stroke="#1E3A8A" stroke-width="1" fill="none"/>
       <circle cx="100" cy="100" r="42" stroke="#1E3A8A" stroke-width="1" fill="none"/>
     </svg>
-
     <div class="relative">
-      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium anim-fade-up">
         Thinking Machine d.o.o. · Boutique engineering advisory
       </div>
-      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-ink-900 leading-[1.05] tracking-tight max-w-4xl">
+      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-ink-900 leading-[1.05] tracking-tight max-w-4xl anim-fade-up anim-delay-100">
         Strategic engineering advisory for compliance-sensitive enterprises.
       </h1>
-      <p class="mt-8 text-xl md:text-2xl text-ink-700 font-serif italic max-w-3xl leading-snug">
+      <p class="mt-8 text-xl md:text-2xl text-ink-700 font-serif italic max-w-3xl leading-snug anim-fade-up anim-delay-200">
         Fixed-scope engagements. Decision-grade deliverables. No six-month discovery phase.
       </p>
-      <div class="mt-10 flex flex-wrap gap-4">
+      <div class="mt-10 flex flex-wrap gap-4 anim-fade-up anim-delay-300">
         <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
         <a href="#what-we-do" class="btn-secondary">What we do →</a>
       </div>
@@ -93,15 +78,26 @@ const faqJsonLd = {
     </div>
   </section>
 
+  {/* STATS STRIP — by the numbers */}
+  <section class="container-page py-16 md:py-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      {stats.map(s => (
+        <div class="border-t-2 border-accent-700 pt-5">
+          <div class="stat-numeral">{s.num}</div>
+          <div class="mt-3 text-sm text-ink-700 leading-snug">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
   {/* WHAT WE DO */}
-  <section id="what-we-do" class="container-page py-20 md:py-24">
+  <section id="what-we-do" class="container-page py-20 md:py-24 border-t border-ink-200">
     <div class="max-w-2xl mb-14">
       <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">What we do</div>
       <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">
         Three lanes. One engagement model. No surprises on the invoice.
       </h2>
     </div>
-
     <div class="grid gap-px bg-ink-200 border border-ink-200 md:grid-cols-3">
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">01 · Cloud</div>
@@ -109,7 +105,9 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           Board-grade cost assessments anchored on published frameworks. Triangulated baselines, multi-scenario reserved-instance modelling, vendor-side pricing playbooks. The document the decision-maker reads.
         </p>
-        <a href="/services#cloud-cost" class="inline-block mt-5 text-sm text-accent-700 no-underline group-hover:text-accent-800">Read more on cloud cost →</a>
+        <a href="/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">
+          Read more on cloud cost <span class="transition-transform group-hover/link:translate-x-1">→</span>
+        </a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">02 · Cyber</div>
@@ -117,7 +115,9 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           NIS2 readiness. Azure-native security architecture. Structured NFR responses for procurement and pre-contract due diligence. We close the gap between <em>we'll figure it out</em> and an auditable position.
         </p>
-        <a href="/services#cyber" class="inline-block mt-5 text-sm text-accent-700 no-underline group-hover:text-accent-800">Read more on cyber resilience →</a>
+        <a href="/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">
+          Read more on cyber resilience <span class="transition-transform group-hover/link:translate-x-1">→</span>
+        </a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">03 · AI</div>
@@ -125,12 +125,14 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           MCP control layers. RAG over enterprise knowledge. On-prem LLM infra for data-residency-sensitive sectors. We connect modern frontier models to the systems you already have — no all-in transformation pitch.
         </p>
-        <a href="/services#ai" class="inline-block mt-5 text-sm text-accent-700 no-underline group-hover:text-accent-800">Read more on AI integration →</a>
+        <a href="/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">
+          Read more on AI integration <span class="transition-transform group-hover/link:translate-x-1">→</span>
+        </a>
       </article>
     </div>
   </section>
 
-  {/* BENTO GRID — "What you actually get" */}
+  {/* BENTO — Deliverables */}
   <section class="bg-ink-100/50 border-y border-ink-200">
     <div class="container-page py-16 md:py-24">
       <div class="max-w-2xl mb-12">
@@ -140,9 +142,8 @@ const faqJsonLd = {
           Every engagement produces tangible artifacts you keep. No deck-only deliverables, no "executive summary" with nothing underneath.
         </p>
       </div>
-
       <div class="grid gap-4 grid-cols-1 md:grid-cols-3 md:grid-rows-2 md:auto-rows-fr">
-        <div class="md:col-span-2 md:row-span-2 bg-accent-700 text-white p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
+        <div class="md:col-span-2 md:row-span-2 bg-accent-700 text-white p-8 md:p-10 flex flex-col justify-between min-h-[320px] card-lift">
           <div>
             <div class="text-xs uppercase tracking-[0.2em] opacity-70 mb-3 font-medium">Primary deliverable</div>
             <h3 class="font-serif text-3xl md:text-4xl leading-tight">Decision-grade report</h3>
@@ -151,26 +152,22 @@ const faqJsonLd = {
             A document the board reads in fifteen minutes — anchored on published frameworks, with explicit scope, methodology, evidence trails, and a recommendation that survives a hostile read.
           </p>
         </div>
-
-        <div class="bg-white border border-ink-200 p-7">
+        <div class="bg-white border border-ink-200 p-7 card-lift">
           <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">Working artifact</div>
           <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Cost model spreadsheet</h3>
           <p class="text-ink-700 text-sm leading-relaxed">Multi-sheet, scenario-modelled, you populate inputs and the answer changes.</p>
         </div>
-
-        <div class="bg-white border border-ink-200 p-7">
+        <div class="bg-white border border-ink-200 p-7 card-lift">
           <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">NFR toolkit</div>
           <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Compliance register + evidence log</h3>
           <p class="text-ink-700 text-sm leading-relaxed">One row per requirement. Status, justification, evidence, cost-impact, action.</p>
         </div>
-
-        <div class="bg-white border border-ink-200 p-7">
+        <div class="bg-white border border-ink-200 p-7 card-lift">
           <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">For AI work</div>
           <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Working PoC + go/no-go memo</h3>
           <p class="text-ink-700 text-sm leading-relaxed">A demonstration in code, not a slide. Plus an honest evaluation of whether to proceed.</p>
         </div>
-
-        <div class="bg-white border border-ink-200 p-7">
+        <div class="bg-white border border-ink-200 p-7 card-lift">
           <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">Always</div>
           <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Out-of-scope declaration</h3>
           <p class="text-ink-700 text-sm leading-relaxed">Up front, in writing — what we deliver, and what we deliberately do not.</p>
@@ -179,50 +176,68 @@ const faqJsonLd = {
     </div>
   </section>
 
+  {/* FRAMEWORKS — methodology depth signal */}
+  <section class="container-page py-16 md:py-20">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Methodology</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Anchored on published frameworks.</h2>
+        <p class="mt-5 text-ink-700 leading-relaxed">
+          We don't invent methodologies on your dime. Cost work, reliability work, observability work — each engagement starts from authored, citeable sources. So does the rebuttal when the work gets reviewed.
+        </p>
+      </div>
+      <div class="md:col-span-2 grid sm:grid-cols-2 gap-3">
+        {frameworks.map(f => (
+          <div class="border-l-2 border-accent-700 bg-ink-100/30 px-5 py-4 text-sm text-ink-800">{f}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   {/* HOW WE WORK */}
-  <section class="container-page py-20 md:py-24">
-    <div class="max-w-2xl mb-12">
-      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">How we work</div>
-      <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-[1.15]">Time-boxed shapes you can actually approve.</h2>
+  <section class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20">
+      <div class="max-w-2xl mb-12">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">How we work</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-[1.15]">Time-boxed shapes you can actually approve.</h2>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7 card-lift">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 1</div>
+          <p class="font-serif text-2xl text-ink-900 mb-2">Discovery Sprint</p>
+          <p class="text-sm text-ink-500 mb-4 font-medium">1–2 weeks · fixed fee</p>
+          <p class="text-ink-700">Scoped problem, structured deliverable, decision-ready output.</p>
+        </div>
+        <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7 card-lift">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 2</div>
+          <p class="font-serif text-2xl text-ink-900 mb-2">Rapid PoC</p>
+          <p class="text-sm text-ink-500 mb-4 font-medium">2–4 weeks · fixed fee</p>
+          <p class="text-ink-700">Working demonstration plus an evidence-based go/no-go.</p>
+        </div>
+        <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7 card-lift">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 3</div>
+          <p class="font-serif text-2xl text-ink-900 mb-2">Fractional advisory</p>
+          <p class="text-sm text-ink-500 mb-4 font-medium">Monthly retainer</p>
+          <p class="text-ink-700">Architectural sounding-board, RFP due diligence, second-opinion reviews.</p>
+        </div>
+      </div>
+      <p class="mt-10 max-w-prose text-ink-700">
+        We take <strong class="text-ink-900">one to two new engagements per quarter</strong>. We decline work where the answer is not actually AI, cloud, or compliance. The first thirty minutes is always free.
+      </p>
     </div>
-    <div class="grid gap-8 md:grid-cols-3">
-      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
-        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 1</div>
-        <p class="font-serif text-2xl text-ink-900 mb-2">Discovery Sprint</p>
-        <p class="text-sm text-ink-500 mb-4 font-medium">1–2 weeks · fixed fee</p>
-        <p class="text-ink-700">Scoped problem, structured deliverable, decision-ready output.</p>
-      </div>
-      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
-        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 2</div>
-        <p class="font-serif text-2xl text-ink-900 mb-2">Rapid PoC</p>
-        <p class="text-sm text-ink-500 mb-4 font-medium">2–4 weeks · fixed fee</p>
-        <p class="text-ink-700">Working demonstration plus an evidence-based go/no-go.</p>
-      </div>
-      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
-        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 3</div>
-        <p class="font-serif text-2xl text-ink-900 mb-2">Fractional advisory</p>
-        <p class="text-sm text-ink-500 mb-4 font-medium">Monthly retainer</p>
-        <p class="text-ink-700">Architectural sounding-board, RFP due diligence, second-opinion reviews.</p>
-      </div>
-    </div>
-    <p class="mt-10 max-w-prose text-ink-700">
-      We take <strong class="text-ink-900">one to two new engagements per quarter</strong>. We decline work where the answer is not actually AI, cloud, or compliance. The first thirty minutes is always free.
-    </p>
   </section>
 
   {/* RECENT WORK */}
-  <section class="bg-ink-100/40 border-y border-ink-200">
-    <div class="container-page py-20 md:py-24">
-      <div class="flex items-end justify-between flex-wrap gap-4 mb-12">
-        <div>
-          <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Recent work</div>
-          <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Anonymised case studies.</h2>
-        </div>
-        <a href="/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">See all engagements →</a>
+  <section class="container-page py-20 md:py-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Recent work</div>
+        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Anonymised case studies.</h2>
       </div>
-      <div class="grid gap-6 md:grid-cols-2">
-        {featured.map(study => <CaseStudyCard study={study} />)}
-      </div>
+      <a href="/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">See all engagements →</a>
+    </div>
+    <div class="grid gap-6 md:grid-cols-2">
+      {featured.map(study => <CaseStudyCard study={study} />)}
     </div>
   </section>
 
@@ -236,18 +251,18 @@ const faqJsonLd = {
     </div>
   </section>
 
-  {/* FAQ ACCORDION */}
+  {/* FAQ */}
   <section class="container-page py-20 md:py-24">
     <div class="max-w-2xl mb-12">
       <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Frequently asked</div>
       <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Questions buyers usually ask first.</h2>
     </div>
     <div class="max-w-3xl divide-y divide-ink-200 border-t border-b border-ink-200">
-      {faqs.map((item, i) => (
+      {faqs.map(item => (
         <details class="group py-6">
           <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
             <h3 class="font-serif text-xl md:text-2xl text-ink-900 leading-snug pr-4">{item.q}</h3>
-            <span class="flex-shrink-0 mt-1 text-accent-700 transition-transform group-open:rotate-45 text-2xl leading-none font-light" aria-hidden="true">+</span>
+            <span class="flex-shrink-0 mt-1 text-accent-700 transition-transform duration-200 group-open:rotate-45 text-2xl leading-none font-light" aria-hidden="true">+</span>
           </summary>
           <div class="mt-4 text-ink-700 leading-relaxed max-w-prose">{item.a}</div>
         </details>
@@ -255,7 +270,7 @@ const faqJsonLd = {
     </div>
   </section>
 
-  {/* ABOUT TEASER */}
+  {/* ABOUT */}
   <section class="bg-ink-100/40 border-t border-ink-200">
     <div class="container-page py-16 md:py-20">
       <div class="grid md:grid-cols-3 gap-12">
@@ -288,6 +303,5 @@ const faqJsonLd = {
     </div>
   </section>
 
-  {/* FAQPage JSON-LD for rich-result snippets in Google search */}
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 </BaseLayout>

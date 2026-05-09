@@ -9,17 +9,16 @@ const { study } = Astro.props;
 const { title, sector, engagementType, year, summary } = study.data;
 const href = `/work/${study.slug}`;
 ---
-<article class="border border-ink-200 bg-white p-7 md:p-8 hover:border-ink-700 transition-colors group">
+<article class="border border-ink-200 bg-white p-7 md:p-8 card-lift group">
   <div class="text-xs uppercase tracking-wider text-ink-500 mb-3">
     {engagementType} · {sector} · {year}
   </div>
   <h3 class="font-serif text-2xl text-ink-900 leading-tight">
-    <a href={href} class="no-underline group-hover:text-accent-800 transition-colors">
-      {title}
-    </a>
+    <a href={href} class="no-underline group-hover:text-accent-800 transition-colors">{title}</a>
   </h3>
   <p class="mt-4 text-ink-700">{summary}</p>
-  <a href={href} class="inline-block mt-5 text-accent-700 no-underline text-sm">
-    Read case study →
+  <a href={href} class="inline-flex items-center gap-1 mt-5 text-accent-700 no-underline text-sm group/link">
+    Read case study
+    <span class="transition-transform group-hover/link:translate-x-1">→</span>
   </a>
 </article>
