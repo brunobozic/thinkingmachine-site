@@ -158,17 +158,18 @@ ufw default deny outgoing
 ufw allow out 53/udp     comment "DNS"
 ufw allow out 53/tcp     comment "DNS (TCP fallback)"
 ufw allow out 80/tcp     comment "HTTP (apt, ACME, etc.)"
-ufw allow out 443/tcp    comment "HTTPS (apt, ghcr.io, Let's Encrypt, Docker hub)"
+ufw allow out 443/tcp    comment "HTTPS - apt ghcr lets-encrypt docker"
 ufw allow out 123/udp    comment "NTP"
-ufw allow out 11371/tcp  comment "GPG keyservers (rare, but apt may need)"
+ufw allow out 11371/tcp  comment "GPG keyservers"
 
 # Outbound SSH for git operations (we don't use it but keep for now)
-ufw allow out 22/tcp     comment "SSH out (for git, etc.)"
+ufw allow out 22/tcp     comment "SSH out for git"
 
 # Block port 25 outbound explicitly (Hetzner already blocks it but defense in depth)
-ufw deny out 25/tcp      comment "SMTP - blocked (anti-spam)"
-ufw deny out 465/tcp     comment "SMTPS - blocked"
-ufw deny out 587/tcp     comment "Submission - blocked"
+# UFW comments must avoid apostrophes and most non-word punctuation.
+ufw deny out 25/tcp      comment "SMTP blocked anti-spam"
+ufw deny out 465/tcp     comment "SMTPS blocked"
+ufw deny out 587/tcp     comment "Submission blocked"
 
 ufw --force enable
 ufw reload
@@ -288,5 +289,4 @@ Recommended manual follow-ups:
 
   • Review:  less /var/log/lynis-baseline.log
   • Per-server traffic alert in Hetzner console (server detail page)
-  • Periodic:  apt list --upgradable && unattended-upgrade --dry-run
-EOF
+  • Periodic:  apt list --upgradable && unattended-upgra
