@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install deps with cache-friendly layering
 COPY package.json package-lock.json* ./
-RUN npm ci --no-audit --no-fund
+RUN npm install --no-audit --no-fund
 
 # Copy sources and build
 COPY . .
