@@ -1,14 +1,7 @@
 # thinkingmachine-site application stack
 # Path on VPS: /srv/thinkingmachine-site/docker-compose.yml
-#
-# Bring up:    cd /srv/thinkingmachine-site && docker compose pull && docker compose up -d
-# Update:      cd /srv/thinkingmachine-site && docker compose pull && docker compose up -d
-# Logs:        docker compose logs -f thinkingmachine-site
-#
-# Requires:
-#   - traefik network exists (created by bootstrap.sh)
-#   - Traefik stack is running with cert resolver "letsencrypt"
-#   - Docker is logged into ghcr.io with read:packages scope
+# Bring up:    cd /srv/thinkingmachine-site && docker compose up -d
+# Requires:    Traefik running, traefik network exists, Docker logged into ghcr.io (only if image private)
 
 services:
   thinkingmachine-site:
@@ -25,11 +18,11 @@ services:
     cap_drop:
       - ALL
     cap_add:
-      - NET_BIND_SERVICE   # bind port 80 inside container
-      - CHOWN              # nginx workers drop to nginx user
+      - NET_BIND_SERVICE
+      - CHOWN
       - SETUID
       - SETGID
-      - DAC_OVERRIDE       # cache dir perms
+      - DAC_OVERRIDE
     security_opt:
       - no-new-privileges:true
     deploy:
@@ -48,19 +41,24 @@ services:
 
     networks:
       - traefik
+
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/"]
       interval: 30s
       timeout: 3s
       retries: 3
       start_period: 5s
+
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
-
-      # Apex + www
+      # Apex + www — both routed to this service
       - "traefik.http.routers.tm-site.rule=Host(`thinkingmachine.uk`) || Host(`www.thinkingmachine.uk`)"
       - "traefik.http.routers.tm-site.entrypoints=websecure"
       - "traefik.http.routers.tm-site.tls=true"
       - "traefik.http.routers.tm-site.tls.certresolver=letsencrypt"
-      - "traefik
+      - "traefik.http.routers.tm-site.middlewares=secure-headers@file,tm-www-redirect"
+      - "traefik.http.services.tm-site.loadbalancer.server.port=80"
+      # www -> apex permanent redirect
+      - "traefik.http.middlewares.tm-www-redirect.redirectregex.regex=^https?://www\\.thinkingmachine\\.uk/(.*)"
+      - "traefik.http.middlewares.tm-www-red
