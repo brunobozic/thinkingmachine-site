@@ -8,31 +8,52 @@ const featured = allStudies
   .filter(s => s.data.featured)
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
 
-const sectors = ['Healthcare IT', 'Telecommunications', 'Government R&D', 'Industrial IoT', 'Energy', 'Aviation'];
+const sectors = [
+  { name: 'Healthcare IT', detail: 'HIS, lab automation, e-Health' },
+  { name: 'Telecommunications', detail: 'CRM, billing, scale' },
+  { name: 'Government R&D', detail: 'EU-funded consortia' },
+  { name: 'Industrial IoT', detail: 'Multi-vendor, multi-site' },
+  { name: 'Energy', detail: 'Operator-side procurement' },
+  { name: 'Aviation', detail: 'Multi-tenant operations' },
+];
 
 const stats = [
   { num: '20+', label: 'Years of enterprise architecture' },
   { num: '6', label: 'Sectors of deep experience' },
-  { num: '1–2', label: 'New engagements per quarter' },
-  { num: '€0', label: 'For the first 30 minutes' },
+  { num: '2–4', label: 'Weeks per decision (vs 4–6 months at a Big-4)' },
+  { num: '1', label: 'Senior expert on the work, not a delivery team' },
 ];
 
-const frameworks = [
-  'Hugo & Rey · Efficient Cloud FinOps',
-  'Kline et al. · Pro Database Migration to Azure',
-  'Campbell & Majors · Database Reliability Engineering',
-  'Majors, Fong-Jones, Miranda · Observability Engineering',
-  'Nygard · Release It!',
-  'Forsgren, Humble, Kim · Accelerate',
+const process = [
+  { n: '01', t: 'Survey', d: 'We come in and listen — to the people who actually know. Most of what matters is not written down. We surface it.' },
+  { n: '02', t: 'Map', d: 'We draw the current situation: data flows, decision rights, dependencies, gaps. Everyone sees the same picture.' },
+  { n: '03', t: 'Think', d: 'The hard part. We anchor on published frameworks and our cross-sector pattern library. We look for the analogy that has already been solved.' },
+  { n: '04', t: 'Deliver', d: 'A document your board reads in fifteen minutes. Backed by a model that survives a hostile read. With every claim cited.' },
+];
+
+const methodologies = [
+  { name: 'Five-pass verbatim verification', desc: 'Every load-bearing claim cited to source.' },
+  { name: 'Position of Record', desc: 'Authoritative voice with traceable evidence chain.' },
+  { name: 'Propagation matrix', desc: 'Cross-document audit trail. Nothing falls through.' },
+  { name: 'Four-category cost taxonomy', desc: 'Fixed overhead · Competence · Variable · Per-server.' },
+  { name: 'Triangulated baseline', desc: 'When invoices are unavailable, anchor on public pricing × partner-margin band.' },
+  { name: 'L / I / B classification', desc: 'Findings tagged Legally Required · Implicit Means · Best Practice.' },
+];
+
+const comparison = [
+  { who: 'Big-4 / strategy house', they: 'Branded report. Team of juniors learning on your dime. 4–6 months.', us: 'One senior expert. 2–4 weeks. Same depth, sharper.' },
+  { who: 'Domain freelancer', they: 'Deep in one vertical. No methodology rigor. No cross-sector library.', us: 'Twenty years across six sectors. Audit-grade methodology.' },
+  { who: 'System integrator', they: 'Will gladly recommend the implementation work they’re selling.', us: 'No implementation conflict. We will not build what we recommend.' },
+  { who: 'Internal team', they: 'Free, contextual. But politically constrained, no external calibration.', us: 'External read. Permission to say what is politically inconvenient.' },
 ];
 
 const faqs = [
-  { q: "How long is a typical engagement?", a: "Discovery Sprints run 1–2 weeks. Rapid PoCs run 2–4 weeks. Fractional advisory is monthly retainer. We never sell engagements that expand themselves — every shape has a fixed scope and a fixed end date declared up front." },
+  { q: "How long is a typical engagement?", a: "Discovery Sprints run 1–2 weeks. Rapid PoCs run 2–4 weeks. Fractional CTO is monthly retainer. We never sell engagements that expand themselves — every shape has a fixed scope and end date declared up front." },
   { q: "How do you price?", a: "Fixed fee, quoted on the first call before any commitment. We do not bill hourly. There are no expansion clauses. The introductory thirty-minute call is free regardless of outcome." },
-  { q: "Will you sign an NDA before the first call?", a: "Yes. Send it ahead of time and we will sign before the call. Many of our existing engagements remain under reference embargo at the client's request." },
+  { q: "Will you sign an NDA before the first call?", a: "Yes. Send it ahead of time and we will sign before the call. Many existing engagements remain under reference embargo at the client's request." },
   { q: "Do you also implement what you recommend?", a: "No. Separation of advisory and implementation is structural, not stylistic. If your engagement uncovers work that needs an implementation team, we will help you scope it but not deliver it." },
-  { q: "Can you work with clients outside the European Union?", a: "Yes. Our base is Zagreb, Croatia, and most engagements are EU-based, but we have worked with clients in Norway, the UK, and beyond. We are remote-first and travel for kickoff and final-readout meetings when the engagement warrants it." },
-  { q: "What sectors do you specialise in?", a: "Healthcare IT, telecommunications, government R&D, industrial IoT, energy, and aviation — anywhere compliance, integration, or cost-discipline matters more than novelty." },
+  { q: "Can you work with clients outside the European Union?", a: "Yes. Our base is Zagreb, Croatia, and most engagements are EU-based, but we have worked with clients in Norway, the UK, Germany, and beyond. Remote-first; we travel for kickoff and final-readout meetings when warranted." },
+  { q: "What sectors do you specialise in?", a: "Healthcare IT, telecommunications, government R&D, industrial IoT, energy, and aviation. The cross-domain pattern library is itself the value: your problem has often already been solved in an adjacent sector." },
   { q: "How quickly can you start?", a: "We take one to two new engagements per quarter. Lead time is usually two to six weeks depending on existing commitments." },
   { q: "What if you decide we're not the right fit?", a: "We will say so on the first call and, where possible, point you to someone better suited. We do not take work where AI, cloud, or compliance is not actually the right answer." }
 ];
@@ -43,8 +64,8 @@ const faqJsonLd = {
 };
 ---
 <BaseLayout
-  title="Thinking Machine — Strategic engineering advisory"
-  description="Cloud cost strategy, cyber resilience, AI integration. Fixed-scope engagements, decision-grade deliverables, no six-month discovery phase. Zagreb-based, EU-wide. 20+ years of enterprise architecture."
+  title="Thinking Machine — Delegate the hard thinking"
+  description="Hand us the hard architectural, cloud-cost, or compliance question. We survey, map, think, and deliver a board-ready answer. Fixed-scope, decision-grade, 2–4 weeks. Twenty years across six sectors."
 >
   {/* HERO */}
   <section class="container-page pt-20 pb-20 md:pt-32 md:pb-28 relative overflow-hidden">
@@ -57,15 +78,15 @@ const faqJsonLd = {
       <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium anim-fade-up">
         Thinking Machine d.o.o. · Boutique engineering advisory
       </div>
-      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-ink-900 leading-[1.05] tracking-tight max-w-4xl anim-fade-up anim-delay-100">
-        Strategic engineering advisory for compliance-sensitive enterprises.
+      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-ink-900 leading-[1.05] tracking-tight max-w-5xl anim-fade-up anim-delay-100">
+        Hand us the hard question. We come back with a defensible answer.
       </h1>
       <p class="mt-8 text-xl md:text-2xl text-ink-700 font-serif italic max-w-3xl leading-snug anim-fade-up anim-delay-200">
-        Fixed-scope engagements. Decision-grade deliverables. No six-month discovery phase.
+        Delegate the thinking. We come in, listen carefully, map what's actually there, do the analysis, and deliver the document your board can read in fifteen minutes.
       </p>
       <div class="mt-10 flex flex-wrap gap-4 anim-fade-up anim-delay-300">
         <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
-        <a href="#what-we-do" class="btn-secondary">What we do →</a>
+        <a href="#how" class="btn-secondary">See how we work →</a>
       </div>
     </div>
   </section>
@@ -74,11 +95,11 @@ const faqJsonLd = {
   <section class="border-y border-ink-200 bg-ink-100/40">
     <div class="container-page py-6 flex flex-wrap items-center gap-x-8 gap-y-3">
       <span class="text-xs uppercase tracking-wider text-ink-500 font-medium">Twenty-plus years across</span>
-      {sectors.map(s => <span class="text-sm text-ink-700">{s}</span>)}
+      {sectors.map(s => <span class="text-sm text-ink-700">{s.name}</span>)}
     </div>
   </section>
 
-  {/* STATS STRIP — by the numbers */}
+  {/* STATS STRIP */}
   <section class="container-page py-16 md:py-20">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
       {stats.map(s => (
@@ -90,13 +111,33 @@ const faqJsonLd = {
     </div>
   </section>
 
-  {/* WHAT WE DO */}
-  <section id="what-we-do" class="container-page py-20 md:py-24 border-t border-ink-200">
+  {/* PROCESS — the survey/map/think/deliver narrative */}
+  <section id="how" class="bg-ink-100/50 border-y border-ink-200">
+    <div class="container-page py-20 md:py-24">
+      <div class="max-w-2xl mb-14">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">How we work</div>
+        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Survey. Map. Think. Deliver.</h2>
+        <p class="mt-5 text-ink-700 text-lg leading-relaxed">
+          The hard part is not the answer — it is finding out what is actually true inside your organisation, then thinking carefully about what to do. We do both.
+        </p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-4">
+        {process.map(p => (
+          <div class="bg-white border border-ink-200 border-t-4 border-t-accent-700 p-7 card-lift">
+            <div class="font-serif text-3xl text-accent-700 font-semibold mb-3">{p.n}</div>
+            <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">{p.t}</h3>
+            <p class="text-ink-700 text-sm leading-relaxed">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* WHAT WE DO — three lanes */}
+  <section id="what-we-do" class="container-page py-20 md:py-24">
     <div class="max-w-2xl mb-14">
       <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">What we do</div>
-      <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">
-        Three lanes. One engagement model. No surprises on the invoice.
-      </h2>
+      <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Three lanes. Same engagement model.</h2>
     </div>
     <div class="grid gap-px bg-ink-200 border border-ink-200 md:grid-cols-3">
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
@@ -105,19 +146,15 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           Board-grade cost assessments anchored on published frameworks. Triangulated baselines, multi-scenario reserved-instance modelling, vendor-side pricing playbooks. The document the decision-maker reads.
         </p>
-        <a href="/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">
-          Read more on cloud cost <span class="transition-transform group-hover/link:translate-x-1">→</span>
-        </a>
+        <a href="/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Read more on cloud cost <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">02 · Cyber</div>
-        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">Cyber resilience & NFR advisory</h3>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">Cyber resilience, NIS2 & CRA</h3>
         <p class="text-ink-700 leading-relaxed">
-          NIS2 readiness. Azure-native security architecture. Structured NFR responses for procurement and pre-contract due diligence. We close the gap between <em>we'll figure it out</em> and an auditable position.
+          Cyber Resilience Act readiness. NIS2 transposition. Azure-native security architecture. Structured NFR responses for procurement and pre-contract due diligence. Audit-defensible positions, not opinions.
         </p>
-        <a href="/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">
-          Read more on cyber resilience <span class="transition-transform group-hover/link:translate-x-1">→</span>
-        </a>
+        <a href="/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Read more on cyber resilience <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">03 · AI</div>
@@ -125,81 +162,154 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           MCP control layers. RAG over enterprise knowledge. On-prem LLM infra for data-residency-sensitive sectors. We connect modern frontier models to the systems you already have — no all-in transformation pitch.
         </p>
-        <a href="/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">
-          Read more on AI integration <span class="transition-transform group-hover/link:translate-x-1">→</span>
-        </a>
+        <a href="/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Read more on AI integration <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
     </div>
   </section>
 
-  {/* BENTO — Deliverables */}
-  <section class="bg-ink-100/50 border-y border-ink-200">
-    <div class="container-page py-16 md:py-24">
-      <div class="max-w-2xl mb-12">
-        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Deliverables</div>
-        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">What you actually get.</h2>
-        <p class="mt-5 text-ink-700 text-lg leading-relaxed">
-          Every engagement produces tangible artifacts you keep. No deck-only deliverables, no "executive summary" with nothing underneath.
-        </p>
-      </div>
-      <div class="grid gap-4 grid-cols-1 md:grid-cols-3 md:grid-rows-2 md:auto-rows-fr">
-        <div class="md:col-span-2 md:row-span-2 bg-accent-700 text-white p-8 md:p-10 flex flex-col justify-between min-h-[320px] card-lift">
-          <div>
-            <div class="text-xs uppercase tracking-[0.2em] opacity-70 mb-3 font-medium">Primary deliverable</div>
-            <h3 class="font-serif text-3xl md:text-4xl leading-tight">Decision-grade report</h3>
-          </div>
-          <p class="opacity-90 leading-relaxed mt-6 text-lg">
-            A document the board reads in fifteen minutes — anchored on published frameworks, with explicit scope, methodology, evidence trails, and a recommendation that survives a hostile read.
+  {/* WHAT WE BRING — methodology library */}
+  <section class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-20 md:py-24">
+      <div class="grid md:grid-cols-3 gap-12 mb-12">
+        <div>
+          <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">What we bring</div>
+          <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">A small library of named techniques.</h2>
+          <p class="mt-5 text-ink-700 leading-relaxed">
+            We do not invent methodology on your dime. Each engagement starts from a small library of techniques we have refined across regulatory, cost, and architecture work — and are explicit about citing.
           </p>
         </div>
-        <div class="bg-white border border-ink-200 p-7 card-lift">
-          <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">Working artifact</div>
-          <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Cost model spreadsheet</h3>
-          <p class="text-ink-700 text-sm leading-relaxed">Multi-sheet, scenario-modelled, you populate inputs and the answer changes.</p>
-        </div>
-        <div class="bg-white border border-ink-200 p-7 card-lift">
-          <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">NFR toolkit</div>
-          <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Compliance register + evidence log</h3>
-          <p class="text-ink-700 text-sm leading-relaxed">One row per requirement. Status, justification, evidence, cost-impact, action.</p>
-        </div>
-        <div class="bg-white border border-ink-200 p-7 card-lift">
-          <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">For AI work</div>
-          <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Working PoC + go/no-go memo</h3>
-          <p class="text-ink-700 text-sm leading-relaxed">A demonstration in code, not a slide. Plus an honest evaluation of whether to proceed.</p>
-        </div>
-        <div class="bg-white border border-ink-200 p-7 card-lift">
-          <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">Always</div>
-          <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Out-of-scope declaration</h3>
-          <p class="text-ink-700 text-sm leading-relaxed">Up front, in writing — what we deliver, and what we deliberately do not.</p>
+        <div class="md:col-span-2 grid sm:grid-cols-2 gap-3">
+          {methodologies.map(m => (
+            <div class="bg-white border-l-2 border-accent-700 px-5 py-4">
+              <div class="font-serif text-base text-ink-900 mb-1">{m.name}</div>
+              <div class="text-sm text-ink-700">{m.desc}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  {/* FRAMEWORKS — methodology depth signal */}
-  <section class="container-page py-16 md:py-20">
-    <div class="grid md:grid-cols-3 gap-12">
+  {/* CROSS-SECTOR LIBRARY — the polymath signal */}
+  <section class="container-page py-20 md:py-24">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Methodology</div>
-        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Anchored on published frameworks.</h2>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Cross-sector library</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Your problem has often already been solved next door.</h2>
         <p class="mt-5 text-ink-700 leading-relaxed">
-          We don't invent methodologies on your dime. Cost work, reliability work, observability work — each engagement starts from authored, citeable sources. So does the rebuttal when the work gets reviewed.
+          Most consultants spend a career in one sector. We have shipped systems in six. The integration patterns from healthcare lab automation, the procurement-NFR rigor from energy, the multi-tenant runtime work from industrial IoT — they translate.
+        </p>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          When we say "we have seen this before", we usually have — just somewhere unexpected.
         </p>
       </div>
-      <div class="md:col-span-2 grid sm:grid-cols-2 gap-3">
-        {frameworks.map(f => (
-          <div class="border-l-2 border-accent-700 bg-ink-100/30 px-5 py-4 text-sm text-ink-800">{f}</div>
-        ))}
+      <div class="relative aspect-square max-w-md mx-auto">
+        <svg viewBox="0 0 400 400" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-label="Sectors cross-pollination diagram">
+          <circle cx="200" cy="200" r="60" fill="#1E3A8A"/>
+          <text x="200" y="195" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">Cross-</text>
+          <text x="200" y="212" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">domain</text>
+          {sectors.map((s, i) => {
+            const angle = (i / sectors.length) * Math.PI * 2 - Math.PI / 2;
+            const x = 200 + Math.cos(angle) * 150;
+            const y = 200 + Math.sin(angle) * 150;
+            const tx = 200 + Math.cos(angle) * 175;
+            const ty = 200 + Math.sin(angle) * 175;
+            const anchor = Math.cos(angle) > 0.3 ? 'start' : Math.cos(angle) < -0.3 ? 'end' : 'middle';
+            return (
+              <>
+                <line x1="200" y1="200" x2={x} y2={y} stroke="#1E3A8A" stroke-width="1" opacity="0.25"/>
+                <circle cx={x} cy={y} r="8" fill="#1E3A8A" opacity="0.2"/>
+                <circle cx={x} cy={y} r="4" fill="#1E3A8A"/>
+                <text x={tx} y={ty + 4} text-anchor={anchor} font-family="Inter, sans-serif" font-size="12" fill="#27272A">{s.name}</text>
+              </>
+            );
+          })}
+        </svg>
       </div>
     </div>
   </section>
 
-  {/* HOW WE WORK */}
+  {/* WHY US — comparison table */}
+  <section class="bg-ink-100/50 border-y border-ink-200">
+    <div class="container-page py-20 md:py-24">
+      <div class="max-w-2xl mb-12">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Why us</div>
+        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Honest comparison.</h2>
+        <p class="mt-5 text-ink-700 text-lg leading-relaxed">
+          We know the alternatives. Here is where we slot in — and where we do not.
+        </p>
+      </div>
+      <div class="overflow-hidden border border-ink-200 bg-white">
+        <table class="w-full text-sm md:text-base">
+          <thead class="bg-ink-100 text-left">
+            <tr>
+              <th class="font-medium text-ink-700 px-5 md:px-6 py-4 text-xs uppercase tracking-wider">If you go to</th>
+              <th class="font-medium text-ink-700 px-5 md:px-6 py-4 text-xs uppercase tracking-wider">You typically get</th>
+              <th class="font-medium text-accent-700 px-5 md:px-6 py-4 text-xs uppercase tracking-wider">With us</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-ink-200">
+            {comparison.map(c => (
+              <tr class="hover:bg-ink-50 transition-colors">
+                <td class="px-5 md:px-6 py-5 align-top font-medium text-ink-900 whitespace-nowrap">{c.who}</td>
+                <td class="px-5 md:px-6 py-5 align-top text-ink-700">{c.they}</td>
+                <td class="px-5 md:px-6 py-5 align-top text-ink-900 font-medium">{c.us}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {/* DELIVERABLES BENTO */}
+  <section class="container-page py-20 md:py-24">
+    <div class="max-w-2xl mb-12">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Deliverables</div>
+      <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">What you actually get.</h2>
+      <p class="mt-5 text-ink-700 text-lg leading-relaxed">
+        Tangible artifacts you keep. No deck-only deliverables, no executive summary with nothing underneath.
+      </p>
+    </div>
+    <div class="grid gap-4 grid-cols-1 md:grid-cols-3 md:grid-rows-2 md:auto-rows-fr">
+      <div class="md:col-span-2 md:row-span-2 bg-accent-700 text-white p-8 md:p-10 flex flex-col justify-between min-h-[320px] card-lift">
+        <div>
+          <div class="text-xs uppercase tracking-[0.2em] opacity-70 mb-3 font-medium">Primary deliverable</div>
+          <h3 class="font-serif text-3xl md:text-4xl leading-tight">Decision-grade report</h3>
+        </div>
+        <p class="opacity-90 leading-relaxed mt-6 text-lg">
+          A document the board reads in fifteen minutes — anchored on published frameworks, with explicit scope, methodology, evidence trails, and a recommendation that survives a hostile read.
+        </p>
+      </div>
+      <div class="bg-white border border-ink-200 p-7 card-lift">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">Working artifact</div>
+        <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Cost model spreadsheet</h3>
+        <p class="text-ink-700 text-sm leading-relaxed">Multi-sheet, scenario-modelled, you populate inputs and the answer changes.</p>
+      </div>
+      <div class="bg-white border border-ink-200 p-7 card-lift">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">NFR / CRA toolkit</div>
+        <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Compliance register + evidence log</h3>
+        <p class="text-ink-700 text-sm leading-relaxed">One row per requirement. Status, justification, evidence, cost-impact, action.</p>
+      </div>
+      <div class="bg-white border border-ink-200 p-7 card-lift">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">For AI work</div>
+        <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Working PoC + go/no-go memo</h3>
+        <p class="text-ink-700 text-sm leading-relaxed">A demonstration in code, not a slide. Plus an honest evaluation of whether to proceed.</p>
+      </div>
+      <div class="bg-white border border-ink-200 p-7 card-lift">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-2 font-medium">Always</div>
+        <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">Out-of-scope declaration</h3>
+        <p class="text-ink-700 text-sm leading-relaxed">Up front, in writing — what we deliver, and what we deliberately do not.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* ENGAGEMENT SHAPES — Discovery / PoC / Fractional CTO */}
   <section class="bg-ink-100/40 border-y border-ink-200">
     <div class="container-page py-16 md:py-20">
       <div class="max-w-2xl mb-12">
-        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">How we work</div>
-        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-[1.15]">Time-boxed shapes you can actually approve.</h2>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Engagement shapes</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-[1.15]">Three shapes you can actually approve.</h2>
       </div>
       <div class="grid gap-8 md:grid-cols-3">
         <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7 card-lift">
@@ -216,13 +326,13 @@ const faqJsonLd = {
         </div>
         <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7 card-lift">
           <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 3</div>
-          <p class="font-serif text-2xl text-ink-900 mb-2">Fractional advisory</p>
+          <p class="font-serif text-2xl text-ink-900 mb-2">Fractional CTO</p>
           <p class="text-sm text-ink-500 mb-4 font-medium">Monthly retainer</p>
-          <p class="text-ink-700">Architectural sounding-board, RFP due diligence, second-opinion reviews.</p>
+          <p class="text-ink-700">A senior architect on call. Sounding-board for the in-house team, RFP due diligence, second-opinion reviews. For when the team is strong but missing one specific area of depth.</p>
         </div>
       </div>
       <p class="mt-10 max-w-prose text-ink-700">
-        We take <strong class="text-ink-900">one to two new engagements per quarter</strong>. We decline work where the answer is not actually AI, cloud, or compliance. The first thirty minutes is always free.
+        We take <strong class="text-ink-900">one to two new engagements per quarter</strong>. The first thirty minutes is always free — no pitch, no slide deck.
       </p>
     </div>
   </section>
@@ -236,7 +346,7 @@ const faqJsonLd = {
       </div>
       <a href="/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">See all engagements →</a>
     </div>
-    <div class="grid gap-6 md:grid-cols-2">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {featured.map(study => <CaseStudyCard study={study} />)}
     </div>
   </section>
@@ -270,7 +380,7 @@ const faqJsonLd = {
     </div>
   </section>
 
-  {/* ABOUT */}
+  {/* ABOUT TEASER */}
   <section class="bg-ink-100/40 border-t border-ink-200">
     <div class="container-page py-16 md:py-20">
       <div class="grid md:grid-cols-3 gap-12">
@@ -279,12 +389,8 @@ const faqJsonLd = {
           <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Bruno Božić</h2>
         </div>
         <div class="md:col-span-2 max-w-prose text-lg text-ink-700 leading-relaxed">
-          <p>
-            Founder of Thinking Machine d.o.o. and Head of IoT at Reos GmbH (Hamburg). Twenty-plus years of enterprise architecture across healthcare IT, telecommunications, government R&D, and industrial IoT. C#/.NET architect by training; integration architect by trade.
-          </p>
-          <p class="mt-6">
-            <a href="/about" class="text-accent-700 no-underline">Read the full background →</a>
-          </p>
+          <p>Founder of Thinking Machine d.o.o. and Head of IoT at Reos GmbH (Hamburg). Twenty-plus years of enterprise architecture across healthcare IT, telecommunications, government R&D, and industrial IoT. C#/.NET architect by training; integration architect by trade.</p>
+          <p class="mt-6"><a href="/about" class="text-accent-700 no-underline">Read the full background →</a></p>
         </div>
       </div>
     </div>
@@ -294,11 +400,11 @@ const faqJsonLd = {
   <section class="container-page py-24">
     <div class="max-w-prose">
       <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">
-        If a fixed-scope outside read on a cloud cost decision, an NFR response, or an AI integration would be useful — the first thirty minutes is on us.
+        Hand us the question. Thirty minutes, no slides, no pitch — and an honest answer about whether we can help.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
         <a href="/contact" class="btn-primary">Book intro</a>
-        <a href="/services" class="btn-secondary">See all services</a>
+        <a href="/notes" class="btn-secondary">Read our notes</a>
       </div>
     </div>
   </section>
