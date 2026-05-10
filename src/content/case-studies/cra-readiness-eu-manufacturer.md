@@ -1,34 +1,36 @@
 ---
 title: "Cyber Resilience Act readiness for an EU manufacturer of connected products"
 sector: "EU manufacturer of connected products"
-engagementType: "Regulatory readiness — sole-author intensive"
+engagementType: "Applied preparedness work · anonymised internal reference"
 year: "2026"
 region: "European Union"
-summary: "An EU manufacturer-operator of connected products needed audit-defensible CRA readiness ahead of the September 2026 reporting cliff. We delivered roughly 240 pages of evidence — master compliance checklist, gap register, executive briefing, Article 14 reporting runbooks, RACI, audit-readiness deep-dive, and a week-by-week execution plan — anchored on a five-pass verbatim verification of the Official Journal text."
+summary: "Applied preparedness work on CRA Cliff 1 (September 2026) for an EU manufacturer-operator of connected products. Roughly 240 pages of audit-defensible evidence — master compliance checklist, gap register, executive briefing, Article 14 reporting runbooks, RACI, audit-readiness deep-dive, week-by-week execution plan — anchored on a five-pass verbatim verification of the Official Journal text. Published as a methodology reference; client unidentified."
 publishedAt: "2026-05-09"
 featured: true
 ---
+
+> **Note on framing.** This page describes a body of internal preparedness work, anonymised and published as a methodology reference. It is not a paid external engagement. Same anonymisation rules apply: no client identification, no quoted text, sector descriptor only.
 
 ## Context
 
 The EU Cyber Resilience Act (Regulation 2024/2847) imposes obligations on every economic operator placing products with digital elements on the EU market. The first operationally meaningful cliff falls on **11 September 2026**: Article 14 active-exploit and severe-incident reporting begins to apply, with mandatory notifications inside 24 hours, 72 hours, and 14 days. The full obligation set — risk assessment, vulnerability handling, secure update, support period, technical documentation, EU Declaration of Conformity, CE marking — falls due on **11 December 2027**.
 
-The vendor in this engagement carried a hybrid regulatory posture: **manufacturer** in CRA terms for its own software stack (edge runtime, container images, cloud back-office, mobile app), **operator/distributor** for the vendor hardware it integrates. Layered on top: the German national NIS2 transposition (BSIG-neu, in force 6 December 2025) created a parallel reporting obligation as a (besonders) wichtige Einrichtung, with its own clocks under § 32. A downstream-customer cascade introduced supply-chain liability from Article 21(2) NIS2.
+The organisation in this body of work carried a hybrid regulatory posture: **manufacturer** in CRA terms for its own software stack (edge runtime, container images, cloud back-office, mobile app), **operator/distributor** for the vendor hardware it integrates. Layered on top: the German national NIS2 transposition (BSIG-neu, in force 6 December 2025) created a parallel reporting obligation as a (besonders) wichtige Einrichtung, with its own clocks under § 32. A downstream-customer cascade introduced supply-chain liability from Article 21(2) NIS2.
 
-The posture was: weak-but-not-yet-breaching. No SBOM. No firmware inventory. No documented support-period rationale. No Article 14 runbook. VPN/SSH operations without per-user attribution. No vendor evidence packs. Hard-deletion confused with security-audit retention. A legacy-certificate exposure for one product family. An inherited site running as a black box from a prior customer migration.
+The starting posture was: weak-but-not-yet-breaching. No SBOM. No firmware inventory. No documented support-period rationale. No Article 14 runbook. VPN/SSH operations without per-user attribution. No vendor evidence packs. Hard-deletion confused with security-audit retention. A legacy-certificate exposure for one product family. An inherited site running as a black box from a prior customer migration.
 
 The engineering team had no dedicated cybersecurity headcount. The deadlines do not move.
 
 ## Approach
 
-The engagement adopted a deliberately authoritative posture from the first day: every load-bearing claim would be cited to the Official Journal text or an EU Commission interpretive document, every finding tagged with verification status, every document propagated through a cross-reference matrix functioning as an internal audit trail. The methodological commitments were:
+The work adopted a deliberately authoritative posture from the first day: every load-bearing claim would be cited to the Official Journal text or an EU Commission interpretive document, every finding tagged with verification status, every document propagated through a cross-reference matrix functioning as an internal audit trail. The methodological commitments were:
 
 - **Five-pass verbatim verification** against EU Regulation 2024/2847 (Articles 13, 14, 16, 22, 28, 31, 64, 69; Annex I Parts I and II; Annex II; Annex III; Annex VII), Directive (EU) 2022/2555 NIS2, and the German BSIG-neu (§§ 30, 32, 33, 38, 65). A separate citations annex carries verbatim regulatory text for every Cliff 1 deliverable, designed to survive a hostile review meeting line-by-line.
 - **A "Position of Record" annex** capturing authoritative claims with their evidence chain, separable from the operational documents that depend on them.
 - **A 32-finding consolidated catalogue** classified L (legally required) / I (implicit means) / B (best practice), tracked across 24 downstream documents with per-document propagation status (DONE / PENDING / FROZEN / OPTIONAL).
 - **Open-question discipline**: every claim awaiting external corroboration (vendor PSIRT response, regulator clarification, notified-body designation) is tagged OPEN, with the document holding it explicitly noting the wait.
 
-## What we delivered
+## What the work produced
 
 Roughly 240 pages of audit-defensible evidence across thirteen primary documents:
 
@@ -46,7 +48,7 @@ Roughly 240 pages of audit-defensible evidence across thirteen primary documents
 - **Operator's Playbook** — three-tier hand-holding guide ordered easiest-leverage-first; for each item: what, where it lives, what it must contain, who signs, where to file, effort estimate, citation satisfied.
 - **README / Index** — Confluence topology, page-numbering convention, status banners (DRAFT / APPROVED / EFFECTIVE / SUPERSEDED), document map.
 
-## Risk surface
+## Risk surface mapped
 
 Fifteen named threat scenarios in the gap analysis, including: container escape on edge; physical attack on unattended edge appliance; NFC relay against mobile credential integration; SSH key compromise propagating across the fleet; unknown vulnerability on inherited site; supply-chain compromise of a Docker base image; central back-end compromise propagating to on-prem; replay/time-drift; cloning of contactless credentials; vendor cloud compromise pivoting back; insider via privileged engineering access; mobile-app reverse engineering; customer-side compromise propagating to integrator; denial-of-service against central whitelist sync; NIS2 supply-chain cascade liability.
 
@@ -54,22 +56,22 @@ Twenty-five to twenty-nine entries in the risk register, scored on a 5×5 model 
 
 ## Outcome
 
-The vendor entered the regulatory countdown with a defensible position pack rather than a problem statement. Specifically:
+The work delivered a defensible position pack rather than a problem statement. Specifically:
 
 - A board-readable briefing distilling the entire posture to three numbers and three staffing options.
 - A line-by-line compliance register the regulator and notified body can audit against.
 - An operational runbook for Article 14 reporting that runs without further design work — including pre-drafted notification text for each clock.
-- An accountability matrix demonstrating that the current staffing model concentrates the responsibility chain in one engineer (and therefore that escalation to leadership for staffing decisions is itself a documented control).
+- An accountability matrix demonstrating the staffing-concentration reality (and therefore that escalation to leadership for staffing decisions is itself a documented control).
 - An execution plan with explicit external-validation gates (notified-body designation, vendor evidence packs, regulator written replies) where the work cannot be advanced unilaterally.
 
-## What we did not deliver
+## What the work did not produce
 
-We did not implement controls. We did not write code. We did not engage with notified bodies or regulators on the vendor's behalf. We did not provide a ISO 27001 certification or a EUCC certificate. We did not build the SBOM pipeline or the PSIRT mailbox. The deliverable was an evidence-grade readiness pack — a position from which staffed-up implementation can begin without re-litigating the foundations.
+We did not implement controls. We did not write code. We did not engage with notified bodies or regulators on anyone's behalf. We did not provide ISO 27001 certification or a EUCC certificate. We did not build the SBOM pipeline or the PSIRT mailbox. The output was an evidence-grade readiness pack — a position from which staffed-up implementation can begin without re-litigating the foundations.
 
-## Engagement shape
+## Shape of the work
 
-Sole-author intensive: roughly 240 pages produced across thirteen primary documents and four annexes. Front-loaded into a compressed drafting window with onward execution scoped over approximately nineteen months to Cliff 2. Companion-document architecture throughout — each deliverable explicitly describes how it overrides or complements the others. Confidential throughout; no public materials produced.
+Sole-author intensive: roughly 240 pages produced across thirteen primary documents and four annexes. Front-loaded into a compressed drafting window with onward execution scoped over approximately nineteen months to Cliff 2. Companion-document architecture throughout — each deliverable explicitly describes how it overrides or complements the others. Confidential throughout; no public materials produced beyond this anonymised methodology reference.
 
 ---
 
-[Book a 30-minute intro to discuss similar work →](/contact)
+[Book a 30-minute intro to discuss similar preparedness →](/contact)
