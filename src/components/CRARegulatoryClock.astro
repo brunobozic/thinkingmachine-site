@@ -1,0 +1,77 @@
+---
+// CRARegulatoryClock — fixed horizontal timeline of the three EU
+// regulatory cliffs that dominate CRA-readiness work.
+//
+// Timeline anchors (numbers used for x positioning):
+//   BSIG-neu (German NIS2 in force):     6  Dec 2025  → day   0  → x=100
+//   Today (build date, ≈ mid-2026):     ~10 May 2026  → day 155  → x=220
+//   CRA Cliff 1 (Article 14 reporting): 11  Sep 2026  → day 279  → x=340
+//   CRA Cliff 2 (full obligations):     11  Dec 2027  → day 735  → x=620
+//
+// The viewBox is 720×220 with width:100% so it scales on any container.
+---
+<figure class="my-12">
+  <figcaption class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">EU regulatory timeline · CRA + NIS2</figcaption>
+  <div class="border border-ink-200 bg-white p-6 md:p-8">
+    <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img" aria-labelledby="cra-clock-title cra-clock-desc">
+      <title id="cra-clock-title">EU regulatory timeline 2025–2027</title>
+      <desc id="cra-clock-desc">Horizontal timeline showing the German NIS2 transposition (BSIG-neu, 6 December 2025), the CRA Article 14 reporting cliff (11 September 2026), and CRA full obligations including SBOM, CE marking, and EU Declaration of Conformity (11 December 2027). A red marker indicates today's date.</desc>
+
+      <!-- Axis -->
+      <line x1="60" y1="120" x2="660" y2="120" stroke="#1E3A8A" stroke-width="2"/>
+
+      <!-- Year ticks -->
+      <g font-family="Inter, sans-serif" font-size="9" fill="#A1A1AA">
+        <line x1="80"  y1="118" x2="80"  y2="125" stroke="#A1A1AA" stroke-width="1"/>
+        <text x="80"  y="138" text-anchor="middle">2025</text>
+        <line x1="240" y1="118" x2="240" y2="125" stroke="#A1A1AA" stroke-width="1"/>
+        <text x="240" y="138" text-anchor="middle">2026</text>
+        <line x1="440" y1="118" x2="440" y2="125" stroke="#A1A1AA" stroke-width="1"/>
+        <text x="440" y="138" text-anchor="middle">2027</text>
+        <line x1="640" y1="118" x2="640" y2="125" stroke="#A1A1AA" stroke-width="1"/>
+        <text x="640" y="138" text-anchor="middle">2028</text>
+      </g>
+
+      <!-- Cliff 1: BSIG-neu (German NIS2) -->
+      <g>
+        <line x1="100" y1="60" x2="100" y2="120" stroke="#1E3A8A" stroke-width="2"/>
+        <circle cx="100" cy="120" r="7" fill="#1E3A8A"/>
+        <text x="100" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#71717A">6 Dec 2025</text>
+        <text x="100" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#18181B">BSIG-neu</text>
+        <text x="100" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">German NIS2</text>
+        <text x="100" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">enters force</text>
+      </g>
+
+      <!-- Today marker -->
+      <g>
+        <line x1="220" y1="100" x2="220" y2="140" stroke="#DC2626" stroke-width="2" stroke-dasharray="3 3"/>
+        <circle cx="220" cy="120" r="5" fill="#DC2626"/>
+        <text x="220" y="92" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#DC2626">today</text>
+      </g>
+
+      <!-- Cliff 2: CRA Article 14 -->
+      <g>
+        <line x1="340" y1="60" x2="340" y2="120" stroke="#1E3A8A" stroke-width="2"/>
+        <circle cx="340" cy="120" r="9" fill="#1E3A8A"/>
+        <circle cx="340" cy="120" r="14" fill="none" stroke="#1E3A8A" stroke-width="1" opacity="0.4"/>
+        <text x="340" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#71717A">11 Sep 2026</text>
+        <text x="340" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">CRA Cliff 1</text>
+        <text x="340" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Article 14:</text>
+        <text x="340" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">24h / 72h / 14d reporting</text>
+      </g>
+
+      <!-- Cliff 3: CRA full obligations -->
+      <g>
+        <line x1="620" y1="60" x2="620" y2="120" stroke="#1E3A8A" stroke-width="2"/>
+        <circle cx="620" cy="120" r="9" fill="#1E3A8A"/>
+        <text x="620" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#71717A">11 Dec 2027</text>
+        <text x="620" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">CRA Cliff 2</text>
+        <text x="620" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Full obligations:</text>
+        <text x="620" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">SBOM · CE · EU DoC</text>
+      </g>
+    </svg>
+    <div class="mt-5 pt-5 border-t border-ink-100 text-sm text-ink-700 leading-relaxed max-w-3xl">
+      The cliffs do not move. Article 14 reporting begins on <strong class="text-ink-900">11 September 2026</strong> with mandatory notifications inside 24h, 72h, and 14d. The full obligation set — risk assessment, vulnerability handling, secure update, support period, technical documentation, EU Declaration of Conformity, CE marking — falls due on <strong class="text-ink-900">11 December 2027</strong>. The German NIS2 transposition has been live since <strong class="text-ink-900">6 December 2025</strong>, layering parallel reporting clocks under § 32 BSIG.
+    </div>
+  </div>
+</figure>

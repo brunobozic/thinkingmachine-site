@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CRARegulatoryClock from '../../components/CRARegulatoryClock.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -14,6 +15,11 @@ interface Props { study: CollectionEntry<'case-studies'>; }
 const { study } = Astro.props;
 const { Content } = await study.render();
 const { title, sector, engagementType, year, region, summary } = study.data;
+
+// Slug-conditional charts: keep the case-study .md files clean and inject
+// data visualisations from the layout where the data has structure worth
+// showing.
+const isCRA = study.slug === 'cra-readiness-eu-manufacturer';
 ---
 <BaseLayout
   title={`${title} — Thinking Machine`}
@@ -49,6 +55,12 @@ const { title, sector, engagementType, year, region, summary } = study.data;
         </div>
       </dl>
     </header>
+
+    {isCRA && (
+      <div class="max-w-4xl mx-auto mb-12">
+        <CRARegulatoryClock />
+      </div>
+    )}
 
     <section class="prose mx-auto">
       <Content />

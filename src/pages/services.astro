@@ -122,6 +122,107 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="mt-8">
       <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
     </div>
+
+    {/* Engagement Gantt — show what a 4-week Rapid PoC actually looks like */}
+    <div class="mt-20 pt-16 border-t border-ink-200">
+      <div class="max-w-2xl mb-10">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">What you actually pay for</div>
+        <h3 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight">A Rapid PoC, week by week.</h3>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          A typical 4-week Rapid PoC engagement. Stages overlap deliberately — by mid-week-2 we already have enough of the map drawn to start the analysis.
+        </p>
+      </div>
+      <div class="bg-white border border-ink-200 p-6 md:p-10">
+        <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img" aria-labelledby="gantt-title gantt-desc">
+          <title id="gantt-title">Rapid PoC engagement Gantt — 4 weeks</title>
+          <desc id="gantt-desc">A four-week Gantt chart showing four engagement stages — Survey, Map, Think, Deliver — overlapping across weeks one through four. Three milestones: Kickoff at start of week one, Midpoint review at end of week two, Final readout at end of week four.</desc>
+
+          {/* Week column headers */}
+          <g font-family="Inter, sans-serif" font-size="11" fill="#52525B">
+            <rect x="130" y="20" width="140" height="22" fill="#F4F4F5"/>
+            <text x="200" y="35" text-anchor="middle" font-weight="600">Week 1</text>
+            <rect x="270" y="20" width="140" height="22" fill="#F4F4F5"/>
+            <text x="340" y="35" text-anchor="middle" font-weight="600">Week 2</text>
+            <rect x="410" y="20" width="140" height="22" fill="#F4F4F5"/>
+            <text x="480" y="35" text-anchor="middle" font-weight="600">Week 3</text>
+            <rect x="550" y="20" width="140" height="22" fill="#F4F4F5"/>
+            <text x="620" y="35" text-anchor="middle" font-weight="600">Week 4</text>
+          </g>
+
+          {/* Vertical week separators */}
+          <g stroke="#E4E4E7" stroke-width="1">
+            <line x1="130" y1="42" x2="130" y2="280"/>
+            <line x1="270" y1="42" x2="270" y2="280"/>
+            <line x1="410" y1="42" x2="410" y2="280"/>
+            <line x1="550" y1="42" x2="550" y2="280"/>
+            <line x1="690" y1="42" x2="690" y2="280"/>
+          </g>
+
+          {/* Milestones row (diamonds at the top) */}
+          <g>
+            {/* Kickoff at x=130 */}
+            <polygon points="130,55 138,65 130,75 122,65" fill="#1E3A8A"/>
+            <text x="130" y="92" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1E3A8A">Kickoff</text>
+            {/* Midpoint at x=410 */}
+            <polygon points="410,55 418,65 410,75 402,65" fill="#1E3A8A"/>
+            <text x="410" y="92" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1E3A8A">Midpoint</text>
+            <text x="410" y="104" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1E3A8A">review</text>
+            {/* Final readout at x=690 */}
+            <polygon points="690,55 698,65 690,75 682,65" fill="#1E3A8A"/>
+            <text x="690" y="92" text-anchor="end" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1E3A8A">Final readout</text>
+          </g>
+
+          {/* Stage bars */}
+          {/* Survey: full week 1 (x=130 to 270) */}
+          <g>
+            <text x="118" y="138" text-anchor="end" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#27272A">Survey</text>
+            <rect x="130" y="125" width="140" height="22" fill="#1E3A8A" rx="2"/>
+            <text x="200" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="white" font-weight="500">listen, surface, capture</text>
+          </g>
+          {/* Map: week 0.5 to week 2 (x=200 to 410) */}
+          <g>
+            <text x="118" y="170" text-anchor="end" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#27272A">Map</text>
+            <rect x="200" y="157" width="210" height="22" fill="#1E3A8A" rx="2" opacity="0.85"/>
+            <text x="305" y="172" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="white" font-weight="500">data flows, dependencies, gaps</text>
+          </g>
+          {/* Think: week 1.5 to week 3.5 (x=340 to 620) */}
+          <g>
+            <text x="118" y="202" text-anchor="end" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#27272A">Think</text>
+            <rect x="340" y="189" width="280" height="22" fill="#1E3A8A" rx="2" opacity="0.7"/>
+            <text x="480" y="204" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="white" font-weight="500">analysis · models · cross-sector lookup</text>
+          </g>
+          {/* Deliver: week 2.5 to week 4 (x=480 to 690) */}
+          <g>
+            <text x="118" y="234" text-anchor="end" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#27272A">Deliver</text>
+            <rect x="480" y="221" width="210" height="22" fill="#B45309" rx="2"/>
+            <text x="585" y="236" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="white" font-weight="500">draft · cite · pressure-test · ship</text>
+          </g>
+
+          {/* Deliverables annotation strip */}
+          <g font-family="Inter, sans-serif" font-size="10" fill="#52525B">
+            <text x="200" y="270" text-anchor="middle">Stakeholder map</text>
+            <text x="340" y="270" text-anchor="middle">Current-state diagram</text>
+            <text x="480" y="270" text-anchor="middle">Draft + evidence log</text>
+            <text x="620" y="270" text-anchor="middle">Final report + model</text>
+            <text x="200" y="284" text-anchor="middle" fill="#A1A1AA">interviews complete</text>
+            <text x="340" y="284" text-anchor="middle" fill="#A1A1AA">decision rights mapped</text>
+            <text x="480" y="284" text-anchor="middle" fill="#A1A1AA">framework anchors set</text>
+            <text x="620" y="284" text-anchor="middle" fill="#A1A1AA">board-readable, cited</text>
+          </g>
+        </svg>
+        <div class="mt-6 pt-5 border-t border-ink-100 grid sm:grid-cols-3 gap-4 text-sm text-ink-700">
+          <div>
+            <span class="text-accent-700 font-semibold">Kickoff:</span> 60-minute call. We confirm scope, declare out-of-scope items, and agree on three to five interview targets.
+          </div>
+          <div>
+            <span class="text-accent-700 font-semibold">Midpoint review:</span> 45-minute call. We share the map and the framework anchors. You correct what we got wrong.
+          </div>
+          <div>
+            <span class="text-accent-700 font-semibold">Final readout:</span> 60-minute call. We walk you through the document. You take it from there.
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   {/* Final CTA */}
