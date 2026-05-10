@@ -21,6 +21,8 @@ The complications were that:
 2. The workload sizing was uncertain. The only available performance data came from a downsized test environment; the actual production sizing was confirmed only mid-engagement.
 3. The deal carried significant non-cost considerations — regulatory compliance, supply-chain risk, SaaS-enablement strategy — that needed to sit alongside the cost number, not behind it.
 
+The workload was telemetry-heavy. Larger installations ingested approximately **200,000 rows per day** captured 24/7 from connected instruments through a Node.js receiver; smaller installations ran around 20,000 rows/day. The planned scope was twelve installations across two database performance tiers, totalling **36 servers** across production and non-production. Small enough that per-server fixed costs — typically negligible at enterprise scale — became disproportionate, which is part of why the assessment had to be done carefully rather than benchmark-extrapolated.
+
 The vendor needed a board-grade document in roughly four weeks. The internal team was capable but did not have the bandwidth, and the larger consulting alternative would have required a multi-month discovery phase the timeline did not support.
 
 ## Approach
