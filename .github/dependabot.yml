@@ -1,0 +1,33 @@
+# Dependabot config — auto-PR security updates across all dependency surfaces.
+# Updates land as PRs against main; CI re-validates each before you merge.
+version: 2
+updates:
+  # npm dependencies (Astro, plugins)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      astro-and-deps:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "tailwindcss"
+          - "@tailwindcss/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Docker base images (Dockerfile)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # GitHub Actions (workflow versions)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
