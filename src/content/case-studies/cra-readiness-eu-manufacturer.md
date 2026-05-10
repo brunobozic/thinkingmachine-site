@@ -4,7 +4,7 @@ sector: "EU manufacturer of connected products"
 engagementType: "Applied preparedness work · anonymised internal reference"
 year: "2026"
 region: "European Union"
-summary: "Applied preparedness work on CRA Cliff 1 (September 2026) for an EU manufacturer-operator of connected products. Roughly 240 pages of audit-defensible evidence — master compliance checklist, gap register, executive briefing, Article 14 reporting runbooks, RACI, audit-readiness deep-dive, week-by-week execution plan — anchored on a five-pass verbatim verification of the Official Journal text. Published as a methodology reference; client unidentified."
+summary: "Applied preparedness work on CRA Cliff 1 (September 2026) for an EU manufacturer-operator of connected products. Roughly 240 pages of audit-defensible evidence across 13 documents — checklists, briefings, the Article 14 runbook, the RACI, the execution plan — anchored on five-pass verbatim verification of the Official Journal. Published as a methodology reference; client unidentified."
 publishedAt: "2026-05-09"
 featured: true
 ---
@@ -50,9 +50,25 @@ Roughly 240 pages of audit-defensible evidence across thirteen primary documents
 
 ## Risk surface mapped
 
-Fifteen named threat scenarios in the gap analysis, including: container escape on edge; physical attack on unattended edge appliance; NFC relay against mobile credential integration; SSH key compromise propagating across the fleet; unknown vulnerability on inherited site; supply-chain compromise of a Docker base image; central back-end compromise propagating to on-prem; replay/time-drift; cloning of contactless credentials; vendor cloud compromise pivoting back; insider via privileged engineering access; mobile-app reverse engineering; customer-side compromise propagating to integrator; denial-of-service against central whitelist sync; NIS2 supply-chain cascade liability.
+Fifteen named threat scenarios in the gap analysis:
 
-Twenty-five to twenty-nine entries in the risk register, scored on a 5×5 model (visible scores 25, 20, 16, 15). Tooling backlog covering twenty categories: SBOM generation, SAST, DAST, container image scanning, secret scanning, image signing, runtime security, bastion / PAM / session recording, EDR on edge, SIEM content packs (Graylog), vulnerability-management dashboard, patch management, secrets and credential management, PKI/cert management, HSM, code signing, backup and DR, GRC, threat-intel feeds.
+- container escape on edge
+- physical attack on unattended edge appliance
+- NFC relay against mobile credential integration
+- SSH key compromise propagating across the fleet
+- unknown vulnerability on inherited site
+- supply-chain compromise of a Docker base image
+- central back-end compromise propagating to on-prem
+- replay / time-drift
+- cloning of contactless credentials
+- vendor cloud compromise pivoting back
+- insider via privileged engineering access
+- mobile-app reverse engineering
+- customer-side compromise propagating to integrator
+- denial-of-service against central whitelist sync
+- NIS2 supply-chain cascade liability
+
+Twenty-five to twenty-nine entries in the risk register, scored on a 5×5 model (visible scores 25, 20, 16, 15). Tooling backlog spans twenty categories — SBOM, SAST, DAST, image scanning, secret scanning, image signing, runtime security, PAM / session recording, EDR on edge, SIEM, vulnerability management, patch management, secrets / credentials, PKI / cert management, HSM, code signing, backup / DR, GRC, threat-intel.
 
 ## Outcome
 

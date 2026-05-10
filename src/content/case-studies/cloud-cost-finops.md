@@ -25,7 +25,7 @@ The vendor needed a board-grade document in roughly four weeks. The internal tea
 
 ## Approach
 
-We anchored the assessment on the cloud-economics, observability, and DevOps research literature — Storment & Fuller on FinOps structure, Majors on observability and SRE economics, Nygard on system robustness, Forsgren et al. on delivery-performance metrics — supplemented by the relevant Microsoft / AWS / GCP first-party tier-selection and DR-cost guidance for the database engines in scope. The frameworks structured a four-category cost taxonomy: fixed overhead, competence, variable, and per-server.
+We anchored the assessment on cloud-economics, observability, and DevOps literature — Storment & Fuller, Majors, Nygard, Forsgren et al. — plus first-party Azure / AWS / GCP tier-selection and DR-cost guidance for the database engines in scope. The frameworks structured a four-category cost taxonomy: fixed overhead, competence, variable, per-server.
 
 Within that frame we built:
 
