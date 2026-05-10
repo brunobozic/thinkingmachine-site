@@ -71,7 +71,3 @@ We did not implement controls. We did not write code. We did not engage with not
 ## Shape of the work
 
 Sole-author intensive: roughly 240 pages produced across thirteen primary documents and four annexes. Front-loaded into a compressed drafting window with onward execution scoped over approximately nineteen months to Cliff 2. Companion-document architecture throughout — each deliverable explicitly describes how it overrides or complements the others. Confidential throughout; no public materials produced beyond this anonymised methodology reference.
-
----
-
-[Book a 30-minute intro to discuss similar preparedness →](/contact)

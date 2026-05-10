@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Replace these placeholders before launch
-const calendarUrl = 'https://cal.com/your-handle/30min';
+// Until a real calendar is wired up, the "Schedule" CTA opens email with a
+// pre-filled subject and template body. Replace `mailtoSchedule` with a
+// cal.com / calendly URL when ready and the rest of the page works unchanged.
 const emailAddress = 'hello@thinkingmachine.uk';
+const mailtoSchedule = `mailto:${emailAddress}?subject=Intro%20call%20%E2%80%94%20Thinking%20Machine&body=Hi%20Bruno%2C%0A%0AI%27d%20like%20to%20book%20a%2030-minute%20intro.%20A%20few%20sentences%20on%20the%20problem%3A%0A%0A%5Bproblem%5D%0A%0AGood%20times%20for%20me%20%28with%20timezone%29%3A%0A%0A%5Bslots%5D%0A%0AThanks%2C%0A%5Bname%5D`;
 ---
 <BaseLayout
   title="Contact — Thinking Machine"
@@ -32,10 +34,10 @@ const emailAddress = 'hello@thinkingmachine.uk';
       <div class="text-xs uppercase tracking-[0.2em] opacity-70 mb-4 font-medium">Schedule</div>
       <h2 class="font-serif text-3xl text-white leading-tight">Pick a slot that works.</h2>
       <p class="mt-5 opacity-90 leading-relaxed">
-        Thirty minutes via video. Bring a few sentences on the problem; we'll read what you send before the call.
+        Thirty minutes via video. Send a few sentences on the problem and proposed times — we will reply within one working day with a calendar invite.
       </p>
-      <a href={calendarUrl} class="inline-block mt-8 bg-white text-accent-700 px-6 py-3 no-underline hover:bg-ink-50 transition-colors font-medium">
-        Open the calendar →
+      <a href={mailtoSchedule} class="inline-block mt-8 bg-white text-accent-700 px-6 py-3 no-underline hover:bg-ink-50 transition-colors font-medium">
+        Email to schedule →
       </a>
     </div>
 

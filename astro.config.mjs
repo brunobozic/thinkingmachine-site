@@ -12,7 +12,11 @@ export default defineConfig({
     sitemap()
   ],
   build: {
-    format: 'directory',
+    // 'file' writes /services.html (not /services/index.html). Combined with
+    // trailingSlash: 'never', this means canonical URLs, sitemap entries, and
+    // the URLs nginx actually serves all agree -- no 301-redirect chain that
+    // dropped to plain HTTP under TLS termination.
+    format: 'file',
     inlineStylesheets: 'auto'
   },
   // i18n configuration intentionally deferred until Phase 5 (Croatian translations).

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Not found — Thinking Machine"
+  description="The page you're looking for has moved or never existed. Try one of the main sections."
+>
+  <section class="container-page py-24 md:py-32 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-16 -right-20 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="98" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="60" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <line x1="20" y1="100" x2="180" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+      <line x1="100" y1="20" x2="100" y2="180" stroke="#1E3A8A" stroke-width="1"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">404</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        We can't find that page.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        The URL you followed is either outdated, mistyped, or refers to a page that has been retired. The site is small — most of what you might be looking for is one of the links below.
+      </p>
+
+      <div class="mt-12 grid sm:grid-cols-2 gap-3 max-w-2xl">
+        <a href="/services" class="border border-ink-200 bg-white px-5 py-4 no-underline card-lift">
+          <div class="font-serif text-lg text-ink-900">Services →</div>
+          <div class="text-sm text-ink-700 mt-1">Cloud cost, cyber resilience, AI integration</div>
+        </a>
+        <a href="/work" class="border border-ink-200 bg-white px-5 py-4 no-underline card-lift">
+          <div class="font-serif text-lg text-ink-900">Work →</div>
+          <div class="text-sm text-ink-700 mt-1">Anonymised case studies</div>
+        </a>
+        <a href="/notes" class="border border-ink-200 bg-white px-5 py-4 no-underline card-lift">
+          <div class="font-serif text-lg text-ink-900">Notes →</div>
+          <div class="text-sm text-ink-700 mt-1">Cross-domain essays</div>
+        </a>
+        <a href="/about" class="border border-ink-200 bg-white px-5 py-4 no-underline card-lift">
+          <div class="font-serif text-lg text-ink-900">About →</div>
+          <div class="text-sm text-ink-700 mt-1">Who we are, why fixed-scope</div>
+        </a>
+      </div>
+
+      <div class="mt-12">
+        <a href="/contact" class="btn-primary">Or just say hello →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

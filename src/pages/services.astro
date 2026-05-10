@@ -34,7 +34,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h3>When to call us</h3>
         <p>You are about to make a multi-year cloud commitment and the internal numbers do not agree. Your incumbent hosting provider will not share invoices. A board paper is due in three weeks. You are a SaaS vendor pricing a multi-installation deal. Your CSP renewal is up and the partner-margin question has nobody to defend it.</p>
         <h3>What we deliver</h3>
-        <p>A board-grade cost assessment anchored on published cloud-economics frameworks — Hugo & Rey on FinOps structure, Kline et al. on managed-instance tier selection, Campbell & Majors on SLA and DR cost modelling, and three more depending on engagement.</p>
+        <p>A board-grade cost assessment anchored on the cloud-economics, observability, and DevOps research literature — Storment & Fuller on FinOps structure, Majors on observability and SRE economics, Nygard on system robustness, Forsgren et al. on delivery-performance metrics — supplemented by the relevant Microsoft / AWS / GCP first-party tier-selection and DR-cost guidance for the database engines in scope.</p>
         <p>Typical deliverables: four-category cost taxonomy (fixed overhead, competence, variable, per-server), multi-scenario reserved-instance and CSP-margin modelling, triangulated baseline against incumbent spend, sensitivity analysis on staffing posture, working cost-model spreadsheet you keep.</p>
         <h3>What we do not deliver</h3>
         <p>We do not write Terraform. We do not migrate workloads. We do not sell you a product or a partner relationship. We deliver the document the decision-maker reads.</p>
@@ -81,7 +81,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <li><strong>MCP control layers</strong> wrapping existing internal applications, exposing them as tools to LLM agents.</li>
           <li><strong>RAG over enterprise knowledge bases</strong> — chunking strategy, retrieval tuning, evaluation harness, and an honest answer to <em>is RAG the right call here at all?</em></li>
           <li><strong>On-premises LLM infrastructure</strong> — model selection (Llama family, Mistral, others), serving stack (Ollama / vLLM), GPU sizing, observability.</li>
-          <li><strong>LLM-assisted legacy modernization</strong> — using frontier models to accelerate code understanding, dependency mapping, and migration planning on systems your team has been told to <em>just rewrite</em>.</li>
+          <li><strong>LLM-assisted legacy modernisation</strong> — using frontier models to accelerate code understanding, dependency mapping, and migration planning on systems your team has been told to <em>just rewrite</em>.</li>
           <li><strong>AI training for engineers and managers</strong> — what these systems are, what they are not, and how to evaluate them empirically.</li>
         </ol>
         <h3>What we do not deliver</h3>
@@ -111,9 +111,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
       <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
         <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stage 3</div>
-        <p class="font-serif text-2xl text-ink-900 mb-2">Fractional advisory</p>
+        <p class="font-serif text-2xl text-ink-900 mb-2">Fractional CTO</p>
         <p class="text-sm text-ink-500 mb-4 font-medium">Monthly retainer</p>
-        <p class="text-ink-700">Architectural sounding-board, RFP due diligence, second-opinion reviews.</p>
+        <p class="text-ink-700">A senior architect on call. Sounding-board for the in-house team, RFP due diligence, second-opinion reviews. For when the team is strong but missing one specific area of depth.</p>
       </div>
     </div>
     <p class="mt-10 max-w-prose text-ink-700">
@@ -121,6 +121,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </p>
     <div class="mt-8">
       <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+    </div>
+  </section>
+
+  {/* Final CTA */}
+  <section class="bg-ink-100/40 border-t border-ink-200">
+    <div class="container-page py-20 md:py-24 max-w-prose">
+      <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">
+        We do not sell hours. We sell decisions.
+      </p>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        Thirty minutes is on us — no pitch, no slides. We will tell you on the call whether we can help.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/contact" class="btn-primary">Book intro</a>
+        <a href="/work" class="btn-secondary">See recent work →</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
