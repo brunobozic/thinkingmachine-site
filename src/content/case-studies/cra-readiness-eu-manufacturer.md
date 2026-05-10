@@ -13,7 +13,7 @@ featured: true
 
 ## Context
 
-The EU Cyber Resilience Act (Regulation 2024/2847) imposes obligations on every economic operator placing products with digital elements on the EU market. The first operationally meaningful cliff falls on **11 September 2026**: Article 14 active-exploit and severe-incident reporting begins to apply, with mandatory notifications inside 24 hours, 72 hours, and 14 days. The full obligation set — risk assessment, vulnerability handling, secure update, support period, technical documentation, EU Declaration of Conformity, CE marking — falls due on **11 December 2027**.
+The EU Cyber Resilience Act (Regulation 2024/2847) imposes obligations on every economic operator placing products with digital elements on the EU market. The cliff dates above set the operational deadlines; what makes this engagement non-trivial is the regulatory geometry of the organisation underneath them.
 
 The organisation in this body of work carried a hybrid regulatory posture: **manufacturer** in CRA terms for its own software stack (edge runtime, container images, cloud back-office, mobile app), **operator/distributor** for the vendor hardware it integrates. Layered on top: the German national NIS2 transposition (BSIG-neu, in force 6 December 2025) created a parallel reporting obligation as a (besonders) wichtige Einrichtung, with its own clocks under § 32. A downstream-customer cascade introduced supply-chain liability from Article 21(2) NIS2.
 

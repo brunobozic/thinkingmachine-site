@@ -30,10 +30,12 @@ const sectorsCovered = [...new Set(studies.map(s => s.data.sector))];
     </div>
   </section>
 
-  {/* Sector filter strip — placeholder for future, also functions as credibility marker */}
+  {/* Recent engagement contexts — values come from the case-study `sector`
+      field, which is written as an organisation descriptor, not a pure sector.
+      The strip functions as a credibility marker, not a real filter. */}
   <section class="border-y border-ink-200 bg-ink-100/40">
     <div class="container-page py-5 flex flex-wrap items-center gap-x-6 gap-y-2">
-      <span class="text-xs uppercase tracking-wider text-ink-500 font-medium">Sectors covered</span>
+      <span class="text-xs uppercase tracking-wider text-ink-500 font-medium">Recent engagement contexts</span>
       {sectorsCovered.map(s => <span class="text-sm text-ink-700">{s}</span>)}
     </div>
   </section>
