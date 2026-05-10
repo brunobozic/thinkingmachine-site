@@ -80,6 +80,8 @@ The work delivered a defensible position pack rather than a problem statement. S
 - An accountability matrix demonstrating the staffing-concentration reality (and therefore that escalation to leadership for staffing decisions is itself a documented control).
 - An execution plan with explicit external-validation gates (notified-body designation, vendor evidence packs, regulator written replies) where the work cannot be advanced unilaterally.
 
+The net effect: by Cliff 1 (11 September 2026) the operator can present this evidence pack to a notified body or to the regulator without preparation gaps, and the staffing-resource decision sits on the leadership table as an explicit board-level call rather than an engineering-team default. The "weak-but-not-yet-breaching" starting posture has a documented path to "audit-defensible".
+
 ## What the work did not produce
 
 We did not implement controls. We did not write code. We did not engage with notified bodies or regulators on anyone's behalf. We did not provide ISO 27001 certification or a EUCC certificate. We did not build the SBOM pipeline or the PSIRT mailbox. The output was an evidence-grade readiness pack — a position from which staffed-up implementation can begin without re-litigating the foundations.

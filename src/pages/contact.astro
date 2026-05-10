@@ -53,6 +53,83 @@ const mailtoSchedule = `mailto:${emailAddress}?subject=Intro%20call%20%E2%80%94%
     </div>
   </section>
 
+  {/* What to expect — 5-step buyer-journey flow */}
+  <section class="container-page py-16 md:py-20">
+    <div class="max-w-2xl mb-10">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">What to expect</div>
+      <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">From first email to final readout.</h2>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        The path from initial contact to a delivered engagement, in five steps. Step 1 is free. Step 2 quotes a fixed fee — no commitment until you sign.
+      </p>
+    </div>
+    <div class="bg-white border border-ink-200 p-6 md:p-10">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img" aria-labelledby="flow-title flow-desc">
+        <title id="flow-title">Buyer journey from first contact to engagement readout</title>
+        <desc id="flow-desc">A horizontal five-step flow. Step 1: 30-minute intro call, free, no NDA needed. Step 2: fixed-fee quote within two working days, NDA signed first if you prefer. Step 3: kickoff call, scope confirmed. Step 4: engagement runs, one to four weeks depending on shape. Step 5: final readout, deliverables handed over.</desc>
+
+        <defs>
+          <marker id="arrow-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1E3A8A"/>
+          </marker>
+        </defs>
+
+        {/* connecting arrows between nodes */}
+        <line x1="148" y1="100" x2="180" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow)"/>
+        <line x1="300" y1="100" x2="332" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow)"/>
+        <line x1="452" y1="100" x2="484" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow)"/>
+        <line x1="604" y1="100" x2="636" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow)"/>
+
+        {/* Step 1: 30-min intro call */}
+        <g>
+          <circle cx="76" cy="100" r="36" fill="#1E3A8A"/>
+          <text x="76" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">Step 1</text>
+          <text x="76" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="white" opacity="0.85">30-min call</text>
+          <text x="76" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Free, no slides</text>
+          <text x="76" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">NDA on request</text>
+        </g>
+
+        {/* Step 2: Fixed-fee quote */}
+        <g>
+          <circle cx="228" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="228" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Step 2</text>
+          <text x="228" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Fixed-fee quote</text>
+          <text x="228" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Within 2 working</text>
+          <text x="228" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">days, no expansion</text>
+        </g>
+
+        {/* Step 3: Kickoff */}
+        <g>
+          <circle cx="380" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="380" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Step 3</text>
+          <text x="380" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Kickoff</text>
+          <text x="380" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Scope confirmed,</text>
+          <text x="380" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">interview targets agreed</text>
+        </g>
+
+        {/* Step 4: Engagement */}
+        <g>
+          <circle cx="532" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="532" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Step 4</text>
+          <text x="532" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Engagement</text>
+          <text x="532" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">1–4 weeks,</text>
+          <text x="532" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">midpoint review at week 2</text>
+        </g>
+
+        {/* Step 5: Readout */}
+        <g>
+          <circle cx="684" cy="100" r="36" fill="#B45309"/>
+          <text x="684" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">Step 5</text>
+          <text x="684" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="white" opacity="0.85">Final readout</text>
+          <text x="684" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">60-min walkthrough,</text>
+          <text x="684" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">deliverables yours</text>
+        </g>
+      </svg>
+      <p class="mt-6 pt-5 border-t border-ink-100 text-sm text-ink-700 leading-relaxed">
+        Total elapsed from first email to engagement quote: usually under three working days. From kickoff to final readout: one to four weeks depending on engagement shape. The first thirty minutes is on us regardless of whether we proceed.
+      </p>
+    </div>
+  </section>
+
   <section class="container-page py-12">
     <div class="prose max-w-prose">
       <h2>What to send ahead</h2>

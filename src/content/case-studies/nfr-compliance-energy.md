@@ -44,9 +44,9 @@ We worked across the standard Azure-native security stack — Entra ID, Key Vaul
 
 ## Outcome
 
-The vendor entered the procurement review with a structured response that documented compliance, evidence, and gap costs in the same artifact. The *difficult items* deep-dive answered, in advance, the questions a hostile procurement read would have asked. The cost-impact summary surfaced renegotiation triggers before they became friction.
+The vendor entered the procurement review with a structured response that documented compliance, evidence, and gap costs in the same artifact, and **moved into commercial close without an additional NFR round** — the *difficult items* deep-dive answered, in advance, the questions a hostile procurement read would have asked, and the cost-impact summary surfaced renegotiation triggers before they became renegotiation.
 
-The five open customer-side clarifications were relayed back to the customer's architecture team as part of the response, narrowing the next round of questions.
+The five open customer-side clarifications were relayed back to the customer's architecture team as part of the response, narrowing the next round of questions and shortening their internal review cycle.
 
 ## What we did not deliver
 
