@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { isTranslated, buildLocaleUrl, SUPPORTED_LOCALES, type Locale } from '../i18n/paths';
 
 export interface Props {
   title: string;
@@ -30,25 +31,26 @@ const canonicalURL = canonical || new URL(cleanPath, Astro.site).toString();
 const siteUrl = Astro.site?.toString() ?? 'https://thinkingmachine.uk/';
 const ogImageURL = new URL(ogImage, Astro.site).toString();
 
-// i18n locale detection from URL path. Map locale -> html lang + og:locale + hreflang base path.
-const LOCALE_MAP: Record<string, { lang: string; ogLocale: string }> = {
+// i18n locale detection from URL path.
+const LOCALE_META: Record<Locale, { lang: string; ogLocale: string }> = {
   en: { lang: 'en', ogLocale: 'en_GB' },
   de: { lang: 'de', ogLocale: 'de_DE' },
   hr: { lang: 'hr', ogLocale: 'hr_HR' },
 };
-const currentLocale = (Astro.currentLocale ?? 'en') as keyof typeof LOCALE_MAP;
-const localeMeta = LOCALE_MAP[currentLocale] ?? LOCALE_MAP.en;
+const currentLocale = (Astro.currentLocale ?? 'en') as Locale;
+const localeMeta = LOCALE_META[currentLocale] ?? LOCALE_META.en;
 // Strip the locale prefix (if any) from the cleanPath to get the path inside the locale.
 // /de/services -> /services, /hr -> /, / -> /
 let pathInsideLocale = cleanPath;
 if (currentLocale !== 'en' && pathInsideLocale.startsWith(`/${currentLocale}`)) {
   pathInsideLocale = pathInsideLocale.slice(currentLocale.length + 1) || '/';
 }
-const buildAlternateUrl = (loc: string) => {
-  const prefix = loc === 'en' ? '' : `/${loc}`;
-  const path = pathInsideLocale === '/' ? '/' : pathInsideLocale;
-  return new URL(`${prefix}${path}`, Astro.site).toString();
-};
+// Only emit hreflang alternates for pages that ARE translated. Pointing at
+// /de/services when /de/services does not exist is harmful for SEO. The
+// shared TRANSLATED_PATHS registry tracks this.
+const pageHasTranslations = isTranslated(pathInsideLocale);
+const buildHreflangUrl = (loc: Locale) =>
+  new URL(buildLocaleUrl(loc, pathInsideLocale), Astro.site).toString();
 
 // JSON-LD structured data (graph). High SEO + AI-visibility value in 2026
 // (ChatGPT, Perplexity, Gemini all parse Organization + Service nodes).
@@ -200,11 +202,16 @@ const ldJson = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    {/* hreflang alternates -- one per supported locale + x-default */}
-    <link rel="alternate" hreflang="en" href={buildAlternateUrl('en')} />
-    <link rel="alternate" hreflang="de" href={buildAlternateUrl('de')} />
-    <link rel="alternate" hreflang="hr" href={buildAlternateUrl('hr')} />
-    <link rel="alternate" hreflang="x-default" href={buildAlternateUrl('en')} />
+    {/* hreflang alternates -- only for pages that have translations.
+        Pointing hreflang at non-existent URLs is harmful for SEO. */}
+    {pageHasTranslations && (
+      <>
+        {SUPPORTED_LOCALES.map(loc => (
+          <link rel="alternate" hreflang={loc} href={buildHreflangUrl(loc)} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={buildHreflangUrl('en')} />
+      </>
+    )}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 

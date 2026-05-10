@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Leistungen — Thinking Machine"
+  description="Drei Spuren: Cloud-Kosten- & FinOps-Strategie, Cyber-Resilienz & NFR-Beratung, KI-Integration. Festpreisige Mandate (1–2 Wochen Discovery Sprint, 2–4 Wochen Rapid PoC, monatlicher Fractional-CTO-Retainer)."
+  pageType="WebPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="100" x2="180" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+      <line x1="100" y1="20" x2="100" y2="180" stroke="#1E3A8A" stroke-width="1"/>
+      <circle cx="100" cy="100" r="60" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Leistungen</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Drei Spuren. Ein Engagement-Modell. Keine Überraschungen auf der Rechnung.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        Wir arbeiten mit Compliance-sensitiven Unternehmen und den Anbietern, die an sie verkaufen. Wählen Sie unten eine Spur; wählen Sie weiter unten eine Mandatsform.
+      </p>
+    </div>
+  </section>
+
+  {/* Service: Cloud cost */}
+  <section id="cloud-cost" class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">01 · Cloud</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Cloud-Kosten- & FinOps-Strategie</h2>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h3>Wann Sie uns rufen sollten</h3>
+        <p>Sie stehen vor einer mehrjährigen Cloud-Verpflichtung und die internen Zahlen stimmen nicht überein. Ihr aktueller Hosting-Anbieter teilt keine Rechnungen. Eine Vorlage für den Vorstand ist in drei Wochen fällig. Sie sind ein SaaS-Anbieter, der einen Multi-Installations-Deal kalkuliert. Ihre CSP-Verlängerung steht an und niemand kann die Frage zur Partner-Marge verteidigen.</p>
+        <h3>Was wir liefern</h3>
+        <p>Eine vorstandsfähige Kostenanalyse, verankert in Cloud-Ökonomie-, Observability- und DevOps-Literatur — Storment & Fuller, Majors, Nygard, Forsgren et al. — ergänzt durch Microsoft / AWS / GCP First-Party-Leitfäden zur Tier-Auswahl und DR-Kosten für die im Mandat relevanten Datenbank-Engines.</p>
+        <p>Typische Lieferobjekte: Vier-Kategorien-Kostentaxonomie (fixer Overhead, Kompetenz, variabel, pro Server), Mehrszenarien-Modellierung von Reserved Instances und CSP-Margen, triangulierte Baseline gegen den aktuellen Spend, Sensitivitätsanalyse zur Personal-Aufstellung, ein funktionsfähiges Kostenmodell-Spreadsheet, das bei Ihnen bleibt.</p>
+        <p>Für medienschwere Plattformen (Video, Audio, Telemetrie-im-Volumen) verfügen wir über Erfahrung mit codec-getriebener Speicherkosten-Optimierung — die richtige Antwort lebt typischerweise gleichzeitig in CPU-, RAM-, Speicher-, Bandbreiten-, Qualitäts- und Resilienz-Trade-offs, nicht in einem einzigen davon. Allein die Codec-Wahl kann die Speicherkosten pro Sitzung um eine Größenordnung verschieben, bevor irgendeine Tier-Strategie greift. Region-of-Interest-Encoding (Priorisierung von Gesicht / Hand / Fokus-Bereich bei gleicher Gesamt-Bitrate) und adaptive Aufzeichnung (volle Treue für informationsreiche Segmente, kompakte abgeleitete Daten für informationsarme Strecken) sind die zwei nächsten Hebel, die explizit modelliert werden sollten, wenn die Speicherkosten-Linie die Unit-Economics dominiert.</p>
+        <h3>Was wir nicht liefern</h3>
+        <p>Wir schreiben kein Terraform. Wir migrieren keine Workloads. Wir verkaufen Ihnen kein Produkt und keine Partnerschaft. Wir liefern das Dokument, das die Entscheidungsträgerin liest.</p>
+        <h3>Aktuelles Beispiel</h3>
+        <p>Ein Multi-Installations-Anbieter industrieller Software musste wissen, was er einem Enterprise-Kunden für ein Cloud-managed Deployment berechnen sollte. Die aktuelle Hosting-Baseline war nicht verfügbar. Wir bauten eine triangulierte Baseline aus öffentlichen Cloud-Listenpreisen und typischen Partner-Margen-Bändern, modellierten drei Pricing-Szenarien über zwei Personal-Aufstellungen und lieferten ein Pricing-Playbook pro Installation plus einen Enterprise-seitigen Rechner, den der Kunde selbst befüllen konnte. <a href="/work/cloud-cost-finops">Vollständige Fallstudie lesen → (Englisch)</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* Service: Cyber resilience */}
+  <section id="cyber" class="border-b border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">02 · Cyber</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Cyber-Resilienz & NFR-Beratung</h2>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h3>Wann Sie uns rufen sollten</h3>
+        <p>Ihr Enterprise-Kunde hat Ihnen gerade seinen NFR-Katalog geschickt und Sie haben neunzig Tage zur Antwort. Die NIS2-Umsetzung berührt Ihren Betriebsperimeter und im Inhouse-Team fehlt ein bestimmter Bereich. Sie schreiben den NFR-Katalog selbst für eine anstehende Beschaffung und wollen ihn Audit-belastbar.</p>
+        <h3>Was wir liefern</h3>
+        <p>Strukturierte NFR-Compliance-Antworten gegen Beschaffungs-Matrizen. Wir arbeiten über die Standard-Domänen — Cyber-Sicherheit, Datenarchitektur, technische Architektur, Business Continuity. Jede Antwort trägt einen Compliance-Status (compliant / partial / non-compliant / desirable), eine Begründung, einen Beweis-Pfad, eine erforderliche Maßnahme und eine Kostenschätzung.</p>
+        <p>Um das Register herum ergänzen wir eine Vertiefung für Punkte, die nicht in eine Zeile passen, ein Quellen-Verifikations-Log, das jede Begründung mit zugrundeliegenden Meetings oder Dokumenten verbindet, und eine konsolidierte Kostenwirkungs-Zusammenfassung, die Nachverhandlungs-Auslöser im Voraus offenlegt statt mitten in der Beschaffung.</p>
+        <p>Wir arbeiten mit Azure-nativen Sicherheitsstacks (Entra ID, Key Vault, Defender, Purview, Sentinel), die Methodik ist aber plattform-agnostisch.</p>
+        <p>Für regulierte-Sektor-Mandate verfügen wir über Erfahrung mit den domänen-spezifischen Überlagerungen — für Healthcare: GDPR Artikel 9 (besondere Kategorien personenbezogener Daten), EHDS-Interoperabilität via HL7 FHIR R4, NIS2-Einstufung als wichtige Einrichtung, MDR / EN 62304 / ISO 14971-Bereitschaft für Software-as-Medical-Device-Adjazenzen, ISO 27001 + 27799 ISMS-Scoping, und die relevanten nationalen Umsetzungen (Deutschland: Gematik TI, BSIG-neu, BSI C5; Kroatien: HZZO, AZOP, eZdravlje). Die Mandatsstruktur bleibt gleich; der regulatorische Anker ändert sich.</p>
+        <h3>Was wir nicht liefern</h3>
+        <p>Wir führen keine Penetrationstests oder Sicherheits-Audits durch. Wir sitzen nicht in Ihrem CSIRT. Wir schreiben Ihre ISO-27001-Policies nicht von Grund auf neu.</p>
+        <h3>Aktuelles Beispiel</h3>
+        <p>Die Beschaffungs-NFR-Matrix eines Tier-1-europäischen Energieanbieters umfasste rund fünfzig Punkte über Cyber-Sicherheit und Datenarchitektur. Wir produzierten das Antwort-Register, das Vertiefungsblatt und das Quellen-Verifikations-Log, das jede Begründung mit einem Meeting oder einer E-Mail verbindet. <a href="/work/nfr-compliance-energy">Vollständige Fallstudie lesen → (Englisch)</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* Service: AI */}
+  <section id="ai" class="bg-ink-100/40 border-b border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">03 · KI</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">KI-Integration in bestehende Systeme</h2>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h3>Wann Sie uns rufen sollten</h3>
+        <p>Sie haben funktionierende Systeme und wollen moderne Frontier-Modelle daran anbinden — sie nicht ersetzen. Ihre Anforderungen an die Datenresidenz schließen gehostete LLM-APIs aus. Ihre Wissensbasis ist zu groß zum Reinkleben in einen Prompt und zu sensibel zum Hochladen zu einem Dritten. Ihr Engineering-Team hat einen Chatbot ausgeliefert und die Geschäftsführung will wissen <em>funktioniert das tatsächlich?</em></p>
+        <h3>Was wir liefern</h3>
+        <ol>
+          <li><strong>MCP-Steuerungsschichten</strong>, die bestehende interne Anwendungen umhüllen und sie als Tools für LLM-Agenten exponieren.</li>
+          <li><strong>RAG über Unternehmens-Wissensbasen</strong> — Chunking-Strategie, Retrieval-Tuning, Evaluations-Harness und eine ehrliche Antwort darauf, ob <em>RAG hier überhaupt der richtige Aufruf ist</em>.</li>
+          <li><strong>On-Premises-LLM-Infrastruktur</strong> — Modellauswahl (Llama-Familie, Mistral, andere), Serving-Stack (Ollama / vLLM), GPU-Sizing, Observability.</li>
+          <li><strong>LLM-gestützte Legacy-Modernisierung</strong> — Frontier-Modelle einsetzen, um Code-Verständnis, Abhängigkeits-Mapping und Migrations-Planung auf Systemen zu beschleunigen, die Ihrem Team gesagt wurde, sie sollten <em>einfach neu schreiben</em>.</li>
+          <li><strong>KI-Trainings für Ingenieure und Manager</strong> — was diese Systeme sind, was sie nicht sind, und wie man sie empirisch evaluiert.</li>
+          <li><strong>Selbstgehostete Speech-to-Text- und ASR-Pipelines</strong> — Whisper-Familie-Deployment (faster-whisper / CTranslate2-Runtime, INT8-Quantisierung), Sprecher-Diarisierung mit wortgenauen Timestamps, GPU-Sizing für Batch-Inferenz, Mehrsprachigkeit. Für hochvolumige Szenarien, in denen Pro-Minute-Cloud-ASR-Preise die Unit-Economics zerschlagen, oder in denen Audio den Perimeter nicht verlassen darf.</li>
+          <li><strong>Edge-seitige neuronale Audio-Aufbereitung</strong> — DNN-basierte Geräuschunterdrückung und Dereverberation, die auf dem Client-Gerät laufen, bevor Medien den Server erreichen. In Kombination mit der oben genannten selbstgehosteten ASR kann die gesamte Sprach-Pipeline innerhalb des Operator-Perimeters laufen — keine Pro-Minute-Cloud-Kosten, kein Audio, das die Netzwerkgrenze verlässt.</li>
+        </ol>
+        <h3>Was wir nicht liefern</h3>
+        <p>Wir trainieren keine Foundation-Modelle. Wir verkaufen Ihnen keine <em>KI-Strategie</em> ohne ein funktionierendes Artefakt. Wir liefern keine KI-Funktion, bei der die richtige Antwort eine SQL-Abfrage ist.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* Engagement model */}
+  <section class="container-page py-20 md:py-24">
+    <div class="max-w-2xl mb-12">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">So arbeiten wir</div>
+      <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Drei Mandatsformen, die Sie tatsächlich genehmigen können.</h2>
+    </div>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stufe 1</div>
+        <p class="font-serif text-2xl text-ink-900 mb-2">Discovery Sprint</p>
+        <p class="text-sm text-ink-500 mb-4 font-medium">1–2 Wochen · Festpreis</p>
+        <p class="text-ink-700">Klar abgegrenztes Problem, strukturierte Lieferung, entscheidungsreifes Ergebnis.</p>
+      </div>
+      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stufe 2</div>
+        <p class="font-serif text-2xl text-ink-900 mb-2">Rapid PoC</p>
+        <p class="text-sm text-ink-500 mb-4 font-medium">2–4 Wochen · Festpreis</p>
+        <p class="text-ink-700">Funktionierende Demonstration plus eine evidenzbasierte Go/No-go-Empfehlung.</p>
+      </div>
+      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Stufe 3</div>
+        <p class="font-serif text-2xl text-ink-900 mb-2">Fractional CTO</p>
+        <p class="text-sm text-ink-500 mb-4 font-medium">Monatlicher Retainer</p>
+        <p class="text-ink-700">Ein Senior-Architekt auf Abruf. Sounding-Board für das Inhouse-Team, RFP-Due-Diligence, Zweitmeinungs-Reviews. Für den Fall, dass das Team stark ist, aber einen spezifischen Tiefen-Bereich vermisst.</p>
+      </div>
+    </div>
+    <p class="mt-10 max-w-prose text-ink-700">
+      Wir nehmen <strong class="text-ink-900">ein bis zwei neue Mandate pro Quartal</strong> an. Die ersten dreißig Minuten sind immer kostenfrei, ohne Pitch und ohne Folien.
+    </p>
+    <div class="mt-8">
+      <a href="/de/contact" class="btn-primary">30-minütiges Erstgespräch buchen</a>
+    </div>
+
+    <div class="mt-20 pt-16 border-t border-ink-200">
+      <div class="max-w-2xl mb-10">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Stufe 1 in Bildern</div>
+        <h3 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight">Ein Discovery Sprint, Tag für Tag.</h3>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Der kürzere Verwandte des Rapid PoC. Eine bis zwei Wochen, ein Lieferobjekt, kein funktionierendes Artefakt — reine Entscheidungs-Unterstützung. Verwendet, wenn die Frage konkret ist und ein funktionsfähiger PoC zu viel wäre.
+        </p>
+      </div>
+      <div class="bg-white border border-ink-200 p-6 md:p-10">
+        <p class="text-sm text-ink-700 leading-relaxed">Die Visualisierung folgt dem gleichen Aufbau wie die englische Fassung — Survey · Map · Think · Deliver über zehn Tage, mit Kickoff am Tag 1 und finaler Übergabe am Tag 10. Anstatt der Visualisierung zu wiederholen, verlinken wir hier die <a href="/services" class="text-accent-700 no-underline">englische Version mit Diagramm</a>.</p>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-16 border-t border-ink-200">
+      <div class="max-w-2xl mb-10">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Stufe 2 in Bildern</div>
+        <h3 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight">Ein Rapid PoC, Woche für Woche.</h3>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Ein typisches 4-wöchiges Rapid-PoC-Mandat. Stufen überlappen bewusst — bis Mitte Woche 2 haben wir genug von der Karte gezeichnet, um mit der Analyse zu beginnen.
+        </p>
+      </div>
+      <div class="bg-white border border-ink-200 p-6 md:p-10">
+        <p class="text-sm text-ink-700 leading-relaxed">Auch dieses Diagramm folgt dem englischen Original. Drei Meilensteine: Kickoff, Zwischenstand-Review nach Woche 2, Final Readout am Ende von Woche 4. Vollständige <a href="/services" class="text-accent-700 no-underline">englische Visualisierung</a>.</p>
+        <div class="mt-6 pt-5 border-t border-ink-100 grid sm:grid-cols-3 gap-4 text-sm text-ink-700">
+          <div>
+            <span class="text-accent-700 font-semibold">Kickoff:</span> 60-minütiges Gespräch. Wir bestätigen Umfang, deklarieren Out-of-Scope-Punkte und einigen uns auf drei bis fünf Interview-Ziele.
+          </div>
+          <div>
+            <span class="text-accent-700 font-semibold">Zwischenstand-Review:</span> 45-minütiges Gespräch. Wir teilen die Karte und die Framework-Anker. Sie korrigieren, was wir falsch verstanden haben.
+          </div>
+          <div>
+            <span class="text-accent-700 font-semibold">Finale Übergabe:</span> 60-minütiges Gespräch. Wir gehen mit Ihnen das Dokument durch. Sie übernehmen es danach.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Final CTA */}
+  <section class="bg-ink-100/40 border-t border-ink-200">
+    <div class="container-page py-20 md:py-24 max-w-prose">
+      <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">
+        Wir verkaufen keine Stunden. Wir verkaufen Entscheidungen.
+      </p>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        Dreißig Minuten gehen auf uns — kein Pitch, keine Folien. Wir sagen Ihnen im Gespräch, ob wir helfen können.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/de/contact" class="btn-primary">Erstgespräch buchen</a>
+        <a href="/work" class="btn-secondary">Aktuelle Arbeit ansehen → (Englisch)</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

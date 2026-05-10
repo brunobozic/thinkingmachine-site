@@ -1,28 +1,84 @@
 ---
+import { buildLocaleUrl, isTranslated, SUPPORTED_LOCALES, type Locale } from '../i18n/paths';
+
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+const cleanPath = path.replace(/\/index\.html$/, '/').replace(/\.html$/, '') || '/';
+
+const currentLocale = (Astro.currentLocale ?? 'en') as Locale;
+
+// Strip locale prefix so we get the path inside the locale, e.g.
+// /de/services -> /services, /hr -> /, / -> /
+let pathInsideLocale = cleanPath;
+if (currentLocale !== 'en' && pathInsideLocale.startsWith(`/${currentLocale}`)) {
+  pathInsideLocale = pathInsideLocale.slice(currentLocale.length + 1) || '/';
+}
+
+const pageHasTranslations = isTranslated(pathInsideLocale);
+
+// Localised nav labels
+const NAV_LABELS: Record<Locale, { services: string; work: string; notes: string; about: string; contact: string }> = {
+  en: { services: 'Services', work: 'Work', notes: 'Notes', about: 'About', contact: 'Contact' },
+  de: { services: 'Leistungen', work: 'Mandate', notes: 'Notizen', about: 'Über uns', contact: 'Kontakt' },
+  hr: { services: 'Usluge', work: 'Mandati', notes: 'Bilješke', about: 'O nama', contact: 'Kontakt' },
+};
+const labels = NAV_LABELS[currentLocale];
+
+// Nav link href: keep at currentLocale if a translation exists for that target
+// path; otherwise fall back to the EN version (Work/Notes are EN-only for now).
+const navHref = (target: string): string => {
+  if (currentLocale === 'en') return target;
+  if (isTranslated(target)) return `/${currentLocale}${target === '/' ? '' : target}`;
+  return target; // EN equivalent
+};
 
 const nav = [
-  { href: '/services', label: 'Services' },
-  { href: '/work', label: 'Work' },
-  { href: '/notes', label: 'Notes' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' }
+  { href: navHref('/services'), label: labels.services, key: '/services' },
+  { href: navHref('/work'),     label: labels.work,     key: '/work' },
+  { href: navHref('/notes'),    label: labels.notes,    key: '/notes' },
+  { href: navHref('/about'),    label: labels.about,    key: '/about' },
+  { href: navHref('/contact'),  label: labels.contact,  key: '/contact' },
 ];
+
+const isActive = (key: string) =>
+  key === '/' ? pathInsideLocale === '/' : pathInsideLocale === key || pathInsideLocale.startsWith(key + '/');
+
+// Brand link goes to current-locale home.
+const brandHref = currentLocale === 'en' ? '/' : `/${currentLocale}`;
 ---
 <header class="border-b border-ink-200">
   <div class="container-page flex items-center justify-between py-6">
-    <a href="/" class="no-underline text-ink-900">
+    <a href={brandHref} class="no-underline text-ink-900">
       <span class="font-serif text-xl tracking-tight">Thinking Machine</span>
     </a>
     <nav class="hidden md:flex items-center gap-8 text-sm">
       {nav.map(item => (
-        <a href={item.href} class:list={['no-underline transition-colors', isActive(item.href) ? 'text-ink-900 font-medium' : 'text-ink-700 hover:text-ink-900']}>
+        <a href={item.href} class:list={['no-underline transition-colors', isActive(item.key) ? 'text-ink-900 font-medium' : 'text-ink-700 hover:text-ink-900']}>
           {item.label}
         </a>
       ))}
-      <span class="text-ink-300 text-xs uppercase tracking-wider" aria-hidden="true">EN</span>
+
+      {/* Language switcher: EN | DE | HR. Active locale is highlighted; clicking
+          a non-active locale lands on the equivalent translated URL, or that
+          locale's home if the current page is not yet translated. */}
+      <span class="flex items-center gap-1 text-xs uppercase tracking-wider ml-2" aria-label="Language">
+        {SUPPORTED_LOCALES.map((loc, i) => (
+          <>
+            {i > 0 && <span class="text-ink-300" aria-hidden="true">·</span>}
+            {loc === currentLocale ? (
+              <span class="text-ink-900 font-semibold" aria-current="true">{loc.toUpperCase()}</span>
+            ) : (
+              <a
+                href={buildLocaleUrl(loc, pathInsideLocale)}
+                class="text-ink-500 hover:text-ink-900 no-underline"
+                title={pageHasTranslations ? undefined : 'This page is only available in English; you will land on the localised home.'}
+              >
+                {loc.toUpperCase()}
+              </a>
+            )}
+          </>
+        ))}
+      </span>
+
       <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/" rel="noopener" class="text-ink-500 hover:text-ink-900 no-underline ml-2" aria-label="Bruno Božić on LinkedIn" title="Founder on LinkedIn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43c-1.14 0-2.07-.93-2.07-2.07 0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07Zm1.78 13.02H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
       </a>
@@ -39,6 +95,18 @@ const nav = [
           {nav.map(item => (
             <a href={item.href} class="no-underline text-ink-800 hover:text-ink-900">{item.label}</a>
           ))}
+          <div class="flex items-center gap-1 text-xs uppercase tracking-wider pt-3 border-t border-ink-200" aria-label="Language">
+            {SUPPORTED_LOCALES.map((loc, i) => (
+              <>
+                {i > 0 && <span class="text-ink-300" aria-hidden="true">·</span>}
+                {loc === currentLocale ? (
+                  <span class="text-ink-900 font-semibold">{loc.toUpperCase()}</span>
+                ) : (
+                  <a href={buildLocaleUrl(loc, pathInsideLocale)} class="text-ink-500 hover:text-ink-900 no-underline">{loc.toUpperCase()}</a>
+                )}
+              </>
+            ))}
+          </div>
         </nav>
       </div>
     </details>

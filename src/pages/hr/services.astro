@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Usluge — Thinking Machine"
+  description="Tri trake: cloud troškovi i FinOps strategija, cyber otpornost i NFR savjetovanje, AI integracija. Mandati fiksnog opsega (1–2 tjedna Discovery Sprint, 2–4 tjedna Rapid PoC, mjesečni Fractional CTO retainer)."
+  pageType="WebPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="100" x2="180" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+      <line x1="100" y1="20" x2="100" y2="180" stroke="#1E3A8A" stroke-width="1"/>
+      <circle cx="100" cy="100" r="60" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Usluge</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Tri trake. Jedan model angažmana. Bez iznenađenja na računu.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        Radimo s organizacijama osjetljivima na compliance i s dobavljačima koji im prodaju. Odaberite traku ispod; zatim odaberite oblik mandata niže na stranici.
+      </p>
+    </div>
+  </section>
+
+  {/* Service: Cloud cost */}
+  <section id="cloud-cost" class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">01 · Cloud</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Strategija cloud troškova i FinOps</h2>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h3>Kada nas pozvati</h3>
+        <p>Pred vama je višegodišnja cloud obveza, a interni brojevi se ne slažu. Vaš trenutni hosting partner ne dijeli račune. Materijal za upravni odbor je za tri tjedna. Vi ste SaaS dobavljač i kalkulirate multi-installation deal. Obnova CSP ugovora se bliži, a pitanje partnerske marže nema branitelja.</p>
+        <h3>Što isporučujemo</h3>
+        <p>Procjenu troškova razine upravnog odbora, sidrenu u literaturi cloud ekonomije, observabilnosti i DevOps-a — Storment & Fuller, Majors, Nygard, Forsgren et al. — uz Microsoft / AWS / GCP first-party smjernice za odabir tier-a i DR troškove za baze podataka u opsegu.</p>
+        <p>Tipične isporučevine: četverokategorijska taksonomija troškova (fiksni overhead, kompetencija, varijabilni, po serveru), modeliranje rezerviranih instanci i CSP marže po više scenarija, triangulirani baseline u odnosu na trenutni spend, analiza osjetljivosti za kadrovsku postavu, radna kalkulacijska tablica koju zadržavate.</p>
+        <p>Za platforme s puno medija (video, audio, telemetrija u količini) imamo iskustva s codec-vođenim inženjeringom skladišnih troškova — pravi odgovor obično istovremeno živi u trade-offu CPU-a, RAM-a, skladišta, propusnosti, kvalitete i otpornosti, ne u jednom od njih. Sam izbor codeca može pomaknuti trošak skladišta po sesiji za red veličine prije bilo kakve tier strategije. Region-of-interest kodiranje (prioritiziranje lica / ruke / fokusne zone uz istu ukupnu bitratu) i adaptivno snimanje (puna kvaliteta za informacijski bogata segmenata, kompaktni izvedeni podaci za informacijski siromašna razdoblja) sljedeća su dva alata koja vrijedi eksplicitno modelirati kada linija skladišta dominira unit-economicsom.</p>
+        <h3>Što ne isporučujemo</h3>
+        <p>Ne pišemo Terraform. Ne migriramo workloadove. Ne prodajemo vam proizvod ili partnerski odnos. Isporučujemo dokument koji čita donositelj odluka.</p>
+        <h3>Nedavni primjer</h3>
+        <p>Multi-installation dobavljaču industrijskog softvera trebalo je znati što naplaćivati enterprise klijentu za cloud-managed deployment. Trenutni hosting baseline nije bio dostupan. Izgradili smo triangulirani baseline iz javnih cijena clouda i tipičnih raspona partnerske marže, modelirali tri scenarija cijena kroz dvije postavke kadrova i isporučili pricing playbook po instalaciji plus enterprise-side kalkulator koji klijent može sam popunjavati. <a href="/work/cloud-cost-finops">Pročitajte cijelu studiju → (engleski)</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* Service: Cyber resilience */}
+  <section id="cyber" class="border-b border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">02 · Cyber</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Cyber otpornost i NFR savjetovanje</h2>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h3>Kada nas pozvati</h3>
+        <p>Vaš enterprise klijent vam je upravo poslao NFR katalog i imate devedeset dana za odgovor. Transponiranje NIS2 direktive počinje dirati vaš operativni perimetar i internom timu nedostaje jedno specifično područje. Sami pišete NFR katalog za nadolazeću nabavu i želite ga audit-spreman.</p>
+        <h3>Što isporučujemo</h3>
+        <p>Strukturirane NFR compliance odgovore na nabavne matrice. Radimo kroz standardne domene — cyber sigurnost, podatkovna arhitektura, tehnička arhitektura, kontinuitet poslovanja. Svaki odgovor nosi compliance status (compliant / partial / non-compliant / desirable), obrazloženje, dokazni trag, potrebnu akciju i procjenu troška.</p>
+        <p>Oko samog registra dodajemo deep-dive za stavke koje ne stanu u redak, source-verification log koji svaku obrazloženu tvrdnju veže uz konkretni sastanak ili dokument, te konsolidirani sažetak troškovnih učinaka koji unaprijed iznosi okidače za pregovaranje, umjesto usred nabave.</p>
+        <p>Radimo s Azure-native sigurnosnim stackovima (Entra ID, Key Vault, Defender, Purview, Sentinel), ali metodologija je platform-agnostic.</p>
+        <p>Za mandate u reguliranim sektorima imamo iskustva s domena-specifičnim slojevima — za zdravstvo: GDPR članak 9 (posebne kategorije podataka o zdravlju), EHDS interoperabilnost putem HL7 FHIR R4, NIS2 klasifikacija kao značajan/posebno značajan subjekt, MDR / EN 62304 / ISO 14971 spremnost za software-as-medical-device adjacencije, ISO 27001 + 27799 ISMS scoping, te relevantna nacionalna transponiranja (Njemačka: Gematik TI, BSIG-neu, BSI C5; Hrvatska: HZZO, AZOP, eZdravlje). Struktura mandata ostaje ista; mijenja se regulatorno sidro.</p>
+        <h3>Što ne isporučujemo</h3>
+        <p>Ne provodimo penetracijske testove ni sigurnosne audite. Ne sjedimo u vašem CSIRT-u. Ne pišemo vaše ISO 27001 politike od nule.</p>
+        <h3>Nedavni primjer</h3>
+        <p>NFR matrica nabavnog tima tier-1 europskog energetskog operatora obuhvaćala je oko pedeset stavki kroz domene cyber sigurnosti i podatkovne arhitekture. Proizveli smo registar odgovora, deep-dive list i source-verification log koji svaku obrazloženu tvrdnju veže uz sastanak ili email. <a href="/work/nfr-compliance-energy">Pročitajte cijelu studiju → (engleski)</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* Service: AI */}
+  <section id="ai" class="bg-ink-100/40 border-b border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">03 · AI</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">AI integracija u postojeće sustave</h2>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h3>Kada nas pozvati</h3>
+        <p>Imate funkcionalne sustave i želite spojiti moderne frontier modele s njima — ne ih zamijeniti. Vaši zahtjevi za rezidenciju podataka isključuju hostane LLM API-je. Vaša baza znanja je prevelika za umetanje u prompt i preosjetljiva za upload trećoj strani. Vaš inženjerski tim isporučio je chatbot, a uprava sada želi znati <em>radi li ovo zaista?</em></p>
+        <h3>Što isporučujemo</h3>
+        <ol>
+          <li><strong>MCP kontrolne slojeve</strong> koji omotavaju postojeće interne aplikacije i izlažu ih kao alate LLM agentima.</li>
+          <li><strong>RAG nad poslovnim bazama znanja</strong> — chunking strategija, retrieval tuning, evaluation harness, i iskren odgovor na <em>je li RAG uopće pravi izbor ovdje</em>.</li>
+          <li><strong>On-premises LLM infrastruktura</strong> — odabir modela (Llama familija, Mistral, drugi), serving stack (Ollama / vLLM), GPU sizing, observabilnost.</li>
+          <li><strong>LLM-potpomognuta modernizacija legacyja</strong> — korištenje frontier modela za ubrzavanje razumijevanja koda, mapiranja ovisnosti i planiranja migracije za sustave kojima je rečeno da ih <em>jednostavno prepišu</em>.</li>
+          <li><strong>AI obuke za inženjere i menadžere</strong> — što ovi sustavi jesu, što nisu, i kako ih empirijski evaluirati.</li>
+          <li><strong>Samohostani speech-to-text i ASR pipelineovi</strong> — Whisper-family deployment (faster-whisper / CTranslate2 runtime, INT8 kvantizacija), diarizacija govornika s timestampovima na razini riječi, GPU sizing za batch inferenciju, višejezičnost. Za scenarije visokog volumena gdje cloud ASR cijene po minuti razbijaju unit economicse, ili gdje audio ne smije napustiti perimetar.</li>
+          <li><strong>Edge-side neuronska obrada zvuka</strong> — DNN-bazirano potiskivanje šuma i dereverberacija koji se izvršavaju na klijentu prije nego što medij dođe do servera. U kombinaciji sa samohostanim ASR-om iznad, cijeli govorni pipeline može raditi unutar perimetra operatora — bez cloud troškova po minuti, bez audija koji napušta granicu mreže.</li>
+        </ol>
+        <h3>Što ne isporučujemo</h3>
+        <p>Ne treniramo foundation modele. Ne prodajemo vam <em>AI strategiju</em> bez funkcionalnog artefakta. Ne isporučujemo AI funkcionalnost gdje je pravi odgovor SQL upit.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* Engagement model */}
+  <section class="container-page py-20 md:py-24">
+    <div class="max-w-2xl mb-12">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Kako radimo</div>
+      <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Tri oblika mandata koja stvarno možete odobriti.</h2>
+    </div>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Razina 1</div>
+        <p class="font-serif text-2xl text-ink-900 mb-2">Discovery Sprint</p>
+        <p class="text-sm text-ink-500 mb-4 font-medium">1–2 tjedna · fiksna cijena</p>
+        <p class="text-ink-700">Jasno omeđen problem, strukturirana isporuka, rezultat spreman za odluku.</p>
+      </div>
+      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Razina 2</div>
+        <p class="font-serif text-2xl text-ink-900 mb-2">Rapid PoC</p>
+        <p class="text-sm text-ink-500 mb-4 font-medium">2–4 tjedna · fiksna cijena</p>
+        <p class="text-ink-700">Funkcionalna demonstracija plus go/no-go preporuka utemeljena na dokazima.</p>
+      </div>
+      <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Razina 3</div>
+        <p class="font-serif text-2xl text-ink-900 mb-2">Fractional CTO</p>
+        <p class="text-sm text-ink-500 mb-4 font-medium">Mjesečni retainer</p>
+        <p class="text-ink-700">Senior arhitekt na poziv. Sounding-board za interni tim, RFP due diligence, drugomišljenjska procjena. Za situaciju kada je tim jak ali nedostaje jedno specifično dubinsko područje.</p>
+      </div>
+    </div>
+    <p class="mt-10 max-w-prose text-ink-700">
+      Uzimamo <strong class="text-ink-900">jedan do dva nova mandata po kvartalu</strong>. Prvih trideset minuta uvijek je besplatno, bez prodaje i bez slajdova.
+    </p>
+    <div class="mt-8">
+      <a href="/hr/contact" class="btn-primary">Dogovorite 30-minutni razgovor</a>
+    </div>
+
+    <div class="mt-20 pt-16 border-t border-ink-200">
+      <div class="max-w-2xl mb-10">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Razina 1 u slikama</div>
+        <h3 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight">Discovery Sprint, dan po dan.</h3>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Kraći rođak Rapid PoC-a. Jedan do dva tjedna, jedan dokument-isporučevina, bez funkcionalnog artefakta — čista podrška odluci. Koristi se kada je pitanje konkretno i kada bi funkcionalni PoC bio previše.
+        </p>
+      </div>
+      <div class="bg-white border border-ink-200 p-6 md:p-10">
+        <p class="text-sm text-ink-700 leading-relaxed">Vizualizacija prati istu strukturu kao engleska verzija — Snimanje · Mapiranje · Razmišljanje · Isporuka kroz deset dana, s kickoffom prvi dan i završnom predajom desetog. Umjesto ponavljanja vizualizacije, ovdje upućujemo na <a href="/services" class="text-accent-700 no-underline">englesku verziju s dijagramom</a>.</p>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-16 border-t border-ink-200">
+      <div class="max-w-2xl mb-10">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Razina 2 u slikama</div>
+        <h3 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight">Rapid PoC, tjedan po tjedan.</h3>
+        <p class="mt-4 text-ink-700 leading-relaxed">
+          Tipičan 4-tjedni Rapid PoC mandat. Faze se namjerno preklapaju — već sredinom drugog tjedna imamo dovoljno mape da krenemo s analizom.
+        </p>
+      </div>
+      <div class="bg-white border border-ink-200 p-6 md:p-10">
+        <p class="text-sm text-ink-700 leading-relaxed">I ovaj dijagram prati englesku verziju. Tri prekretnice: Kickoff, Međupregled na kraju 2. tjedna, Završna predaja na kraju 4. tjedna. Cijela <a href="/services" class="text-accent-700 no-underline">engleska vizualizacija</a>.</p>
+        <div class="mt-6 pt-5 border-t border-ink-100 grid sm:grid-cols-3 gap-4 text-sm text-ink-700">
+          <div>
+            <span class="text-accent-700 font-semibold">Kickoff:</span> 60-minutni razgovor. Potvrđujemo opseg, deklariramo out-of-scope stavke, dogovaramo tri do pet ciljeva intervjua.
+          </div>
+          <div>
+            <span class="text-accent-700 font-semibold">Međupregled:</span> 45-minutni razgovor. Dijelimo mapu i okvirno sidro. Vi korigirate ono što smo krivo razumjeli.
+          </div>
+          <div>
+            <span class="text-accent-700 font-semibold">Završna predaja:</span> 60-minutni razgovor. Vodimo vas kroz dokument. Dalje ga preuzimate vi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Final CTA */}
+  <section class="bg-ink-100/40 border-t border-ink-200">
+    <div class="container-page py-20 md:py-24 max-w-prose">
+      <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">
+        Ne prodajemo sate. Prodajemo odluke.
+      </p>
+      <p class="mt-6 text-lg text-ink-700 leading-relaxed">
+        Trideset minuta na nama — bez prodaje, bez slajdova. U razgovoru ćemo vam reći možemo li pomoći.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/hr/contact" class="btn-primary">Dogovorite razgovor</a>
+        <a href="/work" class="btn-secondary">Pogledajte nedavni rad → (engleski)</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

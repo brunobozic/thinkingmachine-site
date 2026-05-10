@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const emailAddress = 'hello@thinkingmachine.uk';
+const mailtoSchedule = `mailto:${emailAddress}?subject=Erstgespräch%20%E2%80%94%20Thinking%20Machine&body=Hallo%20Bruno%2C%0A%0Aich%20m%C3%B6chte%20gerne%20ein%2030-min%C3%BCtiges%20Erstgespr%C3%A4ch%20vereinbaren.%20Kurz%20zum%20Anliegen%3A%0A%0A%5BProblem%5D%0A%0APassende%20Termine%20%28mit%20Zeitzone%29%3A%0A%0A%5BTermine%5D%0A%0AVielen%20Dank%2C%0A%5BName%5D`;
+---
+<BaseLayout
+  title="Kontakt — Thinking Machine"
+  description="Buchen Sie ein kostenfreies 30-minütiges Erstgespräch. Keine Folien, kein Verkaufsgespräch. Wir besprechen Ihr Anliegen und entscheiden gemeinsam, ob wir helfen können."
+  pageType="ContactPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="140" cy="140" r="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <line x1="60" y1="60" x2="140" y2="140" stroke="#1E3A8A" stroke-width="1"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Kontakt</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Dreißig Minuten. Keine Folien. Kein Verkaufsgespräch.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        Das erste Gespräch ist immer kostenfrei. Wir nutzen es, um das Anliegen zu verstehen und gemeinsam zu entscheiden, ob wir helfen können. Wenn wir nicht zueinander passen, sagen wir es im Gespräch und verweisen, wo möglich, auf jemanden, der besser geeignet ist.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12 md:py-16 grid md:grid-cols-2 gap-12 max-w-page">
+    <div class="bg-accent-700 text-white p-10 md:p-12">
+      <div class="text-xs uppercase tracking-[0.2em] opacity-70 mb-4 font-medium">Termin</div>
+      <h2 class="font-serif text-3xl text-white leading-tight">Wählen Sie einen Termin.</h2>
+      <p class="mt-5 opacity-90 leading-relaxed">
+        Dreißig Minuten per Video. Senden Sie kurz Anliegen und Terminvorschläge — wir antworten binnen eines Werktags mit einer Kalendereinladung.
+      </p>
+      <a href={mailtoSchedule} class="inline-block mt-8 bg-white text-accent-700 px-6 py-3 no-underline hover:bg-ink-50 transition-colors font-medium">
+        E-Mail für Termin →
+      </a>
+    </div>
+
+    <div class="bg-ink-100/40 border border-ink-200 p-10 md:p-12">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">E-Mail</div>
+      <h2 class="font-serif text-3xl text-ink-900 leading-tight">Oder schreiben Sie zuerst.</h2>
+      <p class="mt-5 text-ink-700 leading-relaxed">
+        Wenn Sie vorab Kontext senden möchten, schreiben Sie eine kurze E-Mail. Wir antworten binnen eines Werktags.
+      </p>
+      <a href={`mailto:${emailAddress}`} class="inline-block mt-8 text-accent-700 no-underline text-lg">
+        {emailAddress} →
+      </a>
+    </div>
+  </section>
+
+  <section class="container-page py-16 md:py-20">
+    <div class="max-w-2xl mb-10">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Was Sie erwartet</div>
+      <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Von der ersten E-Mail bis zur finalen Übergabe.</h2>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        Der Weg vom Erstkontakt zum gelieferten Mandat in fünf Schritten. Schritt 1 ist kostenfrei. Schritt 2 nennt einen Festpreis — keine Verpflichtung bis zur Unterzeichnung.
+      </p>
+    </div>
+    <div class="bg-white border border-ink-200 p-6 md:p-10">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img">
+        <defs>
+          <marker id="arrow-flow-de" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1E3A8A"/>
+          </marker>
+        </defs>
+        <line x1="148" y1="100" x2="180" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-de)"/>
+        <line x1="300" y1="100" x2="332" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-de)"/>
+        <line x1="452" y1="100" x2="484" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-de)"/>
+        <line x1="604" y1="100" x2="636" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-de)"/>
+        <g>
+          <circle cx="76" cy="100" r="36" fill="#1E3A8A"/>
+          <text x="76" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">Schritt 1</text>
+          <text x="76" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="white" opacity="0.85">30-min Gespräch</text>
+          <text x="76" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Kostenfrei, keine Folien</text>
+          <text x="76" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">NDA auf Wunsch</text>
+        </g>
+        <g>
+          <circle cx="228" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="228" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Schritt 2</text>
+          <text x="228" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Festpreis-Angebot</text>
+          <text x="228" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Innerhalb von 2 Werk-</text>
+          <text x="228" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">tagen, ohne Erweiterung</text>
+        </g>
+        <g>
+          <circle cx="380" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="380" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Schritt 3</text>
+          <text x="380" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Kickoff</text>
+          <text x="380" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Umfang bestätigt,</text>
+          <text x="380" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Interview-Ziele vereinbart</text>
+        </g>
+        <g>
+          <circle cx="532" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="532" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Schritt 4</text>
+          <text x="532" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Mandat</text>
+          <text x="532" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">1–4 Wochen,</text>
+          <text x="532" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Zwischenstand in Woche 2</text>
+        </g>
+        <g>
+          <circle cx="684" cy="100" r="36" fill="#B45309"/>
+          <text x="684" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">Schritt 5</text>
+          <text x="684" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="white" opacity="0.85">Finale Übergabe</text>
+          <text x="684" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">60-min Walkthrough,</text>
+          <text x="684" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Lieferobjekte gehören Ihnen</text>
+        </g>
+      </svg>
+      <p class="mt-6 pt-5 border-t border-ink-100 text-sm text-ink-700 leading-relaxed">
+        Gesamtdauer von der ersten E-Mail bis zum Mandatsangebot: in der Regel unter drei Werktagen. Vom Kickoff bis zur finalen Übergabe: ein bis vier Wochen, je nach Mandatsform. Die ersten dreißig Minuten gehen unabhängig vom Ausgang auf uns.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    <div class="prose max-w-prose">
+      <h2>Was Sie vorab senden sollten</h2>
+      <p>Ein paar Sätze zum Anliegen. Falls vorhanden, eine Frist. Dokumente, die das Anliegen einrahmen. Wir lesen, was Sie senden, vor dem Gespräch.</p>
+      <p>Wir behandeln alle vorvertraglichen Kommunikationen vertraulich. Wir führen kein CRM. Wir nehmen Sie nicht in einen Newsletter auf. Wir teilen Ihre Anfrage mit niemandem außerhalb von Thinking Machine.</p>
+
+      <h2>Wo wir arbeiten</h2>
+      <p>Zagreb, Kroatien, mit Mandaten in der gesamten Europäischen Union. Remote-first. Wir reisen für Kickoff- und Final-Readout-Termine, wenn das Mandat es rechtfertigt.</p>
+
+      <h2>Was wir berechnen</h2>
+      <p>Mandatshonorare hängen von Form und Umfang ab; wir nennen den Festpreis im ersten Gespräch, vor jeder Verpflichtung. Wir rechnen nicht nach Stunden ab. Es gibt keine Erweiterungsklauseln. Die einleitenden dreißig Minuten berechnen wir unabhängig vom Ausgang nicht.</p>
+    </div>
+  </section>
+
+  <section class="container-page pb-16">
+    <hr class="section-divider mx-auto max-w-prose" />
+    <footer class="max-w-prose text-sm text-ink-500">
+      <p><strong class="text-ink-800">Thinking Machine d.o.o.</strong></p>
+      <p>Zagreb, Kroatien · Gegründet 2022</p>
+      <p>OIB: <span class="text-ink-700">62472822484</span> · MB: <span class="text-ink-700">5637031</span></p>
+      <p>Eingetragener Sitz: <span class="text-ink-700">Zagorska ulica 11, 10000 Zagreb, Kroatien</span></p>
+    </footer>
+  </section>
+</BaseLayout>

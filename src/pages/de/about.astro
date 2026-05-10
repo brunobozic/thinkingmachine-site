@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Über uns — Thinking Machine"
+  description="Bruno Božić, Gründer. 20+ Jahre über Healthcare-IT, Telekommunikation, öffentliche Forschung, industrielles IoT. Warum Festpreis. Was wir nicht tun."
+  pageType="AboutPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="100,10 190,55 190,145 100,190 10,145 10,55" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <polygon points="100,40 165,72 165,128 100,160 35,128 35,72" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Über uns</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Boutique aus Überzeugung. Festpreis als Prinzip.
+      </h1>
+    </div>
+  </section>
+
+  <article class="container-page pb-12 md:pb-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div class="md:col-span-1">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Das Unternehmen</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Thinking Machine d.o.o. ist eine strategische Engineering-Beratung mit Sitz in Zagreb, Kroatien, gegründet 2022. Wir arbeiten mit Compliance-sensitiven Unternehmen und den Anbietern, die an sie verkaufen — über Cloud-Kostenstrategie, Cyber-Resilienz und KI-Integration in bestehende Systeme.</p>
+        <p>Wir sind bewusst klein. Die Arbeit wird vom Gründer persönlich geliefert, nicht an ein Delivery-Team ausgelagert. Jedes Mandat ist festpreislich, zeitlich begrenzt und entscheidungsreif. Wir nehmen ein bis zwei neue Mandate pro Quartal an.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Gründer</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Bruno Božić</h2>
+        <p class="mt-3 text-sm text-ink-500 font-medium">Gründer & Principal Advisor</p>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Ich schreibe seit Ende der 1990er Jahre Software, beruflich seit 2003. Seitdem habe ich Systeme im Gesundheitswesen (Krankenhausinformationssysteme, Laborautomation, e-Health-Zertifizierung), in der Telekommunikation, in EU-finanzierten Forschungskonsortien, in der Luftfahrt, im industriellen IoT sowie in der energiebranchen-seitigen Beschaffung und NFR-Arbeit gebaut und ausgeliefert. C#/.NET ist mein Heimatstack; Integrationsarchitektur ist der rote Faden.</p>
+        <p>Die Organisationen, mit denen ich gearbeitet habe — als Angestellter, Auftragnehmer oder Fractional CTO — umfassen nationale Telekommunikationsbetreiber, Behörden, Gesundheitsnetzwerke und EU-finanzierte Forschungskonsortien. Ich habe Teams von bis zu elf Personen über mehrere europäische Standorte geführt, mehr als fünfzig Ingenieurinnen und Ingenieure gementort und Hunderte von Seiten technischer Spezifikationen und Runbooks verfasst. Aktuell bin ich <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/" rel="noopener" class="text-accent-700 no-underline">Head of IoT bei Reos GmbH</a> (Hamburg), wo ich das Engineering einer Multi-Vendor-Smart-Building-Plattform über Hunderte europäischer Standorte leite. Thinking Machine ist der Kanal, über den ich selektive externe Beratungs-Mandate annehme, die mit dieser Rolle nicht in Konflikt stehen.</p>
+        <p>Daneben bin ich an angewandter Forschung zu Produktionssystemen für IoT-Geräte-Onboarding und Runtime-Integration beteiligt — multi-tenant Zertifikats-Lifecycle, sicheres mTLS at scale, und das Überbrücken affordance-zentrierter Semantik mit den ressourcen-zentrierten REST-APIs, die Geräte-Hersteller-Clouds zunehmend dominieren. Die Forschung informiert die Arbeit, nicht umgekehrt.</p>
+        <p>Separat hat sich die jüngere angewandte Arbeit auf Echtzeit-verschlüsselte Medienarchitekturen konzentriert (WebRTC + SFU, Ende-zu-Ende-Medienverschlüsselung, selbstgehostete GPU-Inferenz für Sprach-Transkription und Sprecher-Diarisierung) für Compliance-sensitive Anwendungsfälle, in denen Audio und Video das Operator-Perimeter nicht verlassen dürfen.</p>
+        <p class="mt-6 pt-5 border-t border-ink-100 text-sm text-ink-500">Empfehlungen früherer Kolleginnen und Kollegen aus diesen Rollen sind auf <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/details/recommendations/" rel="noopener" class="text-accent-700 no-underline">LinkedIn</a> sichtbar. Zuschreibbare Kunden-Testimonials werden auf dieser Seite ergänzt, sobald Mandate die Referenz-Embargo-Phase verlassen.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+    <div>
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Warum Festpreis</div>
+    </div>
+    <div class="md:col-span-2 prose">
+      <p>Die meisten Enterprise-Beratungs-Mandate sind darauf ausgelegt, sich auszuweiten. Aus Discovery wird Phase 1; aus Phase 1 wird Phase 2; das Honorar läuft.</p>
+      <p>Dieses Modell funktioniert für manche Probleme. Für die Probleme, die Thinking Machine annimmt, funktioniert es nicht. Diese sind fast immer: <em>Wir müssen eine Entscheidung treffen, bald, und wir brauchen jemanden Externes, der uns mit Rigor dorthin bringt</em>. Cloud-Migrations-Go/No-go. Vorvertragliche NFR-Due-Diligence. KI-Integrations-Machbarkeit. Diese Probleme haben einen klaren Endpunkt. Das richtige Lieferobjekt ist ein Dokument, das ein Vorstand in fünfzehn Minuten lesen kann, hinterlegt mit einem Modell, das einer kritischen Prüfung standhält.</p>
+      <p>Daher arbeiten wir in festpreisigen Mandatsformen — Discovery Sprint, Rapid PoC, Fractional-CTO-Retainer — mit ausdrücklich vorab erklärten Out-of-Scope-Punkten. Wenn ein Mandat ein größeres Problem aufdeckt, sagen wir es. Wir lösen es nicht im selben Mandat.</p>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Was wir nicht tun</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Wir nehmen keine Mandate an, bei denen KI, Cloud oder Compliance nicht tatsächlich die richtige Antwort sind. Wir bauen nicht im selben Mandat, was wir empfehlen (die Trennung von Beratung und Implementierung ist strukturell, nicht stilistisch). Wir verkaufen Ihnen keine Partner-Beziehung, keine Lizenz, keinen Managed Service. Wir haben kein Vertriebsteam, weil wir keine Dinge verkaufen — wir verkaufen Zeit, gedeckelt.</p>
+        <p>Wenn diese Einschränkungen für Ihre Organisation ein Problem sind, passen wir nicht — und wir helfen Ihnen, jemanden zu finden, der passt.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="container-page py-16 md:py-20">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">Dreißig Minuten, keine Folien, kein Verkaufsgespräch.</p>
+      <div class="mt-8">
+        <a href="/de/contact" class="btn-primary">30-minütiges Erstgespräch buchen</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

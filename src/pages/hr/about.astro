@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="O nama — Thinking Machine"
+  description="Bruno Božić, osnivač. 20+ godina kroz zdravstvenu IT, telekomunikacije, državna istraživanja, industrijski IoT. Zašto fiksni opseg. Što ne radimo."
+  pageType="AboutPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="100,10 190,55 190,145 100,190 10,145 10,55" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <polygon points="100,40 165,72 165,128 100,160 35,128 35,72" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">O nama</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Boutique iz uvjerenja. Fiksni opseg kao načelo.
+      </h1>
+    </div>
+  </section>
+
+  <article class="container-page pb-12 md:pb-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div class="md:col-span-1">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Tvrtka</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Thinking Machine d.o.o. je strateška inženjerska savjetodavna kuća sa sjedištem u Zagrebu, osnovana 2022. godine. Radimo s organizacijama osjetljivima na compliance i s dobavljačima koji im prodaju — kroz strategiju cloud troškova, cyber otpornost i AI integraciju u postojeće sustave.</p>
+        <p>Namjerno smo mali. Posao isporučuje osnivač osobno, ne neki delivery tim. Svaki mandat je fiksnog opsega, vremenski ograničen i odlukama-spreman. Uzimamo jedan do dva nova mandata po kvartalu.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Osnivač</div>
+        <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Bruno Božić</h2>
+        <p class="mt-3 text-sm text-ink-500 font-medium">Osnivač i glavni savjetnik</p>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Pišem softver od kraja 1990-ih, profesionalno od 2003. godine. Otada sam gradio i isporučivao sustave u zdravstvu (bolnički informacijski sustavi, laboratorijska automatizacija, e-Zdravlje certifikacija), telekomunikacijama, EU-financiranim istraživačkim konzorcijima, zrakoplovstvu, industrijskom IoT-u te energetskoj nabavi i NFR radu. C#/.NET je moj domaći stack; integracijska arhitektura je nit koja prolazi kroz sve.</p>
+        <p>Organizacije s kojima sam radio — kao zaposlenik, ugovarač ili fractional CTO — uključuju nacionalne telekom operatore, državne agencije, zdravstvene mreže i EU-financirane istraživačke konzorcije. Vodio sam timove do jedanaest osoba kroz više europskih lokacija, mentorirao više od pedeset inženjera i napisao stotine stranica tehničkih specifikacija i runbookova. Trenutno sam <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/" rel="noopener" class="text-accent-700 no-underline">Head of IoT u Reos GmbH</a> (Hamburg), gdje vodim inženjering multi-vendor smart-building platforme kroz stotine europskih lokacija. Thinking Machine je kanal kroz koji prihvaćam selektivne vanjske savjetodavne mandate koji ne sukobljavaju s tom ulogom.</p>
+        <p>Usporedno sam uključen u primijenjeno istraživanje produkcijskih sustava za IoT onboarding uređaja i runtime integraciju — multi-tenant lifecycle certifikata, sigurni mTLS na skali, i premošćivanje affordance-centrične semantike s resource-centričnim REST API-jima koji sve više dominiraju oblacima dobavljača uređaja. Istraživanje informira rad, ne obrnuto.</p>
+        <p>Odvojeno, nedavni primijenjeni rad obuhvatio je arhitekture za enkriptirani medij u stvarnom vremenu (WebRTC + SFU, end-to-end enkripcija medija, samohostani GPU za inferenciju transkripcije govora i diarizaciju govornika) za compliance-osjetljive scenarije gdje audio i video ne smiju napustiti perimetar operatora.</p>
+        <p class="mt-6 pt-5 border-t border-ink-100 text-sm text-ink-500">Preporuke kolega s prošlih uloga vidljive su na <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/details/recommendations/" rel="noopener" class="text-accent-700 no-underline">LinkedInu</a>. Pripisive izjave klijenata dodaju se na ovu stranicu kako mandati izlaze iz embarga referenci.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+    <div>
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Zašto fiksni opseg</div>
+    </div>
+    <div class="md:col-span-2 prose">
+      <p>Većina enterprise savjetodavnih mandata dizajnirana je da se širi. Iz Discoveryja postaje Faza 1; iz Faze 1 postaje Faza 2; brojač teče.</p>
+      <p>Taj model radi za neke probleme. Ne radi za vrstu problema koju Thinking Machine prihvaća, a to je gotovo uvijek: <em>moramo donijeti odluku, brzo, i trebamo nekoga vanjskog tko će nas tamo dovesti s rigoroznošću</em>. Go/no-go za migraciju u cloud. Predugovorna NFR due diligence. Izvodljivost AI integracije. Ovi problemi imaju jasan kraj. Pravo isporučeno djelo je dokument koji upravni odbor pročita za petnaest minuta, podržan modelom koji izdrži kritičko čitanje.</p>
+      <p>Stoga radimo u fiksno-opsegovnim oblicima mandata — Discovery Sprint, Rapid PoC, Fractional CTO retainer — s eksplicitno proglašenim out-of-scope stavkama. Ako mandat otkrije veći problem, reći ćemo to. Nećemo ga rješavati kroz isti mandat.</p>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-16 md:py-20 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Što ne radimo</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Nećemo prihvatiti posao gdje AI, cloud ili compliance zapravo nisu pravi odgovor. Nećemo graditi ono što preporučimo unutar istog mandata u kojem smo to preporučili (razdvajanje savjetovanja i implementacije je strukturalno, ne stilsko). Nećemo vam prodavati partnerski odnos, licencu ili upravljanu uslugu. Nemamo prodajni tim jer ne prodajemo stvari — prodajemo vrijeme, ograničeno.</p>
+        <p>Ako su ova ograničenja problem za vašu organizaciju, ne pristajemo, i pomoći ćemo vam pronaći nekoga tko pristaje.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="container-page py-16 md:py-20">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">Trideset minuta, bez slajdova, bez prodaje.</p>
+      <div class="mt-8">
+        <a href="/hr/contact" class="btn-primary">Dogovorite 30-minutni razgovor</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

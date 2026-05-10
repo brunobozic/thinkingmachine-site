@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const emailAddress = 'hello@thinkingmachine.uk';
+const mailtoSchedule = `mailto:${emailAddress}?subject=Uvodni%20razgovor%20%E2%80%94%20Thinking%20Machine&body=Pozdrav%20Bruno%2C%0A%0AHtio%2Fhtjela%20bih%20dogovoriti%2030-minutni%20uvodni%20razgovor.%20Ukratko%20o%20problemu%3A%0A%0A%5Bproblem%5D%0A%0AOdgovaraju%C4%87i%20termini%20%28s%20vremenskom%20zonom%29%3A%0A%0A%5Btermini%5D%0A%0AHvala%2C%0A%5Bime%5D`;
+---
+<BaseLayout
+  title="Kontakt — Thinking Machine"
+  description="Dogovorite besplatan 30-minutni uvodni razgovor. Bez slajdova, bez prodaje. Razgovaramo o problemu i zajedno odlučujemo možemo li pomoći."
+  pageType="ContactPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="140" cy="140" r="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <line x1="60" y1="60" x2="140" y2="140" stroke="#1E3A8A" stroke-width="1"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Kontakt</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Trideset minuta. Bez slajdova. Bez prodaje.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        Prvi razgovor je uvijek besplatan. Koristimo ga da razumijemo problem i zajedno odlučimo možemo li pomoći. Ako mislimo da nismo pravi izbor, reći ćemo to u razgovoru i, gdje je moguće, uputiti vas nekome tko bolje odgovara.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12 md:py-16 grid md:grid-cols-2 gap-12 max-w-page">
+    <div class="bg-accent-700 text-white p-10 md:p-12">
+      <div class="text-xs uppercase tracking-[0.2em] opacity-70 mb-4 font-medium">Termin</div>
+      <h2 class="font-serif text-3xl text-white leading-tight">Odaberite termin.</h2>
+      <p class="mt-5 opacity-90 leading-relaxed">
+        Trideset minuta putem videopoziva. Pošaljite kratko opis problema i prijedloge termina — odgovaramo unutar jednog radnog dana s pozivnicom u kalendaru.
+      </p>
+      <a href={mailtoSchedule} class="inline-block mt-8 bg-white text-accent-700 px-6 py-3 no-underline hover:bg-ink-50 transition-colors font-medium">
+        Email za termin →
+      </a>
+    </div>
+
+    <div class="bg-ink-100/40 border border-ink-200 p-10 md:p-12">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">Email</div>
+      <h2 class="font-serif text-3xl text-ink-900 leading-tight">Ili napišite prvo.</h2>
+      <p class="mt-5 text-ink-700 leading-relaxed">
+        Ako želite poslati kontekst unaprijed, napišite kratku poruku. Odgovaramo unutar jednog radnog dana.
+      </p>
+      <a href={`mailto:${emailAddress}`} class="inline-block mt-8 text-accent-700 no-underline text-lg">
+        {emailAddress} →
+      </a>
+    </div>
+  </section>
+
+  <section class="container-page py-16 md:py-20">
+    <div class="max-w-2xl mb-10">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Što očekivati</div>
+      <h2 class="font-serif text-3xl md:text-4xl text-ink-900 leading-tight">Od prvog emaila do završne predaje.</h2>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        Put od prvog kontakta do isporučenog mandata u pet koraka. Korak 1 je besplatan. Korak 2 navodi fiksnu cijenu — bez obveze do potpisa.
+      </p>
+    </div>
+    <div class="bg-white border border-ink-200 p-6 md:p-10">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img">
+        <defs>
+          <marker id="arrow-flow-hr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1E3A8A"/>
+          </marker>
+        </defs>
+        <line x1="148" y1="100" x2="180" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-hr)"/>
+        <line x1="300" y1="100" x2="332" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-hr)"/>
+        <line x1="452" y1="100" x2="484" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-hr)"/>
+        <line x1="604" y1="100" x2="636" y2="100" stroke="#1E3A8A" stroke-width="1.5" marker-end="url(#arrow-flow-hr)"/>
+        <g>
+          <circle cx="76" cy="100" r="36" fill="#1E3A8A"/>
+          <text x="76" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">Korak 1</text>
+          <text x="76" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="white" opacity="0.85">30-min poziv</text>
+          <text x="76" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Besplatno, bez slajdova</text>
+          <text x="76" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">NDA na zahtjev</text>
+        </g>
+        <g>
+          <circle cx="228" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="228" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Korak 2</text>
+          <text x="228" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Fiksna ponuda</text>
+          <text x="228" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Unutar 2 radna</text>
+          <text x="228" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">dana, bez proširenja</text>
+        </g>
+        <g>
+          <circle cx="380" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="380" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Korak 3</text>
+          <text x="380" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Kickoff</text>
+          <text x="380" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">Opseg potvrđen,</text>
+          <text x="380" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">ciljevi intervjua dogovoreni</text>
+        </g>
+        <g>
+          <circle cx="532" cy="100" r="36" fill="white" stroke="#1E3A8A" stroke-width="2"/>
+          <text x="532" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#18181B">Korak 4</text>
+          <text x="532" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#52525B">Mandat</text>
+          <text x="532" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">1–4 tjedna,</text>
+          <text x="532" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">međupregled u 2. tjednu</text>
+        </g>
+        <g>
+          <circle cx="684" cy="100" r="36" fill="#B45309"/>
+          <text x="684" y="96" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="white">Korak 5</text>
+          <text x="684" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="white" opacity="0.85">Završna predaja</text>
+          <text x="684" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">60-min walkthrough,</text>
+          <text x="684" y="174" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#3F3F46">isporučevine ostaju vam</text>
+        </g>
+      </svg>
+      <p class="mt-6 pt-5 border-t border-ink-100 text-sm text-ink-700 leading-relaxed">
+        Ukupno vrijeme od prvog emaila do ponude mandata: obično ispod tri radna dana. Od kickoffa do završne predaje: jedan do četiri tjedna, ovisno o obliku mandata. Prvih trideset minuta je na nama, neovisno o ishodu.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    <div class="prose max-w-prose">
+      <h2>Što poslati unaprijed</h2>
+      <p>Nekoliko rečenica o problemu. Rok, ako postoji. Dokumente koji okvire pitanje. Pročitamo ono što pošaljete prije razgovora.</p>
+      <p>Sve predugovorne komunikacije tretiramo povjerljivo. Ne vodimo CRM. Ne pretplaćujemo vas na newsletter. Ne dijelimo vaš upit s nikim izvan Thinking Machine.</p>
+
+      <h2>Gdje radimo</h2>
+      <p>Zagreb, Hrvatska, s mandatima u cijeloj Europskoj uniji. Remote-first. Putujemo na kickoff i završne sastanke kada to mandat opravdava.</p>
+
+      <h2>Kako naplaćujemo</h2>
+      <p>Naknade ovise o obliku i opsegu; fiksnu cijenu navodimo u prvom razgovoru, prije bilo kakve obveze. Ne naplaćujemo po satu. Nema klauzula o proširenju. Uvodnih trideset minuta ne naplaćujemo neovisno o ishodu.</p>
+    </div>
+  </section>
+
+  <section class="container-page pb-16">
+    <hr class="section-divider mx-auto max-w-prose" />
+    <footer class="max-w-prose text-sm text-ink-500">
+      <p><strong class="text-ink-800">Thinking Machine d.o.o.</strong></p>
+      <p>Zagreb, Hrvatska · Osnovano 2022.</p>
+      <p>OIB: <span class="text-ink-700">62472822484</span> · MB: <span class="text-ink-700">5637031</span></p>
+      <p>Sjedište: <span class="text-ink-700">Zagorska ulica 11, 10000 Zagreb, Hrvatska</span></p>
+    </footer>
+  </section>
+</BaseLayout>
