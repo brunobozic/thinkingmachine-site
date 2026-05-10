@@ -30,6 +30,26 @@ const canonicalURL = canonical || new URL(cleanPath, Astro.site).toString();
 const siteUrl = Astro.site?.toString() ?? 'https://thinkingmachine.uk/';
 const ogImageURL = new URL(ogImage, Astro.site).toString();
 
+// i18n locale detection from URL path. Map locale -> html lang + og:locale + hreflang base path.
+const LOCALE_MAP: Record<string, { lang: string; ogLocale: string }> = {
+  en: { lang: 'en', ogLocale: 'en_GB' },
+  de: { lang: 'de', ogLocale: 'de_DE' },
+  hr: { lang: 'hr', ogLocale: 'hr_HR' },
+};
+const currentLocale = (Astro.currentLocale ?? 'en') as keyof typeof LOCALE_MAP;
+const localeMeta = LOCALE_MAP[currentLocale] ?? LOCALE_MAP.en;
+// Strip the locale prefix (if any) from the cleanPath to get the path inside the locale.
+// /de/services -> /services, /hr -> /, / -> /
+let pathInsideLocale = cleanPath;
+if (currentLocale !== 'en' && pathInsideLocale.startsWith(`/${currentLocale}`)) {
+  pathInsideLocale = pathInsideLocale.slice(currentLocale.length + 1) || '/';
+}
+const buildAlternateUrl = (loc: string) => {
+  const prefix = loc === 'en' ? '' : `/${loc}`;
+  const path = pathInsideLocale === '/' ? '/' : pathInsideLocale;
+  return new URL(`${prefix}${path}`, Astro.site).toString();
+};
+
 // JSON-LD structured data (graph). High SEO + AI-visibility value in 2026
 // (ChatGPT, Perplexity, Gemini all parse Organization + Service nodes).
 const ldJson = {
@@ -170,7 +190,7 @@ const ldJson = {
 };
 ---
 <!doctype html>
-<html lang="en">
+<html lang={localeMeta.lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -179,6 +199,12 @@ const ldJson = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
+    {/* hreflang alternates -- one per supported locale + x-default */}
+    <link rel="alternate" hreflang="en" href={buildAlternateUrl('en')} />
+    <link rel="alternate" hreflang="de" href={buildAlternateUrl('de')} />
+    <link rel="alternate" hreflang="hr" href={buildAlternateUrl('hr')} />
+    <link rel="alternate" hreflang="x-default" href={buildAlternateUrl('en')} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -189,7 +215,7 @@ const ldJson = {
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:site_name" content="Thinking Machine" />
-    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale" content={localeMeta.ogLocale} />
 
     {/* Twitter */}
     <meta name="twitter:card" content="summary_large_image" />

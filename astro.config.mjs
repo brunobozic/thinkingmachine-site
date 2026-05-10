@@ -19,11 +19,12 @@ export default defineConfig({
     format: 'file',
     inlineStylesheets: 'auto'
   },
-  // i18n configuration intentionally deferred until Phase 5 (Croatian translations).
-  // When ready, enable:
-  // i18n: {
-  //   defaultLocale: 'en',
-  //   locales: ['en', 'hr'],
-  //   routing: { prefixDefaultLocale: false }
-  // }
+  // i18n: English-default at /, German at /de/, Croatian at /hr/.
+  // Routes for /de/ and /hr/ are accessible by URL but not yet linked from
+  // the header — soft-launched while translations are reviewed.
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'de', 'hr'],
+    routing: { prefixDefaultLocale: false }
+  }
 });

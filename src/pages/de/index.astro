@@ -1,0 +1,264 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { getCollection } from 'astro:content';
+
+const allStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+const featured = allStudies
+  .filter(s => s.data.featured)
+  .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
+
+const sectors = [
+  { name: 'Healthcare-IT', detail: 'KIS, Laborautomation, e-Health' },
+  { name: 'Telekommunikation', detail: 'CRM, Billing, Skalierung' },
+  { name: 'Öffentliche Forschung', detail: 'EU-finanzierte Konsortien' },
+  { name: 'Industrielles IoT', detail: 'Multi-Vendor, Multi-Standort' },
+  { name: 'Energie', detail: 'Beschaffung auf Betreiberseite' },
+  { name: 'Luftfahrt', detail: 'Multi-Tenant-Betrieb' },
+];
+
+const stats = [
+  { num: '20+', label: 'Jahre Enterprise-Architektur' },
+  { num: '6', label: 'Branchen mit tiefer Erfahrung' },
+  { num: '2–4', label: 'Wochen pro Entscheidung (statt 4–6 Monate bei einem Big-4)' },
+  { num: '1', label: 'Senior-Experte am Mandat, kein Delivery-Team' },
+];
+
+const process = [
+  { n: '01', t: 'Aufnehmen', d: 'Wir kommen ins Haus und hören zu — den Menschen, die es wirklich wissen. Das Wesentliche steht meistens nicht geschrieben. Wir bringen es zutage.' },
+  { n: '02', t: 'Kartieren', d: 'Wir zeichnen die aktuelle Lage: Datenflüsse, Entscheidungsrechte, Abhängigkeiten, Lücken. Alle sehen dasselbe Bild.' },
+  { n: '03', t: 'Denken', d: 'Der schwierige Teil. Wir verankern uns in publizierten Frameworks und unserer branchenübergreifenden Musterbibliothek. Wir suchen die Analogie, die anderswo bereits gelöst wurde.' },
+  { n: '04', t: 'Liefern', d: 'Ein Dokument, das Ihr Vorstand in fünfzehn Minuten liest. Hinterlegt mit einem Modell, das einer kritischen Prüfung standhält. Mit Quellenangabe für jede tragende Aussage.' },
+];
+
+const methodologies = [
+  { name: 'Fünffache wortgetreue Verifikation', desc: 'Jede tragende Aussage zur Quelle zitiert.' },
+  { name: 'Position of Record', desc: 'Autoritative Stimme mit nachvollziehbarer Beweiskette.' },
+  { name: 'Propagationsmatrix', desc: 'Dokumentübergreifender Audit-Pfad. Nichts fällt durch.' },
+  { name: 'Vier-Kategorien-Kostentaxonomie', desc: 'Fixer Overhead · Kompetenz · Variabel · Pro Server.' },
+  { name: 'Triangulierte Baseline', desc: 'Wenn Rechnungen fehlen: Verankerung an Listenpreisen × Partner-Margen-Band.' },
+  { name: 'L / I / B-Klassifikation', desc: 'Befunde markiert als Gesetzlich gefordert · Implizite Pflicht · Best Practice.' },
+];
+
+const comparison = [
+  { who: 'Big-4 / Strategieberatung', they: 'Marken-Report, mehrstufiges Delivery-Team, 4–6-monatiges Mandat.', us: 'Ein Senior-Experte. 2–4 Wochen. Gleiche Tiefe, schärfer.' },
+  { who: 'Domänen-Freelancer', they: 'Tief in einer Vertikalen. Projekt-für-Projekt — keine geteilte Methodenbibliothek.', us: 'Zwanzig Jahre über sechs Branchen. Audit-taugliche Methodik.' },
+  { who: 'Systemintegrator', they: 'Empfiehlt gerne die Implementierungsarbeit, die er verkaufen will.', us: 'Kein Implementierungs-Konflikt. Wir bauen nicht, was wir empfehlen.' },
+  { who: 'Internes Team', they: 'Kostenfrei, kontextstark. Aber politisch eingeschränkt, ohne externe Kalibrierung.', us: 'Externer Blick. Erlaubnis, das politisch Unbequeme auszusprechen.' },
+];
+
+const faqs = [
+  { q: "Wie lange dauert ein typisches Mandat?", a: "Discovery Sprints laufen 1–2 Wochen. Rapid PoCs laufen 2–4 Wochen. Fractional CTO ist eine monatliche Retainer-Vereinbarung. Wir verkaufen keine Mandate, die sich selbst ausweiten — jede Form hat einen festen Umfang und ein vorab erklärtes Enddatum." },
+  { q: "Wie kalkulieren Sie?", a: "Festpreis, im Erstgespräch genannt, vor jeder Verpflichtung. Wir rechnen nicht nach Stunden ab. Es gibt keine Erweiterungsklauseln. Das einleitende dreißigminütige Gespräch ist unabhängig vom Ausgang kostenfrei." },
+  { q: "Unterzeichnen Sie eine NDA vor dem ersten Gespräch?", a: "Ja. Senden Sie sie vorab — wir unterschreiben vor dem Gespräch. Viele bestehende Mandate stehen weiterhin unter Referenz-Embargo auf Wunsch des Kunden." },
+  { q: "Implementieren Sie auch, was Sie empfehlen?", a: "Nein. Die Trennung von Beratung und Implementierung ist strukturell, nicht stilistisch. Wenn ein Mandat Arbeit aufdeckt, die ein Implementierungsteam erfordert, helfen wir beim Scoping — wir liefern aber nicht aus." },
+  { q: "Arbeiten Sie auch mit Kunden außerhalb der Europäischen Union?", a: "Ja. Unser Sitz ist Zagreb, Kroatien, und die meisten Mandate sind EU-basiert. Wir haben aber mit Kunden in Norwegen, dem Vereinigten Königreich, Deutschland und darüber hinaus gearbeitet. Remote-first; wir reisen für Kickoff- und Final-Readout-Termine, wenn das Mandat es rechtfertigt." },
+  { q: "Auf welche Branchen sind Sie spezialisiert?", a: "Healthcare-IT, Telekommunikation, öffentliche Forschung, industrielles IoT, Energie und Luftfahrt. Die branchenübergreifende Musterbibliothek ist selbst der Wert: Ihr Problem ist häufig in einer angrenzenden Branche bereits gelöst worden." },
+  { q: "Wie schnell können Sie starten?", a: "Wir nehmen ein bis zwei neue Mandate pro Quartal an. Vorlaufzeit liegt üblicherweise bei zwei bis sechs Wochen, abhängig von bestehenden Verpflichtungen." },
+  { q: "Was, wenn Sie zu dem Schluss kommen, dass wir nicht zueinander passen?", a: "Wir sagen es im ersten Gespräch und verweisen, wo möglich, auf jemanden, der besser geeignet ist. Wir nehmen keine Mandate an, bei denen KI, Cloud oder Compliance nicht tatsächlich die richtige Antwort sind." },
+  { q: "Was passiert, wenn Sie während eines Mandats ausfallen?", a: "Jedes Mandat enthält eine ausdrückliche Kontinuitätsklausel. Wenn höhere Gewalt die Fortführung verhindert, wird das bisher entstandene Arbeitsergebnis — jeder Entwurf, jede Zitatquelle, jedes Modell, jede Beweisdatei — innerhalb von fünf Arbeitstagen übergeben, das Mandat wird zu einem anteiligen Honorar geschlossen, und wir liefern eine kurze Übergabe für die Person, die übernimmt. Wir mussten diese Klausel bislang in keinem Mandat aktivieren." },
+  { q: "Können Sie Mitwirkende hinzuziehen, wenn der Umfang mehr als eine Person erfordert?", a: "Ja. Für klar abgegrenzte Teilaufgaben (Sicherheitsarchitekt, Regulatorik-Spezialist, Lokalisierungs-Lead) arbeiten wir mit einem kleinen Kreis namentlich benannter Partner unter Sub-NDA. Der Principal bleibt für alle Lieferobjekte und für die Texte verantwortlich. Die analytische Kernarbeit lagern wir nicht aus." }
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } }))
+};
+---
+<BaseLayout
+  title="Thinking Machine — Übergeben Sie das schwierige Denken"
+  description="Geben Sie uns die schwierige architektonische, kosten- oder Compliance-Frage. Wir hören zu, kartieren, denken nach und liefern eine vorstandsfertige Antwort. Festpreis, entscheidungsreif, 2–4 Wochen. Zwanzig Jahre über sechs Branchen."
+>
+  {/* HERO */}
+  <section class="container-page pt-20 pb-20 md:pt-32 md:pb-28 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-24 -right-24 w-[480px] h-[480px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="98" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="70" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="42" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium anim-fade-up">
+        Thinking Machine d.o.o. · Boutique-Engineering-Beratung
+      </div>
+      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-ink-900 leading-[1.05] tracking-tight max-w-5xl anim-fade-up anim-delay-100">
+        Geben Sie uns die schwierige Frage. Wir kommen mit einer belastbaren Antwort zurück.
+      </h1>
+      <p class="mt-8 text-xl md:text-2xl text-ink-700 font-serif italic max-w-3xl leading-snug anim-fade-up anim-delay-200">
+        Übergeben Sie das Denken. Wir kommen ins Haus, hören sorgfältig zu, kartieren, was tatsächlich vorhanden ist, machen die Analyse und liefern das Dokument, das Ihr Vorstand in fünfzehn Minuten lesen kann.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4 anim-fade-up anim-delay-300">
+        <a href="/contact" class="btn-primary">30-minütiges Erstgespräch buchen</a>
+        <a href="#how" class="btn-secondary">So arbeiten wir →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* SECTOR STRIP */}
+  <section class="border-y border-ink-200 bg-ink-100/40">
+    <div class="container-page py-6 flex flex-wrap items-center gap-x-8 gap-y-3">
+      <span class="text-xs uppercase tracking-wider text-ink-500 font-medium">Über zwanzig Jahre in</span>
+      {sectors.map(s => <span class="text-sm text-ink-700">{s.name}</span>)}
+    </div>
+  </section>
+
+  {/* STATS STRIP */}
+  <section class="container-page py-16 md:py-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      {stats.map(s => (
+        <div class="border-t-2 border-accent-700 pt-5">
+          <div class="stat-numeral">{s.num}</div>
+          <div class="mt-3 text-sm text-ink-700 leading-snug">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* PROCESS */}
+  <section id="how" class="bg-ink-100/50 border-y border-ink-200">
+    <div class="container-page py-20 md:py-24">
+      <div class="max-w-2xl mb-14">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">So arbeiten wir</div>
+        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Aufnehmen. Kartieren. Denken. Liefern.</h2>
+        <p class="mt-5 text-ink-700 text-lg leading-relaxed">
+          Der schwierige Teil ist nicht die Antwort — er besteht darin, herauszufinden, was in Ihrer Organisation tatsächlich der Fall ist, und dann sorgfältig zu überlegen, was zu tun ist. Wir machen beides.
+        </p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-4">
+        {process.map(p => (
+          <div class="bg-white border border-ink-200 border-t-4 border-t-accent-700 p-7 card-lift">
+            <div class="font-serif text-3xl text-accent-700 font-semibold mb-3">{p.n}</div>
+            <h3 class="font-serif text-xl text-ink-900 mb-3 leading-tight">{p.t}</h3>
+            <p class="text-ink-700 text-sm leading-relaxed">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* WHAT WE DO */}
+  <section id="what-we-do" class="container-page py-20 md:py-24">
+    <div class="max-w-2xl mb-14">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Was wir tun</div>
+      <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Drei Spuren. Ein Engagement-Modell.</h2>
+    </div>
+    <div class="grid gap-px bg-ink-200 border border-ink-200 md:grid-cols-3">
+      <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">01 · Cloud</div>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">Cloud-Kosten- & FinOps-Strategie</h3>
+        <p class="text-ink-700 leading-relaxed">
+          Vorstandsfähige Kostenanalysen, verankert in publizierten Frameworks. Triangulierte Baselines, Mehrszenarien-Modellierung von Reserved Instances, anbieterseitige Pricing-Playbooks. Das Dokument, das die Entscheidungsträgerin liest.
+        </p>
+        <a href="/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zu Cloud-Kosten <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+      </article>
+      <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">02 · Cyber</div>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">Cyber-Resilienz, NIS2 & CRA</h3>
+        <p class="text-ink-700 leading-relaxed">
+          Vorbereitung auf den EU Cyber Resilience Act. NIS2-Umsetzung. Azure-native Sicherheitsarchitektur. Strukturierte NFR-Antworten für Beschaffung und vorvertragliche Due Diligence. Audit-belastbare Positionen, keine Meinungen.
+        </p>
+        <a href="/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zur Cyber-Resilienz <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+      </article>
+      <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
+        <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">03 · KI</div>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4 leading-tight">KI-Integration in bestehende Systeme</h3>
+        <p class="text-ink-700 leading-relaxed">
+          MCP-Steuerungsschichten. RAG über Unternehmenswissen. On-Prem-LLM-Infrastruktur für Sektoren mit Datenresidenz-Anforderungen. Wir verbinden moderne Frontier-Modelle mit Ihren bestehenden Systemen — kein All-in-Transformations-Pitch.
+        </p>
+        <a href="/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zur KI-Integration <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+      </article>
+    </div>
+  </section>
+
+  {/* COMPARISON */}
+  <section class="bg-ink-100/50 border-y border-ink-200">
+    <div class="container-page py-20 md:py-24">
+      <div class="max-w-2xl mb-12">
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Warum wir</div>
+        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Ehrlicher Vergleich.</h2>
+        <p class="mt-5 text-ink-700 text-lg leading-relaxed">
+          Wir kennen die Alternativen. Hier passen wir hinein — und hier nicht.
+        </p>
+      </div>
+      <div class="overflow-hidden border border-ink-200 bg-white">
+        <table class="w-full text-sm md:text-base">
+          <thead class="bg-ink-100 text-left">
+            <tr>
+              <th class="font-medium text-ink-700 px-5 md:px-6 py-4 text-xs uppercase tracking-wider">Wenn Sie zu</th>
+              <th class="font-medium text-ink-700 px-5 md:px-6 py-4 text-xs uppercase tracking-wider">Sie bekommen typisch</th>
+              <th class="font-medium text-accent-700 px-5 md:px-6 py-4 text-xs uppercase tracking-wider">Bei uns</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-ink-200">
+            {comparison.map(c => (
+              <tr class="hover:bg-ink-50 transition-colors">
+                <td class="px-5 md:px-6 py-5 align-top font-medium text-ink-900 whitespace-nowrap">{c.who}</td>
+                <td class="px-5 md:px-6 py-5 align-top text-ink-700">{c.they}</td>
+                <td class="px-5 md:px-6 py-5 align-top text-ink-900 font-medium">{c.us}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {/* RECENT WORK */}
+  <section class="container-page py-20 md:py-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Aktuelle Arbeit</div>
+        <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Anonymisierte Fallstudien.</h2>
+      </div>
+      <a href="/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">Alle Mandate ansehen →</a>
+    </div>
+    <p class="text-ink-500 text-sm mb-6">Fallstudien sind derzeit nur in englischer Sprache verfügbar.</p>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {featured.map(study => <CaseStudyCard study={study} />)}
+    </div>
+  </section>
+
+  {/* PULL QUOTE */}
+  <section class="bg-accent-700 text-white">
+    <div class="container-page py-20 md:py-28 max-w-prose">
+      <div class="font-serif text-2xl md:text-4xl leading-[1.25] tracking-tight">
+        Die meisten Beratungs-Mandate sind darauf ausgelegt, sich auszuweiten. Aus Discovery wird Phase 1; aus Phase 1 wird Phase 2; das Honorar läuft. So arbeiten wir nicht.
+      </div>
+      <div class="mt-6 text-sm uppercase tracking-wider opacity-70">Warum Festpreis · <a href="/about" class="no-underline text-white opacity-100 underline-offset-4 underline">Vollständigen About-Text lesen →</a></div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="container-page py-20 md:py-24">
+    <div class="max-w-2xl mb-12">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Häufig gefragt</div>
+      <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Fragen, die Käufer üblicherweise zuerst stellen.</h2>
+    </div>
+    <div class="max-w-3xl divide-y divide-ink-200 border-t border-b border-ink-200">
+      {faqs.map(item => (
+        <details class="group py-6">
+          <summary class="flex items-start justify-between gap-4 cursor-pointer list-none">
+            <h3 class="font-serif text-xl md:text-2xl text-ink-900 leading-snug pr-4">{item.q}</h3>
+            <span class="flex-shrink-0 mt-1 text-accent-700 transition-transform duration-200 group-open:rotate-45 text-2xl leading-none font-light" aria-hidden="true">+</span>
+          </summary>
+          <div class="mt-4 text-ink-700 leading-relaxed max-w-prose">{item.a}</div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  {/* FINAL CTA */}
+  <section class="container-page py-24">
+    <div class="max-w-prose">
+      <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">
+        Geben Sie uns die Frage. Dreißig Minuten, keine Folien, kein Verkaufsgespräch — und eine ehrliche Antwort, ob wir helfen können.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/contact" class="btn-primary">Erstgespräch buchen</a>
+        <a href="/notes" class="btn-secondary">Notizen lesen</a>
+      </div>
+      <p class="mt-8 text-sm text-ink-500">Diese Seite ist die deutsche Übersetzung der englischen Startseite — derzeit als Soft-Launch in Überprüfung. Vollständiges Übersetzungs-Set für Services, About und Contact folgt in Kürze. <a href="/" class="text-accent-700 no-underline">English version →</a></p>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</BaseLayout>
