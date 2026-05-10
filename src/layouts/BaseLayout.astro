@@ -20,7 +20,13 @@ const {
 } = Astro.props;
 
 const fullTitle = title.includes('Thinking Machine') ? title : `${title} — Thinking Machine`;
-const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toString();
+// Strip the .html / index.html suffix that build.format='file' bakes into
+// Astro.url.pathname. The sitemap already serves the clean path; the
+// canonical, og:url, and JSON-LD url need to match the served URL exactly.
+const cleanPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '');
+const canonicalURL = canonical || new URL(cleanPath, Astro.site).toString();
 const siteUrl = Astro.site?.toString() ?? 'https://thinkingmachine.uk/';
 const ogImageURL = new URL(ogImage, Astro.site).toString();
 
