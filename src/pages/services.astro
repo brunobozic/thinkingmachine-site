@@ -60,7 +60,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p>Around the register itself we add a deep-dive for items that do not fit a row, a source-verification log linking each justification to underlying meetings or documents, and a consolidated cost-impact summary that surfaces renegotiation triggers up front rather than mid-procurement.</p>
         <p>We work with Azure-native security stacks (Entra ID, Key Vault, Defender, Purview, Sentinel) but the methodology is platform-agnostic.</p>
         <p>For regulated-sector engagements we have experience with the domain-specific overlays — for healthcare: GDPR Article 9 special-category data handling, EHDS interoperability via HL7 FHIR R4, NIS2 essential-entity classification, MDR / EN 62304 / ISO 14971 readiness for software-as-medical-device adjacencies, ISO 27001 + 27799 ISMS scoping, and the relevant national transpositions (Germany: Gematik TI, BSIG-neu, BSI C5; Netherlands: NEN 7510, NCSC-NL guidelines; Croatia: HZZO, AZOP, eZdravlje). The engagement structure stays the same; the regulatory anchor changes.</p>
-        <p>On the audit and testing side we have experience aligning evidence packs against ISO 27001 (and 27002), ENISA guidance, OWASP (ASVS, MASVS, Top 10), OSSTMM, and the NIS2 risk-management measures catalogue — for buyers whose procurement asks for a specific framework reference. GDPR / national-DPA equivalents (AVG in NL, AZOP in HR, BfDI in DE) anchor the privacy side of the same workpack.</p>
+        <p>On the audit-readiness and testing side we have experience aligning evidence packs against ISO/IEC 27001 (and 27002), ENISA guidance, OWASP (ASVS, MASVS, Top 10 2025), OSSTMM, and the NIS2 risk-management measures catalogue — for buyers whose procurement asks for a specific framework reference. GDPR / national-DPA equivalents (AVG in NL, AZOP in HR, BfDI in DE) anchor the privacy side of the same workpack. We deliver readiness reviews, evidence packs, and remediation plans; formal certification or accredited audit is left to bodies that hold the relevant accreditation.</p>
         <h3>What we do not deliver</h3>
         <p>We do not conduct penetration tests or security audits. We do not sit on your CSIRT. We do not write your ISO 27001 policies from scratch.</p>
         <h3>Recent example</h3>
@@ -311,6 +311,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h3 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight">Other shapes we have run when the engagement called for it.</h3>
     </div>
     <div class="grid gap-6 md:grid-cols-2">
+      <div class="border border-ink-200 bg-white p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2 font-medium">Database performance</div>
+        <h4 class="font-serif text-xl text-ink-900 mb-3">SQL Server · PostgreSQL · Oracle rescue</h4>
+        <p class="text-ink-700 text-sm leading-relaxed">Slow databases are rarely fixed by adding hardware alone. Stored-procedure archaeology, execution-plan analysis, indexing strategy, locking / blocking / deadlock investigation, high-ingestion telemetry data design, read-replica and sharding architecture review. Typical output: a ranked list of bottlenecks with safe remediation steps and before/after benchmarks.</p>
+      </div>
+      <div class="border border-ink-200 bg-white p-7">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2 font-medium">Legacy modernisation</div>
+        <h4 class="font-serif text-xl text-ink-900 mb-3">VB6 · Classic ASP · WebForms · old SQL</h4>
+        <p class="text-ink-700 text-sm leading-relaxed">For business-critical applications where the logic lives in old code, stored procedures, and undocumented integrations. Strangler-Fig sequencing, dependency mapping, business-rules-hidden-in-SQL inventory, target-architecture proposal, risk-and-cost estimate. Combines naturally with the AI lane (LLM-assisted code understanding) and the database lane above.</p>
+      </div>
       <div class="border border-ink-200 bg-white p-7">
         <div class="text-xs uppercase tracking-wider text-ink-500 mb-2 font-medium">Interim leadership</div>
         <h4 class="font-serif text-xl text-ink-900 mb-3">Interim team-lead or functional manager</h4>
