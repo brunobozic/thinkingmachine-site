@@ -13,7 +13,7 @@ featured: true
 
 ## Context
 
-The EU Cyber Resilience Act (Regulation 2024/2847) imposes obligations on every economic operator placing products with digital elements on the EU market. The cliff dates above set the operational deadlines; what makes this engagement non-trivial is the regulatory geometry of the organisation underneath them.
+The EU Cyber Resilience Act (Regulation 2024/2847) imposes obligations on every economic operator placing products with digital elements on the EU market. The cliff dates above set the operational deadlines; the official implementation timeline and standardisation requests are tracked on the [European Commission's CRA Implementation page](https://digital-strategy.ec.europa.eu/en/factpages/cyber-resilience-act-implementation). What makes this engagement non-trivial is the regulatory geometry of the organisation underneath those dates.
 
 The organisation in this body of work carried a hybrid regulatory posture: **manufacturer** in CRA terms for its own software stack (edge runtime, container images, cloud back-office, mobile app), **operator/distributor** for the vendor hardware it integrates. Layered on top: the German national NIS2 transposition (BSIG-neu, in force 6 December 2025) created a parallel reporting obligation as a (besonders) wichtige Einrichtung, with its own clocks under § 32. A downstream-customer cascade introduced supply-chain liability from Article 21(2) NIS2.
 
