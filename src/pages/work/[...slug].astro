@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CRARegulatoryClock from '../../components/CRARegulatoryClock.astro';
+import SupplyChainCaseStudyCharts from '../../components/SupplyChainCaseStudyCharts.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -20,6 +21,7 @@ const { title, sector, engagementType, year, region, summary } = study.data;
 // data visualisations from the layout where the data has structure worth
 // showing.
 const isCRA = study.slug === 'cra-readiness-eu-manufacturer';
+const isSupplyChain = study.slug === 'supply-chain-iac-saas-platform';
 ---
 <BaseLayout
   title={`${title} — Thinking Machine`}
@@ -59,6 +61,12 @@ const isCRA = study.slug === 'cra-readiness-eu-manufacturer';
     {isCRA && (
       <div class="max-w-4xl mx-auto mb-12">
         <CRARegulatoryClock />
+      </div>
+    )}
+
+    {isSupplyChain && (
+      <div class="max-w-4xl mx-auto mb-12">
+        <SupplyChainCaseStudyCharts />
       </div>
     )}
 
