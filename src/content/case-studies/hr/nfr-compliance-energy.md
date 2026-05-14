@@ -5,6 +5,14 @@ engagementType: "Pred-ugovorna dubinska analiza — strukturirani NFR odgovor"
 year: "2026"
 region: "Sjeverna Europa"
 summary: "Multidomenska NFR matrica iz enterprise nabavnog tima — otprilike pedeset stavki kroz sigurnost i podatkovnu arhitekturu — zahtijevala je strukturirani odgovor koji bi preživio nabavni pregled. Proizveli smo registar sukladnosti, detaljni list za teške stavke i log provjere izvora."
+quickRead: |
+  Nabavni tim tier-1 europskog energetskog operatora izdao je multidomensku NFR matricu — **otprilike pedeset stavki kroz četiri domene** (cyber sigurnost, podatkovna arhitektura, tehnička arhitektura, kontinuitet poslovanja / DR) — kao dio pred-ugovorne dubinske analize za odnos sa softverskim pružateljem. Pružatelj je imao radni proizvod i Azure-native sigurnosni stack. Što mu je trebalo bio je strukturirani odgovor koji bi preživio nabavni pregled — redak po redak, s dokazima — unutar fiksnog vremenskog okvira.
+
+  Radili smo u strukturi koju je nabavni tim nametnuo i dodali strukturu koju nije.
+
+  Sam **registar sukladnosti** tekao je s jednim retkom po zahtjevu, sa stupcima za status sukladnosti (compliant / partial / non-compliant / desirable), obrazloženje, izvor/referencu dokaza, potrebnu akciju, procjenu utjecaja troška i vremenski okvir. Oko njega dodali smo tri strukturna artefakta koje izvorni katalog nije tražio: **detaljnu analizu "teških stavki"** (sedam stavki koje su zahtijevale više od retka u registru, svaka s vlastitom narativnom stranicom), **log provjere izvora** (~30 unosa koji vežu svako obrazloženje na specifične sastanke, emailove ili dizajn dokumente — pretvara tvrdnje *u skladu smo s X* u auditabilno podrijetlo), i **sažetak utjecaja troška** (konsolidirani pogled na implikacije troška kroz sve djelomične i non-compliant stavke, iznosi okidače za ponovno pregovaranje unaprijed umjesto usred nabave).
+
+  Ishod: pružatelj je ušao u nabavni pregled sa strukturiranim odgovorom koji je dokumentirao sukladnost, dokaze i troškove jaza u istom artefaktu, te **prešao u komercijalno zatvaranje bez dodatne NFR runde** — detaljna analiza *teških stavki* odgovorila je unaprijed na pitanja koja bi neprijateljsko nabavno čitanje postavilo, a sažetak utjecaja troška iznio okidače za ponovno pregovaranje prije nego što su postali ponovno pregovaranje. Pet otvorenih pojašnjenja na strani klijenta vraćeno je arhitekturalnom timu klijenta kao dio odgovora, skraćujući njihov interni ciklus pregleda.
 publishedAt: "2026-05-09"
 featured: true
 ---

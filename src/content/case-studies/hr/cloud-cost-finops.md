@@ -5,6 +5,14 @@ engagementType: "Savjetodavni mandat fiksnog opsega od 40 sati"
 year: "2026"
 region: "Sjeverna Europa"
 summary: "Pružatelj koji je pripremao ponudu za cloud-managed SaaS aranžman tier-1 enterprise klijentu trebao je obranjiv model cijene po instalaciji — bez pristupa baznoj liniji postojećeg davatelja hostinga. Isporučili smo trianguliranu baznu liniju, playbook za cijene u više scenarija i kalkulator za klijenta."
+quickRead: |
+  Pružatelj industrijskog softvera s više instalacija pripremao je ponudu za cloud-managed SaaS aranžman s tier-1 enterprise klijentom. Komercijalno pitanje je djelovalo jednostavno: *koliko naplaćivati po instalaciji mjesečno?* — ali postojeća bazna linija hostinga bila je netransparentna (partner za upravljane usluge odbio je objaviti račune), dimenzioniranje workloada nesigurno (dostupna samo smanjena testna okolina), a posao je nosio ne-troškovna razmatranja koja su morala stajati uz cifru troška, ne iza nje.
+
+  U četrdesetsatnom mandatu fiksnog opsega kroz otprilike četiri tjedna isporučili smo paket odluke za upravu: **trianguliranu baznu liniju** izgrađenu iz verificiranih javnih cloud cijena × tipičnih raspona partnerske marže (tehnika koja omogućuje obranjivu cifru troška kada računi nisu dostupni), **9 + 4 matricu scenarija** (tri cloud puta × tri razine obveze, plus četiri isključena scenarija dokumentirana radi potpunosti), **playbook cijena** modeliran na tri razine marže i dvije postavke osoblja, **kalkulator za klijenta** koji je kupac mogao sam popuniti, i **NFR sukladnosti scoreboard** prema postojećoj nabavnoj matrici kupca.
+
+  Dodatno smo identificirali **bestroškovni SQL konfiguracijski popravak** u testnoj okolini — postavku vezanu uz paralelizam koja je tjerala prividnu potrebu za upgradeom razine — koji sam po sebi preokvirivi cijeli razgovor o dimenzioniranju. Označen je kao prva akcijska stavka u isporuci, a ne sakriven u dodatku.
+
+  Pružatelj je ušao u sljedeći sastanak s klijentom s obranjivim modelom cijene po instalaciji, čistim razdvajanjem između komercijalne cijene i infrastrukturnog troška te kalkulatorom koji je klijent mogao sam pokrenuti. Pitanje *Postoji li marža uopće?* — prije neodgovorivo — preokvireno je kao razgovor o SaaS premiji potkrijepljen kvantificiranom baznom linijom.
 publishedAt: "2026-05-09"
 featured: true
 ---

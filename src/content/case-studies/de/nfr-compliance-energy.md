@@ -5,6 +5,14 @@ engagementType: "Vor-Vertrag-Due-Diligence — strukturierte NFR-Antwort"
 year: "2026"
 region: "Nordeuropa"
 summary: "Eine multi-domänen NFR-Matrix eines Enterprise-Beschaffungsteams — rund fünfzig Punkte über Sicherheit und Datenarchitektur — erforderte eine strukturierte Antwort, die einer Beschaffungs-Prüfung standhielt. Wir produzierten das Compliance-Register, ein Vertiefungsblatt für die schwierigen Punkte und ein Quellen-Verifikations-Log."
+quickRead: |
+  Das Beschaffungsteam eines Tier-1-europäischen Energieanbieters hatte eine multi-domänen NFR-Matrix herausgegeben — **rund fünfzig Punkte über vier Domänen** (Cyber-Sicherheit, Datenarchitektur, technische Architektur, Business Continuity / DR) — als Teil der Vor-Vertrag-Due-Diligence für eine Software-Anbieter-Beziehung. Der Anbieter hatte ein funktionierendes Produkt und einen Azure-nativen Sicherheits-Stack. Was er benötigte, war eine strukturierte Antwort, die einer Beschaffungs-Prüfung standhielt — Zeile für Zeile, mit Evidenz — innerhalb eines festen Fensters.
+
+  Wir arbeiteten in der Struktur, die das Beschaffungsteam vorgab, und ergänzten die Struktur, die es nicht vorgab.
+
+  Das **Compliance-Register** selbst lief mit einer Zeile pro Anforderung, mit Spalten für Compliance-Status (compliant / partial / non-compliant / desirable), Begründung, Quelle/Beweisreferenz, erforderliche Maßnahme, Kostenwirkungs-Schätzung und Zeitplan. Um es herum ergänzten wir drei strukturelle Artefakte, die der ursprüngliche Katalog nicht angefordert hatte: eine **"schwierige Punkte"-Vertiefung** (sieben Punkte, die mehr als eine Registerzeile erforderten, jeder mit eigener narrativer Seite), ein **Quellen-Verifikations-Log** (~30 Einträge, die jede Begründung mit spezifischen Meetings, E-Mails oder Design-Dokumenten verknüpfen — wandelt *wir erfüllen X*-Behauptungen in auditierbare Provenienz um), und eine **Kostenwirkungs-Zusammenfassung** (konsolidierte Sicht der Kosten-Implikationen über alle partiellen und non-compliant Punkte, legt Nachverhandlungs-Auslöser im Voraus offen statt mitten in der Beschaffung).
+
+  Ergebnis: Der Anbieter trat in die Beschaffungs-Prüfung mit einer strukturierten Antwort ein, die Compliance, Evidenz und Lücken-Kosten im selben Artefakt dokumentierte, und **ging in den kommerziellen Abschluss ohne eine zusätzliche NFR-Runde** — die *schwierigen Punkte*-Vertiefung beantwortete im Voraus die Fragen, die eine feindliche Beschaffungs-Lesung gestellt hätte, und die Kostenwirkungs-Zusammenfassung legte Nachverhandlungs-Auslöser offen, bevor sie zu Nachverhandlung wurden. Fünf offene kunden-seitige Klärungen wurden an das Architektur-Team des Kunden als Teil der Antwort zurückgeleitet, was ihren internen Review-Zyklus verkürzte.
 publishedAt: "2026-05-09"
 featured: true
 ---

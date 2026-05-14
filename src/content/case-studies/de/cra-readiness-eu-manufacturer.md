@@ -5,6 +5,14 @@ engagementType: "Angewandte Vorbereitungsarbeit · anonymisierte interne Referen
 year: "2026"
 region: "Europäische Union"
 summary: "Angewandte Vorbereitungsarbeit für CRA-Cliff-1 (September 2026) bei einem EU-Hersteller-Betreiber vernetzter Produkte. Rund 240 Seiten Audit-belastbarer Evidenz über 13 Dokumente — Checklisten, Briefings, der Artikel-14-Runbook, die RACI, der Ausführungsplan — verankert an einer Fünf-Pass-Verbatim-Verifikation des Amtsblatts. Veröffentlicht als Methodik-Referenz; Kunde nicht identifiziert."
+quickRead: |
+  Ein EU-Hersteller-Betreiber vernetzter Produkte stand vor CRA Cliff 1 (11. September 2026) mit dem klassischen Compound-Problem: **hybride regulatorische Position** (Hersteller im CRA-Sinne für den eigenen Software-Stack, Betreiber/Distributor für die integrierte Hersteller-Hardware), **deutsche nationale NIS2-Umsetzung** darüber gelegt (BSIG-neu, in Kraft 6. Dezember 2025, mit eigenen Uhren unter § 32), und eine **Lieferketten-Haftungskaskade** aus NIS2 Artikel 21(2). Ausgangslage: schwach, aber noch nicht im Verstoß. Keine SBOM. Kein Firmware-Inventar. Kein Artikel-14-Runbook. Das Engineering-Team hatte keine dedizierte Cybersecurity-Stelle. Die Fristen bewegen sich nicht.
+
+  Der Methodik-Anker: **Fünf-Pass-Verbatim-Verifikation** gegen den Amtsblatt-Text von EU-Verordnung 2024/2847 (Artikel 13, 14, 16, 22, 28, 31, 64, 69 plus Anhang I Teile I und II, Anhänge II, III, VII), Richtlinie (EU) 2022/2555 NIS2 und das deutsche BSIG-neu (§§ 30, 32, 33, 38, 65). Jede tragende Behauptung verbatim zitiert. Jeder Befund mit Verifikations-Status getaggt. Jedes Dokument durch eine Querverweis-Matrix propagiert, die als interner Audit-Trail fungiert.
+
+  Lieferung: rund **240 Seiten Audit-belastbarer Evidenz über dreizehn primäre Dokumente und vier Annexe** — Master-Compliance-Checkliste, Audit-Bereitschafts-Vertiefung, Ausführungs-Zeitleiste (Woche-für-Woche bis Cliff 1, monatlich bis Cliff 2), Gap-Analyse mit **fünfzehn benannten Bedrohungs-Szenarien**, Research-Update, Erste-30-Tage-Allein (Sole-Engineer-Priorisierung), Executive Briefing (16 Slides, drei Zahlen, drei Staffing-Optionen), Tech-Coordination-Deck (~19 Slides), der Artikel-14 / § 32 BSIG Runbook mit **vier vor-entworfenen Meldungs-Templates** (24h / 72h / 14d / 30d), eine einseitige RACI, ein Konsolidierter-Befunde-Annex, ein Operator's Playbook, plus das README/Index.
+
+  Netto-Effekt: bis Cliff 1 kann der Betreiber dieses Evidenz-Paket einer Benannten Stelle oder dem Regulierer ohne Vorbereitungs-Lücken vorlegen. Die "schwach, aber noch nicht im Verstoß"-Ausgangslage hat einen dokumentierten Pfad zu "Audit-belastbar".
 publishedAt: "2026-05-09"
 featured: true
 ---

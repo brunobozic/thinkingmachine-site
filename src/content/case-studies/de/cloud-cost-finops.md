@@ -5,6 +5,14 @@ engagementType: "40-Stunden festpreisige Beratung"
 year: "2026"
 region: "Nordeuropa"
 summary: "Ein Anbieter, der ein Cloud-managed SaaS-Angebot für einen Tier-1-Enterprise-Kunden kalkulierte, benötigte ein belastbares Pro-Installations-Preismodell — ohne Zugang zur Hosting-Baseline des bestehenden Anbieters. Wir lieferten eine triangulierte Baseline, ein Mehrszenarien-Pricing-Playbook und einen kundenseitigen Kostenrechner."
+quickRead: |
+  Ein Multi-Installations-Anbieter industrieller Software bereitete ein Cloud-managed SaaS-Angebot für einen Tier-1-Enterprise-Kunden vor. Die kommerzielle Frage war scheinbar einfach: *Was sollen wir pro Installation pro Monat berechnen?* — aber die bestehende Hosting-Baseline war intransparent (der Managed-Services-Partner hatte sich geweigert, Rechnungen freizugeben), das Workload-Sizing war unsicher (nur eine verkleinerte Testumgebung war verfügbar), und der Deal trug Nicht-Kosten-Überlegungen, die neben der Kostenzahl stehen mussten, nicht dahinter.
+
+  In einem vierzig-Stunden festpreisigen Mandat über etwa vier Wochen lieferten wir ein vorstandsfähiges Entscheidungs-Paket: eine **triangulierte Baseline**, konstruiert aus verifizierten öffentlichen Cloud-Listenpreisen × typischen Partner-Margen-Bändern (die Technik, die eine belastbare Kostenzahl ermöglicht, wenn Rechnungen nicht verfügbar sind), eine **9 + 4 Szenario-Matrix** (drei Cloud-Pfade × drei Bindungsstufen, plus vier ausgeschlossene Szenarien zur Vollständigkeit dokumentiert), ein **Pricing-Playbook**, modelliert auf drei Margen-Niveaus und zwei Personal-Aufstellungen, einen **kundenseitigen Rechner**, den der Käufer selbst befüllen konnte, und ein **NFR-Compliance-Scoreboard** gegen den bestehenden Beschaffungs-Katalog des Kunden.
+
+  Zusätzlich identifizierten wir einen **kostenfreien SQL-Konfigurations-Fix** auf der Testumgebung — eine parallelitäts-bezogene Einstellung, die einen scheinbaren Bedarf nach Tier-Upgrade trieb — der für sich allein die gesamte Sizing-Konversation umrahmt. Er wurde als erster Aktionspunkt im Lieferobjekt markiert, nicht im Anhang vergraben.
+
+  Der Anbieter ging in das nächste Kunden-Meeting mit einem belastbaren Pro-Installations-Preismodell, einer sauberen Trennung zwischen kommerziellem Preis und Infrastruktur-Kosten, und einem Rechner, den der Kunde selbst ausführen konnte. Die Frage *Gibt es überhaupt eine Marge?* — zuvor unbeantwortbar — wurde als SaaS-Premium-Konversation umrahmt, gestützt durch eine quantifizierte Baseline.
 publishedAt: "2026-05-09"
 featured: true
 ---

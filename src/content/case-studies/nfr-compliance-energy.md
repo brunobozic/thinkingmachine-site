@@ -5,6 +5,14 @@ engagementType: "Pre-contract due diligence — structured NFR response"
 year: "2026"
 region: "Northern Europe"
 summary: "A multi-domain NFR matrix from an enterprise procurement team — roughly fifty line items across security and data architecture — required a structured response that would survive procurement review. We produced the compliance register, a deep-dive sheet for the difficult items, and a source-verification log."
+quickRead: |
+  A tier-1 European energy operator's procurement team had issued a multi-domain non-functional-requirement matrix — **roughly fifty line items across four domains** (cyber security, data architecture, technical architecture, business continuity / DR) — as part of pre-contract due diligence for a software vendor relationship. The vendor had a working product and an Azure-native security stack. What it needed was a structured response that would survive procurement review — line by line, with evidence — within a fixed window.
+
+  We worked in the structure the procurement team imposed and added the structure they did not.
+
+  The **compliance register** itself ran one row per requirement, with columns for compliance status (compliant / partial / non-compliant / desirable), justification, source/evidence reference, action required, cost-impact estimate, and timeline. Around it we added three structural artifacts the original catalog had not asked for: a **"difficult items" deep-dive** (seven line items that required more than a register row, each with its own narrative page), a **source-verification log** (~30 entries linking each justification to specific meetings, emails, or design documents — converting *we comply with X* claims into auditable provenance), and a **cost-impact summary** (consolidated view of cost implications across all partial and non-compliant items, surfacing renegotiation triggers up front rather than mid-procurement).
+
+  Outcome: the vendor entered the procurement review with a structured response that documented compliance, evidence, and gap costs in the same artifact, and **moved into commercial close without an additional NFR round** — the *difficult items* deep-dive answered, in advance, the questions a hostile procurement read would have asked, and the cost-impact summary surfaced renegotiation triggers before they became renegotiation. Five open customer-side clarifications were relayed back to the customer's architecture team as part of the response, shortening their internal review cycle.
 publishedAt: "2026-05-09"
 featured: true
 ---
