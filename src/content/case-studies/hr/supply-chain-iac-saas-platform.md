@@ -38,7 +38,7 @@ Mandat je obuhvatio **četiri međusobno povezana repozitorija**, s otprilike st
 
 Otprilike 30% mandata bilo je koncentrirano ovdje. Cilj je bio operativno jednostavan i regulatorno značajan: **nijedan paket treće strane ne dolazi do tenant builda bez dokumentirane evaluacije prije integracije** prema cyber-sigurnosnim kontrolama koje su sada kodificirane kroz EU regulativu za medicinski softver, NIS2 opskrbni lanac i obveze proizvođača iz CRA.
 
-Arhitektura je workflow, ne samo statička lista registrija. Svaki kanal artefakata koji je platforma konzumirala — PHP paketi preko Composera, JavaScript paketi preko npm-a, SQL promjene sheme, container slike — prolazio je kroz ista četverostuka ulazna vrata prije nego što ih je developer mogao riješiti:
+Arhitektura je workflow, ne samo statička lista registrija. Svaki kanal artefakata koji je platforma konzumirala — PHP paketi preko Composera, JavaScript paketi preko npm-a, SQL promjene sheme, container slike — prolazio je kroz ista četverostruka ulazna vrata prije nego što ih je developer mogao riješiti:
 
 1. **Zahtjev.** Developer traži novi paket treće strane, navodeći ime, traženu verziju i namjenu unutar tenant builda.
 2. **Statička analiza.** Kandidatski paket povlači se u izolirani runner. Composition skeniranje pobrojava tranzitne ovisnosti i inventar licenci. Inventar licenci uspoređuje se s operatorovom listom dopuštenih licenci. Signali na razini koda pregledavaju se na očite nesigurne uzorke (`eval`, dinamičko izvršavanje, shell-out, build-time post-install hookove koji dosežu mrežu).
@@ -73,4 +73,4 @@ Formalnu SBOM cijev koja emitira SPDX / CycloneDX (mandat za format SBOM-a datir
 
 ## Oblik rada
 
-Sole-principal mandat kroz nekoliko mjeseci, vodeći rad u koordinaciji s malim internim timom operatora. **Otprilike 178 commitova kroz četiri repozitorija** kao vidljiv trag: orkestracijska IaC, produkcijski nginx reverse proxy, PostgreSQL container base image i feature branch analitičkog stacka. Plus četverostuka ulazna vrata opskrbnog lanca i provizioniranje analitičkog stacka. Cijelo vrijeme povjerljivo; ova stranica je jedina anonimizirana referenca.
+Sole-principal mandat kroz nekoliko mjeseci, vodeći rad u koordinaciji s malim internim timom operatora. **Otprilike 178 commitova kroz četiri repozitorija** kao vidljiv trag: orkestracijska IaC, produkcijski nginx reverse proxy, PostgreSQL container base image i feature branch analitičkog stacka. Plus četverostruka ulazna vrata opskrbnog lanca i provizioniranje analitičkog stacka. Cijelo vrijeme povjerljivo; ova stranica je jedina anonimizirana referenca.
