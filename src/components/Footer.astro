@@ -5,7 +5,12 @@ const year = new Date().getFullYear();
 
 // Detect the current locale from the URL path so the footer can produce
 // locale-correct hrefs and labels without each parent passing it in.
-const segs = Astro.url.pathname.replace(/^\//, '').split('/');
+// Astro.url.pathname can carry a '.html' / '/index.html' suffix when
+// build.format='file' — strip it first, then split.
+const cleanPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '');
+const segs = cleanPath.replace(/^\//, '').split('/');
 const currentLocale: Locale = (SUPPORTED_LOCALES as readonly string[]).includes(segs[0])
   ? (segs[0] as Locale)
   : 'en';
