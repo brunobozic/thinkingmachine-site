@@ -75,7 +75,7 @@ const numbersStrip = getNumbersStrip(bareSlug, 'de');
               .replace(/&/g, '&amp;')
               .replace(/</g, '&lt;')
               .replace(/>/g, '&gt;')
-              .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+              .replace(/\*\*([^\n]+?)\*\*/g, '<strong>$1</strong>')
               .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
             return `<p>${html}</p>`;
           }).join('')} />
