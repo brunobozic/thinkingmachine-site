@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import { getCollection } from 'astro:content';
 
-const allStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+const allStudies = await getCollection('case-studies', ({ slug, data }) => slug.startsWith('de/') && !data.draft);
 const featured = allStudies
   .filter(s => s.data.featured)
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
@@ -87,7 +87,7 @@ const faqJsonLd = {
         Übergeben Sie das Denken. Wir kommen ins Haus, hören sorgfältig zu, kartieren, was tatsächlich vorhanden ist, machen die Analyse und liefern das Dokument, das Ihr Vorstand in fünfzehn Minuten lesen kann.
       </p>
       <div class="mt-10 flex flex-wrap gap-4 anim-fade-up anim-delay-300">
-        <a href="/contact" class="btn-primary">30-minütiges Erstgespräch buchen</a>
+        <a href="/de/contact" class="btn-primary">30-minütiges Erstgespräch buchen</a>
         <a href="#how" class="btn-secondary">So arbeiten wir →</a>
       </div>
     </div>
@@ -148,7 +148,7 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           Vorstandsfähige Kostenanalysen, verankert in publizierten Frameworks. Triangulierte Baselines, Mehrszenarien-Modellierung von Reserved Instances, anbieterseitige Pricing-Playbooks. Das Dokument, das die Entscheidungsträgerin liest.
         </p>
-        <a href="/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zu Cloud-Kosten <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+        <a href="/de/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zu Cloud-Kosten <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">02 · Cyber</div>
@@ -156,7 +156,7 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           Vorbereitung auf den EU Cyber Resilience Act. NIS2-Umsetzung. Azure-native Sicherheitsarchitektur. Strukturierte NFR-Antworten für Beschaffung und vorvertragliche Due Diligence. Audit-belastbare Positionen, keine Meinungen.
         </p>
-        <a href="/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zur Cyber-Resilienz <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+        <a href="/de/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zur Cyber-Resilienz <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">03 · KI</div>
@@ -164,7 +164,7 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           MCP-Steuerungsschichten. RAG über Unternehmenswissen. On-Prem-LLM-Infrastruktur für Sektoren mit Datenresidenz-Anforderungen. Wir verbinden moderne Frontier-Modelle mit Ihren bestehenden Systemen — kein All-in-Transformations-Pitch.
         </p>
-        <a href="/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zur KI-Integration <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+        <a href="/de/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Mehr zur KI-Integration <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
     </div>
   </section>
@@ -209,11 +209,11 @@ const faqJsonLd = {
         <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Aktuelle Arbeit</div>
         <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Anonymisierte Fallstudien.</h2>
       </div>
-      <a href="/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">Alle Mandate ansehen →</a>
+      <a href="/de/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">Alle Mandate ansehen →</a>
     </div>
     <p class="text-ink-500 text-sm mb-6">Fallstudien sind derzeit nur in englischer Sprache verfügbar.</p>
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {featured.map(study => <CaseStudyCard study={study} />)}
+      {featured.map(study => <CaseStudyCard study={study} locale="de" />)}
     </div>
   </section>
 
@@ -223,7 +223,7 @@ const faqJsonLd = {
       <div class="font-serif text-2xl md:text-4xl leading-[1.25] tracking-tight">
         Die meisten Beratungs-Mandate sind darauf ausgelegt, sich auszuweiten. Aus Discovery wird Phase 1; aus Phase 1 wird Phase 2; das Honorar läuft. So arbeiten wir nicht.
       </div>
-      <div class="mt-6 text-sm uppercase tracking-wider opacity-70">Warum Festpreis · <a href="/about" class="no-underline text-white opacity-100 underline-offset-4 underline">Vollständigen About-Text lesen →</a></div>
+      <div class="mt-6 text-sm uppercase tracking-wider opacity-70">Warum Festpreis · <a href="/de/about" class="no-underline text-white opacity-100 underline-offset-4 underline">Vollständigen About-Text lesen →</a></div>
     </div>
   </section>
 
@@ -253,7 +253,7 @@ const faqJsonLd = {
         Geben Sie uns die Frage. Dreißig Minuten, keine Folien, kein Verkaufsgespräch — und eine ehrliche Antwort, ob wir helfen können.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
-        <a href="/contact" class="btn-primary">Erstgespräch buchen</a>
+        <a href="/de/contact" class="btn-primary">Erstgespräch buchen</a>
         <a href="/notes" class="btn-secondary">Notizen lesen</a>
       </div>
       <p class="mt-8 text-sm text-ink-500">Diese Seite ist die deutsche Übersetzung der englischen Startseite — derzeit als Soft-Launch in Überprüfung. Vollständiges Übersetzungs-Set für Services, About und Contact folgt in Kürze. <a href="/" class="text-accent-700 no-underline">English version →</a></p>

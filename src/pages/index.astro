@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import { getCollection } from 'astro:content';
 
-const allStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+const allStudies = await getCollection('case-studies', ({ slug, data }) => !slug.startsWith('de/') && !slug.startsWith('hr/') && !data.draft);
 const featured = allStudies
   .filter(s => s.data.featured)
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
