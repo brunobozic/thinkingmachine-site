@@ -5,6 +5,15 @@ engagementType: "Architecture design & technology selection · anonymised intern
 year: "2026"
 region: "European Union"
 summary: "Designed and specified a self-hosted, EU-only video-consultation platform purpose-built for clinical mental-health consultations. Edge-ML architecture — face-mesh extraction, noise cancellation, ROI encoding, and adaptive framerate all run on the client; the server is a smart switch. Made the deliberate architectural choice not to do emotion recognition, despite the EU AI Act's medical exemption permitting it, because the clinical evidence does not support reliable emotion inference from facial expression. A six-dimension cost-and-quality framework (CPU, RAM, storage, bandwidth, clinical quality, network resilience) applied across codec, recording, transcription, and storage tiering achieves an end-to-end **98% storage reduction** at the cold tier — €2,190/month down to €45–55/month at 500 sessions/day. Per-session AES-256-GCM keys from HashiCorp Vault, crypto-shredding for GDPR Article 9 right-to-erasure in under 24 hours."
+quickRead: |
+  An EU mental-health services provider needed a self-hosted, EU-only video-consultation platform that would (a) deliver measurably better signal for the channels clinicians actually use — facial micro-expressions and vocal tonality — than Zoom or Teams can at the same bandwidth, (b) handle face-mesh data as the GDPR Article 9 biometric data it is, and (c) stay clear of the EU AI Act's high-risk classification for emotion-recognition systems.
+
+  The architecture's organising principle is **"client works, server forwards"** — all ML (face-mesh extraction, noise cancellation, ROI encoding, adaptive framerate) runs on the client device; the server is a smart switch. The result: server CPU stays under 15% even at full capacity, marginal cost of higher quality is zero, and the platform delivers a ~2.5× sharper face region at the same total bitrate, 96 kbps Opus audio (3× Zoom's default), and ~50% storage reduction via composite recording — stacking to a cumulative 98% storage reduction at the cold tier across the full codec + composite + face-mesh + retention pipeline. €2,190/month down to €45–55/month at 500 sessions/day.
+
+  **The distinctive architectural decision: deliberately *not* doing emotion recognition.** The EU AI Act (Article 5(1)(f)) prohibits emotion recognition in workplace and education contexts but exempts medical purposes. We chose not to use the medical exemption, anchored on Lisa Feldman Barrett's 2019 meta-analysis of 1,000+ studies showing facial expression does not reliably infer emotion. The platform measures *movement*, not emotion. Zero emotion labels, zero confidence scores, zero temporal-emotion graphs. The system never tells a clinician what a patient is feeling.
+
+  Implemented as architecture specification + technology selection — ready for staged implementation, justified at the level a regulator or notified body could audit.
+
 publishedAt: "2026-05-14"
 featured: true
 ---

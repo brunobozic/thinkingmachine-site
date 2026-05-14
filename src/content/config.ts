@@ -9,6 +9,7 @@ const caseStudies = defineCollection({
     year: z.string(),
     region: z.string(),
     summary: z.string(),
+    quickRead: z.string().optional(),
     publishedAt: z.string().optional(),
     featured: z.boolean().default(true),
     draft: z.boolean().default(false)
@@ -20,6 +21,7 @@ const notes = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    quickRead: z.string().optional(),
     publishedAt: z.string(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false)
