@@ -24,7 +24,7 @@ A few patterns directly transferable from the energy NFR practice we wrote about
 The healthcare-specific layer that energy doesn't have:
 
 - **GDPR Article 9 (special-category data)** is a structurally different obligation from the GDPR baseline most vendors think they understand. Health data needs an explicit legal basis under Article 9(2), usually patient consent or healthcare-provision necessity, and the lawful-basis assertion has to survive an audit.
-- **EHDS** (the European Health Data Space, Regulation 2025/...) layers an interoperability obligation on top — HL7 FHIR R4 capability becomes the lingua franca, and primary-use vs secondary-use data flows have to be cleanly separated.
+- **EHDS** (the European Health Data Space Regulation) layers an interoperability obligation on top — HL7 FHIR R4 capability becomes the lingua franca, and primary-use vs secondary-use data flows have to be cleanly separated.
 - **NIS2 essential-entity classification** applies to most healthcare providers and to some software vendors that supply them, which means Article 14-style reporting clocks (24h / 72h / 14d) are in scope.
 - **MDR / EN 62304 / ISO 14971** apply if any part of the product makes a clinical decision, which is a line many digital-health products don't realise they crossed.
 - **ISO 27001 + 27799** is the right ISMS scoping pair. A healthcare-IT vendor with ISO 27001 alone but no 27799 reads as half-cooked to a hospital security architect.
