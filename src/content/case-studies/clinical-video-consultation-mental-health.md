@@ -108,7 +108,7 @@ Cumulative effect: a 50-minute session that would be 4+ GB uncompressed lands at
 
 ### Network resilience — degradation that the patient does not notice
 
-Therapy patients are not always on fibre. The platform's resilience stack:
+Patients connect from variable bandwidth conditions. The platform's resilience stack:
 
 - **Five-tier audio degradation ladder**: Opus 96 kbps + RED (clinical-grade) → 64 kbps + FEC → 32 kbps → 16 kbps → Lyra V2 at 6 kbps (neural codec, intelligible at near-2G speeds). The handover is automatic, driven by the negotiated bandwidth estimate, and the patient does not see a quality dialog.
 - **Predictive ICE restart** for network transitions (Wi-Fi → mobile data, etc.): gap drops from the 4–7 second reactive default to under 500 ms.

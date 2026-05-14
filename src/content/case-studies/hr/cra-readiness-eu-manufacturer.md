@@ -17,13 +17,13 @@ EU Cyber Resilience Act (Uredba 2024/2847) nameće obveze svakom ekonomskom oper
 
 Organizacija u ovom korpusu nosila je hibridnu regulatornu poziciju: **proizvođač** u CRA smislu za svoj vlastiti softverski stack (rub runtime, container slike, cloud back-office, mobilna aplikacija), **operator/distributer** za hardver dobavljača koji integrira. Sloj iznad: njemačka nacionalna transpozicija NIS2 (BSIG-neu, na snazi 6. prosinca 2025.) stvorila je paralelnu obvezu prijavljivanja kao (posebno) značajan subjekt, s vlastitim satovima prema § 32. Kaskada prema klijentu uvela je odgovornost opskrbnog lanca iz Članka 21(2) NIS2.
 
-Početna pozicija bila je: slabo-ali-još-ne-u-prekršaju. Bez SBOM-a. Bez inventara firmvera. Bez dokumentiranog obrazloženja razdoblja podrške. Bez runbooka za Članak 14. VPN/SSH operacije bez per-korisničke atribucije. Bez dokaznih paketa dobavljača. Tvrdo brisanje zbunjeno sa sigurnosno-audit pohranjivanjem. Izloženost legacy certifikata za jednu obitelj proizvoda. Naslijeđena lokacija koja radi kao crna kutija iz prethodne migracije klijenta.
+Početna pozicija: slabo, ali još ne u prekršaju. Bez SBOM-a. Bez inventara firmvera. Bez dokumentiranog obrazloženja razdoblja podrške. Bez runbooka za Članak 14. VPN/SSH operacije bez per-korisničke atribucije. Bez dokaznih paketa dobavljača. Tvrdo brisanje zbunjeno sa sigurnosno-audit pohranjivanjem. Izloženost legacy certifikata za jednu obitelj proizvoda. Naslijeđena lokacija koja radi kao crna kutija iz prethodne migracije klijenta.
 
 Inženjerski tim nije imao dediciranu cybersecurity poziciju. Rokovi se ne pomiču.
 
 ## Pristup
 
-Rad je od prvog dana zauzeo namjerno autoritativnu poziciju: svaka noseća tvrdnja bila bi citirana na tekst Službenog lista ili na interpretativni dokument EU Komisije, svaki nalaz označen statusom provjere, svaki dokument propagiran kroz matricu unakrsnih referenci koja funkcionira kao interni audit trag. Metodološke obveze bile su:
+Rad je od prvog dana zauzeo namjerno rigoroznu poziciju: svaka noseća tvrdnja bila bi citirana na tekst Službenog lista ili na interpretativni dokument EU Komisije, svaki nalaz označen statusom provjere, svaki dokument propagiran kroz matricu unakrsnih referenci koja funkcionira kao interni audit trag. Metodološke obveze bile su:
 
 - **Petostruka doslovna provjera** prema EU Uredbi 2024/2847 (Članci 13, 14, 16, 22, 28, 31, 64, 69; Aneks I Dijelovi I i II; Aneks II; Aneks III; Aneks VII), Direktivi (EU) 2022/2555 NIS2 i njemačkom BSIG-neu (§§ 30, 32, 33, 38, 65). Zaseban dodatak citata nosi doslovni regulatorni tekst za svaku Cliff-1 isporuku, dizajniran da preživi neprijateljski review sastanak redak po redak.
 - **Dodatak "Position of Record"** koji bilježi autoritativne tvrdnje s njihovim dokaznim lancem, odvojiv od operativnih dokumenata koji o njima ovise.

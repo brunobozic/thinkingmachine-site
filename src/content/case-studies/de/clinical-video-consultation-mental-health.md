@@ -108,7 +108,7 @@ Kumulativer Effekt: eine 50-Minuten-Sitzung, die unkomprimiert 4+ GB wäre, land
 
 ### Netzwerk-Resilienz — Degradation, die der Patient nicht bemerkt
 
-Patienten sind nicht immer auf Glasfaser. Der Resilienz-Stack der Plattform:
+Patienten verbinden sich aus variablen Bandbreiten-Bedingungen. Der Resilienz-Stack der Plattform:
 
 - **Fünf-stufige Audio-Degradations-Leiter**: Opus 96 kbps + RED (klinisch) → 64 kbps + FEC → 32 kbps → 16 kbps → Lyra V2 bei 6 kbps (neuronaler Codec, verständlich bei nahezu-2G-Geschwindigkeiten). Die Umschaltung ist automatisch, getrieben durch die ausgehandelte Bandbreiten-Schätzung, und der Patient sieht keinen Qualitäts-Dialog.
 - **Predictive ICE-Restart** für Netzwerk-Übergänge (Wi-Fi → Mobilfunk, etc.): Lücke fällt vom 4–7-Sekunden-reaktiven Default unter 500 ms.

@@ -17,13 +17,13 @@ The EU Cyber Resilience Act (Regulation 2024/2847) imposes obligations on every 
 
 The organisation in this body of work carried a hybrid regulatory posture: **manufacturer** in CRA terms for its own software stack (edge runtime, container images, cloud back-office, mobile app), **operator/distributor** for the vendor hardware it integrates. Layered on top: the German national NIS2 transposition (BSIG-neu, in force 6 December 2025) created a parallel reporting obligation as a (besonders) wichtige Einrichtung, with its own clocks under § 32. A downstream-customer cascade introduced supply-chain liability from Article 21(2) NIS2.
 
-The starting posture was: weak-but-not-yet-breaching. No SBOM. No firmware inventory. No documented support-period rationale. No Article 14 runbook. VPN/SSH operations without per-user attribution. No vendor evidence packs. Hard-deletion confused with security-audit retention. A legacy-certificate exposure for one product family. An inherited site running as a black box from a prior customer migration.
+Starting posture: weak but not yet in breach. No SBOM. No firmware inventory. No documented support-period rationale. No Article 14 runbook. VPN/SSH operations without per-user attribution. No vendor evidence packs. Hard-deletion confused with security-audit retention. A legacy-certificate exposure for one product family. An inherited site running as a black box from a prior customer migration.
 
 The engineering team had no dedicated cybersecurity headcount. The deadlines do not move.
 
 ## Approach
 
-The work adopted a deliberately authoritative posture from the first day: every load-bearing claim would be cited to the Official Journal text or an EU Commission interpretive document, every finding tagged with verification status, every document propagated through a cross-reference matrix functioning as an internal audit trail. The methodological commitments were:
+The work adopted a deliberately rigorous posture from the first day: every load-bearing claim would be cited to the Official Journal text or an EU Commission interpretive document, every finding tagged with verification status, every document propagated through a cross-reference matrix functioning as an internal audit trail. The methodological commitments were:
 
 - **Five-pass verbatim verification** against EU Regulation 2024/2847 (Articles 13, 14, 16, 22, 28, 31, 64, 69; Annex I Parts I and II; Annex II; Annex III; Annex VII), Directive (EU) 2022/2555 NIS2, and the German BSIG-neu (§§ 30, 32, 33, 38, 65). A separate citations annex carries verbatim regulatory text for every Cliff 1 deliverable, designed to survive a hostile review meeting line-by-line.
 - **A "Position of Record" annex** capturing authoritative claims with their evidence chain, separable from the operational documents that depend on them.

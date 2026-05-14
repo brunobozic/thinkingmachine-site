@@ -51,7 +51,7 @@ Također smo identificirali bestroškovni SQL konfiguracijski popravak na testno
 
 Pružatelj je ušao u sljedeći sastanak s klijentom s obranjivim modelom cijene po instalaciji usidrenim u provjerljivim javnim cijenama, čistim razdvajanjem između komercijalne cijene i infrastrukturnog troška te kalkulatorom koji je klijent mogao sam pokrenuti. Pitanje *Postoji li marža uopće?* — koje je prije bilo neodgovorivo — preokvireno je kao razgovor o SaaS premiji, potkrijepljen kvantificiranom baznom linijom.
 
-Konfiguracijski nalaz identificiran tijekom mandata sam po sebi može u potpunosti promijeniti razgovor o odabiru razine.
+Bestroškovni konfiguracijski nalaz sam po sebi dovoljan je da preokvirivi pitanje odabira razine — zato je označen kao prva akcijska stavka u isporuci, a ne sakriven u dodatku.
 
 ## Što nismo isporučili
 

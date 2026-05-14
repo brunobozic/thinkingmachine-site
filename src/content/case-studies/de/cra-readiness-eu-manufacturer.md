@@ -17,13 +17,13 @@ Der EU Cyber Resilience Act (Verordnung 2024/2847) auferlegt Pflichten jedem Wir
 
 Die Organisation in diesem Korpus trug eine hybride regulatorische Position: **Hersteller** im CRA-Sinne für ihren eigenen Software-Stack (Edge-Runtime, Container-Images, Cloud-Backoffice, Mobile-App), **Betreiber/Distributor** für die Hersteller-Hardware, die sie integriert. Darüber gelegt: die deutsche nationale NIS2-Umsetzung (BSIG-neu, in Kraft 6. Dezember 2025) erzeugte eine parallele Meldepflicht als (besonders) wichtige Einrichtung, mit eigenen Uhren unter § 32. Eine nachgelagerte Kunden-Kaskade brachte Lieferketten-Haftung aus Artikel 21(2) NIS2 ein.
 
-Die Ausgangslage war: schwach-aber-noch-nicht-im-Verstoß. Keine SBOM. Kein Firmware-Inventar. Keine dokumentierte Support-Zeitraum-Begründung. Kein Artikel-14-Runbook. VPN/SSH-Betrieb ohne Pro-Nutzer-Attribution. Keine Anbieter-Evidenz-Pakete. Hart-Löschung mit Sicherheits-Audit-Aufbewahrung verwechselt. Eine Legacy-Zertifikat-Exposition für eine Produktfamilie. Eine geerbte Site, die als Black-Box aus einer früheren Kunden-Migration lief.
+Ausgangslage: schwach, aber noch nicht im Verstoß. Keine SBOM. Kein Firmware-Inventar. Keine dokumentierte Support-Zeitraum-Begründung. Kein Artikel-14-Runbook. VPN/SSH-Betrieb ohne Pro-Nutzer-Attribution. Keine Anbieter-Evidenz-Pakete. Hart-Löschung mit Sicherheits-Audit-Aufbewahrung verwechselt. Eine Legacy-Zertifikat-Exposition für eine Produktfamilie. Eine geerbte Site, die als Black-Box aus einer früheren Kunden-Migration lief.
 
 Das Engineering-Team hatte keine dedizierte Cybersecurity-Stelle. Die Fristen bewegen sich nicht.
 
 ## Vorgehen
 
-Die Arbeit nahm vom ersten Tag an bewusst eine autoritative Haltung ein: jede tragende Behauptung würde am Text des Amtsblatts oder an einem interpretativen Dokument der EU-Kommission zitiert, jeder Befund mit Verifikations-Status getaggt, jedes Dokument durch eine Querverweis-Matrix propagiert, die als interner Audit-Trail fungiert. Die methodischen Verpflichtungen waren:
+Die Arbeit nahm vom ersten Tag an eine bewusst rigorose Haltung ein: jede tragende Behauptung würde am Text des Amtsblatts oder an einem interpretativen Dokument der EU-Kommission zitiert, jeder Befund mit Verifikations-Status getaggt, jedes Dokument durch eine Querverweis-Matrix propagiert, die als interner Audit-Trail fungiert. Die methodischen Verpflichtungen waren:
 
 - **Fünf-Pass-Verbatim-Verifikation** gegen EU-Verordnung 2024/2847 (Artikel 13, 14, 16, 22, 28, 31, 64, 69; Anhang I Teile I und II; Anhang II; Anhang III; Anhang VII), Richtlinie (EU) 2022/2555 NIS2 und das deutsche BSIG-neu (§§ 30, 32, 33, 38, 65). Ein separater Zitate-Annex trägt verbatim regulatorischen Text für jedes Cliff-1-Lieferobjekt, ausgelegt um eine feindliche Review-Sitzung Zeile-für-Zeile zu überstehen.
 - **Ein "Position-of-Record"-Annex** erfasst autoritative Behauptungen mit ihrer Evidenz-Kette, trennbar von den operativen Dokumenten, die auf ihnen aufbauen.

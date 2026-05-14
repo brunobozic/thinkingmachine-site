@@ -51,7 +51,7 @@ Wir identifizierten zusätzlich einen kostenfreien SQL-Konfigurations-Fix in der
 
 Der Anbieter ging in das nächste Kunden-Meeting mit einem belastbaren Pro-Installations-Preismodell, das an verifizierbaren öffentlichen Preisen verankert war, einer sauberen Trennung zwischen kommerziellem Preis und Infrastruktur-Kosten und einem Rechner, den der Kunde selbst ausführen konnte. Die Frage *Gibt es überhaupt eine Marge?* — die zuvor unbeantwortbar gewesen war — wurde als SaaS-Premium-Konversation umrahmt, gestützt durch eine quantifizierte Baseline.
 
-Der während des Mandats identifizierte Konfigurations-Befund ist für sich allein in der Lage, die Tier-Auswahl-Konversation vollständig zu verändern.
+Der kostenfreie Konfigurations-Befund allein reicht aus, um die Tier-Auswahl-Frage neu zu rahmen — weshalb er als erster Aktionspunkt im Lieferobjekt markiert wurde, nicht im Anhang vergraben.
 
 ## Was wir nicht lieferten
 

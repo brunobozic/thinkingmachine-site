@@ -51,7 +51,7 @@ We also identified a zero-cost SQL configuration fix on the test environment (a 
 
 The vendor walked into the next customer meeting with a defensible per-installation pricing model anchored on verifiable public pricing, a clean separation between commercial price and infrastructure cost, and a calculator the customer could run themselves. The *is there a margin?* question — which had previously been unanswerable — was reframed as a SaaS-premium conversation supported by a quantified baseline.
 
-The configuration finding identified during the engagement is, on its own, capable of changing the tier-selection conversation entirely.
+The zero-cost configuration finding alone is enough to reframe the tier-selection question — which is why it was flagged as the first action item in the deliverable, not buried in the appendix.
 
 ## What we did not deliver
 

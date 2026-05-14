@@ -108,7 +108,7 @@ Kumulativni učinak: 50-minutna sesija koja bi nekomprimirana bila 4+ GB pristaj
 
 ### Otpornost mreže — degradacija koju pacijent ne primjećuje
 
-Pacijenti nisu uvijek na optičkom vlaknu. Stack otpornosti platforme:
+Pacijenti se spajaju iz različitih uvjeta propusnosti. Stack otpornosti platforme:
 
 - **Petostepena ljestvica degradacije zvuka**: Opus 96 kbps + RED (klinička kvaliteta) → 64 kbps + FEC → 32 kbps → 16 kbps → Lyra V2 pri 6 kbps (neuralni kodek, razumljivo pri gotovo 2G brzinama). Promjena je automatska, vođena dogovorenom procjenom propusnosti, i pacijent ne vidi dijalog o kvaliteti.
 - **Prediktivni ICE restart** za prijelaze mreže (Wi-Fi → mobilna mreža, itd.): praznina pada s 4–7-sekundnog reaktivnog defaulta na ispod 500 ms.
