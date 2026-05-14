@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="How we work — Thinking Machine"
+  description="Operational detail of a Thinking Machine engagement: kickoff agenda, mid-engagement cadence, review cycles, final readout, handover. The README a buyer wants before signing."
+  pageType="WebPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="150" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <line x1="70" y1="100" x2="80" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+      <line x1="120" y1="100" x2="130" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">How we work</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        The operational README of an engagement.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        What an engagement actually looks like, day by day. The kickoff agenda, the mid-engagement cadence, the review windows, the final readout. Written for the buyer who needs to know exactly what arrives in email when, before signing.
+      </p>
+    </div>
+  </section>
+
+  <article class="container-page py-12">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stage 0 · Pre-engagement</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h2>First contact to signed quote</h2>
+        <p>An initial email lands in <a href="mailto:hello@thinkingmachine.uk">hello@thinkingmachine.uk</a> or via the contact form. A reply goes out within one working day proposing a 30-minute video call.</p>
+        <p>The call is free, no slides, no pitch. We use the time to understand the problem, surface what the buyer already knows, and decide together whether Thinking Machine is the right fit. If we are not, we say so on the call and, where possible, point to someone better suited.</p>
+        <p>If we are, a fixed-fee quote follows within two working days. The quote names the engagement shape (Discovery Sprint, Rapid PoC, or Fractional CTO), the fee, the calendar window, the deliverables, and an explicit out-of-scope list. No commitment until the buyer signs.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stage 1 · Kickoff</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h2>The kickoff call</h2>
+        <p>A 60-minute video call on day one of the engagement. The buyer's side typically includes the engagement sponsor plus two or three people who actually know the system — the security architect, the lead engineer, the operations lead, whoever has the context. We deliberately keep it small.</p>
+        <p>Agenda:</p>
+        <ul>
+          <li><strong>Scope reconfirmation.</strong> The deliverables and out-of-scope list from the quote, repeated back. If anything has shifted in the two-to-six weeks between quote and kickoff, this is where it surfaces.</li>
+          <li><strong>Interview targets.</strong> The three-to-five people we need to talk to in the first week. Names, calendars, and the specific question each one answers.</li>
+          <li><strong>Document access.</strong> What we need to read — architecture diagrams, existing audits, vendor contracts, the NFR catalogue from procurement. Usually a shared folder is set up during the call.</li>
+          <li><strong>Communication cadence.</strong> Email is the default. A standing weekly fifteen-minute status call is optional and only added if the engagement runs longer than two weeks.</li>
+          <li><strong>Confidentiality boundary.</strong> Confirm what's already covered by the NDA (signed before the first call if the buyer prefers) and flag any specific names or systems that need extra discretion.</li>
+        </ul>
+        <p>By end of call, the engagement has a working folder, a shared interview schedule, and a defined first deliverable.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stage 2 · Mid-engagement</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h2>What happens in the middle</h2>
+        <p>The bulk of the work — Survey, Map, Think — happens here. Day-to-day shape:</p>
+        <ul>
+          <li><strong>Interviews are scheduled rolling.</strong> The targets identified at kickoff become 30-to-45-minute conversations, recorded with permission, transcribed with WhisperX. Buyer-side participants are usually surprised by how short the interviews are; the discipline of the questions is what makes the time efficient.</li>
+          <li><strong>The Position of Record builds incrementally.</strong> By the end of the second working week of a Rapid PoC, the buyer should have a working draft of the central document — incomplete but with the structure in place and the load-bearing claims already cited.</li>
+          <li><strong>Mid-engagement review.</strong> For engagements longer than two weeks, a 45-minute video call at the midpoint. We share the map and the framework anchors. The buyer corrects anything we misunderstood. This is the moment to redirect, not the final readout.</li>
+          <li><strong>Email is rolling, not scheduled.</strong> Important findings surface as they emerge — the configuration finding that changes the sizing conversation, the missing certificate that opens a regulatory gap. We do not batch surprises for the final readout.</li>
+          <li><strong>One question, one channel.</strong> The buyer designates one person as the engagement contact. All clarifying questions route through them. This is how we keep five-day engagements from turning into fifteen-day engagements through coordination overhead.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stage 3 · Review cycle</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h2>The draft, the redline, the freeze</h2>
+        <p>Two working days before the final readout, the buyer receives the full draft deliverable in their inbox. PDF if it is a written report; spreadsheet if it is a model; markdown if it is a runbook. Plus every supporting artifact (citations, evidence log, model assumptions).</p>
+        <p>The buyer has those two days to redline. Track Changes on a Word document; comments on a PDF; whatever format they prefer. We address every comment in one of three ways:</p>
+        <ul>
+          <li><strong>Accept and edit.</strong> The comment is right, the document changes.</li>
+          <li><strong>Accept with caveat.</strong> The comment surfaces something real that does not change our recommendation; we add a footnote explaining the consideration.</li>
+          <li><strong>Decline and explain.</strong> The comment is wrong or out of scope. We send a one-paragraph email explaining why and the document does not change.</li>
+        </ul>
+        <p>The deliverable does not change after the review window closes. Everything in the final readout is locked.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stage 4 · Final readout</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h2>The 60-minute walkthrough</h2>
+        <p>A 60-minute video call at the end of the engagement. The buyer's side can include anyone they want: the sponsor, the executive who funded the work, the team that will operationalise the recommendation, an outside auditor or notified body. Recording is offered by default.</p>
+        <p>We walk the deliverable end to end. The structure is always the same:</p>
+        <ul>
+          <li>Restate the question.</li>
+          <li>Summarise the method (which frameworks, which evidence, which interviews).</li>
+          <li>Walk the findings in order of significance.</li>
+          <li>State the recommendation.</li>
+          <li>Walk the out-of-scope declaration so the buyer knows what we deliberately did not cover.</li>
+          <li>Open the floor.</li>
+        </ul>
+        <p>By end of call, the buyer has every artifact they paid for, in their possession, and the engagement is closed.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stage 5 · After readout</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h2>What we do not do — and what we do</h2>
+        <p>The engagement ends at the readout. We do not turn into a long tail of clarification calls. We do not subscribe the buyer to a newsletter. We do not pitch follow-on work unless the buyer explicitly asks.</p>
+        <p>What we do offer: a fourteen-day clarification window after the readout for any factual or methodological question that emerges as the buyer takes the work to the board or the notified body. Email-only, untimed, free. If the question reveals a substantive gap in the deliverable we missed, we fix it.</p>
+        <p>If the engagement uncovered a bigger problem than what was scoped, we will say so on the readout call. The buyer can decide whether to commission a follow-on engagement (with a fresh quote and a fresh scope) or take what they have and move on.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Continuity clause</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <h2>What happens if the principal becomes unavailable</h2>
+        <p>Every engagement carries an explicit continuity clause. If a force-majeure event prevents the principal from continuing, the work product to date — every draft, citation, model, evidence file — is handed over within five working days, the engagement is closed at a pro-rated fee, and where useful we provide a one-paragraph briefing for whoever picks up the work.</p>
+        <p>We have not had to invoke this clause in any engagement to date. It exists because the buyer needs to know it does, before signing.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="container-page py-12">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">Thirty minutes, no slides, no pitch.</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+        <a href="/pricing" class="btn-secondary">See pricing →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

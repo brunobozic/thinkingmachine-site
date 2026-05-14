@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const shapes = [
+  { stage: 'Faza 1', name: 'Discovery Sprint', duration: '1–2 tjedna · fiksna cijena', floor: '€5.000',
+    description: 'Određeni problem, strukturirana isporuka, rezultat spreman za odluku. Najjeftiniji put do obranjivog odgovora kada je pitanje omeđeno.',
+    typical: 'Cloud go/no-go procjena · NFR odgovor · kritika arhitekture · memo o odabiru tehnologije.' },
+  { stage: 'Faza 2', name: 'Rapid PoC', duration: '2–4 tjedna · fiksna cijena', floor: '€14.000',
+    description: 'Radna demonstracija plus go/no-go preporuka temeljena na dokazima. Za slučaj kada se do pravog odgovora dolazi samo gradnjom nečeg malog.',
+    typical: 'MCP sloj upravljanja preko postojećeg API-ja · RAG cjevovod preko vaše baze znanja · evaluacija samo-hostiranog LLM-a · provjera izvedivosti edge ML-a.' },
+  { stage: 'Faza 3', name: 'Fractional CTO', duration: 'Mjesečni retainer · fiksna cijena', floor: '€5.000/mjesec',
+    description: 'Senior arhitekt na poziv. Sounding-board za interni tim, RFP due diligence, drugi-pregled, nadzor regulatornih satova.',
+    typical: 'Nadzor spremnosti za CRA/NIS2 · arhitektonske odluke gdje je tim jak ali mu nedostaje jedno područje dubine · tehnička dubinska analiza prije investicije.' },
+];
+---
+<BaseLayout
+  title="Cijene — Thinking Machine"
+  description="Donje granice fiksne cijene. Discovery Sprint od €5.000. Rapid PoC od €14.000. Fractional CTO od €5.000/mjesec. Kotiramo na prvom razgovoru, bez klauzula o širenju opsega."
+  pageType="WebPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="40" width="120" height="120" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <rect x="60" y="60" width="80" height="80" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <rect x="80" y="80" width="40" height="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Cijene</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Donje granice fiksne cijene, kotirane na prvom razgovoru.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        Tri oblika mandata, tri objavljene donje granice. Točna cijena se fiksira na prvom razgovoru, prije bilo kakve obveze. Nikad ne naplaćujemo po satu. Nema klauzula o širenju opsega.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    <div class="grid gap-6 md:grid-cols-3">
+      {shapes.map(s => (
+        <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7 md:p-8">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2 font-medium">{s.stage}</div>
+          <h2 class="font-serif text-2xl text-ink-900 mb-1 leading-tight">{s.name}</h2>
+          <div class="text-sm text-ink-500 mb-4 font-medium">{s.duration}</div>
+          <div class="text-3xl font-serif text-accent-700 mb-4">od {s.floor}</div>
+          <p class="text-ink-700 leading-relaxed">{s.description}</p>
+          <p class="mt-4 text-sm text-ink-700 italic leading-relaxed"><strong class="text-ink-900 not-italic">Tipično:</strong> {s.typical}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-page py-12 md:py-16">
+    <div class="bg-ink-100/50 border border-ink-200 p-8 md:p-10 max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">Što pomiče donju granicu</div>
+      <h2 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight mb-5">Kada mandat nosi jednu od ovih karakteristika, ponuda raste.</h2>
+      <ul class="space-y-3 text-ink-700 leading-relaxed">
+        <li><strong class="text-ink-900">Strogi regulatorni rok.</strong> CRA Cliff 1, prozor transpozicije NIS2, rok nabavnog RFP-a unutar tri tjedna — sve što tjera mandat u uži kalendar od onoga što oblik normalno dopušta.</li>
+        <li><strong class="text-ink-900">Modernizacija naslijeđenog softvera.</strong> Čitanje koda koji nitko od izvornih autora više ne može objasniti — VB6, Classic ASP, stari PHP, SQL pun stored procedurea — dodaje vrijeme na početak mandata prije nego što ikakva analiza može započeti.</li>
+        <li><strong class="text-ink-900">Koordinacija više dionika.</strong> Kada mandat zahtijeva usklađivanje više od tri interna tima ili vanjske strane, režija koordinacije postaje usko grlo.</li>
+        <li><strong class="text-ink-900">Velik volumen dokumentacije.</strong> Mandati koji proizvode više od dvjesto stranica audit-obranjive evidencije (paketi spremnosti za CRA, NFR katalozi s detaljnim aneksima) koštaju više od standardnog oblika mandata.</li>
+      </ul>
+      <p class="mt-6 text-ink-700 leading-relaxed">U tim slučajevima Discovery Sprint obično iznosi <strong class="text-ink-900">€8–12k</strong>, Rapid PoC <strong class="text-ink-900">€20–35k</strong>, a Fractional CTO retainer <strong class="text-ink-900">€7–10k/mjesec</strong>. Točan broj fiksira se na prvom razgovoru i ne pomiče se tijekom mandata.</p>
+    </div>
+  </section>
+
+  <section class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Zašto fiksna cijena</div></div>
+      <div class="md:col-span-2 prose">
+        <p>Naplata po satu usklađuje motivaciju savjetnika s produljivanjem mandata. Mi tako ne radimo. Svaki mandat kotira se po fiksnoj cijeni na prvom razgovoru, prije bilo kakve obveze, i cijena se ne pomiče tijekom mandata.</p>
+        <p>Fiksna cijena nosi umjerenu premiju u odnosu na ekvivalentni satni angažman — tipično 40–60%. Premija je stvarna vrijednost, ne marža:</p>
+        <ul>
+          <li><strong class="text-ink-900">Prijenos rizika opsega.</strong> Ako se mandat pokaže težim od očekivanog, to je naš problem, a ne kupčev račun.</li>
+          <li><strong class="text-ink-900">Metodološka sredstva.</strong> Svaki mandat kreće iz male biblioteke imenovanih tehnika (Position of Record, propagacijska matrica, četverostupanjska taksonomija troška, klasifikacija L/I/B) čiji je razvoj trajao godinama. Iznajmljujete biblioteku, ne rad njezine izgradnje.</li>
+          <li><strong class="text-ink-900">Senior-only isporuka.</strong> Bez junior tima isporuke, bez offshore handoffa. Osoba s kojom razgovarate na prvom razgovoru jest osoba koja obavlja rad.</li>
+          <li><strong class="text-ink-900">Reputacija je osiguranje.</strong> Isporuka nosi marku Thinking Machine. To poravnanje štiti kupca od neuredne isporuke.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Što nije u cijeni</div></div>
+      <div class="md:col-span-2 prose">
+        <p>Putovanja izvan Zagreba, ako mandat opravdava osobni sastanak (što obično nije slučaj). Pravni pregled ugovora od strane treće strane na strani kupca. Cloud ili softverska licenca, ako mandat uključuje gradnju nečega. Rad izvan opsega eksplicitno se deklarira pri postavljanju mandata i, po definiciji, ostaje izvan opsega.</p>
+        <p>Ako mandat otkrije veći problem od onoga što je obuhvaćeno, reći ćemo vam. Nećemo ga rješavati kroz isti mandat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink-100/40 border-t border-ink-200">
+    <div class="container-page py-20 md:py-24 max-w-prose">
+      <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">Prvih trideset minuta ide na nas — a ponuda dolazi natrag isti dan.</p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/hr/contact" class="btn-primary">Rezervirajte 30-minutni razgovor</a>
+        <a href="/hr/work" class="btn-secondary">Pogledajte nedavni rad →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

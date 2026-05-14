@@ -19,7 +19,7 @@ const t = {
   en: {
     tagline: 'Strategic engineering advisory for compliance-sensitive enterprises.',
     site: 'Site',
-    services: 'Services', work: 'Work', notes: 'Notes', about: 'About', contact: 'Contact',
+    services: 'Services', pricing: 'Pricing', process: 'How we work', work: 'Work', notes: 'Notes', about: 'About', contact: 'Contact',
     office: 'Office', city: 'Zagreb, Croatia', founded: 'Founded 2022',
     rights: 'All rights reserved.',
     notrackers: 'No trackers. No newsletter. No CRM.',
@@ -30,7 +30,7 @@ const t = {
   de: {
     tagline: 'Strategische Engineering-Beratung für Compliance-sensitive Unternehmen.',
     site: 'Seite',
-    services: 'Leistungen', work: 'Arbeit', notes: 'Notizen', about: 'Über uns', contact: 'Kontakt',
+    services: 'Leistungen', pricing: 'Preise', process: 'Wie wir arbeiten', work: 'Arbeit', notes: 'Notizen', about: 'Über uns', contact: 'Kontakt',
     office: 'Büro', city: 'Zagreb, Kroatien', founded: 'Gegründet 2022',
     rights: 'Alle Rechte vorbehalten.',
     notrackers: 'Keine Tracker. Kein Newsletter. Kein CRM.',
@@ -41,7 +41,7 @@ const t = {
   hr: {
     tagline: 'Strateško inženjersko savjetovanje za poduzeća osjetljiva na sukladnost.',
     site: 'Stranica',
-    services: 'Usluge', work: 'Rad', notes: 'Bilješke', about: 'O nama', contact: 'Kontakt',
+    services: 'Usluge', pricing: 'Cijene', process: 'Kako radimo', work: 'Rad', notes: 'Bilješke', about: 'O nama', contact: 'Kontakt',
     office: 'Ured', city: 'Zagreb, Hrvatska', founded: 'Osnovano 2022.',
     rights: 'Sva prava pridržana.',
     notrackers: 'Bez trackera. Bez newslettera. Bez CRM-a.',
@@ -68,6 +68,8 @@ const linkUntranslated = (path: string) => path;
     <nav class="flex flex-col gap-2">
       <span class="text-ink-500 uppercase tracking-wider text-xs mb-1">{t.site}</span>
       <a href={link('/services')} class="no-underline hover:text-ink-900">{t.services}</a>
+      <a href={link('/pricing')}  class="no-underline hover:text-ink-900">{t.pricing}</a>
+      <a href={link('/process')}  class="no-underline hover:text-ink-900">{t.process}</a>
       <a href={link('/work')}     class="no-underline hover:text-ink-900">{t.work}</a>
       <a href={linkUntranslated('/notes')}    class="no-underline hover:text-ink-900">{t.notes}</a>
       <a href={link('/about')}    class="no-underline hover:text-ink-900">{t.about}</a>

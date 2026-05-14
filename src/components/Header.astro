@@ -16,10 +16,10 @@ if (currentLocale !== 'en' && pathInsideLocale.startsWith(`/${currentLocale}`)) 
 const pageHasTranslations = isTranslated(pathInsideLocale);
 
 // Localised nav labels
-const NAV_LABELS: Record<Locale, { services: string; work: string; notes: string; about: string; contact: string }> = {
-  en: { services: 'Services', work: 'Work', notes: 'Notes', about: 'About', contact: 'Contact' },
-  de: { services: 'Leistungen', work: 'Mandate', notes: 'Notizen', about: 'Über uns', contact: 'Kontakt' },
-  hr: { services: 'Usluge', work: 'Mandati', notes: 'Bilješke', about: 'O nama', contact: 'Kontakt' },
+const NAV_LABELS: Record<Locale, { services: string; pricing: string; work: string; notes: string; about: string; contact: string }> = {
+  en: { services: 'Services', pricing: 'Pricing', work: 'Work', notes: 'Notes', about: 'About', contact: 'Contact' },
+  de: { services: 'Leistungen', pricing: 'Preise', work: 'Mandate', notes: 'Notizen', about: 'Über uns', contact: 'Kontakt' },
+  hr: { services: 'Usluge', pricing: 'Cijene', work: 'Mandati', notes: 'Bilješke', about: 'O nama', contact: 'Kontakt' },
 };
 const labels = NAV_LABELS[currentLocale];
 
@@ -33,6 +33,7 @@ const navHref = (target: string): string => {
 
 const nav = [
   { href: navHref('/services'), label: labels.services, key: '/services' },
+  { href: navHref('/pricing'),  label: labels.pricing,  key: '/pricing' },
   { href: navHref('/work'),     label: labels.work,     key: '/work' },
   { href: navHref('/notes'),    label: labels.notes,    key: '/notes' },
   { href: navHref('/about'),    label: labels.about,    key: '/about' },

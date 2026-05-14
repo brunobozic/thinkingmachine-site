@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const shapes = [
+  {
+    stage: 'Stage 1',
+    name: 'Discovery Sprint',
+    duration: '1–2 weeks · fixed fee',
+    floor: '€5,000',
+    description: 'Scoped problem, structured deliverable, decision-ready output. The cheapest path to a defensible answer when the question is bounded.',
+    typical: 'Cloud go/no-go assessment · NFR response · architecture critique · technology selection memo.',
+  },
+  {
+    stage: 'Stage 2',
+    name: 'Rapid PoC',
+    duration: '2–4 weeks · fixed fee',
+    floor: '€14,000',
+    description: 'Working demonstration plus an evidence-based go / no-go memo. For when the right answer can only be reached by building something small.',
+    typical: 'MCP control layer over an existing API · RAG pipeline over your knowledge base · self-hosted LLM eval · edge-ML feasibility check.',
+  },
+  {
+    stage: 'Stage 3',
+    name: 'Fractional CTO',
+    duration: 'Monthly retainer · fixed fee',
+    floor: '€5,000/month',
+    description: 'A senior architect on call. Sounding-board for the in-house team, RFP due diligence, second-opinion reviews, regulatory-clock monitoring.',
+    typical: 'CRA / NIS2 readiness oversight · architecture decisions where the team is strong but missing one area of depth · pre-investment technical diligence.',
+  },
+];
+---
+<BaseLayout
+  title="Pricing — Thinking Machine"
+  description="Fixed-fee engagement floors. Discovery Sprint from €5,000. Rapid PoC from €14,000. Fractional CTO from €5,000/month. Quoted on the first call, no expansion clauses."
+  pageType="WebPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="40" width="120" height="120" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <rect x="60" y="60" width="80" height="80" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <rect x="80" y="80" width="40" height="40" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Pricing</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">
+        Fixed-fee floors, quoted on the first call.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">
+        Three engagement shapes, three published floors. The exact quote is fixed on the first call before any commitment. We never bill hourly. There are no expansion clauses.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    <div class="grid gap-6 md:grid-cols-3">
+      {shapes.map(s => (
+        <div class="bg-white border border-ink-200 border-l-4 border-l-accent-700 p-7 md:p-8">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2 font-medium">{s.stage}</div>
+          <h2 class="font-serif text-2xl text-ink-900 mb-1 leading-tight">{s.name}</h2>
+          <div class="text-sm text-ink-500 mb-4 font-medium">{s.duration}</div>
+          <div class="text-3xl font-serif text-accent-700 mb-4">from {s.floor}</div>
+          <p class="text-ink-700 leading-relaxed">{s.description}</p>
+          <p class="mt-4 text-sm text-ink-700 italic leading-relaxed"><strong class="text-ink-900 not-italic">Typical:</strong> {s.typical}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container-page py-12 md:py-16">
+    <div class="bg-ink-100/50 border border-ink-200 p-8 md:p-10 max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">What moves the floor</div>
+      <h2 class="font-serif text-2xl md:text-3xl text-ink-900 leading-tight mb-5">When the engagement carries one of these characteristics, the quote moves up.</h2>
+      <ul class="space-y-3 text-ink-700 leading-relaxed">
+        <li><strong class="text-ink-900">Strict regulatory deadline.</strong> CRA Cliff 1, NIS2 transposition window, procurement-RFP due date inside three weeks — anything that requires compressing the engagement into a tighter calendar than the engagement shape would normally allow.</li>
+        <li><strong class="text-ink-900">Legacy modernisation.</strong> Reading code that no original author is around to explain — VB6, Classic ASP, old PHP, stored-procedure-heavy SQL — adds time at the front of the engagement before any analysis can begin.</li>
+        <li><strong class="text-ink-900">Multi-stakeholder coordination.</strong> When the engagement requires aligning more than three internal teams or external parties, the coordination overhead becomes the bottleneck.</li>
+        <li><strong class="text-ink-900">High-volume documentation.</strong> Engagements that produce two-hundred-plus pages of audit-defensible evidence (CRA readiness packs, NFR catalogues with deep-dive annexes) cost more than the standard engagement shape.</li>
+      </ul>
+      <p class="mt-6 text-ink-700 leading-relaxed">In those cases a Discovery Sprint typically lands at <strong class="text-ink-900">€8–12k</strong>, a Rapid PoC at <strong class="text-ink-900">€20–35k</strong>, and a Fractional CTO retainer at <strong class="text-ink-900">€7–10k/month</strong>. The exact number is fixed on the first call and does not move during the engagement.</p>
+    </div>
+  </section>
+
+  <section class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Why fixed-fee</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Hourly billing aligns the consultant's incentive with making the engagement longer. We do not work that way. Every engagement quotes a fixed fee on the first call, before any commitment, and the fee does not move during the engagement.</p>
+        <p>The fixed fee carries a modest premium over an equivalent hourly engagement — typically 40–60%. The premium is real value, not a markup:</p>
+        <ul>
+          <li><strong class="text-ink-900">Scope-risk transfer.</strong> If the engagement turns out harder than expected, that is our problem, not the buyer's bill.</li>
+          <li><strong class="text-ink-900">Methodology assets.</strong> Each engagement starts from a small library of named techniques (Position of Record, propagation matrix, four-category cost taxonomy, L / I / B classification) that took years to develop. You rent the library, not the labour to build it.</li>
+          <li><strong class="text-ink-900">Senior-only delivery.</strong> No junior delivery team, no offshore handoff. The person you talk to on the first call is the person doing the work.</li>
+          <li><strong class="text-ink-900">Reputation underwrites the work.</strong> The deliverable carries the Thinking Machine brand. That alignment is what protects the buyer from a sloppy artifact.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">What's not in the fee</div>
+      </div>
+      <div class="md:col-span-2 prose">
+        <p>Travel beyond Zagreb if the engagement warrants an in-person session (which it usually does not). Third-party legal review of contracts on the buyer's side. Cloud or software licensing if the engagement involves building anything. Out-of-scope work is declared explicitly at engagement framing and is, by definition, out of scope.</p>
+        <p>If the engagement uncovers a bigger problem than what was scoped, we will tell you. We will not solve it through the same engagement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink-100/40 border-t border-ink-200">
+    <div class="container-page py-20 md:py-24 max-w-prose">
+      <p class="font-serif text-2xl md:text-4xl text-ink-900 leading-[1.2]">
+        The first thirty minutes is on us — and the quote comes back the same day.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/contact" class="btn-primary">Book a 30-minute intro</a>
+        <a href="/work" class="btn-secondary">See recent work →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

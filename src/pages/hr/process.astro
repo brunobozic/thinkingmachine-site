@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Kako radimo — Thinking Machine"
+  description="Operativni detalji Thinking Machine mandata: dnevni red kickoffa, ritam u sredini, ciklusi pregleda, završna predaja, primopredaja. README koji kupac želi prije potpisivanja."
+  pageType="WebPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="150" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <line x1="70" y1="100" x2="80" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+      <line x1="120" y1="100" x2="130" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Kako radimo</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">Operativni README mandata.</h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">Kako mandat zapravo izgleda, dan po dan. Dnevni red kickoffa, ritam usred, prozori pregleda, završna predaja. Pisano za kupca koji prije potpisivanja treba znati što i kada točno stiže u inbox.</p>
+    </div>
+  </section>
+
+  <article class="container-page py-12">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Faza 0 · Prije mandata</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Od prvog kontakta do potpisane ponude</h2>
+        <p>Prvi email stiže na <a href="mailto:hello@thinkingmachine.uk">hello@thinkingmachine.uk</a> ili kroz kontakt formu. Odgovor ide unutar jednog radnog dana s prijedlogom 30-minutnog video razgovora.</p>
+        <p>Razgovor je besplatan, bez slajdova, bez pitcha. Vrijeme koristimo da razumijemo problem, izvučemo što kupac već zna, i zajedno odlučimo je li Thinking Machine pravi izbor. Ako nismo, kažemo to u razgovoru i, gdje je moguće, uputimo na nekog prikladnijeg.</p>
+        <p>Ako jesmo, fiksna ponuda slijedi unutar dva radna dana. Ponuda imenuje oblik mandata (Discovery Sprint, Rapid PoC ili Fractional CTO), iznos, kalendarski prozor, isporuke i eksplicitnu listu što je izvan opsega. Nema obveze do kupčevog potpisa.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Faza 1 · Kickoff</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Kickoff razgovor</h2>
+        <p>60-minutni video razgovor prvog dana mandata. Strana kupca obično uključuje sponzora mandata plus dvije ili tri osobe koje zaista poznaju sustav — sigurnosnog arhitekta, lead inženjera, voditelja operacija, tko god ima kontekst. Namjerno ga držimo malim.</p>
+        <p>Dnevni red: ponovno potvrđivanje opsega · ciljevi intervjua (3–5 osoba za prvi tjedan) · pristup dokumentaciji (zajednička mapa) · ritam komunikacije (email default; opcionalni 15-minutni tjedni status za mandate dulje od dva tjedna) · granica povjerljivosti.</p>
+        <p>Do kraja razgovora mandat ima radnu mapu, podijeljen raspored intervjua i definiranu prvu isporuku.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Faza 2 · Sredina mandata</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Što se događa u sredini</h2>
+        <p>Glavnina rada — Snimanje, Mapiranje, Razmišljanje — događa se ovdje. Dan-po-dan:</p>
+        <ul>
+          <li><strong>Intervjui se planiraju kontinuirano.</strong> 30–45 minuta, snimaju se uz dopuštenje, transkribiraju s WhisperX-om. Disciplina pitanja čini vrijeme učinkovitim.</li>
+          <li><strong>Position of Record gradi se inkrementalno.</strong> Do kraja drugog radnog tjedna Rapid PoC-a, kupac bi trebao imati radni nacrt središnjeg dokumenta — nepotpun, ali sa strukturom i nosećim tvrdnjama već citiranim.</li>
+          <li><strong>Pregled u sredini.</strong> Za mandate dulje od dva tjedna, 45-minutni video razgovor u sredini. Dijelimo mapu i sidrišta frameworka. Kupac ispravlja što smo krivo shvatili.</li>
+          <li><strong>Email je kontinuiran, nije zakazan.</strong> Važni nalazi izlaze kako nastaju — iznenađenja ne grupiramo za završnu predaju.</li>
+          <li><strong>Jedno pitanje, jedan kanal.</strong> Kupac imenuje jednu osobu kao kontakt za mandat. Sva razjašnjavajuća pitanja idu kroz nju. Tako petodnevni mandati ostaju petodnevni.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Faza 3 · Ciklus pregleda</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Nacrt, redline, freeze</h2>
+        <p>Dva radna dana prije završne predaje, kupac dobiva puni nacrt isporuke u inbox. PDF ako je pisani izvještaj; tablica ako je model; markdown ako je runbook. Plus svaki podržavajući artefakt (citati, log dokaza, pretpostavke modela).</p>
+        <p>Kupac ima ta dva dana za redline. Track Changes na Word dokumentu; komentari na PDF-u; što god format preferira. Svaki komentar adresiramo na jedan od tri načina: prihvati i uredi · prihvati uz napomenu (dodaj fusnotu) · odbij uz obrazloženje.</p>
+        <p>Isporuka se ne mijenja nakon zatvaranja prozora pregleda. Sve u završnoj predaji je zaključano.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Faza 4 · Završna predaja</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>60-minutni walkthrough</h2>
+        <p>60-minutni video razgovor na kraju mandata. Strana kupca može uključiti koga god želi: sponzora, izvršnog koji je financirao rad, tim koji će operacionalizirati preporuku, vanjskog auditora ili prijavljeno tijelo. Snimanje se nudi standardno.</p>
+        <p>Prolazimo isporuku end-to-end. Struktura je uvijek ista: ponovi pitanje · sažmi metodu · prođi nalaze po značaju · iznesi preporuku · prođi izjavu o izvan-opsegu · otvori diskusiju.</p>
+        <p>Do kraja razgovora, kupac ima svaki plaćeni artefakt u posjedu, i mandat je zatvoren.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Faza 5 · Nakon predaje</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Što ne radimo — i što radimo</h2>
+        <p>Mandat završava na predaji. Ne pretvaramo se u dugi rep poziva za razjašnjenje. Ne pretplaćujemo kupca na newsletter. Ne pitchamo follow-on rad osim ako kupac eksplicitno ne traži.</p>
+        <p>Što nudimo: četrnaestodnevni prozor za razjašnjenja nakon predaje, za bilo koje činjenično ili metodološko pitanje koje izađe dok kupac nosi rad upravi ili prijavljenom tijelu. Samo email, neograničeno, besplatno. Ako pitanje otkrije značajnu prazninu u isporuci koju smo propustili, popravljamo je.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Klauzula kontinuiteta</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Što se događa ako principal postane nedostupan</h2>
+        <p>Svaki mandat nosi eksplicitnu klauzulu kontinuiteta. Ako force-majeure događaj spriječi principala da nastavi, dosadašnji rezultat — svaki nacrt, citat, model, dokazna datoteka — predaje se unutar pet radnih dana, mandat se zatvara po proporcionalnom iznosu, i gdje je korisno isporučujemo kratki briefing za onoga tko preuzima rad.</p>
+        <p>Ovu klauzulu zasad nismo morali aktivirati ni u jednom mandatu. Postoji jer kupac mora znati da postoji prije nego što potpiše.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="container-page py-12">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">Trideset minuta, bez slajdova, bez pitcha.</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/hr/contact" class="btn-primary">Rezervirajte 30-minutni razgovor</a>
+        <a href="/hr/pricing" class="btn-secondary">Pogledajte cijene →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

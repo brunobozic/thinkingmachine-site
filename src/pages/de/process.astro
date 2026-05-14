@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Wie wir arbeiten — Thinking Machine"
+  description="Operative Details eines Thinking-Machine-Mandats: Kickoff-Agenda, Zwischen-Kadenz, Review-Zyklen, Final-Readout, Übergabe. Das README, das ein Käufer vor der Unterschrift will."
+  pageType="WebPage"
+>
+  <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
+    <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <circle cx="150" cy="100" r="20" stroke="#1E3A8A" stroke-width="1" fill="none"/>
+      <line x1="70" y1="100" x2="80" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+      <line x1="120" y1="100" x2="130" y2="100" stroke="#1E3A8A" stroke-width="1"/>
+    </svg>
+    <div class="relative max-w-3xl">
+      <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-6 font-medium">Wie wir arbeiten</div>
+      <h1 class="font-serif text-4xl md:text-6xl text-ink-900 leading-[1.05] tracking-tight">Das operative README eines Mandats.</h1>
+      <p class="mt-6 text-lg md:text-xl text-ink-700 leading-relaxed">Wie ein Mandat tatsächlich abläuft, Tag für Tag. Die Kickoff-Agenda, die Zwischen-Kadenz, die Review-Fenster, das Final-Readout. Geschrieben für den Käufer, der vor der Unterschrift wissen muss, was wann per E-Mail kommt.</p>
+    </div>
+  </section>
+
+  <article class="container-page py-12">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stufe 0 · Vor-Mandat</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Erster Kontakt bis zum unterschriebenen Angebot</h2>
+        <p>Eine erste E-Mail landet in <a href="mailto:hello@thinkingmachine.uk">hello@thinkingmachine.uk</a> oder über das Kontaktformular. Eine Antwort geht innerhalb von einem Arbeitstag mit einem Vorschlag für ein 30-minütiges Video-Gespräch raus.</p>
+        <p>Das Gespräch ist kostenfrei, ohne Folien, ohne Pitch. Wir nutzen die Zeit, um das Problem zu verstehen, das vorhandene Wissen des Käufers zu sammeln, und gemeinsam zu entscheiden, ob Thinking Machine der richtige Partner ist. Wenn nicht, sagen wir es auf dem Gespräch und verweisen, wo möglich, auf jemand passenderen.</p>
+        <p>Wenn ja, folgt ein Festpreis-Angebot innerhalb von zwei Arbeitstagen. Das Angebot benennt die Mandatsform (Discovery Sprint, Rapid PoC oder Fractional CTO), das Honorar, das Kalenderfenster, die Lieferobjekte und eine explizite Out-of-Scope-Liste. Keine Verpflichtung bis zur Unterschrift.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stufe 1 · Kickoff</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Das Kickoff-Gespräch</h2>
+        <p>Ein 60-minütiges Video-Gespräch am ersten Tag des Mandats. Die Käufer-Seite umfasst typischerweise den Mandats-Sponsor plus zwei oder drei Personen, die das System tatsächlich kennen — den Security-Architekten, den Lead-Engineer, den Operations-Lead, wer auch immer den Kontext hat. Wir halten es bewusst klein.</p>
+        <p>Agenda: Scope-Rebestätigung · Interview-Ziele (3–5 Personen für die erste Woche) · Dokument-Zugriff (gemeinsamer Ordner) · Kommunikations-Kadenz (E-Mail Default; optionaler 15-Minuten-Wochen-Status für Mandate länger als zwei Wochen) · Vertraulichkeits-Grenze.</p>
+        <p>Am Ende des Gesprächs hat das Mandat einen Arbeitsordner, einen geteilten Interview-Zeitplan und ein definiertes erstes Lieferobjekt.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stufe 2 · Mitte des Mandats</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Was in der Mitte passiert</h2>
+        <p>Der Hauptteil der Arbeit — Survey, Map, Think — findet hier statt. Tag-zu-Tag:</p>
+        <ul>
+          <li><strong>Interviews werden laufend geplant.</strong> 30–45 Minuten, mit Erlaubnis aufgezeichnet, mit WhisperX transkribiert. Die Disziplin der Fragen macht die Zeit effizient.</li>
+          <li><strong>Die Position of Record entsteht inkrementell.</strong> Bis zum Ende der zweiten Arbeitswoche eines Rapid PoC sollte der Käufer einen Arbeitsentwurf des zentralen Dokuments haben — unvollständig, aber mit Struktur und bereits zitierten tragenden Behauptungen.</li>
+          <li><strong>Zwischen-Review.</strong> Bei Mandaten länger als zwei Wochen ein 45-minütiges Video-Gespräch am Mittelpunkt. Wir teilen die Karte und die Framework-Anker. Der Käufer korrigiert, was wir falsch verstanden haben.</li>
+          <li><strong>E-Mail ist laufend, nicht geplant.</strong> Wichtige Befunde tauchen auf, sobald sie entstehen — wir bündeln keine Überraschungen für das Final-Readout.</li>
+          <li><strong>Eine Frage, ein Kanal.</strong> Der Käufer benennt eine Person als Mandats-Kontakt. Alle klärenden Fragen laufen über sie. So bleiben Fünf-Tage-Mandate fünf Tage lang.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stufe 3 · Review-Zyklus</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Der Entwurf, die Redline, der Freeze</h2>
+        <p>Zwei Arbeitstage vor dem Final-Readout erhält der Käufer den vollständigen Lieferobjekt-Entwurf per E-Mail. PDF, wenn es ein schriftlicher Bericht ist; Spreadsheet, wenn es ein Modell ist; Markdown, wenn es ein Runbook ist. Plus jedes unterstützende Artefakt (Zitate, Evidenz-Log, Modell-Annahmen).</p>
+        <p>Der Käufer hat diese zwei Tage zum Redlining. Track Changes auf einem Word-Dokument; Kommentare auf einem PDF; was auch immer das bevorzugte Format ist. Wir adressieren jeden Kommentar auf eine von drei Arten: akzeptieren und bearbeiten · akzeptieren mit Vorbehalt (Fußnote hinzufügen) · ablehnen mit Erklärung.</p>
+        <p>Das Lieferobjekt ändert sich nach Schluss des Review-Fensters nicht mehr. Alles im Final-Readout ist gesperrt.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stufe 4 · Final-Readout</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Der 60-minütige Walkthrough</h2>
+        <p>Ein 60-minütiges Video-Gespräch am Ende des Mandats. Die Käufer-Seite kann jeden einbeziehen, den sie will: den Sponsor, die Führungskraft, das Team, das die Empfehlung operationalisieren wird, einen externen Auditor oder eine Benannte Stelle. Aufzeichnung wird standardmäßig angeboten.</p>
+        <p>Wir gehen das Lieferobjekt end to end durch. Struktur ist immer dieselbe: Frage wiederholen · Methode zusammenfassen · Befunde in Bedeutungs-Reihenfolge · Empfehlung · Out-of-Scope-Erklärung · Diskussion.</p>
+        <p>Am Ende des Gesprächs hat der Käufer jedes bezahlte Artefakt in seinem Besitz, und das Mandat ist geschlossen.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bg-ink-100/40 border-y border-ink-200">
+    <div class="container-page py-12 md:py-16 grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Stufe 5 · Nach dem Readout</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Was wir nicht tun — und was wir tun</h2>
+        <p>Das Mandat endet beim Readout. Wir verwandeln uns nicht in eine lange Reihe von Klärungs-Anrufen. Wir abonnieren den Käufer nicht für einen Newsletter. Wir pitchen keine Folge-Arbeit, es sei denn, der Käufer fragt ausdrücklich danach.</p>
+        <p>Was wir anbieten: ein vierzehntägiges Klärungs-Fenster nach dem Readout für jede sachliche oder methodologische Frage, die auftaucht, während der Käufer die Arbeit zum Vorstand oder zur Benannten Stelle trägt. Nur per E-Mail, unbemessen, kostenfrei. Wenn die Frage eine substanzielle Lücke im Lieferobjekt offenlegt, die wir übersehen haben, beheben wir sie.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="container-page py-12 md:py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <div><div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-3 font-medium">Kontinuitäts-Klausel</div></div>
+      <div class="md:col-span-2 prose">
+        <h2>Was passiert, wenn der Principal nicht mehr verfügbar ist</h2>
+        <p>Jedes Mandat trägt eine ausdrückliche Kontinuitäts-Klausel. Wenn ein Force-Majeure-Ereignis die Fortsetzung durch den Principal verhindert, wird das bisherige Arbeitsergebnis — jeder Entwurf, jedes Zitat, jedes Modell, jede Evidenz-Datei — innerhalb von fünf Arbeitstagen übergeben, das Mandat wird zu einem anteiligen Honorar geschlossen, und wo nützlich liefern wir ein einseitiges Briefing für wer auch immer die Arbeit übernimmt.</p>
+        <p>Wir mussten diese Klausel in keinem Mandat bislang aktivieren. Sie existiert, weil der Käufer vor der Unterschrift wissen muss, dass sie existiert.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="container-page py-12">
+    <div class="border-t border-ink-200 pt-12 max-w-prose">
+      <p class="font-serif text-2xl md:text-3xl text-ink-900 leading-snug">Dreißig Minuten, keine Folien, kein Pitch.</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/de/contact" class="btn-primary">30-minütiges Erstgespräch buchen</a>
+        <a href="/de/pricing" class="btn-secondary">Preise ansehen →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
