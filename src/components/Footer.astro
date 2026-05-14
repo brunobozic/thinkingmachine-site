@@ -51,7 +51,12 @@ const t = {
   },
 }[currentLocale];
 
-const link = (path: string) => buildLocaleUrl(currentLocale, path);
+// Build a locale-prefixed URL for paths that ARE translated; for
+// untranslated paths, return the canonical EN URL so the footer never
+// dead-links to the locale home.
+const prefix = currentLocale === 'en' ? '' : `/${currentLocale}`;
+const link = (path: string) => `${prefix}${path}`;
+const linkUntranslated = (path: string) => path;
 ---
 <footer class="mt-24 border-t border-ink-200 bg-ink-100/40">
   <div class="container-page py-12 grid gap-10 md:grid-cols-3 text-sm text-ink-700">
@@ -64,7 +69,7 @@ const link = (path: string) => buildLocaleUrl(currentLocale, path);
       <span class="text-ink-500 uppercase tracking-wider text-xs mb-1">{t.site}</span>
       <a href={link('/services')} class="no-underline hover:text-ink-900">{t.services}</a>
       <a href={link('/work')}     class="no-underline hover:text-ink-900">{t.work}</a>
-      <a href={link('/notes')}    class="no-underline hover:text-ink-900">{t.notes}</a>
+      <a href={linkUntranslated('/notes')}    class="no-underline hover:text-ink-900">{t.notes}</a>
       <a href={link('/about')}    class="no-underline hover:text-ink-900">{t.about}</a>
       <a href={link('/contact')}  class="no-underline hover:text-ink-900">{t.contact}</a>
     </nav>
