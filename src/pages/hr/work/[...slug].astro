@@ -69,7 +69,15 @@ const numbersStrip = getNumbersStrip(bareSlug, 'hr');
       <>
         <section class="max-w-prose mx-auto mb-8">
           <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">Brzi pregled</div>
-          <div class="prose" set:html={study.data.quickRead.split('\n\n').map((p: string) => `<p>${p.trim()}</p>`).join('')} />
+          <div class="prose" set:html={study.data.quickRead.split('\n\n').map((para: string) => {
+            const html = para.trim()
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+              .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+            return `<p>${html}</p>`;
+          }).join('')} />
         </section>
         <section class="max-w-prose mx-auto">
           <details class="group">
