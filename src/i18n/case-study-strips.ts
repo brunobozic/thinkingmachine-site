@@ -24,7 +24,7 @@ const strips: Record<string, SlugStrips> = {
       note: 'All values are drawn from the engagement scope or workload definition documented in the case study text; none are projected outcomes or invented metrics.',
       cells: [
         { value: '40h',    label: 'fixed-scope advisory engagement',     sublabel: '≈ four weeks calendar time, single principal' },
-        { value: '36',     label: 'servers in the planned scope',        sublabel: '12 installations · 2 DB performance tiers · prod + non-prod' },
+        { value: '18–36',  label: 'servers in the planned scope',        sublabel: '6 → 12 installations · 2 DB performance tiers · prod + non-prod' },
         { value: '9 + 4',  label: 'cloud scenarios modelled',            sublabel: '3 platforms × 3 commitment levels + 4 ruled-out paths' },
         { value: '200k',   label: 'rows/day peak ingestion',             sublabel: '24/7 instrument telemetry through Node.js receiver' },
       ],
@@ -34,7 +34,7 @@ const strips: Record<string, SlugStrips> = {
       note: 'Alle Werte stammen aus dem in der Fallstudie dokumentierten Mandatsumfang oder der Workload-Definition; keiner ist ein projiziertes Ergebnis oder eine erfundene Metrik.',
       cells: [
         { value: '40 h',   label: 'festpreisiges Beratungsmandat',       sublabel: '≈ vier Wochen Kalenderzeit, ein Principal' },
-        { value: '36',     label: 'Server im geplanten Umfang',          sublabel: '12 Installationen · 2 DB-Performance-Stufen · Prod + Non-Prod' },
+        { value: '18–36',  label: 'Server im geplanten Umfang',          sublabel: '6 → 12 Installationen · 2 DB-Performance-Stufen · Prod + Non-Prod' },
         { value: '9 + 4',  label: 'Cloud-Szenarien modelliert',          sublabel: '3 Plattformen × 3 Bindungsstufen + 4 ausgeschlossene Pfade' },
         { value: '200k',   label: 'Zeilen/Tag Spitzen-Ingestion',        sublabel: '24/7 Instrumenten-Telemetrie via Node.js-Receiver' },
       ],
@@ -44,7 +44,7 @@ const strips: Record<string, SlugStrips> = {
       note: 'Sve vrijednosti dolaze iz opsega mandata ili definicije workloada dokumentirane u studiji; nijedna nije projicirani rezultat ili izmišljena metrika.',
       cells: [
         { value: '40 h',   label: 'savjetodavni mandat fiksnog opsega',  sublabel: '≈ četiri tjedna kalendarskog vremena, jedan principal' },
-        { value: '36',     label: 'servera u planiranom opsegu',         sublabel: '12 instalacija · 2 razine performansi baze · prod + non-prod' },
+        { value: '18–36',  label: 'servera u planiranom opsegu',         sublabel: '6 → 12 instalacija · 2 razine performansi baze · prod + non-prod' },
         { value: '9 + 4',  label: 'cloud scenarija modelirano',          sublabel: '3 platforme × 3 razine obveze + 4 isključena puta' },
         { value: '200k',   label: 'redaka/dan vršne ingestije',          sublabel: '24/7 telemetrija instrumenata kroz Node.js prijemnik' },
       ],
