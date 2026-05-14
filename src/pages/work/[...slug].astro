@@ -7,7 +7,7 @@ import { getNumbersStrip } from '../../i18n/case-study-strips';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
-  const studies = await getCollection('case-studies', ({ data }) => !data.draft);
+  const studies = await getCollection('case-studies', ({ slug, data }) => !slug.startsWith('de/') && !slug.startsWith('hr/') && !data.draft);
   return studies.map(study => ({
     params: { slug: study.slug },
     props: { study }
