@@ -11,110 +11,154 @@
 //   - 5+: years of legacy codebase reconstructed (built ~2018–2019,
 //         worked on in 2024)
 //   - time allocation: engineer's own time, not client performance metrics.
-//
-// Palette matches the rest of the site:
-//   accent-700  #1E3A8A     ink-200  #E4E4E7
-//   amber-700   #B45309     ink-400  #A1A1AA
-//                           ink-600  #52525B
-//                           ink-800  #27272A
+
+import type { Locale } from '../i18n/paths';
+
+export interface Props {
+  locale?: Locale;
+}
+const { locale = 'en' } = Astro.props;
+
+const t = {
+  en: {
+    cap1: 'By the numbers',
+    note1: 'All four numbers are extracted from the engagement\'s IaC repository or from the deployed infrastructure inventory; none are derived from client-measured performance outcomes.',
+    n1: ['85', 'commits on the IaC repository', 'across all branches, engineer attribution'],
+    n2: ['4',  'artifact channels mediated by internal registries', 'Composer · npm · SQL · container'],
+    n3: ['8',  'VM roles in the Semaphore catalogue', 'router · orchestrator · registry · dev · customer · BI · metrics · packages'],
+    n4: ['5+', 'year-old codebase, revived end-to-end', 'original authorship 2018–2019 · re-armed 2024'],
+    cap2: 'Software supply chain · internal trust roots',
+    colA: 'PUBLIC SOURCE', colB: 'INTERNAL TRUST ROOT', colC: 'TENANT BUILD',
+    pub: ['Packagist (public)', 'npm (public)', 'Public OCI registries', 'Ad-hoc developer SQL'],
+    reg: ['Satis · Composer', 'Verdaccio · npm', 'GitLab Container Reg', 'Redgate · SQL Source Control'],
+    tenant: 'Tenant build', tenant_sub1: 'on per-tenant VM', tenant_sub2: 'behind OpenVPN overlay',
+    caption_bottom: 'No artifact reaches a tenant build without passing through an internal trust root.',
+    cap3: 'Engagement time · by lane',
+    lane: [
+      ['Supply chain',        'Satis · Verdaccio · Redgate · registry creds'],
+      ['IaC reconstruction',  'Semaphore API · idempotency · SSH-key hygiene'],
+      ['Analytics stack',     'Metabase · Grafana provisioning'],
+      ['Certificates & hardening', 'PKI · per-VM dev certs · trust chain'],
+    ],
+    note3: 'Lane percentages reflect the engineer\'s own time allocation across the engagement, not client-side performance measurements. Approximately one-third of the total effort sat in software supply-chain work — the same lane that CRA Article 13 and NIS2 Article 21(2) now make explicit obligations for European operators.',
+  },
+  de: {
+    cap1: 'In Zahlen',
+    note1: 'Alle vier Werte stammen aus dem IaC-Repository des Mandats oder aus dem bereitgestellten Infrastruktur-Inventar; keiner ist aus kunden-gemessenen Performance-Ergebnissen abgeleitet.',
+    n1: ['85', 'Commits auf dem IaC-Repository', 'über alle Branches, Engineer-Attribution'],
+    n2: ['4',  'Artefakt-Kanäle über interne Registries', 'Composer · npm · SQL · Container'],
+    n3: ['8',  'VM-Rollen im Semaphore-Katalog', 'Router · Orchestrator · Registry · Dev · Kunde · BI · Metriken · Pakete'],
+    n4: ['5+', 'Jahre alte Codebasis, end-to-end wiederbelebt', 'ursprüngliche Autorenschaft 2018–2019 · re-aktiviert 2024'],
+    cap2: 'Software-Lieferkette · interne Vertrauensanker',
+    colA: 'ÖFFENTLICHE QUELLE', colB: 'INTERNER VERTRAUENSANKER', colC: 'TENANT-BUILD',
+    pub: ['Packagist (öffentlich)', 'npm (öffentlich)', 'Öffentliche OCI-Registries', 'Ad-hoc-Entwickler-SQL'],
+    reg: ['Satis · Composer', 'Verdaccio · npm', 'GitLab Container Reg', 'Redgate · SQL Source Control'],
+    tenant: 'Tenant-Build', tenant_sub1: 'auf Per-Tenant-VM', tenant_sub2: 'hinter OpenVPN-Overlay',
+    caption_bottom: 'Kein Artefakt erreicht einen Tenant-Build, ohne einen internen Vertrauensanker zu passieren.',
+    cap3: 'Mandatszeit · nach Spur',
+    lane: [
+      ['Lieferkette',              'Satis · Verdaccio · Redgate · Registry-Credentials'],
+      ['IaC-Rekonstruktion',       'Semaphore-API · Idempotenz · SSH-Key-Hygiene'],
+      ['Analytics-Stack',          'Metabase- und Grafana-Provisionierung'],
+      ['Zertifikate & Hardening',  'PKI · Per-VM-Entwickler-Zertifikate · Trust-Chain'],
+    ],
+    note3: 'Die Spuren-Prozente spiegeln die Zeit-Verteilung des Ingenieurs über das Mandat wider, nicht kunden-seitige Performance-Messungen. Etwa ein Drittel des Gesamtaufwands lag in der Software-Lieferketten-Arbeit — derselben Spur, die CRA Artikel 13 und NIS2 Artikel 21(2) nun zu expliziten Pflichten für europäische Betreiber machen.',
+  },
+  hr: {
+    cap1: 'U brojkama',
+    note1: 'Sva četiri broja izvučena su iz IaC repozitorija mandata ili iz inventara raspoređene infrastrukture; nijedan nije izveden iz klijentskih mjerenja performansi.',
+    n1: ['85', 'commitova na IaC repozitoriju', 'kroz sve grane, atribucija inženjera'],
+    n2: ['4',  'kanala artefakata kroz interne registre', 'Composer · npm · SQL · kontejner'],
+    n3: ['8',  'VM uloga u Semaphore katalogu', 'usmjernik · orkestrator · registar · dev · klijent · BI · metrike · paketi'],
+    n4: ['5+', 'godina stara kodna baza, oživljena end-to-end', 'izvorno autorstvo 2018.–2019. · ponovno aktivirana 2024.'],
+    cap2: 'Softverski opskrbni lanac · interni korijeni povjerenja',
+    colA: 'JAVNI IZVOR', colB: 'INTERNI KORIJEN POVJERENJA', colC: 'TENANT BUILD',
+    pub: ['Packagist (javni)', 'npm (javni)', 'Javni OCI registri', 'Ad-hoc developer SQL'],
+    reg: ['Satis · Composer', 'Verdaccio · npm', 'GitLab Container Reg', 'Redgate · SQL Source Control'],
+    tenant: 'Tenant build', tenant_sub1: 'na per-tenant VM-u', tenant_sub2: 'iza OpenVPN sloja',
+    caption_bottom: 'Nijedan artefakt ne dolazi do tenant builda bez prolaska kroz interni korijen povjerenja.',
+    cap3: 'Vrijeme mandata · po području',
+    lane: [
+      ['Opskrbni lanac',          'Satis · Verdaccio · Redgate · vjerodajnice registra'],
+      ['IaC rekonstrukcija',      'Semaphore API · idempotentnost · higijena SSH ključeva'],
+      ['Analitički stack',        'Provizioniranje Metabasea i Grafane'],
+      ['Certifikati i ojačavanje','PKI · po-VM developerski certifikati · lanac povjerenja'],
+    ],
+    note3: 'Postotci područja odražavaju inženjerovu vlastitu raspodjelu vremena kroz mandat, ne mjerenja performansi na strani klijenta. Otprilike trećina ukupnog truda bila je u radu na softverskom opskrbnom lancu — istom području koje CRA Članak 13 i NIS2 Članak 21(2) sada čine eksplicitnim obvezama za europske operatore.',
+  },
+}[locale];
+
+const lanePcts = ['~30%', '~35%', '~20%', '~15%'];
+const lanePx   = [114, 133, 76, 57]; // widths to match the percentages on the 380px scale
+const laneYTextOffset = [56, 100, 144, 188];
+const laneYSubOffset  = [72, 116, 160, 204];
+const laneBarY        = [44, 88, 132, 176];
+const laneOpacity     = [1, 0.85, 0.7, 0.55];
+const laneValueX      = [420, 439, 382, 363];
+const laneValueY      = [61, 105, 149, 193];
 ---
 
 {/* === CHART 1 — Defensible numbers strip === */}
 <figure class="my-10">
-  <figcaption class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">By the numbers</figcaption>
+  <figcaption class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">{t.cap1}</figcaption>
   <div class="border border-ink-200 bg-white p-6 md:p-8">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div>
-        <div class="font-serif text-5xl text-accent-700 leading-none">85</div>
-        <div class="mt-3 text-sm text-ink-700 leading-snug">commits on the IaC repository</div>
-        <div class="mt-1 text-xs text-ink-500">across all branches, engineer attribution</div>
-      </div>
-      <div>
-        <div class="font-serif text-5xl text-accent-700 leading-none">4</div>
-        <div class="mt-3 text-sm text-ink-700 leading-snug">artifact channels mediated by internal registries</div>
-        <div class="mt-1 text-xs text-ink-500">Composer · npm · SQL · container</div>
-      </div>
-      <div>
-        <div class="font-serif text-5xl text-accent-700 leading-none">8</div>
-        <div class="mt-3 text-sm text-ink-700 leading-snug">VM roles in the Semaphore catalogue</div>
-        <div class="mt-1 text-xs text-ink-500">router · orchestrator · registry · dev · customer · BI · metrics · packages</div>
-      </div>
-      <div>
-        <div class="font-serif text-5xl text-accent-700 leading-none">5+</div>
-        <div class="mt-3 text-sm text-ink-700 leading-snug">year-old codebase, revived end-to-end</div>
-        <div class="mt-1 text-xs text-ink-500">original authorship 2018–2019 · re-armed 2024</div>
-      </div>
+      {([t.n1, t.n2, t.n3, t.n4] as [string,string,string][]).map(([v, l, s]) => (
+        <div>
+          <div class="font-serif text-5xl text-accent-700 leading-none">{v}</div>
+          <div class="mt-3 text-sm text-ink-700 leading-snug">{l}</div>
+          <div class="mt-1 text-xs text-ink-500">{s}</div>
+        </div>
+      ))}
     </div>
   </div>
-  <p class="mt-3 text-xs text-ink-500">All four numbers are extracted from the engagement's IaC repository or from the deployed infrastructure inventory; none are derived from client-measured performance outcomes.</p>
+  <p class="mt-3 text-xs text-ink-500">{t.note1}</p>
 </figure>
 
 {/* === CHART 2 — Trust-root architecture === */}
 <figure class="my-12">
-  <figcaption class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">Software supply chain · internal trust roots</figcaption>
+  <figcaption class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">{t.cap2}</figcaption>
   <div class="border border-ink-200 bg-white p-6 md:p-8">
-    <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img" aria-labelledby="trustroot-title trustroot-desc">
-      <title id="trustroot-title">Software supply-chain trust-root pattern</title>
-      <desc id="trustroot-desc">Three-column diagram. Left column lists four public artifact sources (Packagist, npm, public OCI registries, ad-hoc SQL). Middle column lists four internal registries (Satis, Verdaccio, GitLab Container Registry, Redgate SQL Source Control). Right column shows the tenant build pipeline. Arrows from public sources are dashed and pass through the internal registries before reaching the tenant build, illustrating that no artifact reaches a tenant build without passing through an internal trust root.</desc>
+    <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img">
+      <text x="100" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#52525B" letter-spacing="1">{t.colA}</text>
+      <text x="360" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1E3A8A" letter-spacing="1">{t.colB}</text>
+      <text x="620" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#52525B" letter-spacing="1">{t.colC}</text>
 
-      {/* Column headers */}
-      <text x="100" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#52525B" letter-spacing="1">PUBLIC SOURCE</text>
-      <text x="360" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1E3A8A" letter-spacing="1">INTERNAL TRUST ROOT</text>
-      <text x="620" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#52525B" letter-spacing="1">TENANT BUILD</text>
-
-      {/* Public source boxes (dashed, grey) */}
       <g font-family="Inter, sans-serif" font-size="12" fill="#52525B">
-        <rect x="20"  y="60"  width="160" height="36" fill="#FAFAFA" stroke="#A1A1AA" stroke-width="1" stroke-dasharray="4 2"/>
-        <text x="100" y="83" text-anchor="middle">Packagist (public)</text>
-
-        <rect x="20"  y="115" width="160" height="36" fill="#FAFAFA" stroke="#A1A1AA" stroke-width="1" stroke-dasharray="4 2"/>
-        <text x="100" y="138" text-anchor="middle">npm (public)</text>
-
-        <rect x="20"  y="170" width="160" height="36" fill="#FAFAFA" stroke="#A1A1AA" stroke-width="1" stroke-dasharray="4 2"/>
-        <text x="100" y="193" text-anchor="middle">Public OCI registries</text>
-
-        <rect x="20"  y="225" width="160" height="36" fill="#FAFAFA" stroke="#A1A1AA" stroke-width="1" stroke-dasharray="4 2"/>
-        <text x="100" y="248" text-anchor="middle">Ad-hoc developer SQL</text>
+        {t.pub.map((label, i) => (
+          <>
+            <rect x="20" y={60 + i*55} width="160" height="36" fill="#FAFAFA" stroke="#A1A1AA" stroke-width="1" stroke-dasharray="4 2"/>
+            <text x="100" y={83 + i*55} text-anchor="middle">{label}</text>
+          </>
+        ))}
       </g>
 
-      {/* Internal registry boxes (solid, blue) */}
       <g font-family="Inter, sans-serif" font-size="12" fill="#FFFFFF" font-weight="600">
-        <rect x="280" y="60"  width="160" height="36" fill="#1E3A8A"/>
-        <text x="360" y="83" text-anchor="middle">Satis · Composer</text>
-
-        <rect x="280" y="115" width="160" height="36" fill="#1E3A8A"/>
-        <text x="360" y="138" text-anchor="middle">Verdaccio · npm</text>
-
-        <rect x="280" y="170" width="160" height="36" fill="#1E3A8A"/>
-        <text x="360" y="193" text-anchor="middle">GitLab Container Reg</text>
-
-        <rect x="280" y="225" width="160" height="36" fill="#1E3A8A"/>
-        <text x="360" y="248" text-anchor="middle">Redgate · SQL Source Control</text>
+        {t.reg.map((label, i) => (
+          <>
+            <rect x="280" y={60 + i*55} width="160" height="36" fill="#1E3A8A"/>
+            <text x="360" y={83 + i*55} text-anchor="middle">{label}</text>
+          </>
+        ))}
       </g>
 
-      {/* Tenant build (single tall box) */}
       <rect x="540" y="60" width="160" height="201" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2"/>
-      <text x="620" y="150" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="600" fill="#1E3A8A">Tenant build</text>
-      <text x="620" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#52525B">on per-tenant VM</text>
-      <text x="620" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#52525B">behind OpenVPN overlay</text>
+      <text x="620" y="150" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="600" fill="#1E3A8A">{t.tenant}</text>
+      <text x="620" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#52525B">{t.tenant_sub1}</text>
+      <text x="620" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#52525B">{t.tenant_sub2}</text>
 
-      {/* Arrows: public → internal (dashed, mediated) */}
       <g stroke="#A1A1AA" stroke-width="1" stroke-dasharray="4 2" fill="none" marker-end="url(#arrowGrey)">
         <line x1="180" y1="78"  x2="280" y2="78"/>
         <line x1="180" y1="133" x2="280" y2="133"/>
         <line x1="180" y1="188" x2="280" y2="188"/>
         <line x1="180" y1="243" x2="280" y2="243"/>
       </g>
-
-      {/* Arrows: internal → tenant build (solid, trusted) */}
       <g stroke="#1E3A8A" stroke-width="1.5" fill="none" marker-end="url(#arrowBlue)">
         <line x1="440" y1="78"  x2="540" y2="78"/>
         <line x1="440" y1="133" x2="540" y2="133"/>
         <line x1="440" y1="188" x2="540" y2="188"/>
         <line x1="440" y1="243" x2="540" y2="243"/>
       </g>
-
-      {/* Arrowhead defs */}
       <defs>
         <marker id="arrowGrey" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
           <path d="M0,0 L8,4 L0,8 Z" fill="#A1A1AA"/>
@@ -123,59 +167,35 @@
           <path d="M0,0 L8,4 L0,8 Z" fill="#1E3A8A"/>
         </marker>
       </defs>
-
-      {/* Caption strip at bottom */}
-      <text x="360" y="298" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#52525B">No artifact reaches a tenant build without passing through an internal trust root.</text>
+      <text x="360" y="298" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#52525B">{t.caption_bottom}</text>
     </svg>
   </div>
 </figure>
 
-{/* === CHART 3 — Engagement-time allocation (engineer's own time) === */}
+{/* === CHART 3 — Engagement-time allocation === */}
 <figure class="my-12">
-  <figcaption class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">Engagement time · by lane</figcaption>
+  <figcaption class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">{t.cap3}</figcaption>
   <div class="border border-ink-200 bg-white p-6 md:p-8">
-    <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img" aria-labelledby="timealloc-title timealloc-desc">
-      <title id="timealloc-title">Engagement time allocation by lane</title>
-      <desc id="timealloc-desc">Horizontal stacked bar showing approximate engineer-time allocation across four lanes of the engagement: software supply-chain management (about 30 percent), IaC reconstruction and end-to-end revival (about 35 percent), analytics stack provisioning (about 20 percent), and certificate lifecycle and hardening (about 15 percent). All values reflect the engineer's own time, not client performance metrics.</desc>
-
-      {/* Lane labels (left side) */}
+    <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img">
       <g font-family="Inter, sans-serif" font-size="13" fill="#27272A">
-        <text x="280" y="56" text-anchor="end" font-weight="600">Supply chain</text>
-        <text x="280" y="72" text-anchor="end" font-size="11" fill="#52525B">Satis · Verdaccio · Redgate · registry creds</text>
-
-        <text x="280" y="100" text-anchor="end" font-weight="600">IaC reconstruction</text>
-        <text x="280" y="116" text-anchor="end" font-size="11" fill="#52525B">Semaphore API · idempotency · SSH-key hygiene</text>
-
-        <text x="280" y="144" text-anchor="end" font-weight="600">Analytics stack</text>
-        <text x="280" y="160" text-anchor="end" font-size="11" fill="#52525B">Metabase · Grafana provisioning</text>
-
-        <text x="280" y="188" text-anchor="end" font-weight="600">Certificates &amp; hardening</text>
-        <text x="280" y="204" text-anchor="end" font-size="11" fill="#52525B">PKI · per-VM dev certs · trust chain</text>
+        {t.lane.map(([name, sub], i) => (
+          <>
+            <text x="280" y={laneYTextOffset[i]} text-anchor="end" font-weight="600">{name}</text>
+            <text x="280" y={laneYSubOffset[i]}  text-anchor="end" font-size="11" fill="#52525B">{sub}</text>
+          </>
+        ))}
       </g>
-
-      {/* Bars — base scale: 100% across 380px from x=300 to x=680 */}
-      {/* Supply chain ~30% → 114px */}
-      <rect x="300" y="44" width="114" height="22" fill="#1E3A8A" rx="2"/>
-      <text x="420" y="61" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1E3A8A">~30%</text>
-
-      {/* IaC reconstruction ~35% → 133px */}
-      <rect x="300" y="88" width="133" height="22" fill="#1E3A8A" opacity="0.85" rx="2"/>
-      <text x="439" y="105" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1E3A8A">~35%</text>
-
-      {/* Analytics ~20% → 76px */}
-      <rect x="300" y="132" width="76" height="22" fill="#1E3A8A" opacity="0.7" rx="2"/>
-      <text x="382" y="149" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1E3A8A">~20%</text>
-
-      {/* Hardening ~15% → 57px */}
-      <rect x="300" y="176" width="57" height="22" fill="#1E3A8A" opacity="0.55" rx="2"/>
-      <text x="363" y="193" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1E3A8A">~15%</text>
-
-      {/* Axis baseline + 100% marker */}
+      {lanePcts.map((pct, i) => (
+        <>
+          <rect x="300" y={laneBarY[i]} width={lanePx[i]} height="22" fill="#1E3A8A" opacity={laneOpacity[i]} rx="2"/>
+          <text x={laneValueX[i]} y={laneValueY[i]} font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1E3A8A">{pct}</text>
+        </>
+      ))}
       <line x1="300" y1="40" x2="300" y2="206" stroke="#A1A1AA" stroke-width="1"/>
       <line x1="680" y1="40" x2="680" y2="206" stroke="#E4E4E7" stroke-width="1" stroke-dasharray="2 2"/>
       <text x="680" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#A1A1AA">100%</text>
       <text x="300" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#A1A1AA">0%</text>
     </svg>
   </div>
-  <p class="mt-3 text-xs text-ink-500">Lane percentages reflect the engineer's own time allocation across the engagement, not client-side performance measurements. Approximately one-third of the total effort sat in software supply-chain work — the same lane that CRA Article 13 and NIS2 Article 21(2) now make explicit obligations for European operators.</p>
+  <p class="mt-3 text-xs text-ink-500">{t.note3}</p>
 </figure>

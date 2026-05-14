@@ -17,6 +17,11 @@ export const TRANSLATED_PATHS = new Set<string>([
   '/services',
   '/about',
   '/contact',
+  '/work',
+  '/work/cloud-cost-finops',
+  '/work/cra-readiness-eu-manufacturer',
+  '/work/nfr-compliance-energy',
+  '/work/supply-chain-iac-saas-platform',
 ]);
 
 export function isTranslated(pathInsideLocale: string): boolean {

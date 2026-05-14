@@ -1,13 +1,28 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Locale } from '../i18n/paths';
 
 export interface Props {
   study: CollectionEntry<'case-studies'>;
+  locale?: Locale;
 }
 
-const { study } = Astro.props;
+const { study, locale = 'en' } = Astro.props;
 const { title, sector, engagementType, year, summary } = study.data;
-const href = `/work/${study.slug}`;
+
+// Slug shape:
+//   EN studies: 'foo-bar'                → /work/foo-bar
+//   DE studies: 'de/foo-bar'             → /de/work/foo-bar
+//   HR studies: 'hr/foo-bar'             → /hr/work/foo-bar
+const bareSlug = study.slug.replace(/^(de|hr)\//, '');
+const href = locale === 'en' ? `/work/${bareSlug}` : `/${locale}/work/${bareSlug}`;
+
+const ctaByLocale: Record<Locale, string> = {
+  en: 'Read case study',
+  de: 'Fallstudie lesen',
+  hr: 'Pročitaj studiju slučaja',
+};
+const cta = ctaByLocale[locale];
 ---
 <article class="border border-ink-200 bg-white p-7 md:p-8 card-lift group">
   <div class="text-xs uppercase tracking-wider text-ink-500 mb-3">
@@ -18,7 +33,7 @@ const href = `/work/${study.slug}`;
   </h3>
   <p class="mt-4 text-ink-700">{summary}</p>
   <a href={href} class="inline-flex items-center gap-1 mt-5 text-accent-700 no-underline text-sm group/link">
-    Read case study
+    {cta}
     <span class="transition-transform group-hover/link:translate-x-1">→</span>
   </a>
 </article>

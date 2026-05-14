@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CRARegulatoryClock from '../../components/CRARegulatoryClock.astro';
 import SupplyChainCaseStudyCharts from '../../components/SupplyChainCaseStudyCharts.astro';
+import CaseStudyNumbersStrip from '../../components/CaseStudyNumbersStrip.astro';
+import { getNumbersStrip } from '../../i18n/case-study-strips';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -22,6 +24,10 @@ const { title, sector, engagementType, year, region, summary } = study.data;
 // showing.
 const isCRA = study.slug === 'cra-readiness-eu-manufacturer';
 const isSupplyChain = study.slug === 'supply-chain-iac-saas-platform';
+// Locale-aware numbers strip resolution. Returns undefined for slugs
+// that don't carry a strip (e.g. supply-chain, which has its own dedicated
+// chart component instead).
+const numbersStrip = getNumbersStrip(study.slug, 'en');
 ---
 <BaseLayout
   title={`${title} — Thinking Machine`}
@@ -57,6 +63,12 @@ const isSupplyChain = study.slug === 'supply-chain-iac-saas-platform';
         </div>
       </dl>
     </header>
+
+    {numbersStrip && (
+      <div class="max-w-4xl mx-auto mb-8">
+        <CaseStudyNumbersStrip caption={numbersStrip.caption} note={numbersStrip.note} cells={numbersStrip.cells} />
+      </div>
+    )}
 
     {isCRA && (
       <div class="max-w-4xl mx-auto mb-12">
