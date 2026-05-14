@@ -82,6 +82,38 @@ const strips: Record<string, SlugStrips> = {
       ],
     },
   },
+  'clinical-video-consultation-mental-health': {
+    en: {
+      caption: 'By the numbers',
+      note: 'All values are drawn from the architecture specification and capacity model documented in the case study; none are derived from a live deployment or client-measured outcomes.',
+      cells: [
+        { value: '~2.5×',   label: 'sharper face at same total bitrate', sublabel: 'ROI encoding · all on the client' },
+        { value: '96 kbps', label: 'audio at 48 kHz Opus',                sublabel: '3× Zoom\'s default for tonality and breath' },
+        { value: '~50%',    label: 'recording storage reduction',         sublabel: 'composite recording · better clinical content' },
+        { value: '0',       label: 'emotion labels generated',            sublabel: 'deliberate · EU AI Act + clinical evidence' },
+      ],
+    },
+    de: {
+      caption: 'In Zahlen',
+      note: 'Alle Werte stammen aus der Architektur-Spezifikation und dem Kapazitäts-Modell, dokumentiert in der Fallstudie; keiner ist aus einem Live-Deployment oder kunden-gemessenen Ergebnissen abgeleitet.',
+      cells: [
+        { value: '~2,5×',   label: 'schärferes Gesicht bei gleicher Bitrate', sublabel: 'ROI-Encoding · komplett am Client' },
+        { value: '96 kbps', label: 'Audio bei 48 kHz Opus',                    sublabel: '3× Zooms Default für Tonalität und Atem' },
+        { value: '~50%',    label: 'Reduktion des Aufnahme-Speichers',         sublabel: 'Composite Recording · bessere klinische Inhalte' },
+        { value: '0',       label: 'erzeugte Emotions-Labels',                 sublabel: 'bewusst · EU AI Act + klinische Evidenz' },
+      ],
+    },
+    hr: {
+      caption: 'U brojkama',
+      note: 'Sve vrijednosti dolaze iz arhitektonske specifikacije i modela kapaciteta dokumentiranih u studiji; nijedna nije izvedena iz live deploymenta ili klijentskih mjerenja.',
+      cells: [
+        { value: '~2,5×',   label: 'oštrije lice pri istoj propusnosti',   sublabel: 'ROI kodiranje · sve na klijentu' },
+        { value: '96 kbps', label: 'audio pri 48 kHz Opus',                 sublabel: '3× Zoomov default za tonalnost i dah' },
+        { value: '~50%',    label: 'smanjenje pohrane snimaka',             sublabel: 'kompozitno snimanje · bolji klinički sadržaj' },
+        { value: '0',       label: 'generiranih oznaka emocija',            sublabel: 'svjesno · EU AI Act + klinička evidencija' },
+      ],
+    },
+  },
   'nfr-compliance-energy': {
     en: {
       caption: 'By the numbers',

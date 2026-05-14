@@ -22,6 +22,7 @@ export const TRANSLATED_PATHS = new Set<string>([
   '/work/cra-readiness-eu-manufacturer',
   '/work/nfr-compliance-energy',
   '/work/supply-chain-iac-saas-platform',
+  '/work/clinical-video-consultation-mental-health',
 ]);
 
 export function isTranslated(pathInsideLocale: string): boolean {
