@@ -4,7 +4,7 @@ sector: "EU mental-health services provider"
 engagementType: "Architecture design & technology selection · anonymised internal reference"
 year: "2026"
 region: "European Union"
-summary: "Designed and specified a self-hosted, EU-only video-consultation platform purpose-built for clinical mental-health consultations. Edge-ML architecture — face-mesh extraction, noise cancellation, ROI encoding, and adaptive framerate all run on the client; the server is a smart switch. Made the deliberate architectural choice not to do emotion recognition, despite the EU AI Act's medical exemption permitting it, because the clinical evidence does not support reliable emotion inference from facial expression. Composite recording (full video for high-activity segments, face-mesh + audio for low-activity stretches) cuts storage ~50% with strictly better clinical content. Per-session AES-256-GCM keys from HashiCorp Vault, crypto-shredding for GDPR Article 9 right-to-erasure in under 24 hours."
+summary: "Designed and specified a self-hosted, EU-only video-consultation platform purpose-built for clinical mental-health consultations. Edge-ML architecture — face-mesh extraction, noise cancellation, ROI encoding, and adaptive framerate all run on the client; the server is a smart switch. Made the deliberate architectural choice not to do emotion recognition, despite the EU AI Act's medical exemption permitting it, because the clinical evidence does not support reliable emotion inference from facial expression. A six-dimension cost-and-quality framework (CPU, RAM, storage, bandwidth, clinical quality, network resilience) applied across codec, recording, transcription, and storage tiering achieves an end-to-end **98% storage reduction** at the cold tier — €2,190/month down to €45–55/month at 500 sessions/day. Per-session AES-256-GCM keys from HashiCorp Vault, crypto-shredding for GDPR Article 9 right-to-erasure in under 24 hours."
 publishedAt: "2026-05-14"
 featured: true
 ---
@@ -19,7 +19,7 @@ The brief was to specify a self-hosted, EU-only video-consultation platform that
 
 1. Deliver clinically-superior audio and video — measurably better signal for the channels clinicians actually use, at the same or lower bandwidth than commodity platforms.
 2. Keep all data within the operator's EU perimeter — Hetzner Frankfurt, no third-party routing, no analytics, no data mining.
-3. Handle biometric data (face-mesh landmarks under GDPR Article 9) lawfully — explicit consent, purpose limitation, retention discipline, and a genuine right-to-erasure pathway.
+3. Handle biometric data (face-mesh landmarks under GDPR Article 9) lawfully — explicit consent, purpose limitation, retention discipline, and a genuine right-to-erasure pathway — and stand up to the rest of the applicable matrix: EHDS (HL7 FHIR R4 interoperability, patient access rights), NIS2 (healthcare as essential entity, 24h / 72h incident reporting, supply-chain security), ePrivacy (confidentiality of communications, dual consent for recording), ISO 27001 / 27799 (healthcare ISMS), and the national overlays for the primary expansion markets — Germany (Gematik TI, BSI C5, KBV telemedicine guidelines, DiGAV if a DiGA listing is pursued) and Croatia (HZZO integration, AZOP registration, eZdravlje compatibility).
 4. Stay clear of the EU AI Act's high-risk classification for emotion-recognition systems — both because the regulatory burden is enormous and because the clinical evidence does not support reliable emotion inference from facial expression.
 5. Be operable by a small team on commodity Hetzner hardware, with a cost envelope sized to support a long expansion runway before the first scaling event.
 
@@ -90,6 +90,42 @@ So the platform measures **movement** — magnitude of landmark delta between fr
 ### Cost engineering — scaling delayed 6–12 months
 
 A combination of **P2P-when-recording-not-required** (around 40% of sessions), **smart silence** (the listener side drops to 10 fps at 0.4 Mbps), **adaptive framerate**, and **delayed recording** (the formal recorded portion only spans the clinically relevant centre of a session, with P2P for small-talk before and scheduling after) lifts the concurrent-session capacity of a single €52 / month Hetzner box from a baseline of ~145 to approximately **~280**. The second server is needed at ~280 concurrent sessions instead of ~145 — the scaling event moves out by 6–12 months.
+
+### Transcription pipeline — self-hosted, multi-language, clinically reviewable
+
+Therapy sessions are transcribed post-session through a fully self-hosted pipeline — no third-party cloud ASR, audio never leaves the operator's infrastructure. The pipeline runs FFmpeg audio extraction → Silero VAD silence stripping → faster-whisper (Whisper large-v3-turbo via CTranslate2, INT8 quantisation, ~3–5 minutes per 50-minute session on an NVIDIA T4) → wav2vec2 forced word alignment → pyannote-audio 3.1 speaker diarization → JSONL with per-word timestamps, speaker labels, and confidence, compressed with zstd. Target accuracy: WER ≤ 8% on clean speech, ≤ 15% on spontaneous conversational speech, WDER ≤ 5% on two-speaker scenarios (the clinical setting is always two-speaker: clinician + patient). Core languages: Croatian, English, German, Italian — extensible to 99+ via Whisper. The transcript synchronises with the recording for word-level scrubbing, full-text search across all sessions, and timestamp-linked clinical annotations.
+
+### Storage economics — 98% reduction at the cold tier
+
+The 50% composite-recording number is one of four layers in the cumulative storage strategy. The full picture:
+
+- **Live transport codec**: VP9 SVC primary (25% upload-bandwidth reduction vs H.264 simulcast, instant quality-layer switching without keyframe wait), H.264 simulcast fallback for Safari and pre-2020 devices.
+- **Offline storage codec**: SVT-AV1 royalty-free with four-tier CRF tiering (CRF 30 hot / 35 warm / 38 cold archival), VMAF-matched against H.264 baseline at every tier. 64–67% storage reduction vs H.264 at equivalent visual quality.
+- **Composite recording**: per-segment full-video-vs-mesh-only decision driven by movement magnitude (not emotion), as described above. ~50% further reduction.
+- **Face-mesh compression**: 303 MB/hour raw → 10–15 MB/hour via delta-of-delta encoding + zstd dictionary + xxHash3-128 content dedup (93–95% reduction on the mesh stream).
+
+Cumulative effect: a 50-minute session that would be 4+ GB uncompressed lands at **50–60 MB at the cold tier**, including video, audio, face mesh geometry, and full transcript. Monthly storage cost for 500 sessions/day: approximately **€45–55**, versus **€2,190** for a naïve unoptimised implementation. The four-tier codec/retention strategy is paired with retention policies tied to the GDPR purpose-limitation analysis: hot tier 30 days, warm 90 days, cold archival to the lawful retention limit, then crypto-shredded.
+
+### Network resilience — degradation that the patient does not notice
+
+Therapy patients are not always on fibre. The platform's resilience stack:
+
+- **Five-tier audio degradation ladder**: Opus 96 kbps + RED (clinical-grade) → 64 kbps + FEC → 32 kbps → 16 kbps → Lyra V2 at 6 kbps (neural codec, intelligible at near-2G speeds). The handover is automatic, driven by the negotiated bandwidth estimate, and the patient does not see a quality dialog.
+- **Predictive ICE restart** for network transitions (Wi-Fi → mobile data, etc.): gap drops from the 4–7 second reactive default to under 500 ms.
+- **Therapy-tuned jitter buffer** (120 ms target) for fewer glitches at the cost of marginally more end-to-end latency — the trade-off favours stability for the clinical use case.
+- **FlexFEC + DSCP marking** for the transport layer, BBRv3 on the server side.
+
+### Compliance-driven architecture decisions, traced to clauses
+
+| Decision | Driving clause |
+|---|---|
+| End-to-end encryption (SFrame in Phase 2) | ePrivacy + GDPR Art. 32 — SFU cannot access media content |
+| Per-session AES-256-GCM with crypto-shredding | GDPR Art. 17 — deletion of the key constitutes deletion of all derived data |
+| EU-only infrastructure | GDPR Chapter V — no third-country adequacy complications |
+| Append-only hash-chained audit log | NIS2 + GDPR Art. 30 — tamper-evident processing records |
+| Consent-gated everything | GDPR Art. 9(2)(a) — explicit consent before any special-category processing |
+| Dual consent for recording | ePrivacy + national overlays — both parties consent on the record |
+| Movement detection, not emotion classification | EU AI Act Art. 5(1)(f) + Annex III analysis — stay clear of high-risk classification |
 
 ## Outcome
 

@@ -4,7 +4,7 @@ sector: "EU-Anbieter im Bereich psychischer Gesundheit"
 engagementType: "Architektur-Design & Technologie-Auswahl · anonymisierte interne Referenz"
 year: "2026"
 region: "Europäische Union"
-summary: "Entwurf und Spezifikation einer selbst-gehosteten, EU-only Video-Konsultations-Plattform speziell für klinische Konsultationen im Bereich psychischer Gesundheit. Edge-ML-Architektur — Face-Mesh-Extraktion, Geräuschunterdrückung, ROI-Encoding und adaptive Framerate laufen am Client; der Server ist ein intelligenter Switch. Die bewusste architektonische Entscheidung wurde getroffen, keine Emotionserkennung durchzuführen — obwohl die medizinische Ausnahme des EU AI Act sie zuließe — weil die klinische Evidenz keine zuverlässige Emotionsinferenz aus Gesichtsausdrücken stützt. Composite Recording (volles Video für High-Activity-Segmente, Face Mesh + Audio für Low-Activity-Strecken) reduziert Speicherbedarf um ~50% bei strikt besseren klinischen Inhalten. Pro-Sitzung AES-256-GCM-Schlüssel aus HashiCorp Vault, Crypto-Shredding für DSGVO Artikel-9 Recht auf Löschung in unter 24 Stunden."
+summary: "Entwurf und Spezifikation einer selbst-gehosteten, EU-only Video-Konsultations-Plattform speziell für klinische Konsultationen im Bereich psychischer Gesundheit. Edge-ML-Architektur — Face-Mesh-Extraktion, Geräuschunterdrückung, ROI-Encoding und adaptive Framerate laufen am Client; der Server ist ein intelligenter Switch. Die bewusste architektonische Entscheidung wurde getroffen, keine Emotionserkennung durchzuführen — obwohl die medizinische Ausnahme des EU AI Act sie zuließe — weil die klinische Evidenz keine zuverlässige Emotionsinferenz aus Gesichtsausdrücken stützt. Ein Sechs-Dimensionen-Kosten-und-Qualitäts-Framework (CPU, RAM, Speicher, Bandbreite, klinische Qualität, Netzwerk-Resilienz) angewandt über Codec, Aufzeichnung, Transkription und Speicher-Tiering erreicht eine end-to-end **98%-Speicher-Reduktion** auf der Cold-Tier — €2.190/Monat hinunter auf €45–55/Monat bei 500 Sitzungen/Tag. Pro-Sitzung AES-256-GCM-Schlüssel aus HashiCorp Vault, Crypto-Shredding für DSGVO Artikel-9 Recht auf Löschung in unter 24 Stunden."
 publishedAt: "2026-05-14"
 featured: true
 ---
@@ -19,7 +19,7 @@ Der Auftrag war, eine selbst-gehostete, EU-only Video-Konsultations-Plattform zu
 
 1. Klinisch überlegene Audio- und Video-Qualität liefert — messbar besseres Signal für die Kanäle, die Kliniker tatsächlich verwenden, bei gleicher oder geringerer Bandbreite als Commodity-Plattformen.
 2. Alle Daten innerhalb des EU-Perimeters des Betreibers behält — Hetzner Frankfurt, kein Dritt-Routing, keine Analytics, kein Data-Mining.
-3. Biometrische Daten (Face-Mesh-Landmarks unter DSGVO Artikel 9) rechtmäßig behandelt — ausdrückliche Einwilligung, Zweckbindung, Aufbewahrungs-Disziplin und ein echter Recht-auf-Löschung-Pfad.
+3. Biometrische Daten (Face-Mesh-Landmarks unter DSGVO Artikel 9) rechtmäßig behandelt — ausdrückliche Einwilligung, Zweckbindung, Aufbewahrungs-Disziplin und ein echter Recht-auf-Löschung-Pfad — und der restlichen anwendbaren Matrix standhalten: EHDS (HL7-FHIR-R4-Interoperabilität, Patienten-Zugriffsrechte), NIS2 (Gesundheitswesen als wichtige Einrichtung, 24h-/72h-Vorfalls-Meldung, Lieferketten-Sicherheit), ePrivacy (Vertraulichkeit der Kommunikation, doppelte Einwilligung für Aufzeichnung), ISO 27001 / 27799 (Healthcare-ISMS) und die nationalen Überlagerungen für die primären Expansions-Märkte — Deutschland (Gematik TI, BSI C5, KBV-Telemedizin-Richtlinien, DiGAV bei DiGA-Listing) und Kroatien (HZZO-Integration, AZOP-Registrierung, eZdravlje-Kompatibilität).
 4. Von der Hochrisiko-Klassifikation des EU AI Act für Emotionserkennungs-Systeme fernbleibt — sowohl weil die regulatorische Belastung enorm ist als auch weil die klinische Evidenz keine zuverlässige Emotionsinferenz aus Gesichtsausdrücken stützt.
 5. Von einem kleinen Team auf Commodity-Hetzner-Hardware betrieben werden kann, mit einer Kostenhülle, die einen langen Expansions-Vorlauf bis zum ersten Skalierungs-Ereignis trägt.
 
@@ -90,6 +90,42 @@ Die Plattform misst also **Bewegung** — die Magnitude des Landmark-Deltas zwis
 ### Kostenengineering — Skalierung um 6–12 Monate verschoben
 
 Eine Kombination aus **P2P-wenn-Aufzeichnung-nicht-erforderlich** (rund 40% der Sitzungen), **Smart Silence** (die Zuhörer-Seite sinkt auf 10 fps bei 0,4 Mbps), **adaptiver Framerate** und **verzögerter Aufzeichnung** (der formale aufgezeichnete Teil umfasst nur die klinisch relevante Mitte einer Sitzung, mit P2P für Smalltalk davor und Terminierung danach) hebt die Concurrent-Session-Kapazität einer einzelnen €52 / Monat Hetzner-Box von einer Baseline von ~145 auf etwa **~280**. Der zweite Server wird bei ~280 Concurrent-Sessions statt bei ~145 benötigt — das Skalierungs-Ereignis verschiebt sich um 6–12 Monate.
+
+### Transkriptions-Pipeline — selbst-gehostet, mehrsprachig, klinisch reviewbar
+
+Sitzungen werden post-Session über eine vollständig selbst-gehostete Pipeline transkribiert — kein Dritt-Cloud-ASR, Audio verlässt die Infrastruktur des Betreibers nie. Die Pipeline läuft FFmpeg-Audio-Extraktion → Silero-VAD-Stille-Stripping → faster-whisper (Whisper large-v3-turbo via CTranslate2, INT8-Quantisierung, ~3–5 Minuten pro 50-Minuten-Sitzung auf einer NVIDIA T4) → wav2vec2 erzwungene Wort-Ausrichtung → pyannote-audio 3.1 Sprecher-Diarisierung → JSONL mit Pro-Wort-Zeitstempeln, Sprecher-Labels und Konfidenz, zstd-komprimiert. Ziel-Genauigkeit: WER ≤ 8% auf sauberer Sprache, ≤ 15% auf spontaner Konversation, WDER ≤ 5% in Zwei-Sprecher-Szenarien (das klinische Setting ist immer Zwei-Sprecher: Kliniker + Patient). Kern-Sprachen: Kroatisch, Englisch, Deutsch, Italienisch — erweiterbar auf 99+ via Whisper. Das Transkript synchronisiert mit der Aufzeichnung für Wort-genaues Scrubbing, Volltext-Suche über alle Sitzungen und zeitstempel-verknüpfte klinische Annotationen.
+
+### Speicher-Ökonomie — 98% Reduktion auf der Cold-Tier
+
+Die 50%-Composite-Recording-Zahl ist eine von vier Schichten in der kumulativen Speicher-Strategie. Das vollständige Bild:
+
+- **Live-Transport-Codec**: VP9 SVC primär (25% Upload-Bandbreiten-Reduktion vs H.264-Simulcast, sofortiges Quality-Layer-Switching ohne Keyframe-Wartezeit), H.264-Simulcast-Fallback für Safari und Pre-2020-Geräte.
+- **Offline-Speicher-Codec**: SVT-AV1 lizenzfrei mit vier-stufigem CRF-Tiering (CRF 30 hot / 35 warm / 38 cold-archival), VMAF-abgeglichen gegen H.264-Baseline auf jeder Stufe. 64–67% Speicher-Reduktion vs H.264 bei gleicher visueller Qualität.
+- **Composite Recording**: Pro-Segment-Voll-Video-vs-Mesh-Only-Entscheidung, getrieben durch Bewegungs-Magnitude (nicht Emotion), wie oben beschrieben. ~50% weitere Reduktion.
+- **Face-Mesh-Kompression**: 303 MB/Stunde Roh → 10–15 MB/Stunde via Delta-of-Delta-Encoding + zstd-Wörterbuch + xxHash3-128-Content-Dedup (93–95% Reduktion auf dem Mesh-Stream).
+
+Kumulativer Effekt: eine 50-Minuten-Sitzung, die unkomprimiert 4+ GB wäre, landet bei **50–60 MB auf der Cold-Tier**, einschließlich Video, Audio, Face-Mesh-Geometrie und vollem Transkript. Monatliche Speicher-Kosten für 500 Sitzungen/Tag: etwa **€45–55**, gegenüber **€2.190** für eine naive nicht-optimierte Implementierung. Die vier-stufige Codec-/Aufbewahrungs-Strategie ist mit Aufbewahrungs-Richtlinien gekoppelt, die an die DSGVO-Zweckbindungs-Analyse gebunden sind: Hot-Tier 30 Tage, Warm 90 Tage, Cold-Archival bis zur gesetzlichen Aufbewahrungsgrenze, dann crypto-shredded.
+
+### Netzwerk-Resilienz — Degradation, die der Patient nicht bemerkt
+
+Patienten sind nicht immer auf Glasfaser. Der Resilienz-Stack der Plattform:
+
+- **Fünf-stufige Audio-Degradations-Leiter**: Opus 96 kbps + RED (klinisch) → 64 kbps + FEC → 32 kbps → 16 kbps → Lyra V2 bei 6 kbps (neuronaler Codec, verständlich bei nahezu-2G-Geschwindigkeiten). Die Umschaltung ist automatisch, getrieben durch die ausgehandelte Bandbreiten-Schätzung, und der Patient sieht keinen Qualitäts-Dialog.
+- **Predictive ICE-Restart** für Netzwerk-Übergänge (Wi-Fi → Mobilfunk, etc.): Lücke fällt vom 4–7-Sekunden-reaktiven Default unter 500 ms.
+- **Therapie-getunter Jitter-Buffer** (120 ms Ziel) für weniger Glitches zum Preis marginal höherer End-to-End-Latenz — der Trade-off begünstigt Stabilität für den klinischen Use-Case.
+- **FlexFEC + DSCP-Markierung** für die Transport-Schicht, BBRv3 auf der Server-Seite.
+
+### Compliance-getriebene Architektur-Entscheidungen, an Klauseln rückverfolgbar
+
+| Entscheidung | Treibende Klausel |
+|---|---|
+| End-to-End-Verschlüsselung (SFrame in Phase 2) | ePrivacy + DSGVO Art. 32 — SFU kann auf Medien-Inhalt nicht zugreifen |
+| Pro-Sitzung AES-256-GCM mit Crypto-Shredding | DSGVO Art. 17 — Löschung des Schlüssels = Löschung aller abgeleiteten Daten |
+| EU-only-Infrastruktur | DSGVO Kapitel V — keine Drittland-Adäquanz-Komplikationen |
+| Append-only Hash-verkettetes Audit-Log | NIS2 + DSGVO Art. 30 — manipulationsfeste Verarbeitungs-Aufzeichnungen |
+| Einwilligungs-gegatete Verarbeitung | DSGVO Art. 9(2)(a) — ausdrückliche Einwilligung vor jeder besonderen-Kategorie-Verarbeitung |
+| Doppelte Einwilligung für Aufzeichnung | ePrivacy + nationale Überlagerungen — beide Parteien willigen aktenkundig ein |
+| Bewegungs-Detektion statt Emotions-Klassifikation | EU-AI-Act Art. 5(1)(f) + Anhang-III-Analyse — Hochrisiko-Klassifikation vermeiden |
 
 ## Ergebnis
 

@@ -89,7 +89,7 @@ const strips: Record<string, SlugStrips> = {
       cells: [
         { value: '~2.5×',   label: 'sharper face at same total bitrate', sublabel: 'ROI encoding · all on the client' },
         { value: '96 kbps', label: 'audio at 48 kHz Opus',                sublabel: '3× Zoom\'s default for tonality and breath' },
-        { value: '~50%',    label: 'recording storage reduction',         sublabel: 'composite recording · better clinical content' },
+        { value: '98%',     label: 'storage reduction at cold tier',      sublabel: 'codec + composite + mesh compression + retention' },
         { value: '0',       label: 'emotion labels generated',            sublabel: 'deliberate · EU AI Act + clinical evidence' },
       ],
     },
@@ -99,7 +99,7 @@ const strips: Record<string, SlugStrips> = {
       cells: [
         { value: '~2,5×',   label: 'schärferes Gesicht bei gleicher Bitrate', sublabel: 'ROI-Encoding · komplett am Client' },
         { value: '96 kbps', label: 'Audio bei 48 kHz Opus',                    sublabel: '3× Zooms Default für Tonalität und Atem' },
-        { value: '~50%',    label: 'Reduktion des Aufnahme-Speichers',         sublabel: 'Composite Recording · bessere klinische Inhalte' },
+        { value: '98%',     label: 'Speicher-Reduktion auf der Cold-Tier',     sublabel: 'Codec + Composite + Mesh-Kompression + Retention' },
         { value: '0',       label: 'erzeugte Emotions-Labels',                 sublabel: 'bewusst · EU AI Act + klinische Evidenz' },
       ],
     },
@@ -109,7 +109,7 @@ const strips: Record<string, SlugStrips> = {
       cells: [
         { value: '~2,5×',   label: 'oštrije lice pri istoj propusnosti',   sublabel: 'ROI kodiranje · sve na klijentu' },
         { value: '96 kbps', label: 'audio pri 48 kHz Opus',                 sublabel: '3× Zoomov default za tonalnost i dah' },
-        { value: '~50%',    label: 'smanjenje pohrane snimaka',             sublabel: 'kompozitno snimanje · bolji klinički sadržaj' },
+        { value: '98%',     label: 'smanjenje pohrane na cold-tieru',       sublabel: 'kodek + kompozit + mesh kompresija + retencija' },
         { value: '0',       label: 'generiranih oznaka emocija',            sublabel: 'svjesno · EU AI Act + klinička evidencija' },
       ],
     },

@@ -4,7 +4,7 @@ sector: "EU pružatelj usluga mentalnog zdravlja"
 engagementType: "Dizajn arhitekture i odabir tehnologije · anonimizirana interna referenca"
 year: "2026"
 region: "Europska unija"
-summary: "Osmišljena i specificirana self-hosted, EU-only platforma za video konzultacije namjenski izgrađena za kliničke konzultacije u području mentalnog zdravlja. Edge-ML arhitektura — ekstrakcija face mesha, smanjenje šuma, ROI kodiranje i adaptivna brzina sličica izvršavaju se na klijentu; server je inteligentni preklopnik. Donesena svjesna arhitektonska odluka da se ne provodi prepoznavanje emocija — iako medicinska iznimka EU AI Acta to dopušta — jer klinička evidencija ne podržava pouzdanu inferenciju emocija iz izraza lica. Kompozitno snimanje (puni video za segmente visoke aktivnosti, face mesh + audio za dijelove niske aktivnosti) smanjuje pohranu ~50% uz strogo bolji klinički sadržaj. Po-sesijski AES-256-GCM ključevi iz HashiCorp Vaulta, crypto-shredding za GDPR članak 9 pravo na brisanje u manje od 24 sata."
+summary: "Osmišljena i specificirana self-hosted, EU-only platforma za video konzultacije namjenski izgrađena za kliničke konzultacije u području mentalnog zdravlja. Edge-ML arhitektura — ekstrakcija face mesha, smanjenje šuma, ROI kodiranje i adaptivna brzina sličica izvršavaju se na klijentu; server je inteligentni preklopnik. Donesena svjesna arhitektonska odluka da se ne provodi prepoznavanje emocija — iako medicinska iznimka EU AI Acta to dopušta — jer klinička evidencija ne podržava pouzdanu inferenciju emocija iz izraza lica. Šesterodimenzionalni okvir troška-i-kvalitete (CPU, RAM, pohrana, propusnost, klinička kvaliteta, otpornost mreže) primijenjen na kodek, snimanje, transkripciju i tiering pohrane postiže end-to-end **smanjenje pohrane od 98%** na cold-tieru — €2.190/mjesec na €45–55/mjesec pri 500 sesija/dan. Po-sesijski AES-256-GCM ključevi iz HashiCorp Vaulta, crypto-shredding za GDPR članak 9 pravo na brisanje u manje od 24 sata."
 publishedAt: "2026-05-14"
 featured: true
 ---
@@ -19,7 +19,7 @@ Zadatak je bio specificirati self-hosted, EU-only platformu za video konzultacij
 
 1. Isporučila klinički superiorniju audio i video kvalitetu — mjerljivo bolji signal za kanale koje kliničari zapravo koriste, pri istoj ili manjoj propusnosti od commodity platformi.
 2. Sve podatke zadržala unutar EU perimetra operatora — Hetzner Frankfurt, bez usmjeravanja kroz treće strane, bez analitike, bez rudarenja podataka.
-3. Biometrijske podatke (face mesh oznake pod GDPR člankom 9) tretirala zakonito — eksplicitni pristanak, ograničenje svrhe, disciplina čuvanja i stvaran put do prava na brisanje.
+3. Biometrijske podatke (face mesh oznake pod GDPR člankom 9) tretirala zakonito — eksplicitni pristanak, ograničenje svrhe, disciplina čuvanja i stvaran put do prava na brisanje — i izdržala ostatak primjenjive matrice: EHDS (HL7 FHIR R4 interoperabilnost, prava pristupa pacijenata), NIS2 (zdravstvo kao značajan subjekt, prijava incidenata 24h / 72h, sigurnost opskrbnog lanca), ePrivacy (povjerljivost komunikacija, dvostruki pristanak za snimanje), ISO 27001 / 27799 (zdravstveni ISMS) i nacionalne slojeve za primarna tržišta ekspanzije — Njemačku (Gematik TI, BSI C5, KBV smjernice za telemedicinu, DiGAV za DiGA listing) i Hrvatsku (HZZO integracija, AZOP registracija, eZdravlje kompatibilnost).
 4. Ostala podalje od visokorizične klasifikacije EU AI Acta za sustave prepoznavanja emocija — i jer je regulatorni teret enorman i jer klinička evidencija ne podržava pouzdanu inferenciju emocija iz izraza lica.
 5. Bila operabilna od strane malog tima na commodity Hetzner hardveru, s troškovnom omotnicom dimenzioniranom za dugu ekspanzijsku stazu prije prvog događaja skaliranja.
 
@@ -90,6 +90,42 @@ Platforma stoga mjeri **pokret** — magnitudu delte oznaka između sličica —
 ### Troškovno inženjerstvo — skaliranje odgođeno 6–12 mjeseci
 
 Kombinacija **P2P-kad-snimanje-nije-potrebno** (oko 40% sesija), **smart silencea** (strana koja sluša pada na 10 fps pri 0,4 Mbps), **adaptivne brzine sličica** i **odgođenog snimanja** (formalni snimljeni dio obuhvaća samo klinički relevantni središnji dio sesije, s P2P-om za small talk prije i terminiranje nakon) podiže kapacitet konkurentnih sesija jedne €52 / mjesečne Hetzner kutije s baseline-a od ~145 na otprilike **~280**. Drugi server potreban je pri ~280 konkurentnih sesija umjesto pri ~145 — događaj skaliranja pomiče se 6–12 mjeseci dalje.
+
+### Transkripcijski cjevovod — self-hosted, višejezičan, klinički provjerljiv
+
+Sesije se transkribiraju post-sesije kroz potpuno self-hosted cjevovod — bez treće strane cloud ASR-a, audio nikad ne napušta infrastrukturu operatora. Cjevovod prolazi FFmpeg ekstrakcija audija → Silero VAD uklanjanje tišine → faster-whisper (Whisper large-v3-turbo preko CTranslate2, INT8 kvantizacija, ~3–5 minuta po 50-minutnoj sesiji na NVIDIA T4) → wav2vec2 prisilno usklađivanje riječi → pyannote-audio 3.1 dijarizacija govornika → JSONL s vremenskim oznakama po riječi, oznakama govornika i pouzdanostima, zstd-komprimirano. Ciljana točnost: WER ≤ 8% na čistom govoru, ≤ 15% na spontanom razgovoru, WDER ≤ 5% u dvogovorničkim scenarijima (kliničko okruženje uvijek je dva govornika: kliničar + pacijent). Osnovni jezici: hrvatski, engleski, njemački, talijanski — proširivo na 99+ kroz Whisper. Transkript se sinkronizira sa snimkom za scrubbanje po riječi, pretragu cijelog teksta kroz sve sesije i kliničke anotacije vezane uz vremenske oznake.
+
+### Ekonomija pohrane — 98% smanjenje na cold-tieru
+
+50%-tna brojka iz kompozitnog snimanja jedna je od četiri sloja u kumulativnoj strategiji pohrane. Cijela slika:
+
+- **Live transport kodek**: VP9 SVC primarni (25% smanjenje upload propusnosti naspram H.264 simulcast-a, trenutno prebacivanje slojeva kvalitete bez čekanja keyframea), H.264 simulcast fallback za Safari i uređaje prije 2020.
+- **Offline kodek za pohranu**: SVT-AV1 royalty-free s četverostepenim CRF tieringom (CRF 30 hot / 35 warm / 38 cold-archival), VMAF-uspoređen s H.264 baseline-om na svakom stupnju. 64–67% smanjenja pohrane naspram H.264 pri istoj vizualnoj kvaliteti.
+- **Kompozitno snimanje**: odluka puni-video-vs-samo-mesh po segmentu, vođena magnitudom pokreta (ne emocijom), kako je opisano gore. ~50% daljnjeg smanjenja.
+- **Kompresija face mesha**: 303 MB/sat sirovo → 10–15 MB/sat kroz delta-od-delte encoding + zstd rječnik + xxHash3-128 sadržajna deduplikacija (93–95% smanjenja na mesh streamu).
+
+Kumulativni učinak: 50-minutna sesija koja bi nekomprimirana bila 4+ GB pristaje na **50–60 MB na cold-tieru**, uključujući video, audio, geometriju face mesha i puni transkript. Mjesečni trošak pohrane za 500 sesija/dan: otprilike **€45–55**, naspram **€2.190** za naivnu neoptimiziranu implementaciju. Četverostepena kodek-/retencijska strategija sparena je s politikama čuvanja vezanim uz analizu ograničenja svrhe iz GDPR-a: hot 30 dana, warm 90 dana, cold-archival do zakonske granice čuvanja, zatim crypto-shredded.
+
+### Otpornost mreže — degradacija koju pacijent ne primjećuje
+
+Pacijenti nisu uvijek na optičkom vlaknu. Stack otpornosti platforme:
+
+- **Petostepena ljestvica degradacije zvuka**: Opus 96 kbps + RED (klinička kvaliteta) → 64 kbps + FEC → 32 kbps → 16 kbps → Lyra V2 pri 6 kbps (neuralni kodek, razumljivo pri gotovo 2G brzinama). Promjena je automatska, vođena dogovorenom procjenom propusnosti, i pacijent ne vidi dijalog o kvaliteti.
+- **Prediktivni ICE restart** za prijelaze mreže (Wi-Fi → mobilna mreža, itd.): praznina pada s 4–7-sekundnog reaktivnog defaulta na ispod 500 ms.
+- **Jitter buffer naštiman za terapiju** (cilj 120 ms) za manje glitcheva po cijeni marginalno veće end-to-end latencije — kompromis pogoduje stabilnosti za klinički use-case.
+- **FlexFEC + DSCP označavanje** za transportni sloj, BBRv3 na strani servera.
+
+### Arhitektonske odluke vođene sukladnošću, povezive s klauzulama
+
+| Odluka | Pokretačka klauzula |
+|---|---|
+| End-to-end enkripcija (SFrame u Fazi 2) | ePrivacy + GDPR čl. 32 — SFU ne može pristupiti sadržaju medija |
+| Po-sesijski AES-256-GCM s crypto-shreddingom | GDPR čl. 17 — brisanje ključa = brisanje svih izvedenih podataka |
+| EU-only infrastruktura | GDPR poglavlje V — bez komplikacija adekvatnosti trećih zemalja |
+| Append-only hash-vezan audit log | NIS2 + GDPR čl. 30 — zapisi obrade otporni na manipulaciju |
+| Obrada uvjetovana pristankom | GDPR čl. 9(2)(a) — eksplicitan pristanak prije svake obrade posebnih kategorija |
+| Dvostruki pristanak za snimanje | ePrivacy + nacionalni slojevi — obje strane pristaju u zapisniku |
+| Detekcija pokreta umjesto klasifikacije emocija | EU AI Act čl. 5(1)(f) + analiza Aneksa III — izbjegavanje visokorizične klasifikacije |
 
 ## Ishod
 
