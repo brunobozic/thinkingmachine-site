@@ -41,7 +41,7 @@ The 30-day clock allows time for forensic investigation — which is realistic, 
 
 ## Single Reporting Platform — one inbox, one credential
 
-The ENISA Single Reporting Platform is the single technical interface for these notifications across the EU. A manufacturer files once; the relevant national authorities receive the notification through the platform. The platform is operational from 11 September 2026.
+The ENISA Single Reporting Platform is the single technical interface for these notifications across the EU. A manufacturer files once; the relevant national authorities receive the notification through the platform. The Regulation requires the platform to be operational by 11 September 2026 — ENISA's actual deployment timeline is the relevant risk to monitor.
 
 Practical implication: the credentials for the Single Reporting Platform need to exist *before* the first 24-hour notification is filed. Setting up the credentials during an incident is exactly the wrong time. The runbook step is to register, designate the responsible-person role, and complete the platform onboarding well before any product is shipped under CRA scope. We have seen organisations leave this until the week of Cliff 1 — that is the worst time to discover that the role authorisation requires a senior-management signature.
 
