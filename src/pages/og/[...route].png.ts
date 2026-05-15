@@ -92,13 +92,10 @@ export const { getStaticPaths, GET } = OGImageRoute({
         lineHeight: 1.4,
       },
     },
-    logo: {
-      // No bitmap logo asset yet; the "Thinking Machine" wordmark is rendered
-      // as a text bar by astro-og-canvas's logo position when path is omitted.
-      // If/when a square brand mark exists, drop it at public/og-logo.png
-      // (200×200) and reference it here.
-      // path: './public/og-logo.png',
-      // size: [120],
-    },
+    // No `logo` key set — astro-og-canvas errors with `fs.open(undefined)`
+    // when `logo` is an object with no `path`. When a square brand mark
+    // becomes available, drop a 200×200 PNG at public/og-logo.png and add
+    // (don't comment-in):
+    //   logo: { path: './public/og-logo.png', size: [120, 120] }
   }),
 });
