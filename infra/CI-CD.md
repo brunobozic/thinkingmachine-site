@@ -11,26 +11,42 @@ git push origin main
         ▼
 GitHub Actions: .github/workflows/deploy.yml
         │
-        ├─ checkout
-        ├─ setup-node (Node 20)
-        ├─ npm ci
-        ├─ npm run check           ── TypeScript + content collections valid?
-        ├─ npm run build           ── dist/ + sitemap + OG images
-        ├─ docker build            ── nginx-alpine wraps dist/
-        ├─ docker push → GHCR      ── ghcr.io/brunobozic/thinkingmachine-site
-        ├─ ssh → Hetzner VPS       ── deploy key auth
-        │     │
-        │     ▼
-        │  on the VPS:
-        │  ─ docker login ghcr.io
-        │  ─ docker pull <image>
-        │  ─ docker compose up -d
-        │  ─ docker image prune -f
+        ├─ build-and-push job:
+        │   ├─ checkout
+        │   ├─ docker buildx build (Dockerfile = npm install + astro build + nginx-alpine wrap)
+        │   ├─ tag :latest and :<short-sha>
+        │   └─ push → GHCR (ghcr.io/brunobozic/thinkingmachine-site)
         │
-        └─ health check            ── curl https://thinkingmachine.uk/ → 200
+        └─ notify-vps job (if WEBHOOK_URL secret is set):
+            └─ POST https://hooks.thinkingmachine.uk/hooks/redeploy
+                Authorization: Bearer ${{ secrets.WEBHOOK_TOKEN }}
+                    │
+                    ▼
+            VPS (tm-webhook container, adnanh/webhook):
+            ─ validates bearer token (constant-time)
+            ─ runs /scripts/redeploy.sh which does:
+              docker compose pull thinkingmachine-site
+              docker compose up -d thinkingmachine-site
+              docker image prune -f
+                    │
+                    ▼
+            https://thinkingmachine.uk now serves the new image.
+            Traefik picks up the swap with zero downtime.
 ```
 
 Total elapsed: **90–120 seconds** from push to verified live.
+
+## Fallback if the webhook isn't wired
+
+The `notify-vps` job degrades gracefully — if `WEBHOOK_URL` or `WEBHOOK_TOKEN`
+are missing from repo secrets, it logs a warning and exits 0 (doesn't fail the
+workflow). In that case you need to SSH and pull manually:
+
+```bash
+ssh <deploy_user>@<vps>
+cd /opt/thinkingmachine-site
+docker compose pull && docker compose up -d
+```
 
 ## Required GitHub repo secrets
 

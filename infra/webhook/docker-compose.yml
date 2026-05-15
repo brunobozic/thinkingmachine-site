@@ -1,0 +1,75 @@
+# Webhook receiver — auto-pulls and restarts the site container on GHCR push.
+#
+# How it fits in:
+#   GitHub Actions (deploy.yml notify-vps job) POSTs to https://hooks.thinkingmachine.uk/hooks/redeploy
+#   → Traefik routes to this container on the traefik network
+#   → adnanh/webhook validates the bearer token from the Authorization header
+#   → executes /scripts/redeploy.sh inside the container
+#   → script pulls the new image and rolls the site container
+#
+# One-time deploy on VPS:
+#   1. Generate a strong token:  openssl rand -hex 32
+#   2. Add the same token to two places:
+#        a) GitHub repo Secrets:  Settings → Secrets → Actions → New repo secret
+#             WEBHOOK_TOKEN = <token>
+#             WEBHOOK_URL = https://hooks.thinkingmachine.uk/hooks/redeploy
+#        b) VPS environment file at /etc/thinkingmachine/webhook.env:
+#             WEBHOOK_TOKEN=<token>
+#   3. Add DNS A record: hooks.thinkingmachine.uk → VPS public IP (proxied through Cloudflare)
+#   4. Bring it up:  docker compose -f infra/webhook/docker-compose.yml up -d
+#   5. Test: curl -H "Authorization: Bearer $WEBHOOK_TOKEN" https://hooks.thinkingmachine.uk/hooks/redeploy
+#      Should return "redeploy triggered" and you should see the site container restart in `docker ps`.
+
+services:
+  webhook:
+    image: ghcr.io/thecatlady/webhook:2.8.2
+    container_name: tm-webhook
+    restart: unless-stopped
+    env_file: /etc/thinkingmachine/webhook.env
+    # Mount the docker socket so the hook can run `docker compose pull/up`
+    # against the host's docker daemon. Read-only mount on the socket is
+    # NOT possible here because compose needs write to the API; mitigation
+    # is the bearer-token gate + the script being narrow-scoped.
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./hooks.yaml:/etc/webhook/hooks.yaml:ro
+      - ./scripts:/scripts:ro
+      # Mount the site compose stack so the script can run `docker compose`
+      # against it. Adjust path if the site stack lives elsewhere on your VPS.
+      - /opt/thinkingmachine-site:/opt/thinkingmachine-site:ro
+    # adnanh/webhook listens on 9000 by default
+    expose:
+      - "9000"
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.tm-webhook.rule=Host(`hooks.thinkingmachine.uk`)"
+      - "traefik.http.routers.tm-webhook.entrypoints=websecure"
+      - "traefik.http.routers.tm-webhook.tls=true"
+      - "traefik.http.routers.tm-webhook.tls.certresolver=letsencrypt"
+      - "traefik.http.services.tm-webhook.loadbalancer.server.port=9000"
+      # Same security headers middleware as the main site — defence in depth
+      - "traefik.http.routers.tm-webhook.middlewares=secure-headers@file,rate-limit-default@file"
+    # Defensive: tight resource limits and capability drop. The webhook
+    # process needs to fork docker CLI, so we can't drop ALL caps.
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+      - DAC_OVERRIDE
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 64M
+          pids: 50
+
+networks:
+  traefik:
+    external: true

@@ -1,0 +1,26 @@
+# adnanh/webhook hooks definition.
+# Single hook: /hooks/redeploy
+#
+# Authentication: bearer token in the Authorization header, compared against
+# WEBHOOK_TOKEN env var. Constant-time match handled by webhook's match-strict.
+# No body params required — the script always pulls :latest from GHCR.
+#
+# Rate limit: handled at Traefik (rate-limit-default middleware).
+
+- id: redeploy
+  execute-command: /scripts/redeploy.sh
+  command-working-directory: /opt/thinkingmachine-site
+  response-message: "redeploy triggered"
+  response-headers:
+    - name: "X-Webhook-Source"
+      value: "tm-webhook"
+  http-methods:
+    - POST
+  # Bearer token auth on the Authorization header.
+  trigger-rule:
+    match:
+      type: value
+      value: "Bearer {env_WEBHOOK_TOKEN}"
+      parameter:
+        source: header
+        name: Authorization
