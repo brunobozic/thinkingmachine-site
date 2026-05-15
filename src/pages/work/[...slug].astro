@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CRARegulatoryClock from '../../components/CRARegulatoryClock.astro';
+import SupplyChainCaseStudyCharts from '../../components/SupplyChainCaseStudyCharts.astro';
+import CaseStudyNumbersStrip from '../../components/CaseStudyNumbersStrip.astro';
+import { getNumbersStrip } from '../../i18n/case-study-strips';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -24,8 +27,11 @@ const { title, sector, engagementType, year, region, summary, publishedAt } = st
 
 // Slug-conditional charts: keep the case-study .md files clean and inject
 // data visualisations from the layout where the data has structure worth
-// showing.
+// showing. Same set of components rendered on /de/work/<slug> and
+// /hr/work/<slug>; EN was missing parity until this commit.
 const isCRA = study.slug === 'cra-readiness-eu-manufacturer';
+const isSupplyChain = study.slug === 'supply-chain-iac-saas-platform';
+const numbersStrip = getNumbersStrip(study.slug, 'en');
 
 // Case studies carry Article semantics for structured-data purposes —
 // authored, dated, with a stable publication identity. Falls back to the
@@ -70,9 +76,21 @@ const articleDate = publishedAt || `${year}-01-01`;
       </dl>
     </header>
 
+    {numbersStrip && (
+      <div class="max-w-4xl mx-auto mb-8">
+        <CaseStudyNumbersStrip caption={numbersStrip.caption} note={numbersStrip.note} cells={numbersStrip.cells} />
+      </div>
+    )}
+
     {isCRA && (
       <div class="max-w-4xl mx-auto mb-12">
         <CRARegulatoryClock />
+      </div>
+    )}
+
+    {isSupplyChain && (
+      <div class="max-w-4xl mx-auto mb-12">
+        <SupplyChainCaseStudyCharts locale="en" />
       </div>
     )}
 
