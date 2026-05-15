@@ -1,0 +1,42 @@
+[Unit]
+Description=Thinking Machine deploy webhook
+After=docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/webhook -verbose -hotreload -hooks /etc/webhook.yml -port 9001 -ip 0.0.0.0
+Restart=on-failure
+RestartSec=5s
+
+# Hardening — least privilege (compatible with Go runtime)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectClock=true
+ProtectHostname=true
+ProtectProc=invisible
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+ReadOnlyPaths=/etc/webhook.yml /etc/thinkingmachine
+# Allow reading the redeploy script + writing nothing
+ReadWritePaths=
+# Resource limits
+TasksMax=64
+MemoryMax=64M
+IPAccounting=true
+
+# NOTE: SystemCallFilter=@system-service breaks Go runtime (status=31/SYS).
+# NOTE: MemoryDenyWriteExecute=true breaks Go GC/JIT.
+# Both intentionally omitted after testing.
+
+[Install]
+WantedBy=multi-user.target

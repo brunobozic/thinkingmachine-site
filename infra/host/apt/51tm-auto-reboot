@@ -1,0 +1,7 @@
+// Unattended-upgrades auto-reboot config. Installed at:
+//   /etc/apt/apt.conf.d/51tm-auto-reboot
+// Kernel upgrades that need a reboot now trigger one at 03:30 UTC.
+
+Unattended-Upgrade::Automatic-Reboot "true";
+Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
+Unattended-Upgrade::Automatic-Reboot-Time "03:30";

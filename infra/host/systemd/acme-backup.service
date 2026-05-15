@@ -1,0 +1,6 @@
+[Unit]
+Description=Daily Lets Encrypt acme.json backup
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "cp /srv/traefik/letsencrypt/acme.json /var/backups/traefik/acme-$(date +%%Y%%m%%d).json && find /var/backups/traefik -name 'acme-*.json' -mtime +14 -delete"

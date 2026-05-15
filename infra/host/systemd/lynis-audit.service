@@ -1,0 +1,9 @@
+[Unit]
+Description=Weekly Lynis security audit
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/lynis audit system --quiet --no-colors --logfile /var/log/lynis-weekly.log
+Nice=15
+IOSchedulingClass=idle
