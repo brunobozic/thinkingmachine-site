@@ -3,7 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import { getCollection } from 'astro:content';
 
-const studies = (await getCollection('case-studies', ({ data }) => !data.draft))
+// EN /work: only EN-locale studies (slugs without `de/` or `hr/` prefix).
+// Without this filter the index renders 15 cards (5 × 3 locales) with
+// mixed-language titles and summaries.
+const studies = (await getCollection('case-studies', ({ slug, data }) =>
+  !data.draft && !slug.startsWith('de/') && !slug.startsWith('hr/')
+))
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
 
 const sectorsCovered = [...new Set(studies.map(s => s.data.sector))];

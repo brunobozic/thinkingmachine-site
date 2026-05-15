@@ -3,7 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import { getCollection } from 'astro:content';
 
-const allStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+// DE home: only DE-localised studies (slugs under `case-studies/de/*`).
+// Without this filter the home page renders all 15 cards (5 × 3 locales)
+// with mixed-language titles/summaries and English CTAs.
+const allStudies = await getCollection('case-studies', ({ slug, data }) =>
+  !data.draft && slug.startsWith('de/')
+);
 const featured = allStudies
   .filter(s => s.data.featured)
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
@@ -231,7 +236,7 @@ const faqJsonLd = {
     </div>
     <p class="text-ink-500 text-sm mb-6">Fallstudien sind derzeit nur in englischer Sprache verfügbar.</p>
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {featured.map(study => <CaseStudyCard study={study} />)}
+      {featured.map(study => <CaseStudyCard study={study} locale="de" />)}
     </div>
   </section>
 
