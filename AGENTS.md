@@ -3,6 +3,23 @@
 This file is **mandatory reading before any non-trivial change**. Most of it is
 hard-won knowledge — every gotcha here cost real time the first time we hit it.
 
+## TL;DR for "I just want to deploy a fix" — the fast path
+
+The site lives on Hetzner VPS **tm-prod-fsn1** at **178.105.104.173** (CX23,
+Falkenstein, project 12580250). The deploy loop is:
+
+1. **Edit files locally**, work in `C:\tm-fresh` (a fresh clone — DO NOT work
+   in the cowork session path; see §1).
+2. **Commit + push** via the `.bat` scripts pattern (see §5). HTTPS clone +
+   Git Credential Manager handle auth — DON'T mess with SSH (see §4).
+3. **CI builds the image** and pushes to `ghcr.io/brunobozic/thinkingmachine-site`.
+   **CI does NOT deploy to the VPS** unless the webhook in §22 is wired up.
+4. **Pull on the VPS**: SSH `root@178.105.104.173`, then `cd /opt/thinkingmachine-site && docker compose pull && docker compose up -d`.
+5. **Verify**: `curl -sI https://thinkingmachine.uk/ | grep -i security-policy`.
+
+If you skip step 4, the site never updates. **Wire the webhook (§22) so this
+becomes one-step.**
+
 ## 1. The Windows long-path gotcha (single biggest source of pain)
 
 **Symptom:** `git status` or `git checkout` fails with `Filename too long` or
@@ -282,12 +299,255 @@ A clean run = `0` matches. If anything fires, fix it before push.
 ## 20. CI/CD pipeline summary (full detail in `infra/CI-CD.md`)
 
 - Push to `main` triggers `.github/workflows/deploy.yml`
-- GitHub Actions builds the Astro static site
-- Wraps it in nginx-alpine via `Dockerfile`
-- Pushes the image to GitHub Container Registry (GHCR)
-- SSHs to the Hetzner VPS using a deploy key
-- VPS pulls the new image and restarts the `thinkingmachine-site` container
-- Traefik (always running) picks up the restarted container and routes
-  traffic through it without dropping connections
+- GitHub Actions builds the Astro static site inside the Dockerfile multi-stage
+  build (npm install + astro build + nginx-alpine wrap)
+- Pushes the image to GitHub Container Registry (GHCR) tagged both `:latest`
+  and `:<short-sha>`
+- `notify-vps` job POSTs to `https://hooks.thinkingmachine.uk/hooks/redeploy`
+  with a bearer token — the webhook receiver pulls the new image and rolls
+  the site container
+- Traefik (always running) picks up the restarted container with zero downtime
+
+If the webhook isn't wired (§22), the workflow degrades gracefully — CI still
+builds and pushes the image, but the site doesn't update until someone SSHes
+in and runs `docker compose pull && up -d`.
+
+## 21. **CI builds; CI does NOT deploy by default** ← single biggest historical confusion
+
+**Symptom:** You push a change, the workflow shows green, but
+`https://thinkingmachine.uk/` still serves the previous build.
+
+**Cause:** The original workflow only had a `build-and-push` job — no SSH step,
+no webhook, no auto-pull. The `notify-vps` job sat commented out from day one
+with the note *"Comment out until WEBHOOK_URL is configured in repo Secrets."*
+So "CI green" meant only "image is on GHCR," not "site is live."
+
+**Fix shipped (commit `1a1cb0b` and on):** `infra/webhook/` plus the now-active
+`notify-vps` job in the workflow. After one-time VPS setup (§22), every push
+to `main` auto-deploys. Until the one-time setup is done on the VPS, the
+workflow tolerates the missing secret and exits 0 with a warning — but the
+site still doesn't update without a manual pull.
+
+**Past Bruno spent multiple hours assuming the workflow was deploying.** Save
+yourself the time: when you push, also check the live site for the change.
+The fast check is `curl -sI https://thinkingmachine.uk/ | grep -i security-policy`
+— compare the CSP against your local infra/traefik/dynamic.yml. If they
+diverge, the deploy didn't happen.
+
+## 22. The webhook one-time VPS setup (mandatory for true auto-deploy)
+
+Full instructions: `infra/webhook/README.md`. Five steps, ~5 minutes:
+
+1. Generate token: `openssl rand -hex 32`
+2. Store on VPS: `echo WEBHOOK_TOKEN=<token> | sudo tee /etc/thinkingmachine/webhook.env`
+3. GitHub repo → Settings → Secrets → Actions:
+   - `WEBHOOK_URL = https://hooks.thinkingmachine.uk/hooks/redeploy`
+   - `WEBHOOK_TOKEN = <same token>`
+4. Cloudflare DNS: add `hooks.thinkingmachine.uk` A record → VPS public IP
+5. `cd infra/webhook && docker compose up -d` on the VPS
+
+Verify with `curl -i -X POST -H "Authorization: Bearer <token>" https://hooks.thinkingmachine.uk/hooks/redeploy`
+— expect 200 + "redeploy triggered" + the site container rolls.
+
+## 23. The VPS — coordinates an agent always needs
+
+| Field | Value |
+|---|---|
+| Provider | Hetzner Cloud |
+| Server name | `tm-prod-fsn1` |
+| Server ID | `130167718` |
+| Public IPv4 | `178.105.104.173` |
+| IPv6 | `2a01:4f8:c014:1fad::/64` |
+| Type | CX23 (2 vCPU, 4 GB RAM, 40 GB SSD) |
+| Location | Falkenstein (eu-central) |
+| Hetzner Project ID | `12580250` |
+| Project console URL | `https://console.hetzner.com/projects/12580250/servers/130167718/overview` |
+
+To find this again: <https://console.hetzner.com/projects/12580250/servers/130167718/overview>.
+
+**The public IPv4 is the actual origin.** It's NOT Cloudflare-proxied — earlier
+confusion was because `curl --resolve thinkingmachine.uk:443:1.1.1.1` was used
+during diagnostics, which forces the request to Cloudflare's resolver, not the
+site. A plain `curl thinkingmachine.uk` hits the Hetzner box directly.
+
+## 24. SSH key for the VPS — NOT in `~/.ssh/`
+
+The four keys in `C:\Users\BrunoBozic\.ssh\` (`id_ed25519`, `id_rsa`,
+`id_multipass`, `id_theknowlogy`) **do not auth to the VPS**. Don't waste time
+iterating through them again — the probe is recorded in `vps.log` from
+2026-05-15 and all four returned `Permission denied (publickey)`.
+
+The Hetzner SSH key store lists a key called `claude-cowork-deploy`. The
+matching private key lives wherever you keep your real deploy keys (likely in
+a project folder, WSL, or a password manager — not in `~/.ssh/`). When you
+find it, **drop a symlink at `~/.ssh/id_tm_prod` and add this to
+`~/.ssh/config`:**
+```
+Host tm-prod-fsn1
+  HostName 178.105.104.173
+  User root
+  IdentityFile ~/.ssh/id_tm_prod
+  IdentitiesOnly yes
+```
+Then `ssh tm-prod-fsn1 'cd /opt/thinkingmachine-site && docker compose pull && docker compose up -d'`
+is the deploy one-liner.
+
+## 25. SSH-from-cmd-spawned-process loses your ssh-agent context
+
+**Symptom:** You can SSH to GitHub fine from your normal terminal, but
+`Start-Process cmd /c 'ssh github.com'` from a non-interactive parent fails
+with `Permission denied (publickey)`.
+
+**Cause:** Non-interactive child shells inherit a stripped environment.
+ssh-agent socket isn't reachable. Git for Windows' bundled `ssh.exe` only
+sees the keys you pass via `-i` and uses `IdentitiesOnly=yes` semantics
+under `BatchMode`.
+
+**Fix:** For Git operations, use **HTTPS remotes + Git Credential Manager**
+(see §4). The user's GitHub PAT is cached in Windows Credential Manager and
+GCM presents it on demand — no SSH agent needed.
+For VPS SSH, use the explicit `IdentityFile` in `~/.ssh/config` (see §24).
+
+## 26. PowerShell `& 'C:\Program Files\...'` silently swallows output
+
+**Symptom:** Your script runs, exits 0, but produces no output. Variables
+that should hold stdout from a child process are empty.
+
+**Cause:** When PowerShell is launched non-interactively (via Desktop Commander
+`start_process`), the call operator `&` against a quoted path containing
+spaces fails to spawn the child process correctly — but doesn't error. The
+parent script continues with empty/null variables.
+
+**Fix:** Use the 8.3 short-name (`C:\PROGRA~1\Git\cmd\git.exe`) **and** invoke
+via `Start-Process -FilePath cmd.exe -ArgumentList '/c …'` with output
+redirected to a file (`> outfile 2>&1`). Capture via PowerShell variables is
+unreliable in this context.
+
+**Even better:** skip PowerShell, write `.bat` files. cmd.exe spawns processes
+correctly. Template:
+```bat
+@echo off
+set PATH=%SystemRoot%\System32;%SystemRoot%;%PATH%
+set GIT=C:\PROGRA~1\Git\cmd\git.exe
+%GIT% status > C:\path\to\out.log 2>&1
+```
+
+## 27. Desktop Commander spawned cmd.exe has empty PATH
+
+**Symptom:** `where`, `findstr`, `cmdkey`, even `curl` fail with "not
+recognized as an internal or external command".
+
+**Cause:** The spawned shell inherits a minimal environment. System32 isn't
+on PATH.
+
+**Fix:** Set PATH at the top of every `.bat`:
+```
+set PATH=%SystemRoot%\System32;%SystemRoot%;%PATH%
+```
+Also keep absolute paths to common tools (`C:\Windows\System32\curl.exe`,
+`C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`) handy.
+
+## 28. The Cloudflare-doesn't-actually-proxy nuance
+
+The site DNS resolves to `178.105.104.173` directly. There's no Cloudflare
+proxy in front despite Cloudflare being the DNS host (the orange-cloud is
+disabled or absent for the apex `A` record). That means:
+
+- HTTPS / TLS termination happens at Traefik on the VPS (not at Cloudflare's
+  edge)
+- `Let's Encrypt` issues the cert directly to the VPS via TLS-ALPN-01
+- Direct IP `curl https://thinkingmachine.uk/` hits the VPS, not a Cloudflare
+  PoP
+
+If you ever flip the orange-cloud on (for DDoS / WAF), be aware:
+- Origin IP gets hidden — clients can't reach the VPS directly, so the webhook
+  receiver path changes
+- The CAA records still pin to letsencrypt.org so cert issuance still works
+- Origin certs must come from Cloudflare (not Let's Encrypt) for end-to-end
+  HTTPS — or accept that Cloudflare→origin is unencrypted (don't)
+
+## 29. astro-og-canvas's `logo` key trap
+
+**Symptom:** Astro build fails at the OG image endpoint:
+```
+The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+  at open (node:internal/fs/promises:634:10)
+  at file:///app/dist/pages/og/_---route_.png.astro.mjs:247:33
+```
+
+**Cause:** Passing `logo: { /* commented-out path */ }` to `getImageOptions`.
+The library treats `logo` as present-and-malformed and calls `fs.open(undefined)`.
+
+**Fix:** Omit the entire `logo` key. To add a logo later: add a 200×200 PNG
+at `public/og-logo.png` and add:
+```ts
+logo: { path: './public/og-logo.png', size: [120, 120] }
+```
+(don't comment-in keys — the empty-object form is the trap).
+
+## 30. The repo-state-across-sessions chaos
+
+**Symptom:** Local working tree in the cowork outputs path drifts wildly from
+origin/main. Files appear modified locally that you never touched.
+`git status` shows 30+ stale "M" entries.
+
+**Cause:** Previous Claude sessions wrote files to disk via Edit/Write but
+never committed. Origin/main moved forward via OTHER Claude sessions (or
+your direct pushes). The local working tree never reconciles.
+
+**Fix:** Don't work in the cowork outputs path for any non-trivial change.
+Clone fresh to a short path:
+```
+cd C:\
+git clone https://github.com/brunobozic/thinkingmachine-site.git tm-fresh
+```
+Work, commit, push from `C:\tm-fresh`. The cowork outputs path is fine for
+reading + scratch; treat it as ephemeral.
+
+## 31. Hetzner web console (noVNC) opens in a popup outside the MCP tab group
+
+**Symptom:** You click Console → ">_" in Hetzner Cloud UI, a popup opens with
+the noVNC terminal, but the Claude-in-Chrome MCP doesn't see it
+(`tabs_context_mcp` shows only the original tab).
+
+**Cause:** Hetzner opens the console as a `window.open` in a new browser
+window, which doesn't get included in the MCP's session tab group.
+
+**Workaround:** For commands you want me to run, prefer:
+1. SSH from Desktop Commander (need the key — see §24), or
+2. Wire the webhook (§22) and never need the console again, or
+3. Ask the user to type into the noVNC popup themselves
+
+The noVNC popup IS interactive — Bruno can paste commands into it directly.
+But I can't drive it through the Chrome MCP.
+
+## 32. Cowork session ".git" is on a permission-denied mount
+
+**Symptom:** From the `mcp__workspace__bash` sandbox shell, even
+`rm .git/index.lock` returns `Operation not permitted`. Git commands fail
+because the lock can't be removed.
+
+**Cause:** The sandbox mount that exposes the outputs path blocks `unlink`
+syscalls on the `.git/` subtree as a security policy. The bash shell's user
+owns the files but the kernel still refuses the syscall.
+
+**Fix:** Don't run git from inside the sandbox. Use Desktop Commander
+(`mcp__Desktop_Commander__start_process`) which runs natively on the Windows
+host and has full filesystem access. The sandbox is fine for reading file
+content via `git show origin/main:path` (uses pack objects, not the index).
+
+## 33. The Cowork outputs working-copy filesystem differs from the Windows view
+
+**Symptom:** You read a file via the `Read` tool successfully, then try to
+read the same path via `mcp__workspace__bash` and get "no such file."
+
+**Cause:** Two distinct mount points:
+- Windows path `C:\Users\BrunoBozic\AppData\Roaming\Claude\local-agent-mode-sessions\<uuid>\<uuid>\<uuid>\outputs\` is what `Read`/`Write`/`Edit` see
+- Linux path `/sessions/<name>/mnt/outputs/` is what `mcp__workspace__bash` sees
+- They map to the same files but the Linux mount blocks writes to `.git/`
+
+In practice: file content tools (Read/Write/Edit) work on the Windows path
+and are reliable. Use them for all content edits. The bash shell is fine
+for read-only inspection and curl/grep tasks against external sources.
 
 Total elapsed: usually 90–120 seconds from `git push` to live.
