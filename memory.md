@@ -43,22 +43,49 @@ X live, who decided Y, and what was the reasoning Z".
   - sysctl hardening: standard CIS-flavoured tweaks
   - Cloud-init disabled post-first-boot
 
+### Actual VPS layout (verified 2026-05-15)
+
+**Note:** the repo's `infra/` folder is the *template*. The real VPS uses
+`/srv/` not `/opt/`. The deploy ecosystem on the VPS itself:
+
+| Path | Purpose |
+|---|---|
+| `/srv/thinkingmachine-site/docker-compose.yml` | Site container compose stack |
+| `/srv/traefik/docker-compose.yml` | Traefik reverse proxy stack |
+| `/srv/traefik/traefik.yml` | Traefik static config (entry points, ACME) |
+| `/srv/traefik/dynamic.yml` | Traefik dynamic config (CSP, HSTS, rate limit, **webhook routing**) |
+| `/srv/traefik/letsencrypt/acme.json` | TLS cert state — back up if migrating |
+| `/srv/thinkingmachine-webhook/` | Holds webhook receiver compose stack (now unused — see note below) |
+| `/etc/thinkingmachine/webhook.env` | `WEBHOOK_TOKEN=…` (mode 600, root only) |
+| `/etc/webhook.yml` | adnanh/webhook hook definition |
+| `/etc/systemd/system/tm-webhook.service` | systemd unit running webhook on host |
+| `/usr/local/bin/tm-redeploy.sh` | Script the webhook calls to pull + roll |
+
+**Webhook architecture (final, working).** We initially tried running
+adnanh/webhook as a Docker container. It failed because the container is
+Alpine-based and can't execute the host's dynamically-linked `docker` binary.
+The working setup is **adnanh/webhook running on the host as a systemd unit**
+(installed via `apt install webhook`), bound to `0.0.0.0:9001`. UFW allows
+port 9001 only from the Docker bridge subnet `172.18.0.0/16`. Traefik's
+dynamic.yml defines a path-based router at `Host(thinkingmachine.uk) &&
+PathPrefix(/_webhook)` that proxies to `http://172.18.0.1:9001` (the bridge
+gateway, which routes to the host). This means **no new subdomain DNS was
+needed** — the webhook reuses the existing TLS cert.
+
 ### Containers on the VPS
 
-Two compose stacks, both behind the same Traefik instance:
+Two compose stacks share the `traefik` docker bridge network:
 
-1. **Traefik** at `infra/traefik/docker-compose.yml` — reverse proxy, TLS terminator.
-   Config:
-   - `infra/traefik/traefik.yml` — static config (entry points, providers, ACME)
-   - `infra/traefik/dynamic.yml` — dynamic config (CSP, HSTS, rate limit, TLS)
-   - Persistent volume for ACME state at `/letsencrypt/acme.json`
-2. **Site container** at `infra/thinkingmachine-site/docker-compose.yml` —
-   runs `ghcr.io/brunobozic/thinkingmachine-site:latest` (built by CI). Has
-   Traefik labels for routing: `thinkingmachine.uk` and `www.thinkingmachine.uk`
-   both route here; `www` redirects to apex.
+1. **Traefik** at `/srv/traefik/` — reverse proxy, TLS terminator. Mounts
+   `traefik.yml` and `dynamic.yml` from the host. ACME state persisted at
+   `/srv/traefik/letsencrypt/acme.json`.
+2. **Site container** at `/srv/thinkingmachine-site/` — runs
+   `ghcr.io/brunobozic/thinkingmachine-site:latest`. Traefik labels route
+   `thinkingmachine.uk` and `www.thinkingmachine.uk` here; www → apex 301.
 
-Both stacks share the `traefik_proxy` docker bridge network. Nothing else
-is exposed.
+Both stacks share the `traefik` (not `traefik_proxy`) docker bridge network.
+Nothing else is exposed publicly. Webhook routing is a Traefik file-provider
+entry, not a docker label.
 
 ### TLS / certificates
 

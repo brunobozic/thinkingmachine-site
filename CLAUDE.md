@@ -195,5 +195,38 @@ cache; subsequent installs are fast.
 3. Run `npm run check` and `npm run build` locally. The build must be green.
 4. Commit with a structured message. The commits in this repo's history are
    templates worth following — multi-section, each section a heading.
-5. Push to `main`. CI deploys automatically. See `infra/CI-CD.md` for the full
-   pipeline (also summarised in `AGENTS.md`).
+5. Push to `main`. **CI auto-deploys** — see `infra/CI-CD.md` for the full
+   pipeline (also summarised in `AGENTS.md` §22).
+6. **After ~90 seconds**, run `bash infra/verify-all-pages.sh` from any shell
+   with curl. All 41 URLs should return 200 with content markers present.
+
+## Deploy + ops at a glance (no surprises)
+
+| Thing | Where |
+|---|---|
+| Production VPS | Hetzner `tm-prod-fsn1` at `178.105.104.173` (Falkenstein, CX23) |
+| SSH access | `ssh tm-prod` — key at `~/.ssh/hetzner_tm`, alias in `~/.ssh/config` |
+| Site compose stack on VPS | `/srv/thinkingmachine-site/docker-compose.yml` |
+| Traefik compose stack on VPS | `/srv/traefik/docker-compose.yml` |
+| Traefik dynamic config (CSP, webhook routing) | `/srv/traefik/dynamic.yml` |
+| Let's Encrypt cert state | `/srv/traefik/letsencrypt/acme.json` |
+| Deploy webhook (systemd unit on host) | `tm-webhook` listening on `0.0.0.0:9001` |
+| Webhook hook definition | `/etc/webhook.yml` |
+| Webhook token | `/etc/thinkingmachine/webhook.env` (mode 600) |
+| Redeploy script the webhook runs | `/usr/local/bin/tm-redeploy.sh` |
+| Public deploy webhook URL | `https://thinkingmachine.uk/_webhook/hooks/redeploy` |
+| GitHub repo secrets | `WEBHOOK_URL`, `WEBHOOK_TOKEN` (both set) |
+| CI workflow | `.github/workflows/deploy.yml` — `build-and-push` + `notify-vps` |
+| Container registry | `ghcr.io/brunobozic/thinkingmachine-site:latest` (+ `:sha`) |
+| DNS | Cloudflare-managed; A record points direct to VPS (no proxy) |
+
+To verify the loop end-to-end at any time:
+
+```bash
+# Sanity-check: trigger a deploy manually with the bearer token
+ssh tm-prod "grep WEBHOOK_TOKEN /etc/thinkingmachine/webhook.env"
+TOKEN="...paste..."
+curl -i -X POST -H "Authorization: Bearer $TOKEN" https://thinkingmachine.uk/_webhook/hooks/redeploy
+# Expect HTTP 200 "redeploy triggered". Check logs:
+ssh tm-prod 'journalctl -u tm-webhook --since "1 minute ago" --no-pager'
+```

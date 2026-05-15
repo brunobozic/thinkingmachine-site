@@ -5,20 +5,38 @@ hard-won knowledge — every gotcha here cost real time the first time we hit it
 
 ## TL;DR for "I just want to deploy a fix" — the fast path
 
-The site lives on Hetzner VPS **tm-prod-fsn1** at **178.105.104.173** (CX23,
-Falkenstein, project 12580250). The deploy loop is:
+**The auto-deploy loop is wired and working as of 2026-05-15.** Just push to
+`main` and the site updates ~90s later. No manual SSH needed.
+
+The site runs on Hetzner VPS **tm-prod-fsn1** at **178.105.104.173** (CX23,
+Falkenstein, project 12580250). Deploy flow:
 
 1. **Edit files locally**, work in `C:\tm-fresh` (a fresh clone — DO NOT work
    in the cowork session path; see §1).
 2. **Commit + push** via the `.bat` scripts pattern (see §5). HTTPS clone +
-   Git Credential Manager handle auth — DON'T mess with SSH (see §4).
-3. **CI builds the image** and pushes to `ghcr.io/brunobozic/thinkingmachine-site`.
-   **CI does NOT deploy to the VPS** unless the webhook in §22 is wired up.
-4. **Pull on the VPS**: SSH `root@178.105.104.173`, then `cd /opt/thinkingmachine-site && docker compose pull && docker compose up -d`.
-5. **Verify**: `curl -sI https://thinkingmachine.uk/ | grep -i security-policy`.
+   Git Credential Manager handle GitHub auth.
+3. **CI builds** the image and pushes to `ghcr.io/brunobozic/thinkingmachine-site`
+   (~60s).
+4. **CI's `notify-vps` job** POSTs to
+   `https://thinkingmachine.uk/_webhook/hooks/redeploy` with `Authorization: Bearer $WEBHOOK_TOKEN`.
+5. **Webhook receiver** on the VPS (systemd unit `tm-webhook`) validates the
+   bearer token, runs `/usr/local/bin/tm-redeploy.sh` which does
+   `docker compose pull && up -d`.
+6. **Traefik** swaps the container with zero downtime (~5s).
+7. Total: **~90 seconds from `git push` to live**.
 
-If you skip step 4, the site never updates. **Wire the webhook (§22) so this
-becomes one-step.**
+If you ever need to deploy manually, the SSH alias is `tm-prod`:
+```
+ssh tm-prod 'cd /srv/thinkingmachine-site && docker compose pull && docker compose up -d'
+```
+The key is at `~/.ssh/hetzner_tm` with the alias in `~/.ssh/config`. Both are
+installed and verified working.
+
+## TL;DR for "verify the site is alive"
+
+Run `bash infra/verify-all-pages.sh` (committed to the repo) — it checks every
+URL in the sitemap and every locale, asserts HTTP 200, and verifies content
+markers. Last full pass: 2026-05-15, **41 pages all green**.
 
 ## 1. The Windows long-path gotcha (single biggest source of pain)
 
