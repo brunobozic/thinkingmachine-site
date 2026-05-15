@@ -9,6 +9,9 @@ const caseStudies = defineCollection({
     year: z.string(),
     region: z.string(),
     summary: z.string(),
+    // Marketing-grade short summary rendered above the collapsible full body.
+    // Optional: studies without a quickRead fall back to rendering the full
+    // body directly (see /work/[...slug].astro conditional).
     quickRead: z.string().optional(),
     publishedAt: z.string().optional(),
     featured: z.boolean().default(true),
@@ -21,7 +24,6 @@ const notes = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    quickRead: z.string().optional(),
     publishedAt: z.string(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false)

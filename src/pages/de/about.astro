@@ -1,11 +1,37 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Person schema — German locale variant. Same @id so search engines de-dupe
+// the entity across locales. Description is in German for inLanguage match.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://thinkingmachine.uk/about#person',
+  name: 'Bruno Božić',
+  givenName: 'Bruno',
+  familyName: 'Božić',
+  jobTitle: ['Gründer & Principal Advisor', 'Head of IoT'],
+  url: 'https://thinkingmachine.uk/de/about',
+  worksFor: [
+    { '@type': 'Organization', name: 'Thinking Machine d.o.o.', '@id': 'https://thinkingmachine.uk/#organization' },
+    { '@type': 'Organization', name: 'Reos GmbH', url: 'https://reos.de/', address: { '@type': 'PostalAddress', addressLocality: 'Hamburg', addressCountry: 'DE' } },
+  ],
+  homeLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Zagreb', addressCountry: 'HR' } },
+  nationality: { '@type': 'Country', name: 'Croatia' },
+  knowsLanguage: ['en', 'hr', 'de'],
+  sameAs: [
+    'https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/',
+    'https://github.com/brunobozic',
+  ],
+  description: 'Gründer von Thinking Machine d.o.o.; Head of IoT bei Reos GmbH. Über zwanzig Jahre Enterprise-Architektur in Healthcare-IT, Telekommunikation, öffentlicher Forschung, industriellem IoT, Energiesektor und Luftfahrt.',
+};
 ---
 <BaseLayout
   title="Über uns — Thinking Machine"
   description="Bruno Božić, Gründer. 20+ Jahre über Healthcare-IT, Telekommunikation, öffentliche Forschung, industrielles IoT. Warum Festpreis. Was wir nicht tun."
   pageType="AboutPage"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
   <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
     <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <polygon points="100,10 190,55 190,145 100,190 10,145 10,55" stroke="#1E3A8A" stroke-width="1" fill="none"/>
@@ -40,8 +66,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
       <div class="md:col-span-2 prose">
         <p>Ich schreibe seit Ende der 1990er Jahre Software, beruflich seit 2003. Seitdem habe ich Systeme im Gesundheitswesen (Krankenhausinformationssysteme, Laborautomation, e-Health-Zertifizierung), in der Telekommunikation, in EU-finanzierten Forschungskonsortien, in der Luftfahrt, im industriellen IoT sowie in der energiebranchen-seitigen Beschaffung und NFR-Arbeit gebaut und ausgeliefert. C#/.NET ist mein Heimatstack; Integrationsarchitektur ist der rote Faden.</p>
-        <p>Die Organisationen, mit denen ich gearbeitet habe — als Angestellter, Auftragnehmer oder Fractional CTO — umfassen nationale Telekommunikationsbetreiber, Behörden, Gesundheitsnetzwerke und EU-finanzierte Forschungskonsortien. Ich habe Teams von bis zu elf Personen über mehrere europäische Standorte geführt, mehr als fünfzig Ingenieurinnen und Ingenieure gementort und Hunderte von Seiten technischer Spezifikationen und Runbooks verfasst. Konkrete Belege aus diesem Zeitraum: Deployment-Pipeline-Modernisierungen, die Rollouts von zwei Standorten pro Tag auf 140 Standorte in vier Stunden hoben; 24/7 fehlerfreie Laborautomations-Integrationen über drei Krankenhaus-Standorte; Integrations-Plattformen, die 6.000+ IoT-Geräte in Produktion verwalten; und, in einer früheren unabhängigen Praxis, die Lieferung eines unternehmensweiten sprach-gesteuerten KI-Assistenten von der Use-Case-Identifikation bis zur Produktion in Wochen, einschließlich 19 benutzerdefinierter Ansible-Rollen und 2.498 automatisierter Tests. Aktuell bin ich <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/" rel="noopener" class="text-accent-700 no-underline">Head of IoT bei Reos GmbH</a> (Hamburg), wo ich das Engineering einer Multi-Vendor-Smart-Building-Plattform über Hunderte europäischer Standorte leite. Thinking Machine ist der Kanal, über den ich selektive externe Beratungs-Mandate annehme, die mit dieser Rolle nicht in Konflikt stehen.</p>
-        <p>Daneben bin ich an angewandter Forschung im Rahmen eines Multi-Parteien-Konsortiums beteiligt, das eine Protokoll-Abstraktions-Schicht für IoT-Interoperabilität entwickelt — multi-tenant Zertifikats-Lifecycle, sicheres mTLS at scale und einheitliche semantische Modelle über heterogenen Geräte-Protokollen. Die Forschung informiert die Arbeit, nicht umgekehrt.</p>
+        <p>Die Organisationen, mit denen ich gearbeitet habe — als Angestellter, Auftragnehmer oder Fractional CTO — umfassen nationale Telekommunikationsbetreiber, Behörden, Gesundheitsnetzwerke und EU-finanzierte Forschungskonsortien. Ich habe Teams von bis zu elf Personen über mehrere europäische Standorte geführt, mehr als fünfzig Ingenieurinnen und Ingenieure gementort und Hunderte von Seiten technischer Spezifikationen und Runbooks verfasst. Aktuell bin ich <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/" rel="noopener" class="text-accent-700 no-underline">Head of IoT bei Reos GmbH</a> (Hamburg), wo ich das Engineering einer Multi-Vendor-Smart-Building-Plattform über Hunderte europäischer Standorte leite. Thinking Machine ist der Kanal, über den ich selektive externe Beratungs-Mandate annehme, die mit dieser Rolle nicht in Konflikt stehen.</p>
+        <p>Daneben bin ich an angewandter Forschung zu Produktionssystemen für IoT-Geräte-Onboarding und Runtime-Integration beteiligt — multi-tenant Zertifikats-Lifecycle, sicheres mTLS at scale, und das Überbrücken affordance-zentrierter Semantik mit den ressourcen-zentrierten REST-APIs, die Geräte-Hersteller-Clouds zunehmend dominieren. Die Forschung informiert die Arbeit, nicht umgekehrt.</p>
         <p>Separat hat sich die jüngere angewandte Arbeit auf Echtzeit-verschlüsselte Medienarchitekturen konzentriert (WebRTC + SFU, Ende-zu-Ende-Medienverschlüsselung, selbstgehostete GPU-Inferenz für Sprach-Transkription und Sprecher-Diarisierung) für Compliance-sensitive Anwendungsfälle, in denen Audio und Video das Operator-Perimeter nicht verlassen dürfen.</p>
         <p class="mt-6 pt-5 border-t border-ink-100 text-sm text-ink-500">Empfehlungen früherer Kolleginnen und Kollegen aus diesen Rollen sind auf <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/details/recommendations/" rel="noopener" class="text-accent-700 no-underline">LinkedIn</a> sichtbar. Zuschreibbare Kunden-Testimonials werden auf dieser Seite ergänzt, sobald Mandate die Referenz-Embargo-Phase verlassen.</p>
       </div>

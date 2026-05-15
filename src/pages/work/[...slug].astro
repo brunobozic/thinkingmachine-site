@@ -1,13 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CRARegulatoryClock from '../../components/CRARegulatoryClock.astro';
-import SupplyChainCaseStudyCharts from '../../components/SupplyChainCaseStudyCharts.astro';
-import CaseStudyNumbersStrip from '../../components/CaseStudyNumbersStrip.astro';
-import { getNumbersStrip } from '../../i18n/case-study-strips';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
-  const studies = await getCollection('case-studies', ({ slug, data }) => !slug.startsWith('de/') && !slug.startsWith('hr/') && !data.draft);
+  const studies = await getCollection('case-studies', ({ data }) => !data.draft);
   return studies.map(study => ({
     params: { slug: study.slug },
     props: { study }
@@ -17,21 +14,24 @@ export async function getStaticPaths() {
 interface Props { study: CollectionEntry<'case-studies'>; }
 const { study } = Astro.props;
 const { Content } = await study.render();
-const { title, sector, engagementType, year, region, summary } = study.data;
+const { title, sector, engagementType, year, region, summary, publishedAt } = study.data;
 
 // Slug-conditional charts: keep the case-study .md files clean and inject
 // data visualisations from the layout where the data has structure worth
 // showing.
 const isCRA = study.slug === 'cra-readiness-eu-manufacturer';
-const isSupplyChain = study.slug === 'supply-chain-iac-saas-platform';
-// Locale-aware numbers strip resolution. Returns undefined for slugs
-// that don't carry a strip (e.g. supply-chain, which has its own dedicated
-// chart component instead).
-const numbersStrip = getNumbersStrip(study.slug, 'en');
+
+// Case studies carry Article semantics for structured-data purposes —
+// authored, dated, with a stable publication identity. Falls back to the
+// engagement year if no publishedAt is set on the frontmatter.
+const articleDate = publishedAt || `${year}-01-01`;
 ---
 <BaseLayout
   title={`${title} — Thinking Machine`}
   description={summary}
+  pageType="Article"
+  datePublished={articleDate}
+  ogImage={`/og/work-${study.slug}.png`}
 >
   <article class="container-page py-16 md:py-24">
     <nav class="max-w-prose mx-auto mb-8 text-sm">
@@ -64,56 +64,15 @@ const numbersStrip = getNumbersStrip(study.slug, 'en');
       </dl>
     </header>
 
-    {numbersStrip && (
-      <div class="max-w-4xl mx-auto mb-8">
-        <CaseStudyNumbersStrip caption={numbersStrip.caption} note={numbersStrip.note} cells={numbersStrip.cells} />
-      </div>
-    )}
-
     {isCRA && (
       <div class="max-w-4xl mx-auto mb-12">
         <CRARegulatoryClock />
       </div>
     )}
 
-    {isSupplyChain && (
-      <div class="max-w-4xl mx-auto mb-12">
-        <SupplyChainCaseStudyCharts />
-      </div>
-    )}
-
-    {study.data.quickRead ? (
-      <>
-        <section class="max-w-prose mx-auto mb-8">
-          <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4 font-medium">Quick read</div>
-          <div class="prose" set:html={study.data.quickRead.split('\n\n').map((para: string) => {
-            const html = para.trim()
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;')
-              .replace(/\*\*([^\n]+?)\*\*/g, '<strong>$1</strong>')
-              .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
-            return `<p>${html}</p>`;
-          }).join('')} />
-        </section>
-        <section class="max-w-prose mx-auto">
-          <details class="group">
-            <summary class="cursor-pointer list-none border border-ink-200 bg-ink-50 px-6 py-4 inline-flex items-center gap-2 text-accent-700 font-medium text-sm hover:bg-ink-100 transition-colors">
-              <span class="transition-transform duration-200 group-open:rotate-45 text-xl leading-none font-light" aria-hidden="true">+</span>
-              <span class="group-open:hidden">Show the full case study</span>
-              <span class="hidden group-open:inline">Hide full case study</span>
-            </summary>
-            <div class="prose mt-8">
-              <Content />
-            </div>
-          </details>
-        </section>
-      </>
-    ) : (
-      <section class="prose mx-auto">
-        <Content />
-      </section>
-    )}
+    <section class="prose mx-auto">
+      <Content />
+    </section>
 
     <hr class="section-divider mx-auto max-w-prose" />
 

@@ -6,13 +6,17 @@ year: "2026"
 region: "Europäische Union"
 summary: "Angewandte Vorbereitungsarbeit für CRA-Cliff-1 (September 2026) bei einem EU-Hersteller-Betreiber vernetzter Produkte. Rund 240 Seiten Audit-belastbarer Evidenz über 13 Dokumente — Checklisten, Briefings, der Artikel-14-Runbook, die RACI, der Ausführungsplan — verankert an einer Fünf-Pass-Verbatim-Verifikation des Amtsblatts. Veröffentlicht als Methodik-Referenz; Kunde nicht identifiziert."
 quickRead: |
-  Ein EU-Hersteller-Betreiber vernetzter Produkte stand vor CRA Cliff 1 (11. September 2026) mit dem klassischen Compound-Problem: **hybride regulatorische Position** (Hersteller im CRA-Sinne für den eigenen Software-Stack, Betreiber/Distributor für die integrierte Hersteller-Hardware), **deutsche nationale NIS2-Umsetzung** darüber gelegt (BSIG-neu, in Kraft 6. Dezember 2025, mit eigenen Uhren unter § 32), und eine **Lieferketten-Haftungskaskade** aus NIS2 Artikel 21(2). Ausgangslage: schwach, aber noch nicht im Verstoß. Keine SBOM. Kein Firmware-Inventar. Kein Artikel-14-Runbook. Das Engineering-Team hatte keine dedizierte Cybersecurity-Stelle. Die Fristen bewegen sich nicht.
+  **Ausgangslage: schwach, aber noch nicht im Verstoß.** Kein SBOM. Kein Firmware-Inventar. Kein Artikel-14-Runbook. Im Engineering-Team kein dediziertes Cybersecurity-Personal.
 
-  Der Methodik-Anker: **Fünf-Pass-Verbatim-Verifikation** gegen den Amtsblatt-Text von EU-Verordnung 2024/2847 (Artikel 13, 14, 16, 22, 28, 31, 64, 69 plus Anhang I Teile I und II, Anhänge II, III, VII), Richtlinie (EU) 2022/2555 NIS2 und das deutsche BSIG-neu (§§ 30, 32, 33, 38, 65). Jede tragende Behauptung verbatim zitiert. Jeder Befund mit Verifikations-Status getaggt. Jedes Dokument durch eine Querverweis-Matrix propagiert, die als interner Audit-Trail fungiert.
+  **Die Fristen verschieben sich nicht.**
 
-  Lieferung: rund **240 Seiten Audit-belastbarer Evidenz über dreizehn primäre Dokumente und vier Annexe** — Master-Compliance-Checkliste, Audit-Bereitschafts-Vertiefung, Ausführungs-Zeitleiste (Woche-für-Woche bis Cliff 1, monatlich bis Cliff 2), Gap-Analyse mit **fünfzehn benannten Bedrohungs-Szenarien**, Research-Update, Erste-30-Tage-Allein (Sole-Engineer-Priorisierung), Executive Briefing (16 Slides, drei Zahlen, drei Staffing-Optionen), Tech-Coordination-Deck (~19 Slides), der Artikel-14 / § 32 BSIG Runbook mit **vier vor-entworfenen Meldungs-Templates** (24h / 72h / 14d / 30d), eine einseitige RACI, ein Konsolidierter-Befunde-Annex, ein Operator's Playbook, plus das README/Index.
+  Ein EU-Hersteller-Betreiber vernetzter Produkte stand vor CRA-Cliff 1 (11. September 2026) mit dem klassischen zusammengesetzten Problem: hybride Regulierungsposition (Hersteller im Sinne des CRA für den eigenen Software-Stack, Betreiber/Distributor für integrierte Vendor-Hardware), die deutsche NIS2-Umsetzung obendrauf (BSIG-neu, in Kraft seit 6. Dezember 2025, mit eigenen Fristen nach § 32) und eine Lieferketten-Haftungskaskade aus NIS2 Artikel 21 Absatz 2.
 
-  Netto-Effekt: bis Cliff 1 kann der Betreiber dieses Evidenz-Paket einer Benannten Stelle oder dem Regulierer ohne Vorbereitungs-Lücken vorlegen. Die "schwach, aber noch nicht im Verstoß"-Ausgangslage hat einen dokumentierten Pfad zu "Audit-belastbar".
+  Methodischer Anker: **fünffache wortgetreue Verifizierung** gegen die Amtsblatt-Texte von EU-Verordnung 2024/2847, Richtlinie (EU) 2022/2555 NIS2 und dem deutschen BSIG-neu. Jede tragende Aussage zitiert; jeder Befund mit Verifizierungsstatus markiert; jedes Dokument in eine Querverweismatrix eingebunden, die als interner Audit-Pfad fungiert.
+
+  Drei Dokumente bilden das Rückgrat des Mandats: das **Runbook Artikel 14 / § 32 BSIG** mit vier vorformulierten Meldungsvorlagen (24h / 72h / 14d / 30d), die **First 30 Days Alone**-Priorisierung für eine alleinstehende Engineering-Stelle und das **Executive Briefing** für die Vorstandsfreigabe. Drumherum etwa 240 Seiten audittauglicher Evidenz — Checklisten, Gap-Analyse, wöchentlicher Ausführungsplan, RACI, Operator's Playbook.
+
+  Bis Cliff 1 kann der Betreiber dieses Evidenzpaket einer benannten Stelle oder der Aufsicht ohne Vorbereitungslücken vorlegen. *Schwach, aber noch nicht im Verstoß* hat einen dokumentierten Weg zu *audittauglich*.
 publishedAt: "2026-05-09"
 featured: true
 ---

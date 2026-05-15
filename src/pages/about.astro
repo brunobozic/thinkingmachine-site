@@ -1,11 +1,87 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Person schema for the founder — high-value E-E-A-T signal for AI search
+// (ChatGPT, Perplexity, Gemini) which rank by Person×Organization×Article
+// triples. Anchors Bruno's name as a search entity rather than just a label
+// on the org. Mirrors the founder.sameAs in BaseLayout's ProfessionalService
+// but adds knowsAbout, jobTitle, worksFor (Reos), and homeLocation here so
+// the Person node is fully described on its canonical page.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://thinkingmachine.uk/about#person',
+  name: 'Bruno Božić',
+  givenName: 'Bruno',
+  familyName: 'Božić',
+  jobTitle: ['Founder & Principal Advisor', 'Head of IoT'],
+  url: 'https://thinkingmachine.uk/about',
+  worksFor: [
+    {
+      '@type': 'Organization',
+      name: 'Thinking Machine d.o.o.',
+      '@id': 'https://thinkingmachine.uk/#organization',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Reos GmbH',
+      url: 'https://reos.de/',
+      address: { '@type': 'PostalAddress', addressLocality: 'Hamburg', addressCountry: 'DE' },
+    },
+  ],
+  homeLocation: {
+    '@type': 'Place',
+    address: { '@type': 'PostalAddress', addressLocality: 'Zagreb', addressCountry: 'HR' },
+  },
+  nationality: { '@type': 'Country', name: 'Croatia' },
+  knowsLanguage: ['en', 'hr', 'de'],
+  knowsAbout: [
+    'Enterprise architecture',
+    'C# .NET architecture',
+    'Integration architecture',
+    'Cloud cost optimisation',
+    'FinOps',
+    'EU Cyber Resilience Act',
+    'NIS2 Directive compliance',
+    'Non-functional requirements',
+    'Procurement due diligence',
+    'AI integration',
+    'Retrieval-Augmented Generation',
+    'Model Context Protocol',
+    'On-premises Large Language Models',
+    'Industrial IoT',
+    'Multi-vendor smart-building platforms',
+    'IoT device onboarding',
+    'mTLS at scale',
+    'Healthcare information systems',
+    'Laboratory Information Management Systems (LIMS)',
+    'Telecommunications',
+    'WebRTC architecture',
+    'Selective Forwarding Unit (SFU)',
+    'Self-hosted speech-to-text and ASR',
+    'GPU sizing for inference workloads',
+    'Edge-side audio/video processing',
+    'GDPR Article 9 special-category data',
+    'European Health Data Space (EHDS)',
+    'EN 62304 medical-device software lifecycle',
+    'ISO 27001 / 27799 healthcare ISMS',
+    'Domain-Driven Design',
+    'Legacy application modernisation',
+    'Strangler Fig migration pattern',
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/',
+    'https://github.com/brunobozic',
+  ],
+  description: 'Founder of Thinking Machine d.o.o.; Head of IoT at Reos GmbH. Twenty-plus years of enterprise architecture across healthcare IT, telecommunications, government R&D, industrial IoT, energy, and aviation.',
+};
 ---
 <BaseLayout
   title="About — Thinking Machine"
   description="Bruno Božić, founder. 20+ years across healthcare IT, telecommunications, government R&D, industrial IoT. Why fixed-scope advisory. What we won't do."
   pageType="AboutPage"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
   <section class="container-page pt-20 pb-12 md:pt-28 md:pb-16 relative overflow-hidden">
     <svg aria-hidden="true" class="absolute -top-20 -right-32 w-[420px] h-[420px] opacity-[0.04] pointer-events-none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <polygon points="100,10 190,55 190,145 100,190 10,145 10,55" stroke="#1E3A8A" stroke-width="1" fill="none"/>
@@ -40,8 +116,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
       <div class="md:col-span-2 prose">
         <p>I started writing software in the late 1990s and have been doing it professionally since 2003. Since then I have built and shipped systems in healthcare (hospital information systems, lab automation, e-Health certification), telecommunications, government R&D consortia, aviation, industrial IoT, and energy-sector procurement and NFR work. C#/.NET is my home stack; integration architecture is the thread that runs through all of it.</p>
-        <p>The organisations I have worked with — as employee, contractor, or fractional CTO — include national telecommunications operators, government agencies, healthcare networks, and EU-funded research consortia. I have managed teams of up to eleven across multiple European sites, mentored more than fifty engineers, and authored hundreds of pages of technical specifications and runbooks. Concrete proof points from that span: deployment-pipeline modernisations that moved rollouts from two sites per day to 140 sites in four hours; 24/7 zero-error lab-automation integrations across three hospital sites; integration platforms managing 6,000+ IoT devices in production; and, in a prior independent practice, delivery of an enterprise voice-enabled AI assistant from use-case discovery to production in weeks, including 19 custom Ansible roles and 2,498 automated tests. I am currently <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/" rel="noopener" class="text-accent-700 no-underline">Head of IoT at Reos GmbH</a> (Hamburg), where I lead the engineering for a multi-vendor smart-building platform across hundreds of European sites. Thinking Machine is the channel through which I take selective external advisory engagements that do not conflict with that role.</p>
-        <p>I am also engaged in applied research as part of a multi-party consortium developing a protocol-abstraction layer for IoT interoperability — multi-tenant certificate lifecycle management, secure mTLS at scale, and unified semantic models over heterogeneous device protocols. The research informs the work, not the other way around.</p>
+        <p>The organisations I have worked with — as employee, contractor, or fractional CTO — include national telecommunications operators, government agencies, healthcare networks, and EU-funded research consortia. I have managed teams of up to eleven across multiple European sites, mentored more than fifty engineers, and authored hundreds of pages of technical specifications and runbooks. I am currently <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/" rel="noopener" class="text-accent-700 no-underline">Head of IoT at Reos GmbH</a> (Hamburg), where I lead the engineering for a multi-vendor smart-building platform across hundreds of European sites. Thinking Machine is the channel through which I take selective external advisory engagements that do not conflict with that role.</p>
+        <p>I am also engaged in applied research on production systems for IoT device onboarding and runtime integration — multi-tenant certificate lifecycle management, secure mTLS at scale, and bridging affordance-centric semantics with the resource-centric REST APIs that increasingly dominate device-vendor clouds. The research informs the work, not the other way around.</p>
         <p>Separately, recent applied work has covered real-time encrypted media architectures (WebRTC + SFU, end-to-end media encryption, self-hosted GPU inference for speech transcription and speaker diarization) for compliance-sensitive use cases where audio and video cannot leave the operator perimeter.</p>
         <p class="mt-6 pt-5 border-t border-ink-100 text-sm text-ink-500">Recommendations from past colleagues across these roles are visible on <a href="https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/details/recommendations/" rel="noopener" class="text-accent-700 no-underline">LinkedIn</a>. Attributable client-side testimonials are added to this page as engagements clear reference embargo.</p>
       </div>

@@ -6,13 +6,17 @@ year: "2026"
 region: "European Union"
 summary: "Applied preparedness work on CRA Cliff 1 (September 2026) for an EU manufacturer-operator of connected products. Roughly 240 pages of audit-defensible evidence across 13 documents — checklists, briefings, the Article 14 runbook, the RACI, the execution plan — anchored on five-pass verbatim verification of the Official Journal. Published as a methodology reference; client unidentified."
 quickRead: |
-  An EU manufacturer-operator of connected products faced CRA Cliff 1 (11 September 2026) with the classic compound problem: **hybrid regulatory posture** (manufacturer in CRA terms for its own software stack, operator/distributor for the vendor hardware it integrates), **German national NIS2 transposition** layered on top (BSIG-neu, in force 6 December 2025, with its own clocks under § 32), and a **supply-chain liability cascade** from NIS2 Article 21(2). Starting posture: weak but not yet in breach. No SBOM. No firmware inventory. No Article 14 runbook. The engineering team had no dedicated cybersecurity headcount. The deadlines do not move.
+  **Starting posture: weak but not yet in breach.** No SBOM. No firmware inventory. No Article 14 runbook. The engineering team had no dedicated cybersecurity headcount.
 
-  The methodology anchor: **five-pass verbatim verification** against the Official Journal text of EU Regulation 2024/2847 (Articles 13, 14, 16, 22, 28, 31, 64, 69 plus Annex I Parts I and II, Annexes II, III, VII), Directive (EU) 2022/2555 NIS2, and the German BSIG-neu (§§ 30, 32, 33, 38, 65). Every load-bearing claim cited verbatim. Every finding tagged with verification status. Every document propagated through a cross-reference matrix functioning as an internal audit trail.
+  **The deadlines do not move.**
 
-  Deliverable: roughly **240 pages of audit-defensible evidence across thirteen primary documents and four annexes** — Master Compliance Checklist, Audit-Readiness Deep-Dive, Execution Timeline (week-by-week to Cliff 1, monthly to Cliff 2), Gap Analysis with **fifteen named threat scenarios**, Research Update, First 30 Days Alone (sole-engineer prioritisation), Executive Briefing (16 slides, three numbers, three staffing options), Tech Coordination Deck (~19 slides), the Article 14 / § 32 BSIG Runbook with **four pre-drafted notification templates** (24h / 72h / 14d / 30d), a one-page RACI, a consolidated findings annex, an Operator's Playbook, plus the README/index.
+  An EU manufacturer-operator of connected products faced CRA Cliff 1 (11 September 2026) with the classic compound problem: hybrid regulatory posture (manufacturer in CRA terms for its own software stack, operator/distributor for the vendor hardware it integrates), German national NIS2 transposition layered on top (BSIG-neu, in force 6 December 2025, with its own clocks under § 32), and a supply-chain liability cascade from NIS2 Article 21(2).
 
-  Net effect: by Cliff 1, the operator can present this evidence pack to a notified body or to the regulator without preparation gaps. The "weak but not yet in breach" starting posture has a documented path to "audit-defensible".
+  The methodology anchor: **five-pass verbatim verification** against the Official Journal text of EU Regulation 2024/2847, Directive (EU) 2022/2555 NIS2, and the German BSIG-neu. Every load-bearing claim cited; every finding tagged with verification status; every document tied into a cross-reference matrix functioning as an internal audit trail.
+
+  Three documents anchor the engagement: the **Article 14 / § 32 BSIG Runbook** with four pre-drafted notification templates (24h / 72h / 14d / 30d), the **First 30 Days Alone** sole-engineer prioritisation, and the **Executive Briefing** for board sign-off. Around them, roughly 240 pages of audit-defensible evidence — checklists, gap analysis, week-by-week execution timeline, RACI, Operator's Playbook.
+
+  By Cliff 1, the operator can present this evidence pack to a notified body or to the regulator without preparation gaps. *Weak but not yet in breach* has a documented path to *audit-defensible*.
 publishedAt: "2026-05-09"
 featured: true
 ---

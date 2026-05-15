@@ -16,6 +16,8 @@ const { title, summary, publishedAt, tags } = note.data;
   title={`${title} — Thinking Machine Notes`}
   description={summary}
   pageType="Article"
+  datePublished={publishedAt}
+  ogImage={`/og/notes-${note.slug}.png`}
 >
   <article class="container-page py-16 md:py-24">
     <nav class="max-w-prose mx-auto mb-8 text-sm">
@@ -27,6 +29,12 @@ const { title, summary, publishedAt, tags } = note.data;
       </div>
       <h1 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.15]">{title}</h1>
       <p class="mt-6 text-lg text-ink-700 italic font-serif leading-relaxed">{summary}</p>
+      {/* Author byline + verification timestamp. Regulatory advice is
+          time-sensitive; freshness + named author improves E-E-A-T signals
+          and gives procurement readers a citable provenance line. */}
+      <div class="mt-4 text-xs text-ink-500">
+        By <span class="text-ink-700">Bruno Božić</span> · Verified as of {new Date(publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+      </div>
     </header>
     <section class="prose mx-auto"><Content /></section>
     <hr class="section-divider mx-auto max-w-prose" />

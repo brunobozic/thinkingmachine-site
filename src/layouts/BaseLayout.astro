@@ -10,6 +10,12 @@ export interface Props {
   canonical?: string;
   ogImage?: string;
   pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'Article';
+  // When pageType === 'Article', these enrich the JSON-LD with publication and authorship signals
+  // used by Google rich results, Perplexity, and OpenAI's web crawler for E-E-A-T scoring.
+  datePublished?: string;
+  dateModified?: string;
+  // Optional FAQ block for FAQPage rich-result eligibility (home page).
+  faqItems?: { q: string; a: string }[];
 }
 
 const {
@@ -18,6 +24,9 @@ const {
   canonical,
   ogImage = '/og-image.png',
   pageType = 'WebPage',
+  datePublished,
+  dateModified,
+  faqItems,
 } = Astro.props;
 
 const fullTitle = title.includes('Thinking Machine') ? title : `${title} — Thinking Machine`;
@@ -188,7 +197,8 @@ const ldJson = {
         '@type': 'ContactPoint',
         contactType: 'Sales',
         email: 'hello@thinkingmachine.uk',
-        availableLanguage: ['en', 'hr'],
+        // Includes 'de' because /de/* is fully translated and published.
+        availableLanguage: ['en', 'de', 'hr'],
       },
     },
     {
@@ -197,7 +207,8 @@ const ldJson = {
       url: siteUrl,
       name: 'Thinking Machine',
       publisher: { '@id': `${siteUrl}#organization` },
-      inLanguage: 'en',
+      // WebSite as a whole is multilingual; default to the served-page locale.
+      inLanguage: localeMeta.lang,
     },
     {
       '@type': pageType,
@@ -207,8 +218,44 @@ const ldJson = {
       description,
       isPartOf: { '@id': `${siteUrl}#website` },
       about: { '@id': `${siteUrl}#organization` },
-      inLanguage: 'en',
+      // Per-page language must match <html lang>; previously hardcoded 'en'
+      // which conflicted with /de/* and /hr/* and was a Google quality flag.
+      inLanguage: localeMeta.lang,
+      // Article-specific enrichment (only emitted when pageType is 'Article'
+      // and the page passes datePublished). Strengthens E-E-A-T signals for
+      // /notes and /work case studies.
+      ...(pageType === 'Article' && datePublished ? {
+        datePublished,
+        dateModified: dateModified || datePublished,
+        author: {
+          '@type': 'Person',
+          name: 'Bruno Božić',
+          jobTitle: 'Founder & Principal Advisor',
+          worksFor: { '@id': `${siteUrl}#organization` },
+          sameAs: [
+            'https://www.linkedin.com/in/bruno-bo%C5%BEi%C4%87-74245876/',
+            'https://github.com/brunobozic',
+          ],
+        },
+        publisher: { '@id': `${siteUrl}#organization` },
+        headline: fullTitle,
+        image: ogImageURL,
+      } : {}),
     },
+    // Optional FAQPage node — Google rich-result eligibility for the home FAQ.
+    ...(faqItems && faqItems.length ? [{
+      '@type': 'FAQPage',
+      '@id': `${canonicalURL}#faq`,
+      mainEntity: faqItems.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a,
+        },
+      })),
+      inLanguage: localeMeta.lang,
+    }] : []),
   ],
 };
 ---
@@ -237,11 +284,16 @@ const ldJson = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     {/* Open Graph */}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType === 'Article' ? 'article' : 'website'} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
+    {/* Explicit dimensions stop LinkedIn / Slack / iMessage from silently
+        downgrading the preview card while they probe the image. */}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={fullTitle} />
     <meta property="og:site_name" content="Thinking Machine" />
     <meta property="og:locale" content={localeMeta.ogLocale} />
 
@@ -250,18 +302,19 @@ const ldJson = {
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={fullTitle} />
+
+    {/* RSS — exposes the notes feed to feed readers and AI crawlers
+        (Perplexity, ChatGPT, Gemini) that look for it via <link rel="alternate">. */}
+    <link rel="alternate" type="application/rss+xml" title="Thinking Machine — Notes" href="/rss.xml" />
 
     {/* Author / publisher */}
     <meta name="author" content="Bruno Božić" />
     <meta name="theme-color" content="#1E3A8A" />
 
-    {/* Fonts — preconnect + display swap */}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
-    />
+    {/* Fonts are self-hosted via @fontsource (imported in global.css).
+        Removed Google Fonts CDN loads — no third-party IP leak, no third-party
+        RTT on critical path, and the "No trackers" footer claim is honest. */}
 
     {/* JSON-LD structured data — for SEO + AI visibility (ChatGPT/Perplexity/Gemini parse this) */}
     <script type="application/ld+json" set:html={JSON.stringify(ldJson)} />

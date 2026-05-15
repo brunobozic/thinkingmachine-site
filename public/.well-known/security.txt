@@ -1,0 +1,8 @@
+# RFC 9116 security.txt — point of contact for responsible disclosure.
+# For a compliance-sensitive engineering advisory, publishing a disclosure
+# address is operational hygiene that mirrors what we tell our clients to do.
+
+Contact: mailto:security@thinkingmachine.uk
+Expires: 2027-05-15T00:00:00.000Z
+Preferred-Languages: en, de, hr
+Canonical: https://thinkingmachine.uk/.well-known/security.txt

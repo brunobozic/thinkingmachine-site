@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import { getCollection } from 'astro:content';
 
-const allStudies = await getCollection('case-studies', ({ slug, data }) => slug.startsWith('hr/') && !data.draft);
+const allStudies = await getCollection('case-studies', ({ data }) => !data.draft);
 const featured = allStudies
   .filter(s => s.data.featured)
   .sort((a, b) => (b.data.publishedAt ?? '').localeCompare(a.data.publishedAt ?? ''));
@@ -52,7 +52,7 @@ const faqs = [
   { q: "Kako naplaćujete?", a: "Fiksna naknada, navedena u prvom razgovoru, prije bilo kakve obveze. Ne naplaćujemo po satu. Nema klauzula o proširenju. Uvodni tridesetominutni razgovor je besplatan, neovisno o ishodu." },
   { q: "Potpisujete li NDA prije prvog razgovora?", a: "Da. Pošaljite ga unaprijed i potpisat ćemo prije razgovora. Mnogi postojeći mandati i dalje su pod referentnim embargom na zahtjev klijenta." },
   { q: "Implementirate li i ono što preporučite?", a: "Ne. Razdvajanje savjetovanja i implementacije je strukturalno, ne stilsko. Ako mandat otkrije posao koji zahtijeva implementacijski tim, pomoći ćemo u opsegu, ali ga nećemo izvršiti." },
-  { q: "Radite li i s klijentima izvan Europske unije?", a: "Da. Naša baza je Zagreb, Hrvatska, i većina mandata je u EU, ali smo radili s klijentima u Norveškoj, Njemačkoj i šire. Remote-first; putujemo na kickoff i završne sastanke kada to mandat opravdava." },
+  { q: "Radite li i s klijentima izvan Europske unije?", a: "Da. Naša baza je Zagreb, Hrvatska, i većina mandata je u EU, ali smo radili s klijentima u Norveškoj, Ujedinjenom Kraljevstvu, Njemačkoj i šire. Remote-first; putujemo na kickoff i završne sastanke kada to mandat opravdava." },
   { q: "Za koje ste sektore specijalizirani?", a: "Zdravstvena IT, telekomunikacije, državna istraživanja, industrijski IoT, energetika i zrakoplovstvo. Međusektorska biblioteka uzoraka je sama po sebi vrijednost: vaš problem je često već riješen u susjednom sektoru." },
   { q: "Kako brzo možete krenuti?", a: "Uzimamo jedan do dva nova mandata po kvartalu. Vrijeme čekanja obično je dva do šest tjedana, ovisno o postojećim obvezama." },
   { q: "Što ako odlučite da ne pristajemo?", a: "Reći ćemo to u prvom razgovoru i, gdje je moguće, uputiti vas nekome tko bolje odgovara. Ne uzimamo poslove gdje AI, cloud ili compliance zapravo nisu pravi odgovor." },
@@ -87,17 +87,35 @@ const faqJsonLd = {
         Delegirajte razmišljanje. Dolazimo k vama, pažljivo slušamo, mapiramo ono što tamo stvarno postoji, radimo analizu i isporučujemo dokument koji vaš upravni odbor može pročitati za petnaest minuta.
       </p>
       <div class="mt-10 flex flex-wrap gap-4 anim-fade-up anim-delay-300">
-        <a href="/hr/contact" class="btn-primary">Dogovorite 30-minutni razgovor</a>
+        <a href="/contact" class="btn-primary">Dogovorite 30-minutni razgovor</a>
         <a href="#how" class="btn-secondary">Kako radimo →</a>
       </div>
     </div>
   </section>
 
-  {/* SECTOR STRIP */}
+  {/* SECTOR STRIP — područja ekspertize */}
   <section class="border-y border-ink-200 bg-ink-100/40">
     <div class="container-page py-6 flex flex-wrap items-center gap-x-8 gap-y-3">
       <span class="text-xs uppercase tracking-wider text-ink-500 font-medium">Više od dvadeset godina kroz</span>
       {sectors.map(s => <span class="text-sm text-ink-700">{s.name}</span>)}
+    </div>
+  </section>
+
+  {/* ENGAGEMENT-CONTEXT RIBBON — anonimizirani dokaz.
+      Zrcali traku s nedavnim angažmanima na /hr/work, ali iznad pregiba. */}
+  <section class="border-b border-ink-200 bg-white">
+    <div class="container-page py-5 flex flex-wrap items-center gap-x-6 gap-y-2">
+      <span class="text-xs uppercase tracking-wider text-accent-700 font-medium">Nedavno angažirani od strane</span>
+      <span class="text-sm text-ink-700">EU pružatelja usluga mentalnog zdravlja</span>
+      <span class="text-ink-300" aria-hidden="true">·</span>
+      <span class="text-sm text-ink-700">Tier-1 europskog energetskog operatera</span>
+      <span class="text-ink-300" aria-hidden="true">·</span>
+      <span class="text-sm text-ink-700">EU proizvođača povezanih proizvoda</span>
+      <span class="text-ink-300" aria-hidden="true">·</span>
+      <span class="text-sm text-ink-700">Multi-tenant SaaS dobavljača</span>
+      <span class="text-ink-300" aria-hidden="true">·</span>
+      <span class="text-sm text-ink-700">Industrijskog softverskog dobavljača</span>
+      <a href="/hr/work" class="text-xs text-accent-700 no-underline hover:underline ml-2">Pogledaj angažmane →</a>
     </div>
   </section>
 
@@ -148,7 +166,7 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           Procjene troška na razini upravnog odbora, sidrene u objavljenim okvirima. Triangulirani baselineovi, modeliranje rezerviranih instanci po više scenarija, pricing playbookovi sa strane dobavljača. Dokument koji čita donositelj odluka.
         </p>
-        <a href="/hr/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Više o cloud troškovima <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+        <a href="/services#cloud-cost" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Više o cloud troškovima <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">02 · Cyber</div>
@@ -156,7 +174,7 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           Spremnost za EU Cyber Resilience Act. Transponiranje NIS2. Azure-native sigurnosna arhitektura. Strukturirani NFR odgovori za nabavu i predugovornu due diligence. Audit-spremne pozicije, ne mišljenja.
         </p>
-        <a href="/hr/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Više o cyber otpornosti <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+        <a href="/services#cyber" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Više o cyber otpornosti <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
       <article class="bg-white p-8 md:p-10 hover:bg-ink-50 transition-colors group">
         <div class="text-xs uppercase tracking-wider text-accent-700 mb-3 font-medium">03 · AI</div>
@@ -164,7 +182,7 @@ const faqJsonLd = {
         <p class="text-ink-700 leading-relaxed">
           MCP kontrolni slojevi. RAG nad poslovnim znanjem. On-prem LLM infrastruktura za sektore osjetljive na rezidenciju podataka. Spajamo moderne frontier modele s vašim postojećim sustavima — bez "transformacijskog" prodajnog razgovora.
         </p>
-        <a href="/hr/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Više o AI integraciji <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
+        <a href="/services#ai" class="inline-flex items-center gap-1 mt-5 text-sm text-accent-700 no-underline group/link">Više o AI integraciji <span class="transition-transform group-hover/link:translate-x-1">→</span></a>
       </article>
     </div>
   </section>
@@ -209,11 +227,11 @@ const faqJsonLd = {
         <div class="text-xs uppercase tracking-[0.2em] text-accent-700 mb-4">Nedavni rad</div>
         <h2 class="font-serif text-3xl md:text-5xl text-ink-900 leading-[1.1]">Anonimizirane studije slučaja.</h2>
       </div>
-      <a href="/hr/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">Pogledajte sve mandate →</a>
+      <a href="/work" class="text-sm text-accent-700 no-underline whitespace-nowrap">Pogledajte sve mandate →</a>
     </div>
     <p class="text-ink-500 text-sm mb-6">Studije slučaja trenutno su dostupne samo na engleskom.</p>
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {featured.map(study => <CaseStudyCard study={study} locale="hr" />)}
+      {featured.map(study => <CaseStudyCard study={study} />)}
     </div>
   </section>
 
@@ -223,7 +241,7 @@ const faqJsonLd = {
       <div class="font-serif text-2xl md:text-4xl leading-[1.25] tracking-tight">
         Većina savjetodavnih mandata dizajnirana je da se širi. Iz Discoveryja postaje Faza 1; iz Faze 1 postaje Faza 2; brojač teče. Mi ne radimo tako.
       </div>
-      <div class="mt-6 text-sm uppercase tracking-wider opacity-70">Zašto fiksni opseg · <a href="/hr/about" class="no-underline text-white opacity-100 underline-offset-4 underline">Pročitajte cijeli About →</a></div>
+      <div class="mt-6 text-sm uppercase tracking-wider opacity-70">Zašto fiksni opseg · <a href="/about" class="no-underline text-white opacity-100 underline-offset-4 underline">Pročitajte cijeli About →</a></div>
     </div>
   </section>
 
@@ -253,10 +271,10 @@ const faqJsonLd = {
         Postavite pitanje. Trideset minuta, bez slajdova, bez prodaje — i iskren odgovor možemo li pomoći.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
-        <a href="/hr/contact" class="btn-primary">Dogovorite razgovor</a>
+        <a href="/contact" class="btn-primary">Dogovorite razgovor</a>
         <a href="/notes" class="btn-secondary">Pročitajte bilješke</a>
       </div>
-      <p class="mt-8 text-sm text-ink-500">Ova stranica je hrvatska verzija. <a href="/" class="text-accent-700 no-underline">English version →</a></p>
+      <p class="mt-8 text-sm text-ink-500">Ova stranica je hrvatski prijevod engleske naslovnice — trenutno u soft-launch i na pregledu. Kompletni prijevodi za Services, About i Contact slijede ubrzo. <a href="/" class="text-accent-700 no-underline">English version →</a></p>
     </div>
   </section>
 

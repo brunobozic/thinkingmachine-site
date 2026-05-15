@@ -6,13 +6,17 @@ year: "2026"
 region: "Europska unija"
 summary: "Primijenjena pripremna radnja za CRA Cliff 1 (rujan 2026.) za EU proizvođača-operatora povezanih proizvoda. Otprilike 240 stranica audit-obranjive evidencije kroz 13 dokumenata — checkliste, briefinzi, runbook za Članak 14, RACI, plan izvršenja — usidreno u petostrukoj doslovnoj provjeri Službenog lista. Objavljeno kao metodološka referenca; klijent neidentificiran."
 quickRead: |
-  EU proizvođač-operator povezanih proizvoda susreo se s CRA Cliffom 1 (11. rujna 2026.) s klasičnim compound problemom: **hibridna regulatorna pozicija** (proizvođač u smislu CRA za vlastiti softverski stack, operator/distributer za hardver dobavljača koji integrira), **njemačka nacionalna transpozicija NIS2** na vrhu (BSIG-neu, na snazi 6. prosinca 2025., s vlastitim satovima prema § 32), i **kaskada odgovornosti opskrbnog lanca** iz NIS2 članka 21(2). Početna pozicija: slabo, ali još ne u prekršaju. Bez SBOM-a. Bez inventara firmvera. Bez runbooka za Članak 14. Inženjerski tim nije imao dediciranu cybersecurity poziciju. Rokovi se ne pomiču.
+  **Početna pozicija: slaba, ali još ne u kršenju.** Bez SBOM-a. Bez inventara firmwarea. Bez runbooka za članak 14. U inženjerskom timu nema dediciranog kadra za kibernetičku sigurnost.
 
-  Metodološko sidrište: **petostruka doslovna provjera** prema tekstu Službenog lista EU Uredbe 2024/2847 (članci 13, 14, 16, 22, 28, 31, 64, 69 plus Aneks I dijelovi I i II, Aneksi II, III, VII), Direktive (EU) 2022/2555 NIS2 i njemačkog BSIG-neu (§§ 30, 32, 33, 38, 65). Svaka noseća tvrdnja doslovno citirana. Svaki nalaz označen statusom provjere. Svaki dokument propagiran kroz matricu unakrsnih referenci koja funkcionira kao interni audit trag.
+  **Rokovi se ne pomiču.**
 
-  Isporuka: oko **240 stranica audit-obranjive evidencije kroz trinaest primarnih dokumenata i četiri dodatka** — Glavna checklista sukladnosti, Audit-spremnost duboko zaranjanje, Vremenski raspored izvršenja (tjedan-po-tjedan do Cliffa 1, mjesečno do Cliffa 2), Gap analiza s **petnaest imenovanih scenarija prijetnji**, Research update, Prvih 30 dana sami (prioritizacija za pojedinog inženjera), Executive briefing (16 slajdova, tri broja, tri kadrovske opcije), Tech coordination deck (~19 slajdova), Runbook za Članak 14 / § 32 BSIG s **četiri unaprijed sastavljena predloška obavijesti** (24h / 72h / 14d / 30d), jednostrana RACI, dodatak konsolidiranih nalaza, Operator's Playbook, plus README/index.
+  EU proizvođač-operator povezanih proizvoda suočio se s CRA Cliff 1 (11. rujna 2026.) s klasičnim složenim problemom: hibridna regulatorna pozicija (proizvođač u CRA smislu za vlastiti softverski stog, operator/distributer za hardver dobavljača koji integrira), njemačka transpozicija NIS2 dodatno preko toga (BSIG-neu, na snazi od 6. prosinca 2025., s vlastitim rokovima prema § 32), te kaskada odgovornosti u opskrbnom lancu iz NIS2 članka 21. stavka 2.
 
-  Neto efekt: do Cliffa 1, operator može predstaviti ovaj paket dokaza prijavljenom tijelu ili regulatoru bez pripremnih praznina. Početna pozicija "slabo, ali još ne u prekršaju" ima dokumentirani put prema "audit-obranjivom".
+  Metodološko sidro: **petostruka doslovna verifikacija** prema tekstu Službenog lista za Uredbu EU 2024/2847, Direktivu (EU) 2022/2555 NIS2 i njemački BSIG-neu. Svaka nosiva tvrdnja citirana; svaki nalaz označen statusom verifikacije; svaki dokument povezan u matricu unakrsnih referenci koja funkcionira kao interni revizijski trag.
+
+  Tri dokumenta nose težinu angažmana: **Runbook za članak 14. / § 32 BSIG** s četiri unaprijed pripremljena predloška obavijesti (24h / 72h / 14d / 30d), prioritizacija **First 30 Days Alone** za jednog inženjera, te **Executive Briefing** za odobrenje uprave. Oko njih približno 240 stranica revizijski obranjivih dokaza — kontrolne liste, gap analiza, plan izvršenja tjedan po tjedan, RACI, Operatorski playbook.
+
+  Do Cliffa 1, operator može ovaj paket dokaza predstaviti ovlaštenom tijelu ili regulatoru bez praznina u pripremi. *Slaba, ali još ne u kršenju* dobiva dokumentirani put do *revizijski obranjivo*.
 publishedAt: "2026-05-09"
 featured: true
 ---
